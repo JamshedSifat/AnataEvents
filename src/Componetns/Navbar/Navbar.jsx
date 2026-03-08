@@ -1,11 +1,18 @@
-import React, { useState } from "react";
-import { NavLink } from "react-router";
+import React, { useState, useEffect } from "react";
+import { NavLink, useLocation } from "react-router";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [isBookAnArtistOpen, setIsBookAnArtistOpen] = useState(false);
   const [isOpportunityOpen, setIsOpportunityOpen] = useState(false);
+  
+  const location = useLocation();
+
+  // Scroll to top when route changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
 
   const navLinks = [
     { name: "Home", path: "/" },
@@ -49,6 +56,23 @@ const Navbar = () => {
     { name: "Career Opportunities", path: "/opportunities/careers" }
   ];
 
+  // Function to handle navigation with smooth scroll to top
+  const handleNavigation = (path) => {
+    // Close all dropdowns
+    setIsServicesOpen(false);
+    setIsBookAnArtistOpen(false);
+    setIsOpportunityOpen(false);
+    setIsOpen(false);
+    
+    // If it's the same page, scroll to top
+    if (location.pathname === path) {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   // Get dropdown data based on link name
   const getDropdownData = (linkName) => {
     if (linkName === "Services") return { items: servicesDropdown, isOpen: isServicesOpen, setOpen: setIsServicesOpen };
@@ -72,7 +96,12 @@ const Navbar = () => {
           >
             <NavLink
               to={link.path}
-              className="px-6 py-3 rounded-lg hover:bg-base-200 hover:text-primary transition-all duration-300 flex items-center space-x-1"
+              onClick={() => handleNavigation(link.path)}
+              className={({ isActive }) =>
+                `px-6 py-3 rounded-lg hover:bg-base-200 hover:text-primary transition-all duration-300 flex items-center space-x-1 ${
+                  isActive ? 'text-primary bg-base-200' : 'text-base-content'
+                }`
+              }
             >
               <span>{link.name}</span>
               <span className={`transition-transform duration-300 ${dropdown.isOpen ? "rotate-180" : ""}`}>
@@ -87,8 +116,14 @@ const Navbar = () => {
                   <NavLink
                     key={item.name}
                     to={item.path}
-                    className="block px-4 py-2 text-base-content hover:bg-primary hover:text-white rounded-lg transition-all duration-300"
-                    onClick={() => dropdown.setOpen(false)}
+                    onClick={() => handleNavigation(item.path)}
+                    className={({ isActive }) =>
+                      `block px-4 py-2 rounded-lg transition-all duration-300 ${
+                        isActive
+                          ? 'bg-primary text-white'
+                          : 'text-base-content hover:bg-primary hover:text-white'
+                      }`
+                    }
                   >
                     {item.name}
                   </NavLink>
@@ -103,7 +138,12 @@ const Navbar = () => {
         <NavLink
           key={link.name}
           to={link.path}
-          className="px-6 py-3 rounded-lg hover:bg-base-200 hover:text-primary transition-all duration-300"
+          onClick={() => handleNavigation(link.path)}
+          className={({ isActive }) =>
+            `px-6 py-3 rounded-lg hover:bg-base-200 hover:text-primary transition-all duration-300 ${
+              isActive ? 'text-primary bg-base-200' : 'text-base-content'
+            }`
+          }
         >
           {link.name}
         </NavLink>
@@ -120,7 +160,9 @@ const Navbar = () => {
           <div key={link.name} className="space-y-1">
             <button
               onClick={() => dropdown.setOpen(!dropdown.isOpen)}
-              className="w-full flex justify-between items-center px-4 py-3 rounded-lg hover:bg-base-200 hover:text-primary transition-all duration-300"
+              className={`w-full flex justify-between items-center px-4 py-3 rounded-lg hover:bg-base-200 hover:text-primary transition-all duration-300 ${
+                location.pathname === link.path ? 'text-primary bg-base-200' : 'text-base-content'
+              }`}
             >
               <span>{link.name}</span>
               <span className={`transition-transform duration-300 ${dropdown.isOpen ? "rotate-180" : ""}`}>
@@ -134,11 +176,14 @@ const Navbar = () => {
                   <NavLink
                     key={item.name}
                     to={item.path}
-                    onClick={() => {
-                      setIsOpen(false);
-                      dropdown.setOpen(false);
-                    }}
-                    className="block px-4 py-2 rounded-lg hover:bg-primary hover:text-white transition-all duration-300"
+                    onClick={() => handleNavigation(item.path)}
+                    className={({ isActive }) =>
+                      `block px-4 py-2 rounded-lg transition-all duration-300 ${
+                        isActive
+                          ? 'bg-primary text-white'
+                          : 'text-base-content hover:bg-primary hover:text-white'
+                      }`
+                    }
                   >
                     {item.name}
                   </NavLink>
@@ -153,8 +198,12 @@ const Navbar = () => {
         <NavLink
           key={link.name}
           to={link.path}
-          onClick={() => setIsOpen(false)}
-          className="block px-4 py-3 rounded-lg hover:bg-base-200 hover:text-primary transition-all duration-300"
+          onClick={() => handleNavigation(link.path)}
+          className={({ isActive }) =>
+            `block px-4 py-3 rounded-lg hover:bg-base-200 hover:text-primary transition-all duration-300 ${
+              isActive ? 'text-primary bg-base-200 border-l-4 border-primary' : 'text-base-content'
+            }`
+          }
         >
           {link.name}
         </NavLink>
@@ -168,7 +217,11 @@ const Navbar = () => {
           
           {/* Logo */}
           <div className="flex-shrink-0">
-            <NavLink to="/" className="text-2xl font-bold">
+            <NavLink 
+              to="/" 
+              onClick={() => handleNavigation("/")}
+              className="text-2xl font-bold"
+            >
               <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
                 Ananta Events
               </span>
