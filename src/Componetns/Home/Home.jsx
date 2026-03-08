@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import WhyChooseUs from '../WhyChooseUs/WhyChooseUs';
-import Services from '../Services.jsx/Services';
+
 import Hero from '../Hero/Hero';
 import Navbar from '../Navbar/Navbar';
 import Gallary from '../Gallary/Gallary';
@@ -10,6 +10,7 @@ import FAQ from '../FAQ/FAQ';
 import Testimonials from '../Testimonials/Testimonials';
 import OurClients from '../OurClients/OurClients';
 import QueryModal from '../QueryModal/QueryModal'; // import modal
+import Services from '../Services/Services';
 
 const Home = () => {
 
@@ -35,7 +36,7 @@ const Home = () => {
             <main className="flex-1">
                 <Hero />
                 <WhyChooseUs />
-                <Services />
+                <Services                                                                                                                     />
                 <Gallary />
                 <Testimonials />
                 <OurClients />

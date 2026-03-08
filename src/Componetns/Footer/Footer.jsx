@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router';
 import { FaFacebook ,FaLinkedin,FaPinterestP, } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
+import logo from './Ananta_Logo.png'
 const Footer = () => {
     const currentYear = new Date().getFullYear();
 
@@ -57,8 +58,11 @@ const Footer = () => {
                     <div className="lg:col-span-1">
                         <div className="mb-6">
                             <NavLink to="/" className="text-3xl font-bold font-playfair">
-                                <span className="text-primary">Ananta</span>
-                                <span className="text-secondary ml-1">Events</span>
+                                <img
+                                  src={logo}
+                                  alt="Ananta Logo"
+                                  className="w-32 h-auto object-contain transition-transform duration-300 hover:scale-105 cursor-pointer"
+                                />
                             </NavLink>
                             <p className="text-xs text-base-content/60 mt-1 tracking-wider uppercase">
                                 Luxury Experience

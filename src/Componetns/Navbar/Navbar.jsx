@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router";
+import logo from '../Navbar/Ananta_Logo.png'
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,18 +26,15 @@ const Navbar = () => {
   ];
 
   const servicesDropdown = [
-    { name: "Event Management", path: "/services/event-management" },
-    { name: "Corporate Events", path: "/services/corporate-events" },
-    { name: "Concert & Fashion Show", path: "/services/concert-fashion" },
-    { name: "Conference & Seminars", path: "/services/conference-seminars" },
-    { name: "Event Coordination", path: "/services/event-coordination" },
-    { name: "Brand Activation", path: "/services/brand-activation" },
-    { name: "Trade Show & Exhibition", path: "/services/trade-show" },
-    { name: "Exhibition Stall Design", path: "/services/stall-design" },
-    { name: "Furniture & Logistics", path: "/services/furniture-logistics" },
-    { name: "Singer & Celebrity Booking", path: "/services/celebrity-booking" },
-    { name: "Advertising", path: "/services/advertising" },
-    { name: "Wedding Planning", path: "/services/wedding-planning" },
+    { name: "Corporate Event", path: "/services/CorporateEvent" },
+    { name: "Best Exhibition stall desgin and Fabrication company dhaka bangladesh", path: "/services/BestExhibitionStallDesgin" },
+    { name: "Influencer Marketing Agency", path: "/services/InfluencerMarketingAgency" },
+    { name: "Singer & Celebrity Booking", path: "/services/SingerAndCelebrityBooking" },
+    { name: "Wedding Planner & Management", path: "/services/WeddingPlanner&Management" },
+    { name: "Photography & Vedio Services", path: "/services/Photography&VedioServices" },
+    { name: "Special Event", path: "/services/SpecialEvent" },
+    { name: "Virtual Event", path: "/services/VirtualEvent" }
+   
   ];
 
   const bookAnArtistDropdown = [
@@ -216,15 +214,17 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-20">
           
           {/* Logo */}
-          <div className="flex-shrink-0">
+          <div className="flex-shrink-0 ">
             <NavLink 
               to="/" 
               onClick={() => handleNavigation("/")}
               className="text-2xl font-bold"
             >
-              <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                Ananta Events
-              </span>
+             <img
+                src={logo}
+                   alt='anantaEvents'
+                    className="w-32 h-auto object-contain transition-transform duration-300 hover:scale-105 cursor-pointer"
+/>
             </NavLink>
           </div>
 
