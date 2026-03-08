@@ -1,0 +1,107 @@
+[
+  {
+    "id": 1,
+    "src": "https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+    "category": "Weddings",
+    "title": "Elegant Garden Wedding",
+    "description": "A romantic outdoor ceremony with stunning floral arrangements"
+  },
+  {
+    "id": 2,
+    "src": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+    "category": "Corporate",
+    "title": "Tech Conference Hall",
+    "description": "Modern conference setup with cutting-edge technology"
+  },
+  {
+    "id": 3,
+    "src": "https://images.unsplash.com/photo-1511632765486-a01980e01a18?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+    "category": "Galas",
+    "title": "Luxury Charity Gala",
+    "description": "Sophisticated evening gala with elegant table settings"
+  },
+  {
+    "id": 4,
+    "src": "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80",
+    "category": "Private",
+    "title": "Anniversary Celebration",
+    "description": "Intimate family celebration with personal touches"
+  },
+  {
+    "id": 5,
+    "src": "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80",
+    "category": "Venues",
+    "title": "Beachfront Venue",
+    "description": "Stunning oceanfront location for destination events"
+  },
+  {
+    "id": 6,
+    "src": "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+    "category": "Corporate",
+    "title": "Product Launch Setup",
+    "description": "Creative product launch with interactive displays"
+  },
+  {
+    "id": 7,
+    "src": "https://images.unsplash.com/photo-1606800052052-a08af7148866?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+    "category": "Weddings",
+    "title": "Royal Wedding Ceremony",
+    "description": "Grand traditional wedding with luxurious decorations"
+  },
+  {
+    "id": 8,
+    "src": "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+    "category": "Private",
+    "title": "Birthday Celebration",
+    "description": "Vibrant birthday party with custom decorations"
+  },
+  {
+    "id": 9,
+    "src": "https://images.unsplash.com/photo-1505236858219-8359eb29e329?ixlib=rb-4.0.3&auto=format&fit=crop&w=2062&q=80",
+    "category": "Galas",
+    "title": "Awards Ceremony",
+    "description": "Prestigious awards ceremony with elegant staging"
+  },
+  {
+    "id": 10,
+    "src": "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+    "category": "Venues",
+    "title": "Historic Mansion",
+    "description": "Classic venue with timeless architectural beauty"
+  },
+  {
+    "id": 11,
+    "src": "https://images.unsplash.com/photo-1478146896981-b80fe463b330?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+    "category": "Weddings",
+    "title": "Outdoor Reception",
+    "description": "Magical evening reception under twinkling lights"
+  },
+  {
+    "id": 12,
+    "src": "https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80",
+    "category": "Corporate",
+    "title": "Business Summit",
+    "description": "Professional networking event with modern setup"
+  },
+  {
+    "id": 13,
+    "src": "https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80",
+    "category": "Venues",
+    "title": "Modern Event Hall",
+    "description": "Contemporary venue with flexible space design"
+  },
+  {
+    "id": 14,
+    "src": "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+    "category": "Private",
+    "title": "Garden Party",
+    "description": "Charming garden party with natural beauty"
+  },
+  {
+    "id": 15,
+    "src": "https://images.unsplash.com/photo-1464207687429-7505649dae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=2073&q=80",
+    "category": "Galas",
+    "title": "Fundraising Dinner",
+    "description": "Elegant fundraising event with formal dining"
+  }
+]
