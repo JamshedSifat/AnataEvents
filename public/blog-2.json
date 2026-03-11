@@ -1,0 +1,47 @@
+{
+  "id": 2,
+  "title": "Corporate Event Trends for 2024",
+  "excerpt": "Stay ahead with the latest corporate event trends. Virtual integration, sustainable practices, and innovative networking.",
+  "category": "Corporate",
+  "author": "Karim Hassan",
+  "date": "March 5, 2024",
+  "readTime": "7 min read",
+  "image": "https://images.unsplash.com/photo-1511578314322-379afb476865",
+  "tags": ["corporate", "trends", "2024", "networking", "innovation"],
+  "views": 980,
+  "comments": 15,
+  "content": {
+    "intro": "The corporate events landscape is rapidly evolving. Here are the top trends shaping business gatherings in 2024.",
+    "sections": [
+      {
+        "heading": "1. Hybrid Event Integration",
+        "content": "Combining in-person and virtual experiences is no longer optional. Successful corporate events now seamlessly blend physical and digital interactions, allowing broader participation and increased engagement."
+      },
+      {
+        "heading": "2. Sustainable Event Practices",
+        "content": "Companies are prioritizing eco-friendly events. This includes zero-waste policies, digital materials instead of printed ones, local sourcing, and carbon offset programs."
+      },
+      {
+        "heading": "3. AI-Powered Personalization",
+        "content": "Artificial intelligence is being used to personalize attendee experiences, from customized agendas to intelligent networking recommendations based on interests and goals."
+      },
+      {
+        "heading": "4. Wellness-Focused Programming",
+        "content": "Corporate events now include wellness components like mindfulness sessions, healthy catering options, and mental health awareness programs to support employee wellbeing."
+      },
+      {
+        "heading": "5. Interactive Technology",
+        "content": "AR/VR experiences, interactive displays, and gamification elements are making corporate events more engaging and memorable for attendees."
+      }
+    ],
+    "conclusion": "Staying ahead of these trends will help you create corporate events that not only meet business objectives but also provide meaningful experiences for all participants."
+  },
+  "author_bio": {
+    "name": "Karim Hassan",
+    "designation": "Corporate Event Strategist",
+    "experience": "15+ years",
+    "specialization": "Tech Events & Conferences",
+    "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d",
+    "bio": "Karim specializes in large-scale corporate events and has managed conferences for Fortune 500 companies across Asia."
+  }
+}

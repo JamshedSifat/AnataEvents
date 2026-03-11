@@ -1,0 +1,41 @@
+[
+  {
+    "id": 1,
+    "title": "10 Essential Tips for Planning the Perfect Wedding",
+    "excerpt": "Discover the most important elements that make a wedding truly unforgettable. From venue selection to vendor coordination, learn the secrets of professional wedding planning.",
+    "category": "Wedding",
+    "author": "Sarah Ahmed",
+    "date": "March 8, 2024",
+    "readTime": "5 min read",
+    "image": "https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    "tags": ["wedding", "planning", "tips", "venue"],
+    "views": 1250,
+    "comments": 23
+  },
+  {
+    "id": 2,
+    "title": "Corporate Event Trends for 2024",
+    "excerpt": "Stay ahead with the latest corporate event trends. Virtual integration, sustainable practices, and innovative networking solutions for modern business events.",
+    "category": "Corporate",
+    "author": "Karim Hassan",
+    "date": "March 5, 2024",
+    "readTime": "7 min read",
+    "image": "https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    "tags": ["corporate", "trends", "2024", "networking"],
+    "views": 980,
+    "comments": 15
+  },
+  {
+    "id": 3,
+    "title": "Budget-Friendly Event Planning Strategies",
+    "excerpt": "Learn how to create stunning events on any budget. Smart vendor negotiations and creative cost-cutting techniques without compromising quality.",
+    "category": "Tips",
+    "author": "Fatima Rahman",
+    "date": "March 2, 2024",
+    "readTime": "6 min read",
+    "image": "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    "tags": ["budget", "planning", "savings", "tips"],
+    "views": 1840,
+    "comments": 31
+  }
+]

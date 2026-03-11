@@ -11,6 +11,7 @@ import Testimonials from '../Testimonials/Testimonials';
 import OurClients from '../OurClients/OurClients';
 import QueryModal from '../QueryModal/QueryModal'; // import modal
 import Services from '../Services/Services';
+import BlogCard from '../BlogCard/BlogCard';
 
 const Home = () => {
 
@@ -40,6 +41,7 @@ const Home = () => {
                 <Gallary />
                 <Testimonials />
                 <OurClients />
+                <BlogCard></BlogCard>
                 <EventCoverage />
                 <FAQ />
             </main>

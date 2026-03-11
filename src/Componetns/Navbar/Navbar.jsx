@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router";
-import logo from '../Navbar/Ananta_Logo.png'
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -221,9 +220,9 @@ const Navbar = () => {
               className="text-2xl font-bold"
             >
              <img
-                src={logo}
+                src='/public/Ananta_Logo.png'
                    alt='anantaEvents'
-                    className="w-32 h-auto object-contain transition-transform duration-300 hover:scale-105 cursor-pointer"
+                    className="w-32 h-auto object-contain "
 />
             </NavLink>
           </div>

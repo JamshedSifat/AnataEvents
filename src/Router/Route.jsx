@@ -13,6 +13,10 @@ import WeddingPlannerManagement from "../Componetns/Services/WeddingPlannerManag
 import PhotographyVedioServices from "../Componetns/Services/PhotographyVedioServices/PhotographyVedioServices";
 import SpecialEvent from "../Componetns/Services/SpecialEvent/SpecialEvent";
 import VirtualEvent from "../Componetns/Services/VirtualEvent/VirtualEvent";
+import BlogDetails from "../Pages/BlogDetails/BlogDetails";
+import BlogCard from "../Componetns/BlogCard/BlogCard";
+import BookAnArtists from "../Pages/BookAnArtists/BookAnArtists";
+import Singer from "../Pages/BookAnArtists/Singers/Singer";
 
 // Title setter function
 const setTitle = (title) => {
@@ -82,6 +86,16 @@ export const router = createBrowserRouter([
         element: <About></About>,
         loader: setTitle("About Us - Ananta Events | 16+ Years Experience in Event Planning")
       },
+          {
+        path: '/blog',
+        element: <BlogCard></BlogCard>,
+        loader: setTitle("Blog - Ananta Events | Event Planning Tips & Ideas")
+      },
+      {
+        path: '/blog/:id',
+        element: <BlogDetails></BlogDetails>,
+        loader: setTitle("Blog Details - Ananta Events | Event Planning Article")
+      },
       {
         path: '/portfolio',
         element: <Portfolio></Portfolio>,
@@ -91,6 +105,23 @@ export const router = createBrowserRouter([
         path: '/contact',
         element: <Contact></Contact>,
         loader: setTitle("Contact Us - Ananta Events | Get Free Event Planning Consultation")
+      },
+       {
+        path:'/bookAnArtists',
+        element:<BookAnArtists></BookAnArtists>
+      },
+
+      {
+        path:'/bookAnArtists/singer',
+        element:<Singer></Singer>
+      },
+      {
+        path:'/bookAnArtists/dj',
+        element:<Singer></Singer>
+      },
+      {
+        path:'/bookAnArtists/comedian',
+        element:<Singer></Singer>
       },
     ]
   },

@@ -1,0 +1,47 @@
+{
+  "id": 1,
+  "title": "10 Essential Tips for Planning the Perfect Wedding",
+  "excerpt": "Discover the most important elements that make a wedding truly unforgettable. From venue selection to vendor coordination.",
+  "category": "Wedding",
+  "author": "Sarah Ahmed",
+  "date": "March 8, 2024",
+  "readTime": "5 min read",
+  "image": "https://images.unsplash.com/photo-1519741497674-611481863552",
+  "tags": ["wedding", "planning", "tips", "venue", "decoration"],
+  "views": 1250,
+  "comments": 23,
+  "content": {
+    "intro": "Planning a wedding can be overwhelming, but with the right approach and attention to detail, you can create an unforgettable celebration that reflects your unique love story.",
+    "sections": [
+      {
+        "heading": "1. Start with Your Budget",
+        "content": "Before making any decisions, establish a clear budget. This will guide all your choices and help you prioritize what matters most. Typically, allocate 40-50% for venue and catering, 10% for photography, 10% for attire, and 8% for flowers."
+      },
+      {
+        "heading": "2. Choose the Perfect Venue",
+        "content": "Your venue sets the tone for the entire celebration. Consider factors like guest count, season, style preference, and location accessibility. Book 12-18 months in advance for popular venues."
+      },
+      {
+        "heading": "3. Create a Detailed Timeline",
+        "content": "A well-planned timeline ensures smooth execution. Start planning 12-18 months ahead for major decisions, 6 months for vendors, and 2 months for final details."
+      },
+      {
+        "heading": "4. Select the Right Vendors",
+        "content": "Choose vendors who understand your vision and budget. Read reviews, check portfolios, and ensure they're available on your date. Key vendors include caterer, photographer, decorator, and entertainment."
+      },
+      {
+        "heading": "5. Plan Your Guest Experience",
+        "content": "Consider your guests' comfort from invitation to farewell. Provide clear directions, comfortable seating, good food, and entertainment that appeals to all age groups."
+      }
+    ],
+    "conclusion": "Remember, your wedding should reflect your personality and love story. Don't stress about perfection – focus on creating meaningful moments with your loved ones."
+  },
+  "author_bio": {
+    "name": "Sarah Ahmed",
+    "designation": "Senior Wedding Planner",
+    "experience": "12+ years",
+    "specialization": "Luxury Weddings & Destination Events",
+    "image": "https://images.unsplash.com/photo-1494790108755-2616b612b1a4",
+    "bio": "Sarah has planned over 200 weddings across Bangladesh and is known for her attention to detail and creative problem-solving skills."
+  }
+}

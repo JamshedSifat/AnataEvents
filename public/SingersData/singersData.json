@@ -1,0 +1,235 @@
+{
+  "singers": [
+    {
+      "id": 1,
+      "name": "Habib Wahid",
+      "genre": "Pop, Electronic, Folk Fusion",
+      "price": "৳8,00,000",
+      "rating": 4.9,
+      "image": "https://i.pinimg.com/1200x/4f/66/37/4f66377fbc491c9d81cd630d2cd2c371.jpg",
+      "description": "Popular Bangladeshi singer and music composer known for his unique blend of traditional and modern music.",
+      "experience": "20+ years",
+      "languages": ["Bengali", "Hindi", "English"],
+      "popularSongs": ["Krishno", "Shey Je Boshe Ache", "Jao Pakhi Bolo", "Monn Chay"],
+      "availability": "Available",
+      "location": "Dhaka, Bangladesh",
+      "contactEmail": "booking@habibwahid.com",
+      "specialties": ["Folk Fusion", "Electronic Music", "Live Concerts", "Wedding Events"],
+      "awards": ["Meril Prothom Alo Award", "National Film Award", "Channel i Music Award"],
+      "socialMedia": {
+        "facebook": "@habibwahidofficial",
+        "instagram": "@habibwahid",
+        "youtube": "HabibWahidOfficial"
+      }
+    },
+    {
+      "id": 2,
+      "name": "Tahsan Rahman Khan",
+      "genre": "Rock, Pop, Alternative",
+      "price": "৳6,50,000",
+      "rating": 4.8,
+      "image": "https://i.pinimg.com/736x/ca/6f/c5/ca6fc5289356f12bf9fe066ba9cb861e.jpg",
+      "description": "Bangladeshi singer-songwriter, musician and actor, former member of the band Black.",
+      "experience": "18+ years",
+      "languages": ["Bengali", "English"],
+      "popularSongs": ["Irsha", "Daruchini Dip", "Koto Din", "Natuner Gaan"],
+      "availability": "Available",
+      "location": "Dhaka, Bangladesh",
+      "contactEmail": "booking@tahsan.com",
+      "specialties": ["Alternative Rock", "Acoustic Sessions", "University Concerts", "Corporate Events"],
+      "awards": ["Meril Prothom Alo Award", "Bachsas Award", "National Film Award"],
+      "socialMedia": {
+        "facebook": "@tahsanofficial",
+        "instagram": "@tahsanrahman",
+        "youtube": "TahsanOfficialBD"
+      }
+    },
+   
+   
+    {
+      "id": 5,
+      "name": "Runa Laila",
+      "genre": "Classical, Ghazal, Playback",
+      "price": "৳12,00,000",
+      "rating": 4.9,
+      "image": "https://i.pinimg.com/736x/7a/92/37/7a9237b970f160c2301e5c58c343f60b.jpg",
+      "description": "Legendary playback singer with over 50 years of experience in Bengali, Hindi, and Urdu music.",
+      "experience": "55+ years",
+      "languages": ["Bengali", "Hindi", "Urdu", "English"],
+      "popularSongs": ["Ekbar Jodi Keu", "Alamgir", "Ghum Parani Bondhu Re", "Tomake Chai"],
+      "availability": "Limited",
+      "location": "Dhaka, Bangladesh",
+      "contactEmail": "booking@runalaila.com",
+      "specialties": ["Classical Music", "Ghazal", "Playback Singing", "Cultural Programs"],
+      "awards": ["Independence Day Award", "Ekushey Padak", "National Film Award", "Pride of Performance (Pakistan)"],
+      "socialMedia": {
+        "facebook": "@runalailaofficial",
+        "youtube": "RunaLailaClassics"
+      }
+    },
+    {
+      "id": 6,
+      "name": "Aurthohin (Bassbaba Sumon)",
+      "genre": "Heavy Metal, Progressive Rock",
+      "price": "৳5,50,000",
+      "rating": 4.5,
+      "image": "https://images.squarespace-cdn.com/content/v1/52d881e0e4b093afad1a2ae2/1749860614960-GC01EPZ4G50Z1AT2MKTW/Bassbaba+Gallien-Krueger+6.jpg",
+      "description": "Pioneering Bangladeshi heavy metal band with powerful vocals and progressive compositions.",
+      "experience": "25+ years",
+      "languages": ["Bengali", "English"],
+      "popularSongs": ["Odbhut Sei Cheleta", "Guti", "Nikrishto", "Rupkotha"],
+      "availability": "Available",
+      "location": "Dhaka, Bangladesh",
+      "contactEmail": "booking@aurthohin.com",
+      "specialties": ["Heavy Metal", "Progressive Rock", "Rock Concerts", "Music Festivals"],
+      "awards": ["Meril Prothom Alo Award", "Best Band Award"],
+      "socialMedia": {
+        "facebook": "@aurthohinofficial",
+        "instagram": "@aurthohin",
+        "youtube": "AurthohinOfficial"
+      }
+    },
+    {
+      "id": 7,
+      "name": "Nancy",
+      "genre": "Pop, Modern Folk",
+      "price": "৳4,00,000",
+      "rating": 4.4,
+      "image": "https://i.pinimg.com/1200x/23/a1/3d/23a13db36196f7243a635ed4df6b737e.jpg",
+      "description": "Popular Bangladeshi female singer known for her melodious voice and contemporary Bengali music.",
+      "experience": "22+ years",
+      "languages": ["Bengali", "Hindi"],
+      "popularSongs": ["Chokher Bali", "Premer Taj Mahal", "Valobashi Tomake", "Jibon Mane"],
+      "availability": "Available",
+      "location": "Dhaka, Bangladesh",
+      "contactEmail": "booking@nancymusic.com",
+      "specialties": ["Pop Music", "Wedding Songs", "Female Solo Performances", "Cultural Events"],
+      "awards": ["Meril Prothom Alo Award", "Channel i Music Award"],
+      "socialMedia": {
+        "facebook": "@nancysingerbangladesh",
+        "youtube": "NancySingerBD"
+      }
+    },
+    {
+      "id": 8,
+      "name": "James (Nagar Baul)",
+      "genre": "Rock, Blues, Folk Rock",
+      "price": "৳9,00,000",
+      "rating": 4.8,
+      "image": "https://i.pinimg.com/736x/e2/92/e0/e292e08f0942966aac832b470d621db7.jpg",
+      "description": "Legendary rock musician known as the 'Nagar Baul' of Bangladesh, pioneering rock music in the country.",
+      "experience": "40+ years",
+      "languages": ["Bengali", "English"],
+      "popularSongs": ["Lal Golap", "Dukhini Dukkho Korona", "Ami Tomaderi Lok", "Mirabai"],
+      "availability": "Limited",
+      "location": "Dhaka, Bangladesh",
+      "contactEmail": "booking@jamesband.com",
+      "specialties": ["Rock Music", "Blues", "Folk Rock", "Live Concerts"],
+      "awards": ["Lifetime Achievement Award", "National Film Award", "Meril Prothom Alo Award"],
+      "socialMedia": {
+        "facebook": "@jamesnagarbaul",
+        "youtube": "JamesNagarBaul"
+      }
+    },
+    {
+      "id": 9,
+      "name": "Kona",
+      "genre": "Pop, Folk, Playback",
+      "price": "৳3,50,000",
+      "rating": 4.3,
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdCkzl0B1TLTfDuIoRshqvVWyJcEUiSK9Ojg&s",
+      "description": "Popular female vocalist known for her versatile singing in pop, folk, and playback singing.",
+      "experience": "16+ years",
+      "languages": ["Bengali", "Hindi"],
+      "popularSongs": ["Tomake Bhalobashi", "Shada Kalo", "Mon Mane Na", "Ekla Cholo"],
+      "availability": "Available",
+      "location": "Dhaka, Bangladesh",
+      "contactEmail": "booking@konamusic.com",
+      "specialties": ["Pop Music", "Playback Singing", "Wedding Events", "Cultural Programs"],
+      "awards": ["Meril Prothom Alo Award", "National Film Award"],
+      "socialMedia": {
+        "facebook": "@konasingerbangladesh",
+        "instagram": "@kona_official",
+        "youtube": "KonaSingerBD"
+      }
+    },
+    {
+      "id": 10,
+      "name": "Arnob",
+      "genre": "Alternative, Indie Folk, Experimental",
+      "price": "৳6,00,000",
+      "rating": 4.7,
+      "image": "https://ecdn.dhakatribune.net/contents/cache/images/800x450x1/uploads/dten/2015/01/15-Arnob.jpg",
+      "description": "Innovative musician known for his experimental approach to Bengali music and unique compositions.",
+      "experience": "20+ years",
+      "languages": ["Bengali", "English"],
+      "popularSongs": ["Tumi Jake Bhalobaso", "She Je Boshe Ache", "Dhushor Shomoy", "Haire Manush"],
+      "availability": "Available",
+      "location": "Dhaka, Bangladesh",
+      "contactEmail": "booking@arnobmusic.com",
+      "specialties": ["Alternative Music", "Indie Folk", "Acoustic Sessions", "Art Events"],
+      "awards": ["Meril Prothom Alo Award", "National Film Award"],
+      "socialMedia": {
+        "facebook": "@arnobofficial",
+        "instagram": "@arnobdohar",
+        "youtube": "ArnobOfficialBD"
+      }
+    },
+    {
+      "id": 11,
+      "name": "Asif Akbar",
+      "genre": "Pop, Rock, Playback",
+      "price": "৳5,00,000",
+      "rating": 4.4,
+      "image": "https://www.tbsnews.net/sites/default/files/styles/big_2/public/images/2025/10/01/asif.jpg",
+      "description": "Popular Bangladeshi singer known for his powerful voice and versatility in different music genres.",
+      "experience": "18+ years",
+      "languages": ["Bengali", "Hindi"],
+      "popularSongs": ["Jao Pakhi", "Shunte Ki Pao", "Dhakay Jabo", "Premer Jala"],
+      "availability": "Available",
+      "location": "Dhaka, Bangladesh",
+      "contactEmail": "booking@asifakbar.com",
+      "specialties": ["Pop Music", "Rock Ballads", "Live Concerts", "Wedding Events"],
+      "awards": ["Meril Prothom Alo Award", "Bachsas Award"],
+      "socialMedia": {
+        "facebook": "@asifakbarofficial",
+        "instagram": "@asifakbar",
+        "youtube": "AsifAkbarOfficial"
+      }
+    },
+    {
+      "id": 12,
+      "name": "Minar Rahman",
+      "genre": "Contemporary Pop, Rock",
+      "price": "৳4,50,000",
+      "rating": 4.2,
+      "image": "https://lastfm.freetls.fastly.net/i/u/ar0/d5e0cc25930de7e012610bd3f35e6bb5.jpg",
+      "description": "Young and talented singer-songwriter known for his contemporary style and meaningful lyrics.",
+      "experience": "12+ years",
+      "languages": ["Bengali", "English"],
+      "popularSongs": ["Alo", "Shada Megher Bhela", "Apon", "Shopner Thikana"],
+      "availability": "Available",
+      "location": "Dhaka, Bangladesh",
+      "contactEmail": "booking@minarmusic.com",
+      "specialties": ["Contemporary Pop", "Singer-Songwriter", "Youth Events", "University Concerts"],
+      "awards": ["Meril Prothom Alo Award", "Channel i Music Award"],
+      "socialMedia": {
+        "facebook": "@minarrahmanofficial",
+        "instagram": "@minarrahman",
+        "youtube": "MinarRahmanOfficial"
+      }
+    }
+  ],
+  "metadata": {
+    "lastUpdated": "2026-03-11",
+    "totalSingers": 12,
+    "country": "Bangladesh",
+    "categories": ["Pop", "Folk", "Rock", "Alternative", "Classical", "Traditional", "Electronic"],
+    "priceRange": {
+      "min": "৳3,50,000",
+      "max": "৳12,00,000"
+    },
+    "languages": ["Bengali", "Hindi", "English", "Urdu"],
+    "popularRegions": ["Dhaka", "Chittagong", "Sylhet", "Khulna", "Rajshahi"]
+  }
+}
