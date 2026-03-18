@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Celebrity = () => {
+const VendorRegistration = () => {
     return (
         <div>
             
@@ -8,4 +8,4 @@ const Celebrity = () => {
     );
 };
 
-export default Celebrity;
+export default VendorRegistration;

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router";
+import logo from "../../assets/Ananta_Logo.png"
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -39,8 +40,7 @@ const Navbar = () => {
   const bookAnArtistDropdown = [
     { name: "Singer", path: "/bookAnArtists/singer" },
     { name: "DJ", path: "/bookAnArtists/dj" },
-    { name: "Celebrity", path: "/bookAnArtists/celebrity" },
-    { name: "Dancer / Choreographer", path: "/bookAnArtists/dancer" },
+    { name: "Dancer ", path: "/bookAnArtists/dancer" },
     { name: "Magician", path: "/bookAnArtists/magician" },
     { name: "Comedian", path: "/bookAnArtists/comedian" },
   ];
@@ -220,7 +220,7 @@ const Navbar = () => {
               className="text-2xl font-bold"
             >
              <img
-                src='/public/Ananta_Logo.png'
+                src={logo}
                    alt='anantaEvents'
                     className="w-32 h-auto object-contain "
 />

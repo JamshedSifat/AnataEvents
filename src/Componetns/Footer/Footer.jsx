@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router';
 import { FaFacebook ,FaLinkedin,FaPinterestP, } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
-import logo from './Ananta_Logo.png'
+import logo from '../../assets/Ananta_Logo.png'
 const Footer = () => {
     const currentYear = new Date().getFullYear();
 

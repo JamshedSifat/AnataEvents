@@ -1,147 +1,144 @@
-import React, { useState, useEffect } from "react";
-import SingerCard from "./SingerCard";
-import SingerModal from "./SingerModal";
+import React, { useEffect, useState } from "react";
 
 const Singer = () => {
-
   const [singers, setSingers] = useState([]);
-  const [search, setSearch] = useState("");
-  const [genre, setGenre] = useState("All");
   const [selectedSinger, setSelectedSinger] = useState(null);
-  const [favorites, setFavorites] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
-  // Fetch data
   useEffect(() => {
-    const loadData = async () => {
-      try {
-        const res = await fetch("/SingersData/singersData.json");
-        const data = await res.json();
-
-        setSingers(data.singers || []);
-
-        const saved = JSON.parse(
-          localStorage.getItem("favoriteBangladeshiSingers") || "[]"
-        );
-        setFavorites(saved);
-
-      } catch (err) {
-        setError("Failed to load singers");
-      } finally {
+    fetch("/SingersData/singersData.json") // JSON in public folder
+      .then((res) => res.json())
+      .then((data) => {
+        setSingers(data.singers); // access singers array
         setLoading(false);
-      }
-    };
-
-    loadData();
+      })
+      .catch(() => setLoading(false));
   }, []);
 
-  // Toggle Favorite
-  const toggleFavorite = (id) => {
-    const updated = favorites.includes(id)
-      ? favorites.filter((f) => f !== id)
-      : [...favorites, id];
-
-    setFavorites(updated);
-    localStorage.setItem(
-      "favoriteBangladeshiSingers",
-      JSON.stringify(updated)
-    );
-  };
-
-  // Filter singers
-  const filteredSingers = singers.filter((s) => {
-
-    const matchSearch =
-      s.name.toLowerCase().includes(search.toLowerCase());
-
-    const matchGenre =
-      genre === "All" || s.genre.toLowerCase().includes(genre.toLowerCase());
-
-    return matchSearch && matchGenre;
-
-  });
-
-  if (loading) return <h2 className="text-center mt-20">Loading...</h2>;
-
-  if (error) return <h2 className="text-center mt-20">{error}</h2>;
-
   return (
-    <div className="min-h-screen bg-gray-100 py-10">
+    <section className="py-10 bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 className="text-3xl sm:text-4xl font-bold text-center mb-10">
+          Top Bangladeshi Singers
+        </h1>
 
-   {/* Header Section */}
-<div className="text-center mb-12">
+        {loading && <p className="text-center text-primary">Loading Singers...</p>}
 
-  <h1 className="text-4xl md:text-5xl font-bold text-primary mb-3">
-    🇧🇩 Book Bangladeshi Singers
-  </h1>
+        {/* Responsive grid: 1 col mobile, 2 col tablet, 3 col desktop */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          {singers.map((singer) => (
+            <div
+              key={singer.id}
+              className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-transform duration-300 hover:scale-105 overflow-hidden"
+            >
+              <figure className="relative h-56 sm:h-64 overflow-hidden">
+                <img
+                  src={singer.image}
+                  alt={singer.name}
+                  className="w-full h-full object-cover"
+                />
+                <span className="absolute top-3 left-3 bg-primary text-white px-3 py-1 text-xs sm:text-sm rounded-full shadow">
+                  {singer.genre.split(",")[0]}
+                </span>
+                <span className="absolute top-3 right-3 bg-white/90 text-black px-3 py-1 text-xs sm:text-sm rounded-full shadow font-semibold">
+                  ⭐ {singer.rating}
+                </span>
+              </figure>
 
-  <p className="text-gray-500 max-w-xl mx-auto">
-    Find and book talented Bangladeshi singers for your wedding, concert, or special event.
-  </p>
+              <div className="p-4 sm:p-5">
+                <h3 className="text-lg sm:text-xl font-bold">
+                  {singer.name}
+                </h3>
+                <p className="text-gray-600 text-sm sm:text-base mt-2 line-clamp-2">
+                  {singer.description}
+                </p>
 
-  <div className="w-24 h-1 bg-gradient-to-r from-green-500 to-red-500 mx-auto mt-4 rounded"></div>
+                <div className="flex justify-between mt-4 items-center text-sm sm:text-base">
+                  <p>🕒 {singer.experience}</p>
+                  <button
+                    onClick={() => setSelectedSinger(singer)}
+                    className="btn btn-primary btn-sm sm:btn-md"
+                  >
+                    View Details
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
 
-</div>
+        {/* Modal */}
+        {selectedSinger && (
+          <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4 sm:p-6">
+            <div className="bg-white w-full max-w-3xl rounded-xl overflow-auto shadow-2xl relative max-h-[90vh]">
+              <button
+                onClick={() => setSelectedSinger(null)}
+                className="absolute top-3 right-3 text-white bg-black/70 rounded-full w-8 h-8 flex items-center justify-center"
+              >
+                ✕
+              </button>
 
+              <img
+                src={selectedSinger.image}
+                alt={selectedSinger.name}
+                className="w-full h-64 sm:h-80 object-cover"
+              />
 
-{/* Search + Filter Section */}
-<div className="flex flex-col md:flex-row justify-center items-center gap-4 mb-12">
+              <div className="p-4 sm:p-6">
+                <h2 className="text-2xl sm:text-3xl font-bold mb-2">{selectedSinger.name}</h2>
+                <p className="text-gray-600 mb-4">{selectedSinger.description}</p>
 
-  {/* Search */}
-  <div className="relative w-full md:w-96">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm sm:text-base">
+                  <p><b>Genre:</b> {selectedSinger.genre}</p>
+                  <p><b>Rating:</b> ⭐ {selectedSinger.rating}</p>
+                  <p><b>Experience:</b> {selectedSinger.experience}</p>
+                  <p><b>Location:</b> {selectedSinger.location}</p>
+                  <p><b>Availability:</b> {selectedSinger.availability}</p>
+                </div>
 
-    <input
-      type="text"
-      placeholder="Search singer..."
-      onChange={(e) => setSearch(e.target.value)}
-      className="w-full border border-gray-300 rounded-full px-5 py-3 pl-10 focus:outline-none focus:ring-2 focus:ring-primary"
-    />
+                <div className="mt-4">
+                  <h4 className="font-semibold">Popular Songs:</h4>
+                  <ul className="list-disc ml-5 text-sm sm:text-base">
+                    {selectedSinger.popularSongs.map((song, i) => (
+                      <li key={i}>{song}</li>
+                    ))}
+                  </ul>
+                </div>
 
-    <span className="absolute left-3 top-3 text-gray-400">
-      🔍
-    </span>
+                <div className="mt-4">
+                  <h4 className="font-semibold">Specialties:</h4>
+                  <ul className="list-disc ml-5 text-sm sm:text-base">
+                    {selectedSinger.specialties.map((sp, i) => (
+                      <li key={i}>{sp}</li>
+                    ))}
+                  </ul>
+                </div>
 
-  </div>
+                <div className="mt-4">
+                  <h4 className="font-semibold">Awards:</h4>
+                  <ul className="list-disc ml-5 text-sm sm:text-base">
+                    {selectedSinger.awards.map((award, i) => (
+                      <li key={i}>{award}</li>
+                    ))}
+                  </ul>
+                </div>
 
-
-  {/* Filter */}
-  <select
-    onChange={(e) => setGenre(e.target.value)}
-    className="border border-gray-300 rounded-full px-5 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-primary"
-  >
-    <option>All</option>
-    <option>Pop</option>
-    <option>Rock</option>
-    <option>Folk</option>
-  </select>
-
-</div>
-
-      {/* Singer Grid */}
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4">
-
-        {filteredSingers.map((singer) => (
-          <SingerCard
-            key={singer.id}
-            singer={singer}
-            onBookNow={() => setSelectedSinger(singer)}
-            onToggleFavorite={() => toggleFavorite(singer.id)}
-            isFavorite={favorites.includes(singer.id)}
-          />
-        ))}
-
+                <div className="mt-4 text-sm sm:text-base">
+                  <h4 className="font-semibold">Social Media:</h4>
+                  <p>Facebook: {selectedSinger.socialMedia.facebook}</p>
+                  {selectedSinger.socialMedia.instagram && (
+                    <p>Instagram: {selectedSinger.socialMedia.instagram}</p>
+                  )}
+                  {selectedSinger.socialMedia.youtube && (
+                    <p>YouTube: {selectedSinger.socialMedia.youtube}</p>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
-
-      {/* Booking Modal */}
-      {selectedSinger && (
-        <SingerModal
-          singer={selectedSinger}
-          onClose={() => setSelectedSinger(null)}
-        />
-      )}
-
-    </div>
+    </section>
   );
 };
 

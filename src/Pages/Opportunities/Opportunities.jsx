@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CoreoGrapher = () => {
+const Opportunities = () => {
     return (
         <div>
             
@@ -8,4 +8,4 @@ const CoreoGrapher = () => {
     );
 };
 
-export default CoreoGrapher;
+export default Opportunities;

@@ -1,0 +1,31 @@
+[
+    
+  {
+    "id": 1,
+    "title": "Corporate Promotional Gift",
+    "icon": "📊",
+    "description": "Corporate Gift Provider in BD, Corporate Gifts manufacturers, Promotional Gifts supplier, Gifts wholesalers",
+    "fullDetails": "We provide premium corporate promotional gifts including custom jute bags, branded merchandise, and corporate gift hampers. Perfect for employee recognition, client gifts, and brand promotion events.",
+    "images": [
+      "https://www.anantabd.net/wp-content/uploads/2020/03/Jute-Bag-Bangladesh-e1584697580808-768x439.png",
+      "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&h=400&fit=crop"
+    ]
+  },
+  
+  {
+    "id": 2,
+    "title": "Road shows, Canter Activities",
+    "icon": "📊",
+    "description": "Road shows give an opportunity to the customer to have a firsthand  experience of the products. It is a highly cost effective way of launching a  product …",
+    "fullDetails": "We provide premium corporate promotional gifts including custom jute bags, branded merchandise, and corporate gift hampers. Perfect for employee recognition, client gifts, and brand promotion events.",
+    "images": [
+      "https://www.anantabd.net/wp-content/uploads/2020/03/Canter-Activities11-768x439.jpg",
+      "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&h=400&fit=crop"
+    ]
+  }
+
+]
