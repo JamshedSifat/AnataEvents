@@ -1,0 +1,164 @@
+{
+  "talents": [
+    {
+      "id": 1,
+      "name": "Raina Khan",
+      "category": "Singing",
+      "experience": "5 years",
+      "bio": "Professional singer specializing in pop and classical music",
+      "image": "🎤",
+      "rating": 4.8,
+      "fullBio": "I am a professional playback singer with 5 years of experience. I have performed at major events across Bangladesh and won multiple awards.",
+      "videoUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      "audioUrl": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+      "portfolio": "https://rainakhan.com",
+      "instagram": "https://instagram.com/rainakhan",
+      "achievements": [
+        "Best Singer Award 2023",
+        "Collaborated with 50+ Events",
+        "International Performance"
+      ],
+      "rates": "৳10,000 - ৳25,000 per event"
+    },
+    {
+      "id": 2,
+      "name": "Ahmed Hasan",
+      "category": "Dancing",
+      "experience": "8 years",
+      "bio": "Contemporary and traditional dance performer",
+      "image": "💃",
+      "rating": 4.9,
+      "fullBio": "Professional dancer with expertise in contemporary, hip-hop, and classical dance. I have trained dancers and performed internationally.",
+      "videoUrl": "https://www.youtube.com/embed/jNQXAC9IVRw",
+      "audioUrl": null,
+      "portfolio": "https://ahmedhasan.com",
+      "instagram": "https://instagram.com/ahmedhasan",
+      "achievements": [
+        "National Dance Champion",
+        "Trained 200+ Students",
+        "Viral TikTok Videos"
+      ],
+      "rates": "৳15,000 - ৳30,000 per event"
+    },
+    {
+      "id": 3,
+      "name": "Priya Sharma",
+      "category": "Acting",
+      "experience": "6 years",
+      "bio": "Experienced actor in film and theatrical productions",
+      "image": "🎭",
+      "rating": 4.7,
+      "fullBio": "Award-winning actress with experience in films, TV dramas, and theater productions. Known for character depth and versatility.",
+      "videoUrl": "https://www.youtube.com/embed/9bZkp7q19f0",
+      "audioUrl": null,
+      "portfolio": "https://priyasharma.com",
+      "instagram": "https://instagram.com/priyasharma",
+      "achievements": [
+        "Best Actress Award",
+        "Featured in 15+ Films",
+        "Theater Productions"
+      ],
+      "rates": "৳20,000 - ৳50,000 per event"
+    },
+    {
+      "id": 4,
+      "name": "Karim Ali",
+      "category": "Comedy",
+      "experience": "4 years",
+      "bio": "Stand-up comedian with a unique style",
+      "image": "😂",
+      "rating": 4.6,
+      "fullBio": "Stand-up comedian with a fresh approach to humor. Fluent in Bangla, English, and Hinglish comedy.",
+      "videoUrl": "https://www.youtube.com/embed/aqz-KE-bpKQ",
+      "audioUrl": null,
+      "portfolio": "https://karimali.com",
+      "instagram": "https://instagram.com/karimali",
+      "achievements": [
+        "50K YouTube Subscribers",
+        "Performed at 100+ Events",
+        "Comedy Special"
+      ],
+      "rates": "৳8,000 - ৳15,000 per event"
+    },
+    {
+      "id": 5,
+      "name": "Nadia Islam",
+      "category": "Music Production",
+      "experience": "7 years",
+      "bio": "Professional music producer and composer",
+      "image": "🎵",
+      "rating": 4.8,
+      "fullBio": "Music producer and composer with experience in various genres. Created background music for 50+ events.",
+      "videoUrl": null,
+      "audioUrl": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+      "portfolio": "https://nadiaislammusic.com",
+      "instagram": "https://instagram.com/nadiaislammusic",
+      "achievements": [
+        "Produced 100+ Songs",
+        "Spotify Verified",
+        "Film Scorer"
+      ],
+      "rates": "৳5,000 - ৳20,000 per event"
+    },
+    {
+      "id": 6,
+      "name": "Rahul Das",
+      "category": "Performing Arts",
+      "experience": "9 years",
+      "bio": "Versatile performer in multiple art forms",
+      "image": "🎪",
+      "rating": 4.9,
+      "fullBio": "Multi-talented performer skilled in magic, juggling, aerial acts, and theatrical performances.",
+      "videoUrl": "https://www.youtube.com/embed/oUFJJNQGwhk",
+      "audioUrl": null,
+      "portfolio": "https://rahuldas.com",
+      "instagram": "https://instagram.com/rahuldas",
+      "achievements": [
+        "International Performer",
+        "TV Show Features",
+        "Trained Performers"
+      ],
+      "rates": "৳12,000 - ৳40,000 per event"
+    },
+    {
+      "id": 7,
+      "name": "Zara Khan",
+      "category": "Hosting",
+      "experience": "3 years",
+      "bio": "Professional event host and MC",
+      "image": "🎤",
+      "rating": 4.7,
+      "fullBio": "Professional MC and host for corporate events, weddings, and conferences. Fluent in multiple languages.",
+      "videoUrl": "https://www.youtube.com/embed/kJQP7kiw9Y0",
+      "audioUrl": null,
+      "portfolio": "https://zarakhan.com",
+      "instagram": "https://instagram.com/zarakhan",
+      "achievements": [
+        "Hosted 200+ Events",
+        "Corporate Expert",
+        "Wedding Specialist"
+      ],
+      "rates": "৳6,000 - ৳15,000 per event"
+    },
+    {
+      "id": 8,
+      "name": "Imran Hassan",
+      "category": "Magic",
+      "experience": "10 years",
+      "bio": "Magician and illusionist with international experience",
+      "image": "✨",
+      "rating": 5.0,
+      "fullBio": "Professional magician and illusionist with international certifications. Specializes in close-up magic and stage illusions.",
+      "videoUrl": "https://www.youtube.com/embed/gFeQJlHEGSc",
+      "audioUrl": null,
+      "portfolio": "https://imranhassan.com",
+      "instagram": "https://instagram.com/imranhassan",
+      "achievements": [
+        "International Magician",
+        "TV Appearances",
+        "Award Winner"
+      ],
+      "rates": "৳15,000 - ৳50,000 per event"
+    }
+  ]
+}
