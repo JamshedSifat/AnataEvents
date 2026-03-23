@@ -53,7 +53,7 @@ export default function Opportunities() {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
-          <h1 className="text-5xl font-bold text-gray-800 mb-4">
+          <h1 className="text-5xl font-bold text-primary mb-4">
             Opportunities
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
@@ -90,63 +90,6 @@ export default function Opportunities() {
           })}
         </div>
 
-        {/* Why Join Us Section */}
-        <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
-          <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
-            Why Join AnataEvents?
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl font-bold text-blue-600">✓</span>
-              </div>
-              <h3 className="text-lg font-semibold mb-2">Best Opportunities</h3>
-              <p className="text-gray-600">
-                Connect with leading events across Bangladesh
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl font-bold text-purple-600">✓</span>
-              </div>
-              <h3 className="text-lg font-semibold mb-2">Professional Network</h3>
-              <p className="text-gray-600">
-                Build relationships with industry professionals
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl font-bold text-green-600">✓</span>
-              </div>
-              <h3 className="text-lg font-semibold mb-2">Growth & Exposure</h3>
-              <p className="text-gray-600">
-                Grow your career and gain visibility in the industry
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Stats Section */}
-        <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white rounded-lg p-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
-            <div>
-              <h4 className="text-4xl font-bold mb-2">500+</h4>
-              <p className="text-blue-100">Registered Vendors</p>
-            </div>
-            <div>
-              <h4 className="text-4xl font-bold mb-2">1000+</h4>
-              <p className="text-blue-100">Talented Artists</p>
-            </div>
-            <div>
-              <h4 className="text-4xl font-bold mb-2">50+</h4>
-              <p className="text-blue-100">Active Team Members</p>
-            </div>
-            <div>
-              <h4 className="text-4xl font-bold mb-2">2000+</h4>
-              <p className="text-blue-100">Successful Events</p>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );

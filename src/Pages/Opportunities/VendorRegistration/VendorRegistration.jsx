@@ -141,7 +141,7 @@ export default function VendorRegistration() {
         
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold mb-3">🏢 Vendor Registration</h1>
+          <h1 className="text-4xl font-bold mb-3">🏢 Vendor <span className='text-primary'>Registration</span></h1>
           <p className="text-gray-600 text-lg">
             Register your business and collaborate with AnataEvents
           </p>
@@ -430,9 +430,9 @@ export default function VendorRegistration() {
         </div>
 
         {/* Info Box */}
-        <div className="bg-green-50 border-l-4 border-green-500 p-6 rounded-lg">
-          <h4 className="font-bold text-green-600 mb-3">✓ What We're Looking For:</h4>
-          <ul className="space-y-2 text-gray-700">
+        <div className="bg-red-50 border-l-7 border-primary p-6 rounded-lg">
+          <h4 className="font-bold text-primary text-xl mb-3">✓ What We're Looking For:</h4>
+          <ul className="space-y-2 text-gray-700 text-xl">
             <li>✓ Professional business license/certificate</li>
             <li>✓ Quality portfolio images of your work</li>
             <li>✓ Active social media presence (bonus)</li>

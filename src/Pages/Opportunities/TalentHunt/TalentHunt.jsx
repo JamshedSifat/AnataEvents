@@ -51,7 +51,7 @@ export default function TalentHunt() {
         videoFile: file,
         videoFileName: file.name
       }));
-      toast.success('✓ Video uploaded: ' + file.name);
+      toast.success(' Video uploaded: ' + file.name);
     }
   };
 
@@ -105,9 +105,9 @@ export default function TalentHunt() {
     <div className="min-h-screen bg-gray-100">
       
       {/* Header */}
-      <div className="bg-gradient-to-r from-purple-600 to-pink-600 text-white py-12 px-4">
+      <div className="py-22 px-4">
         <div className="max-w-6xl mx-auto text-center">
-          <h1 className="text-5xl font-bold mb-3">🌟 Talent Hunt</h1>
+          <h1 className="text-5xl font-bold mb-3"> Talent <span className='text-primary'>Hunt</span></h1>
           <p className="text-xl">
             Discover amazing talents across Bangladesh. Join our community of performers!
           </p>
@@ -123,9 +123,9 @@ export default function TalentHunt() {
             className="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-all border-2 border-purple-200"
           >
             <div className="text-4xl mb-3">👥</div>
-            <h3 className="text-2xl font-bold text-purple-600 mb-2">View Featured Talents</h3>
+            <h3 className="text-2xl font-bold text-primary mb-2">View Featured Talents</h3>
             <p className="text-gray-600 mb-4">Explore our talented performers and success stories</p>
-            <button className="bg-purple-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-purple-700 w-full">
+            <button className="bg-primary text-white font-bold py-2 px-6 rounded-lg hover:bg-pink-600 w-full">
               {showFeature ? '✓ View Talents' : 'View Talents'}
             </button>
           </button>
@@ -152,23 +152,7 @@ export default function TalentHunt() {
         </div>
       )}
 
-      {/* Call to Action */}
-      {!showFeature && (
-        <div className="max-w-4xl mx-auto px-4 mb-12">
-          <div className="bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg shadow-lg p-8 text-center">
-            <h2 className="text-3xl font-bold mb-3">Ready to Showcase Your Talent?</h2>
-            <p className="text-lg mb-6">
-              Join thousands of talented artists and performers. Get discovered by event organizers!
-            </p>
-            <button
-              onClick={() => setShowModal(true)}
-              className="bg-white text-purple-600 font-bold py-3 px-8 rounded-lg hover:bg-gray-100 text-lg transition-all"
-            >
-              🚀 Register Now
-            </button>
-          </div>
-        </div>
-      )}
+     
 
       {/* Modal */}
       {showModal && (
@@ -176,8 +160,8 @@ export default function TalentHunt() {
           <div className="bg-white rounded-lg shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
             
             {/* Modal Header */}
-            <div className="sticky top-0 bg-gradient-to-r from-purple-600 to-pink-600 text-white p-6 flex justify-between items-center">
-              <h2 className="text-2xl font-bold">🌟 Register Your Talent</h2>
+            <div className="sticky top-0 bg-gradient-to-r from-primary to-pink-600 text-white p-6 flex justify-between items-center">
+              <h2 className="text-2xl font-bold"> Register Your Talent</h2>
               <button
                 onClick={() => setShowModal(false)}
                 className="text-2xl font-bold hover:text-gray-200"

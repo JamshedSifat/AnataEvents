@@ -49,7 +49,6 @@ const Navbar = () => {
     { name: "Vendor Registration", path: "/opportunities/vendor-registration" },
     { name: "Talent Hunt", path: "/opportunities/talent-hunt" },
     { name: "Artist Registration", path: "/opportunities/artist-registration" },
-    { name: "Become a Partner", path: "/opportunities/partner-program" },
     { name: "Career Opportunities", path: "/opportunities/careers" }
   ];
 

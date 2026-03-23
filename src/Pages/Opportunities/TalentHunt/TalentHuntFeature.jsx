@@ -75,7 +75,7 @@ export default function TalentHuntFeature() {
               className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-all overflow-hidden cursor-pointer transform hover:-translate-y-2"
             >
               {/* Card Header */}
-              <div className="bg-gradient-to-r from-purple-500 to-pink-500 p-6 text-center text-white">
+              <div className="bg-gradient-to-r from-primary to-pink-500 p-6 text-center text-white">
                 <p className="text-5xl mb-2">{talent.image}</p>
                 <h3 className="text-xl font-bold">{talent.name}</h3>
               </div>
@@ -83,7 +83,7 @@ export default function TalentHuntFeature() {
               {/* Card Body */}
               <div className="p-4">
                 <div className="mb-3">
-                  <p className="text-sm font-bold text-purple-600 bg-purple-100 inline-block px-3 py-1 rounded-full">
+                  <p className="text-sm font-bold text-green-600 bg-purple-100 inline-block px-3 py-1 rounded-full">
                     {talent.category}
                   </p>
                 </div>
@@ -101,7 +101,7 @@ export default function TalentHuntFeature() {
                 </div>
 
                 {/* Click to View More */}
-                <button className="w-full mt-4 bg-purple-600 text-white py-2 rounded font-bold hover:bg-purple-700 text-sm">
+                <button className="w-full mt-4 bg-primary text-white py-2 rounded font-bold hover:bg-pink-600 text-sm">
                   View Profile
                 </button>
               </div>
@@ -110,31 +110,11 @@ export default function TalentHuntFeature() {
         </div>
       </div>
 
-      {/* Statistics */}
-      <div className="max-w-6xl mx-auto mb-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          <div className="bg-white rounded-lg shadow-lg p-6 text-center">
-            <p className="text-4xl font-bold text-purple-600 mb-2">1000+</p>
-            <p className="text-gray-600">Registered Talents</p>
-          </div>
-          <div className="bg-white rounded-lg shadow-lg p-6 text-center">
-            <p className="text-4xl font-bold text-pink-600 mb-2">500+</p>
-            <p className="text-gray-600">Events Organized</p>
-          </div>
-          <div className="bg-white rounded-lg shadow-lg p-6 text-center">
-            <p className="text-4xl font-bold text-blue-600 mb-2">95%</p>
-            <p className="text-gray-600">Success Rate</p>
-          </div>
-          <div className="bg-white rounded-lg shadow-lg p-6 text-center">
-            <p className="text-4xl font-bold text-green-600 mb-2">24/7</p>
-            <p className="text-gray-600">Support Available</p>
-          </div>
-        </div>
-      </div>
+     
 
       {/* How It Works */}
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl font-bold mb-8 text-center">How It Works</h2>
+        <h2 className="text-3xl font-bold mb-8 text-center">How It <span className='text-primary'>Works</span></h2>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           <div className="bg-white rounded-lg shadow-lg p-6">
             <div className="bg-purple-100 w-12 h-12 rounded-full flex items-center justify-center mb-4 mx-auto">
