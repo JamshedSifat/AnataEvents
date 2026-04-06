@@ -28,6 +28,7 @@ import TalentHunt from "../Pages/Opportunities/TalentHunt/TalentHunt";
 import ArtistRegistration from "../Pages/Opportunities/ArtistRegistration/ArtistRegistration";
 import CareerOpportunities from "../Pages/Opportunities/CareerOpportunities/CareerOpportunities";
 import VendorRegistration from "../Pages/Opportunities/VendorRegistration/VendorRegistration";
+import PhotographyServicesDetails from "../Componetns/Services/PhotographyVedioServices/PhotographyServicesDetails";
 
 
 // Title setter function
@@ -89,6 +90,11 @@ export const router = createBrowserRouter([
         element: <PhotographyVedioServices></PhotographyVedioServices>,
         loader: setTitle("Photography & Video - Ananta Events | Professional Event Coverage")
       },
+      {
+  path: '/services/Photography&VedioServices/:id',
+  element: <PhotographyServicesDetails></PhotographyServicesDetails>,
+  loader: setTitle("Photography & Video Details - Ananta Events | Professional Event Coverage")
+},
       {
         path: '/services/SpecialEvent',
         element: <SpecialEvent></SpecialEvent>,
