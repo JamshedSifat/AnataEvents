@@ -88,7 +88,7 @@ const About = () => {
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 
-                {/* Header
+                {/* Header */}
                 <div className="text-center mb-16">
                     <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-red-100 to-pink-100 rounded-full text-red-600 text-sm font-medium mb-4">
                         <span className="mr-2">🏆</span>
@@ -106,13 +106,13 @@ const About = () => {
                         For over 15 years, we've been transforming dreams into reality, creating unforgettable experiences 
                         that celebrate life's most precious moments.
                     </p>
-                </div> */}
+                </div>
 
                 {/* My Journey */}
                <MyJourney></MyJourney>
 
                 {/* Statistics Section */}
-                {/* <StatisticsItems></StatisticsItems> */}
+                <StatisticsItems></StatisticsItems>
 
 
                 {/* Commitment */}
