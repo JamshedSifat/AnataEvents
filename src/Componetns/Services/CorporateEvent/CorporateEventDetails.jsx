@@ -24,7 +24,7 @@ const CorporateEventDetails = () => {
 
         {/* Back Button */}
         <Link
-          to="/services/corporate-event"
+          to="/services/CorporateEvent"
           className="text-primary font-semibold mb-6 inline-block"
         >
           ← Back to Services
@@ -75,6 +75,52 @@ const CorporateEventDetails = () => {
             ))}
           </div>
         </div>
+
+     {/* Overview */}
+<div className="mb-10">
+  <h3 className="text-2xl font-semibold mb-4">Overview</h3>
+  <p className="text-gray-700">{service.details?.overview}</p>
+</div>
+
+{/* Design Services */}
+<div className="mb-10">
+  <h3 className="text-2xl font-semibold mb-4">Design Services</h3>
+  <ul className="list-disc ml-6 space-y-2 text-gray-700">
+    {service.details?.designServices?.map((item, i) => (
+      <li key={i}>{item}</li>
+    ))}
+  </ul>
+</div>
+
+{/* Social Media */}
+<div className="mb-10">
+  <h3 className="text-2xl font-semibold mb-4">Social Media Content</h3>
+  <ul className="list-disc ml-6 space-y-2 text-gray-700">
+    {service.details?.socialMediaServices?.map((item, i) => (
+      <li key={i}>{item}</li>
+    ))}
+  </ul>
+</div>
+
+{/* Printing */}
+<div className="mb-10">
+  <h3 className="text-2xl font-semibold mb-4">Printing Solutions</h3>
+  <ul className="list-disc ml-6 space-y-2 text-gray-700">
+    {service.details?.printingSolutions?.map((item, i) => (
+      <li key={i}>{item}</li>
+    ))}
+  </ul>
+</div>
+
+{/* Marketing */}
+<div className="mb-10">
+  <h3 className="text-2xl font-semibold mb-4">Marketing & Promotion</h3>
+  <ul className="list-disc ml-6 space-y-2 text-gray-700">
+    {service.details?.marketingServices?.map((item, i) => (
+      <li key={i}>{item}</li>
+    ))}
+  </ul>
+</div>
 
       </div>
     </section>

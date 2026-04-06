@@ -29,6 +29,7 @@ import ArtistRegistration from "../Pages/Opportunities/ArtistRegistration/Artist
 import CareerOpportunities from "../Pages/Opportunities/CareerOpportunities/CareerOpportunities";
 import VendorRegistration from "../Pages/Opportunities/VendorRegistration/VendorRegistration";
 
+
 // Title setter function
 const setTitle = (title) => {
   return () => {
@@ -158,6 +159,7 @@ export const router = createBrowserRouter([
         path:'/opportunities',
         element:<Opportunities></Opportunities>
       },
+      
       {
         path:'/opportunities/talent-hunt',
         element:<TalentHunt></TalentHunt>
