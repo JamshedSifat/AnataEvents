@@ -7,79 +7,7 @@ import CoreValues from './CoreValues/CoreValues';
 
 
 const About = () => {
-    // Create state to store data
-    // const [data, setData] = useState({
-    //     stats: [],
-    //     team: [],
-    //     values: []
-    // });
-
-    // // State to track if data is loading
-    // const [loading, setLoading] = useState(true);
-
-    // // State to store error messages
-    // const [error, setError] = useState(null);
-
-    // // useEffect runs when component loads
-    // useEffect(() => {
-    //     // Create function to fetch data
-    //     const fetchAboutData = async () => {
-    //         try {
-    //             // Fetch the JSON file from public folder
-    //             const response = await fetch('../../../public/About/About.json');
-
-    //             // Check if fetch was successful
-    //             if (!response.ok) {
-    //                 throw new Error('Failed to load data');
-    //             }
-
-    //             // Convert response to JSON
-    //             const jsonData = await response.json();
-
-    //             // Update state with fetched data
-    //             setData(jsonData);
-
-    //             // Clear any errors
-    //             setError(null);
-
-    //         } catch (err) {
-    //             // If error occurs, store error message
-    //             console.log('Error:', err.message);
-    //             setError(err.message);
-    //         } finally {
-    //             // Stop loading regardless of success or error
-    //             setLoading(false);
-    //         }
-    //     };
-
-    //     // Call the fetch function
-    //     fetchAboutData();
-
-    // }, []); // Empty array means run only once when component loads
-
-    // // Show loading message while fetching
-    // if (loading) {
-    //     return (
-    //         <section className="py-20 bg-white">
-    //             <div className="max-w-7xl mx-auto px-4 text-center">
-    //                 <p className="text-gray-600">Loading data...</p>
-    //             </div>
-    //         </section>
-    //     );
-    // }
-
-    // // Show error message if something went wrong
-    // if (error) {
-    //     return (
-    //         <section className="py-20 bg-white">
-    //             <div className="max-w-7xl mx-auto px-4 text-center">
-    //                 <p className="text-red-600">Error: {error}</p>
-    //             </div>
-    //         </section>
-    //     );
-    // }
-
-    // Main component JSX
+   
     return (
         <section className="py-20 bg-white relative overflow-hidden">
             {/* Background Decorations */}
@@ -119,10 +47,10 @@ const About = () => {
                <Commitment></Commitment>
 
                 {/* Team Section */}
-               {/* <MyTeam></MyTeam> */}
+               <MyTeam></MyTeam>
 
                  {/* Our Values Section */}
-                {/* <CoreValues></CoreValues> */}
+                <CoreValues></CoreValues>
 
              
 
