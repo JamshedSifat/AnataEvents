@@ -1,0 +1,123 @@
+import React, { useEffect, useState } from 'react';
+
+const MyTeam = () => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [hoveredMember, setHoveredMember] = useState(null);
+
+  useEffect(() => {
+    const fetchTeamData = async () => {
+      try {
+        // Fetch data from your JSON file
+        const response = await fetch('/About/About.json');
+        
+        if (!response.ok) {
+          throw new Error('Failed to load team data');
+        }
+        
+        const jsonData = await response.json();
+        setData(jsonData.team || []);
+        setError(null);
+        
+      } catch (err) {
+        console.log('Error:', err.message);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTeamData();
+  }, []);
+
+  if (loading) {
+    return (
+      <section className=" bg-base-100">
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <p className="text-neutral text-lg">Loading team data...</p>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className="py-20 bg-base-100">
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <p className="text-error text-lg">Error: {error}</p>
+        </div>
+      </section>
+    );
+  }
+
+  return (
+    <section className="py-16 md:py-20 bg-base-100">
+      <div className="mx-auto w-full max-w-7xl px-4">
+        
+        {/* Header */}
+        <div className="text-center mb-12">
+          <span className="inline-block rounded-full bg-primary/10 px-4 py-2 text-sm font-semibold text-primary mb-4">
+            OUR TEAM
+          </span>
+          <h2 className="text-3xl md:text-4xl font-bold text-secondary mb-4">
+            Meet Our <span className="text-primary">Expert Team</span>
+          </h2>
+          <p className="text-neutral max-w-2xl mx-auto">
+            Passionate professionals dedicated to making your brand succeed through strategic influencer marketing
+          </p>
+        </div>
+
+        {/* Team Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+          {data.map((member, index) => (
+            <div
+              key={index}
+              onMouseEnter={() => setHoveredMember(index)}
+              onMouseLeave={() => setHoveredMember(null)}
+              className="group text-center"
+            >
+              {/* Image Container */}
+              <div className="relative mb-6 overflow-hidden rounded-2xl">
+                <img
+                  src={member.image}
+                  alt={member.name}
+                  className="w-full aspect-square object-cover transition-transform duration-300 group-hover:scale-110"
+                />
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                
+               
+              </div>
+
+              {/* Content */}
+              <div>
+                <h3 className="text-lg md:text-xl font-bold text-secondary mb-1">
+                  {member.name}
+                </h3>
+                <p className="text-primary font-semibold text-sm md:text-base mb-2">
+                  {member.role}
+                </p>
+                <p className="text-neutral text-xs md:text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  {member.description || "Expert professional"}
+                </p>
+              </div>
+
+              {/* Bottom accent line */}
+              <div className="mt-4 h-1 w-12 bg-primary mx-auto rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center"></div>
+            </div>
+          ))}
+        </div>
+
+        {/* Empty State */}
+        {data.length === 0 && (
+          <div className="text-center py-12">
+            <p className="text-neutral text-lg">No team members found</p>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+};
+
+export default MyTeam;
