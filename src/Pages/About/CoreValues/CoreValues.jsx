@@ -19,7 +19,7 @@ const CoreValues = () => {
             const fetchAboutData = async () => {
                 try {
                     // Fetch the JSON file from public folder
-                    const response = await fetch('../../../public/About/About.json');
+                    const response = await fetch('/About/About.json');
     
                     // Check if fetch was successful
                     if (!response.ok) {
