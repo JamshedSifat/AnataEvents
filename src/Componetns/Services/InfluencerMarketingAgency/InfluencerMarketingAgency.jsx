@@ -8,6 +8,27 @@ import "swiper/css/pagination";
 
 const InfluencerMarketingAgency = () => {
   const [activeTab, setActiveTab] = useState(0);
+   const [openIndex, setOpenIndex] = useState(null);
+  
+    const toggleFAQ = (index) => {
+      setOpenIndex(openIndex === index ? null : index);
+    };
+
+const faqData = [
+  {
+    question: "How to choose the right social Influencer for your brand?",
+    answer: "To choose the right influencer for your business in Bangladesh, you need to verify a few things Is the influencer creating content that is applicable to your business Do the influencers engage with their following?Is their content consistent or are they always changing to stay relevant?How often is their content shared?Is the influencer someone you would like your brand to be affiliated with?An influencer must be chosen after answering all these questions. Influencers in marketing tend to create lifestyle content. As such, it is best to choose someone who may already use your product or might benefit from it. Other Influencer create specific content and can create content directly promoting a brand or good. For such influencers it is essential that a brand is honest and forthcoming about their products. It must also be ensured that the Influencer does not have any scandals. Any scandal can reflect badly on the brand. Finally, it is crucial that the brand and influencer share the same social message. This ensures a long and successful relationship."
+  },
+  {
+    question: "What is a social media influencer?",
+    answer: "Social media Influencer or social influencer is a term we hear every day, but who are they? The answer: Social Influencers are individuals who possess a massive social media following. Their followings can be anywhere between 50,000 to 500,000 people. Such Influencers are divided into two groups; Micro Influencers, who have around 50,000 followers and Macro Influencers, Influencers whose follower count ranges from 100,000 to over 1 million. These individuals tend to create content based around their own lives. This attracts an audience that relate with the influencer on a personal level. Influencers tend to have a lot of respect within their communities. As such, their followers put a lot of weight on their opinions. These followers tend to receive any endorsement the influencer does as genuine advice."
+  },
+  {
+    question: "Why choose us to find your right Influencers for your Brand ?",
+    answer: "Our exceptional team at Ananta Events & Entertainment provide support according to our customers’ needs. Our influencer Marketing Agency is the top pioneering influencer agency in Dhaka Bangladesh. We are both a Micro Influencers Agency and a Top Macro Influencers Agency. Our team is connected to many Influencer marketing Companies. Furthermore, our Instagram Influencer Agency connects you to the top micro and macro Instagram influencers. Additionally, our YouTube Influencer Agency can connect you to any YouTuber of Bangladesh. Ananta Events & Entertainment are here to help in any shape and form."
+  },
+  
+];
 
  const influencersList = [
   {
@@ -284,14 +305,14 @@ const InfluencerMarketingAgency = () => {
         <div className="mb-16 grid items-center gap-8 md:grid-cols-2">
           <div className="overflow-hidden rounded-2xl">
             <img
-              src="https://images.unsplash.com/photo-1460925895917-adf4ea4c37d4?auto=format&fit=crop&w=500&q=80"
+              src="https://i.pinimg.com/1200x/f8/45/52/f84552a8a27200320230b3fb86793ae8.jpg"
               alt="Digital Marketing"
-              className="h-96 w-full object-cover"
+              className="h-96 w-full object-center"
               loading="lazy"
             />
           </div>
           <div>
-            <span className="inline-block rounded-full bg-accent/10 px-4 py-2 text-sm font-semibold text-accent mb-4">
+            <span className="inline-block rounded-full bg-primary px-4 py-2 text-sm text-white font-semibold text-accent mb-4">
               DIGITAL MARKETING
             </span>
             <h2 className="text-3xl font-bold text-secondary mb-4">What is Digital Marketing?</h2>
@@ -384,7 +405,27 @@ const InfluencerMarketingAgency = () => {
           </div>
         </div>
 
-       {/* Influencers List - Carousel with Images */}
+
+{/* Video Section */}
+<div className="mb-16">
+  <h2 className="text-3xl font-bold text-secondary mb-8">How to Execute Influencer Marketing</h2>
+  
+  <div className="rounded-2xl overflow-hidden border-2 border-base-300 shadow-xl">
+    <div className="relative w-full aspect-video bg-black">
+      <iframe
+        width="100%"
+        height="100%"
+        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+        title="Influencer Marketing Guide"
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowFullScreen
+        className="w-full h-full"
+      ></iframe>
+    </div>
+  </div>
+</div>
+   {/* Influencers List - Carousel with Images */}
 <div className="mb-16">
   <div className="mb-8">
     <span className="inline-block rounded-full bg-primary/10 px-4 py-2 text-sm font-semibold text-primary mb-4">
@@ -462,133 +503,59 @@ const InfluencerMarketingAgency = () => {
   </Swiper>
 </div>
 
-      
+       
+      </div>
+      {/* FAQ quesstion */}
+      <section className="py-20 bg-gradient-to-b from-gray-50 to-gray-100">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 className="text-4xl font-extrabold text-center text-gray-900 mb-12">
+          Frequently Asked <span className="text-primary">Questions</span>
+        </h2>
 
-{/* Video Section */}
-<div className="mb-16">
-  <h2 className="text-3xl font-bold text-secondary mb-8">How to Execute Influencer Marketing</h2>
-  
-  <div className="rounded-2xl overflow-hidden border-2 border-base-300 shadow-xl">
-    <div className="relative w-full aspect-video bg-black">
-      <iframe
-        width="100%"
-        height="100%"
-        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-        title="Influencer Marketing Guide"
-        frameBorder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowFullScreen
-        className="w-full h-full"
-      ></iframe>
-    </div>
-  </div>
-</div>
+        <div className="space-y-5">
+          {faqData.map((faq, index) => {
+            const isOpen = openIndex === index;
+            return (
+              <div
+                key={index}
+                className={`rounded-2xl overflow-hidden transition-all duration-500 shadow-md 
+                  ${isOpen ? "bg-primary text-white shadow-xl" : "bg-white text-gray-800 hover:shadow-xl"}`}
+              >
+                <button
+                  onClick={() => toggleFAQ(index)}
+                  className="w-full flex justify-between items-center px-6 py-5 text-left focus:outline-none group"
+                >
+                  <span
+                    className={`font-semibold text-lg transition-colors duration-300 ${
+                      isOpen ? "text-white" : "text-gray-800 group-hover:text-primary"
+                    }`}
+                  >
+                    {faq.question}
+                  </span>
+                  <span
+                    className={`transform transition-transform duration-300 text-2xl ${
+                      isOpen ? "text-white" : "text-primary"
+                    }`}
+                    style={{ rotate: isOpen ? "45deg" : "0deg" }}
+                  >
+                    +
+                  </span>
+                </button>
 
-        {/* Choosing Tips */}
-        <div className="mb-16 rounded-2xl bg-gradient-to-r from-secondary to-secondary/80 text-white p-8 md:p-12">
-          <h2 className="text-3xl font-bold mb-4">How to Choose the Right Influencer for Your Brand</h2>
-          <p className="mb-8 opacity-90">To select the perfect influencer for your business in Bangladesh, verify these key factors:</p>
-          
-          <div className="grid md:grid-cols-2 gap-6">
-            {choosingTips.map((tip, idx) => (
-              <div key={idx} className="flex gap-4">
-                <div className="flex-shrink-0">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-white font-bold text-sm">
-                    {idx + 1}
-                  </div>
-                </div>
-                <p className="pt-1">{tip}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-8 pt-8 border-t border-white/20">
-            <p className="text-sm opacity-90">
-              <span className="font-semibold">Best Practice:</span> Choose influencers who already use your products or would benefit from them. Ensure mutual alignment in values, content quality, and social media philosophy for a successful, long-term relationship.
-            </p>
-          </div>
-        </div>
-
-        {/* Why Choose Us */}
-        <div className="mb-16 rounded-2xl bg-base-200 p-8 md:p-12">
-          <h2 className="text-3xl font-bold text-secondary mb-8">Why Choose Ananta Events & Entertainment?</h2>
-          
-          <div className="grid md:grid-cols-2 gap-8 mb-8">
-            <div>
-              <ul className="space-y-4">
-                {[
-                  "15+ years of industry expertise",
-                  "Network of 5000+ verified influencers",
-                  "100+ successful campaigns delivered",
-                  "Data-driven strategy approach",
-                  "Transparent reporting & analytics",
-                  "Dedicated account management",
-                ].map((item, idx) => (
-                  <li key={idx} className="flex gap-3">
-                    <span className="text-primary font-bold text-xl">✓</span>
-                    <span className="text-neutral font-semibold">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="overflow-hidden rounded-2xl">
-              <img
-                src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=500&q=80"
-                alt="Our Team"
-                className="h-full w-full object-cover"
-                loading="lazy"
-              />
-            </div>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-4">
-            <div className="rounded-xl bg-white p-4 text-center border-2 border-primary/20">
-              <p className="text-3xl mb-2">🎯</p>
-              <p className="font-semibold text-secondary">Customized Solutions</p>
-              <p className="text-xs text-neutral mt-2">Tailored strategies for every brand</p>
-            </div>
-            <div className="rounded-xl bg-white p-4 text-center border-2 border-accent/20">
-              <p className="text-3xl mb-2">💰</p>
-              <p className="font-semibold text-secondary">Cost-Effective</p>
-              <p className="text-xs text-neutral mt-2">Flexible packages at every budget</p>
-            </div>
-            <div className="rounded-xl bg-white p-4 text-center border-2 border-primary/20">
-              <p className="text-3xl mb-2">📈</p>
-              <p className="font-semibold text-secondary">Proven ROI</p>
-              <p className="text-xs text-neutral mt-2">Measurable results & conversions</p>
-            </div>
-          </div>
-        </div>
-
-        {/* CTA Section */}
-        <div className="rounded-3xl bg-gradient-to-r from-primary via-primary/80 to-secondary p-1">
-          <div className="rounded-3xl bg-base-100 p-8 md:p-12">
-            <div className="grid items-center gap-8 md:grid-cols-2">
-              <div>
-                <h2 className="text-3xl md:text-4xl font-bold text-secondary mb-4">Ready to Launch Your Campaign?</h2>
-                <p className="text-neutral mb-6 leading-relaxed">
-                  Let's connect your brand with the right influencers and drive real, measurable results. Our team is ready to build a strategy tailored to your goals.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <button className="rounded-lg bg-primary px-8 py-3 font-semibold text-white transition-all hover:shadow-lg hover:scale-105">
-                    Schedule Consultation
-                  </button>
-                  <button className="rounded-lg border-2 border-secondary px-8 py-3 font-semibold text-secondary transition-all hover:bg-secondary/10">
-                    View Pricing
-                  </button>
+                <div
+                  className="px-6 leading-relaxed overflow-hidden transition-all duration-500"
+                  style={{
+                    maxHeight: isOpen ? "500px" : "0",
+                  }}
+                >
+                  <p className="py-4">{faq.answer}</p>
                 </div>
               </div>
-              <div className="hidden md:block text-center">
-                <div className="inline-block">
-                  <p className="text-5xl font-bold text-primary mb-2">5000+</p>
-                  <p className="font-semibold text-secondary">Active Influencers</p>
-                  <p className="text-sm text-neutral mt-4">Ready to amplify your brand</p>
-                </div>
-              </div>
-            </div>
-          </div>
+            );
+          })}
         </div>
       </div>
+    </section>
     </section>
   );
 };
