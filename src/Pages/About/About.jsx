@@ -112,17 +112,17 @@ const About = () => {
                <MyJourney></MyJourney>
 
                 {/* Statistics Section */}
-                <StatisticsItems></StatisticsItems>
+                {/* <StatisticsItems></StatisticsItems> */}
 
 
                 {/* Commitment */}
                <Commitment></Commitment>
 
                 {/* Team Section */}
-               <MyTeam></MyTeam>
+               {/* <MyTeam></MyTeam> */}
 
                  {/* Our Values Section */}
-                <CoreValues></CoreValues>
+                {/* <CoreValues></CoreValues> */}
 
              
 
