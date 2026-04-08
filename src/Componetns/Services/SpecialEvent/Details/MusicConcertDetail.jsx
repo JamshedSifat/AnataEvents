@@ -52,7 +52,7 @@ const MusicConcertDetail = () => {
     const fetchEvent = async () => {
       try {
         setLoading(true);
-        const response = await fetch('/public/Services/SpecialEvent.json');
+        const response = await fetch('/Services/SpecialEvent.json');
         
         if (!response.ok) {
           throw new Error('Failed to load data');

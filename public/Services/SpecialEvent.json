@@ -8,9 +8,9 @@
     "details": "Award Shows are highly glamorous events requiring meticulous planning and professional execution. It is essential to hire an event management service in this scenario to ensure every detail is perfect.",
     "services": ["Venue Management", "Decoration", "Sound & Lighting", "Red Carpet Setup", "Guest Management", "Photography", "Live Streaming", "Catering"],
     "stats": [
-      { "number": "20+", "label": "বছরের অভিজ্ঞতা" },
-      { "number": "500+", "label": "সফল ইভেন্ট" },
-      { "number": "1000+", "label": "সন্তুষ্ট ক্লায়েন্ট" }
+      { "number": "20+", "label": "Years of Experience" },
+      { "number": "500+", "label": "Successful Events" },
+      { "number": "1000+", "label": "Satisfied Clients" }
     ]
   },
   {
@@ -22,23 +22,23 @@
     "details": "We provide comprehensive convocation event planning including academic ceremony management, guest accommodation, catering, and documentation. Our team specializes in creating memorable academic celebrations.",
     "services": ["Ceremony Management", "Catering", "Transportation", "Documentation", "Guest Accommodation", "Stage Setup", "Media Coverage", "Digital Marketing"],
     "stats": [
-      { "number": "50+", "label": "বিশ্ববিদ্যালয়" },
-      { "number": "10K+", "label": "সন্তুষ্ট ছাত্র" },
-      { "number": "100+", "label": "বার্ষিক অনুষ্ঠান" }
+      { "number": "50+", "label": "Universities Served" },
+      { "number": "10K+", "label": "Satisfied Students" },
+      { "number": "100+", "label": "Annual Events" }
     ]
   },
   {
     "id": "reunion-event",
     "title": "Reunion Event Planner",
-    "image": "https://www.anantabd.net/services/reunion-event-planner/",
-    "description": "University-college-school reunions event planner",
+    "image": "https://www.anantabd.net/wp-content/uploads/2020/03/reunion-event-management.jpg",
+    "description": "University, college and school reunions event planner",
     "type": "reunion-event",
     "details": "Specialized in organizing golden jubilee celebrations, class reunions, and alumni gatherings. We create nostalgic experiences with themed decorations and memorable programs.",
     "services": ["Theme Planning", "Registration System", "Photography", "Refreshments", "Venue Decoration", "Entertainment", "Memory Wall", "Video Coverage"],
     "stats": [
-      { "number": "200+", "label": "পুনর্মিলন" },
-      { "number": "50K+", "label": "অংশগ্রহণকারী" },
-      { "number": "98%", "label": "সন্তুষ্টির হার" }
+      { "number": "200+", "label": "Reunion Events" },
+      { "number": "50K+", "label": "Total Participants" },
+      { "number": "98%", "label": "Satisfaction Rate" }
     ]
   },
   {
@@ -50,9 +50,9 @@
     "details": "Complete fashion show production including model coordination, runway setup, lighting design, makeup stations, and media coverage. We bring your fashion vision to life with professional execution.",
     "services": ["Runway Setup", "Model Coordination", "Lighting Design", "Makeup Stations", "Media Coverage", "Sound System", "Backstage Management", "Fashion Show Production"],
     "stats": [
-      { "number": "150+", "label": "ফ্যাশন শো" },
-      { "number": "1000+", "label": "মডেল ম্যানেজমেন্ট" },
-      { "number": "500+", "label": "ডিজাইনার" }
+      { "number": "150+", "label": "Fashion Shows" },
+      { "number": "1000+", "label": "Models Managed" },
+      { "number": "500+", "label": "Designers Collaborated" }
     ]
   },
   {
@@ -64,9 +64,9 @@
     "details": "Professional concert organization with artist management, sound engineering, crowd control, and technical support. We create unforgettable musical experiences with state-of-the-art equipment.",
     "services": ["Artist Management", "Sound Engineering", "Crowd Control", "Technical Support", "Stage Production", "Lighting Effects", "Security Management", "VIP Arrangement"],
     "stats": [
-      { "number": "300+", "label": "কনসার্ট" },
-      { "number": "50K+", "label": "দর্শক" },
-      { "number": "200+", "label": "শিল্পী" }
+      { "number": "300+", "label": "Concerts Organized" },
+      { "number": "50K+", "label": "Total Audience" },
+      { "number": "200+", "label": "Artists Managed" }
     ]
   }
 ]
