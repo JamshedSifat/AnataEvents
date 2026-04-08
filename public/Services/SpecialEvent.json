@@ -30,7 +30,7 @@
   {
     "id": "reunion-event",
     "title": "Reunion Event Planner",
-    "image": "https://www.anantabd.net/wp-content/uploads/2020/03/reunion-event-management.jpg",
+    "image": "https://www.anantabd.net/wp-content/uploads/2020/03/Reunion-Events-4-1.jpg",
     "description": "University, college and school reunions event planner",
     "type": "reunion-event",
     "details": "Specialized in organizing golden jubilee celebrations, class reunions, and alumni gatherings. We create nostalgic experiences with themed decorations and memorable programs.",
@@ -68,5 +68,33 @@
       { "number": "50K+", "label": "Total Audience" },
       { "number": "200+", "label": "Artists Managed" }
     ]
-  }
+  },
+  {
+  "id": "laser-show",
+  "title": "Laser Show & Fireworks Organizer",
+  "image": "https://images.unsplash.com/photo-1511379938547-c1f69b13e835?w=800&h=600&fit=crop",
+  "description": "Professional laser show and fireworks display services",
+  "type": "laser-show",
+  "details": "Professional laser show and fireworks display organization with advanced technology and safety measures. We create stunning visual experiences with synchronized effects, aerial displays, and pyrotechnic shows. Our team ensures complete safety and compliance with all regulations while delivering breathtaking entertainment.",
+  "services": ["Laser Show Design", "Fireworks Display", "Safety Management", "Technical Setup", "Sound Synchronization", "Aerial Effects", "Pyrotechnics", "Event Coordination"],
+  "stats": [
+    { "number": "150+", "label": "Laser & Fireworks Shows" },
+    { "number": "100K+", "label": "Total Spectators" },
+    { "number": "50+", "label": "Major Events" }
+  ]
+},
+{
+  "id": "sports-management",
+  "title": "Sports Event Management Companies",
+  "image": "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&h=600&fit=crop",
+  "description": "Professional sports event management and organization services",
+  "type": "sports-management",
+  "details": "Comprehensive sports event management services including tournament organization, venue management, athlete coordination, and spectator management. We handle all aspects of sports events from planning to execution with professional expertise. Our team ensures smooth operations, fair play, and memorable experiences for all participants and spectators.",
+  "services": ["Tournament Planning", "Venue Management", "Athlete Coordination", "Registration Management", "Commentary & Broadcasting", "Security & Safety", "Sponsorship Management", "Awards & Trophies"],
+  "stats": [
+    { "number": "200+", "label": "Sports Events Organized" },
+    { "number": "10K+", "label": "Athletes Managed" },
+    { "number": "500K+", "label": "Spectators Hosted" }
+  ]
+}
 ]

@@ -7,7 +7,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
 
-const ReunionDetail = () => {
+const LaserShowDetail = () => {
   const navigate = useNavigate();
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -17,25 +17,34 @@ const ReunionDetail = () => {
   const galleryImages = [
     {
       id: 1,
-      title: 'Reunion Gathering',
-      url: 'https://www.anantabd.net/wp-content/uploads/2020/03/Reunion-Events-2.jpg'
+      title: 'Laser Light Display',
+      url: 'https://images.unsplash.com/photo-1511379938547-c1f69b13e835?w=800&h=600&fit=crop'
     },
     {
       id: 2,
-      title: 'Alumni Meeting',
-      url: 'https://www.anantabd.net/wp-content/uploads/2020/03/Reunion-Events-67-768x489.jpg'
+      title: 'Fireworks Show',
+      url: 'https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=800&h=600&fit=crop'
     },
     {
       id: 3,
-      title: 'Memory Wall',
-      url: 'https://www.anantabd.net/wp-content/uploads/2020/03/Reunion-Events-4-768x576.jpg'
+      title: 'Night Spectacular',
+      url: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&h=600&fit=crop'
     },
     {
       id: 4,
-      title: 'Group Photo',
-      url: 'https://www.anantabd.net/wp-content/uploads/2020/03/Reunion-Events-6-1024x768.jpg'
+      title: 'Aerial Effects',
+      url: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=800&h=600&fit=crop'
     },
-    
+    {
+      id: 5,
+      title: 'Synchronized Display',
+      url: 'https://images.unsplash.com/photo-1487180144351-b8472da7d491?w=800&h=600&fit=crop'
+    },
+    {
+      id: 6,
+      title: 'Celebration Moment',
+      url: 'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=800&h=600&fit=crop'
+    }
   ];
 
   useEffect(() => {
@@ -49,7 +58,7 @@ const ReunionDetail = () => {
         }
         
         const data = await response.json();
-        const foundEvent = data.find(e => e.id === 'reunion-event');
+        const foundEvent = data.find(e => e.id === 'laser-show');
         
         if (!foundEvent) {
           throw new Error('Event not found');
@@ -124,9 +133,9 @@ const ReunionDetail = () => {
         {/* Content */}
         <div className='absolute inset-0 flex items-center justify-center'>
           <div className='text-center text-white px-4'>
-            <p className='text-secondary text-xl font-semibold mb-2'>👥 REUNION EVENTS</p>
+            <p className='text-secondary text-xl font-semibold mb-2'>✨ LASER & FIREWORKS SHOWS</p>
             <h1 className='text-5xl md:text-6xl font-bold mb-4'>{event.title}</h1>
-            <p className='text-gray-100 text-lg'>Relive Old Memories and Strengthen Bonds</p>
+            <p className='text-gray-100 text-lg'>Stunning Visual Experience & Pyrotechnic Displays</p>
           </div>
         </div>
       </div>
@@ -145,22 +154,60 @@ const ReunionDetail = () => {
 
         {/* Introduction Section */}
         <div className='bg-gradient-to-r from-primary/10 to-secondary/10 p-8 rounded-lg mb-16 border-l-4 border-primary'>
-          <h2 className='text-4xl font-bold mb-4 text-primary'>Reunion Events Registration & Management</h2>
-          <h3 className='text-2xl font-semibold mb-4 text-secondary'>Make Your Next Reunion a Memorable Experience</h3>
+          <h2 className='text-4xl font-bold mb-6 text-primary'>Laser Show & Fireworks Organizer Company in Dhaka, Bangladesh</h2>
           <p className='text-gray-700 leading-relaxed text-lg mb-4'>
-            The joy of meeting with your old friends after years can never be explained in words! It is a feeling that drives many to take up the responsibility of organizing alumni events. You can simplify your Reunion Events Registration with Ananta's flexible and feature-rich Event and Payment Management platform.
+            Ananta Events & Entertainment is Bangladesh's premium Laser Multimedia Show Company offering a world of laser show entertainment. We provide laser shows and special effects for any type of event from a product launch to birthday event, exhibitions to film festivals, Indoor or Outdoor - we have the complete solution.
           </p>
           <p className='text-gray-700 leading-relaxed text-lg mb-4'>
-            Let your members view reunion details with this amazing solution provider. Help attendees register and submit information seamlessly and without any hassle; store it for your future use. Access the marketing capabilities of our Reunion Events Registration software to promote your events extensively.
+            With high powered 30W RGB (Multi Color) Laser System to 20W GREEN Laser systems, we ensure your event will look spectacular. Our advanced laser technology creates stunning visual experiences that captivate audiences and leave lasting impressions.
           </p>
           <p className='text-gray-700 leading-relaxed text-lg'>
-            We are one of the best golden jubilee celebration events planner located in Dhaka and Chittagong. Planning for a class reunion calls for good event planning ideas that include the whole group.
+            Ananta Events & Entertainment was formed in the year 2006. During these years, we have executed numerous shows in Bangladesh and provided special laser effects for the entertainment industry. We turn your vision into reality with our goal of providing spectacular laser light shows, exceptional customer service, and best production quality.
           </p>
+        </div>
+
+        {/* Company Overview */}
+        <div className='mb-16'>
+          <h2 className='text-3xl font-bold text-primary mb-8'>About Our Company</h2>
+          
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+            {/* Established */}
+            <div className='bg-white p-8 rounded-lg border-l-4 border-primary shadow-md hover:shadow-lg transition'>
+              <h3 className='text-2xl font-bold text-primary mb-4'>📅 Established in 2006</h3>
+              <p className='text-gray-700 leading-relaxed'>
+                With nearly 20 years of experience, Ananta Events & Entertainment has built a reputation as Bangladesh's leading laser show company. Our proven track record speaks to our commitment to excellence and innovation in the entertainment industry.
+              </p>
+            </div>
+
+            {/* Specialization */}
+            <div className='bg-white p-8 rounded-lg border-l-4 border-secondary shadow-md hover:shadow-lg transition'>
+              <h3 className='text-2xl font-bold text-secondary mb-4'>🎯 Specialized Services</h3>
+              <p className='text-gray-700 leading-relaxed'>
+                We specialize in both Indoor and Outdoor laser multimedia show entertainment. Our expertise covers Special Events, Corporate Events, Trade Shows, Concerts, Trade & Exhibitions, Movies, Product Launches, and Permanent Theme Park installations.
+              </p>
+            </div>
+
+            {/* Technology */}
+            <div className='bg-white p-8 rounded-lg border-l-4 border-primary shadow-md hover:shadow-lg transition'>
+              <h3 className='text-2xl font-bold text-primary mb-4'>⚡ Advanced Technology</h3>
+              <p className='text-gray-700 leading-relaxed'>
+                Our arsenal includes high-powered 30W RGB (Multi Color) Laser systems and 20W GREEN Laser systems. This cutting-edge technology ensures your events are visually stunning and technically superior.
+              </p>
+            </div>
+
+            {/* Location */}
+            <div className='bg-white p-8 rounded-lg border-l-4 border-secondary shadow-md hover:shadow-lg transition'>
+              <h3 className='text-2xl font-bold text-secondary mb-4'>📍 Based in Dhaka</h3>
+              <p className='text-gray-700 leading-relaxed'>
+                Headquartered in Dhaka, Bangladesh, we serve clients across the country and beyond. Our centralized location allows us to efficiently manage projects and provide exceptional service to all our clients.
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Image Gallery with Swiper */}
         <div className='mb-16'>
-          <h2 className='text-3xl font-bold mb-8 text-primary'>Our Reunion Events Gallery</h2>
+          <h2 className='text-3xl font-bold mb-8 text-primary'>Our Laser & Fireworks Gallery</h2>
           <div className='relative'>
             <Swiper
               modules={[Navigation, Pagination, Autoplay, EffectFade]}
@@ -207,73 +254,85 @@ const ReunionDetail = () => {
           </div>
         </div>
 
-        {/* Key Planning Points */}
+        {/* Event Types We Cover */}
         <div className='mb-16'>
-          <h2 className='text-3xl font-bold text-primary mb-8'>Class Reunion Planning Tips</h2>
+          <h2 className='text-3xl font-bold text-primary mb-8'>Event Types We Specialize In</h2>
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
+            {[
+              'Product Launches',
+              'Birthday Parties',
+              'Exhibitions',
+              'Film Festivals',
+              'Corporate Events',
+              'Concerts',
+              'Trade Shows',
+              'School/College Events',
+              'Marriage Ceremonies',
+              'Theme Park Events',
+              'Wedding Receptions',
+              'Special Occasions'
+            ].map((eventType, idx) => (
+              <div 
+                key={idx} 
+                className='bg-gradient-to-br from-primary/5 to-secondary/5 p-4 rounded-lg border-l-2 border-primary hover:shadow-lg transition text-center'
+              >
+                <p className='text-primary font-semibold'>✨ {eventType}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Why Choose Us Section */}
+        <div className='mb-16'>
+          <h2 className='text-3xl font-bold text-primary mb-8'>Why Choose Our Laser Show Services</h2>
           
           <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
-            {/* Plan Early */}
+            {/* Advanced Technology */}
             <div className='bg-white p-8 rounded-lg border-l-4 border-primary shadow-md hover:shadow-lg transition'>
-              <h3 className='text-2xl font-bold text-primary mb-4'>📅 Plan Early</h3>
+              <h3 className='text-2xl font-bold text-primary mb-4'>🎆 Advanced Technology</h3>
               <p className='text-gray-700 leading-relaxed'>
-                A reunion calls for good planning prior to the event. Ideally planning for reunions should start 12 months prior the event. Book the party site, events and entertainment early to get the best deals and availability.
+                High-powered 30W RGB and 20W GREEN laser systems ensure spectacular visual effects. Our cutting-edge equipment is maintained to the highest standards for consistent performance.
               </p>
             </div>
 
-            {/* Party Theme */}
+            {/* Professional Expertise */}
             <div className='bg-white p-8 rounded-lg border-l-4 border-secondary shadow-md hover:shadow-lg transition'>
-              <h3 className='text-2xl font-bold text-secondary mb-4'>🎨 Party Theme</h3>
+              <h3 className='text-2xl font-bold text-secondary mb-4'>👨‍💼 Professional Expertise</h3>
               <p className='text-gray-700 leading-relaxed'>
-                Decide on an exciting party theme that keeps everybody interested. Do not plan formal events as people prefer casual settings. A casual party theme is best as they will feel free to interact and enjoy.
+                With nearly 20 years of experience, our team has executed countless shows. We bring artistic vision and technical precision to every project, turning your vision into reality.
               </p>
             </div>
 
-            {/* Party Decorations */}
+            {/* Complete Solutions */}
             <div className='bg-white p-8 rounded-lg border-l-4 border-primary shadow-md hover:shadow-lg transition'>
-              <h3 className='text-2xl font-bold text-primary mb-4'>🎉 Party Decorations</h3>
+              <h3 className='text-2xl font-bold text-primary mb-4'>🎯 Complete Solutions</h3>
               <p className='text-gray-700 leading-relaxed'>
-                A reunion event can look stunning with the correct party decorations. Use pictures of teachers, class activities, sports and graduation ceremonies. For a beach reunion, decorate with sand castles or innovative items like flamingos and beach balls.
+                Indoor or outdoor, small or large scale, we have complete solutions for all your laser and special effects needs. From concept to execution, we manage everything professionally.
               </p>
             </div>
 
-            {/* Music Level */}
+            {/* Safety & Compliance */}
             <div className='bg-white p-8 rounded-lg border-l-4 border-secondary shadow-md hover:shadow-lg transition'>
-              <h3 className='text-2xl font-bold text-secondary mb-4'>🎵 Perfect Music Level</h3>
+              <h3 className='text-2xl font-bold text-secondary mb-4'>🛡️ Safety & Compliance</h3>
               <p className='text-gray-700 leading-relaxed'>
-                A reunion event should be thrilling and calm. Avoid loud music as people join to revive old friendships and memories. Earsplitting music will hinder conversation and nobody will like to scream to talk.
-              </p>
-            </div>
-
-            {/* Activities & Games */}
-            <div className='bg-white p-8 rounded-lg border-l-4 border-primary shadow-md hover:shadow-lg transition'>
-              <h3 className='text-2xl font-bold text-primary mb-4'>🎮 Activities & Games</h3>
-              <p className='text-gray-700 leading-relaxed'>
-                A class reunion event is incomplete without exciting games and activities. Scavenger hunt games are great party activities. A karaoke contest will also add zing to the party and keep everyone engaged.
-              </p>
-            </div>
-
-            {/* Party Favors */}
-            <div className='bg-white p-8 rounded-lg border-l-4 border-secondary shadow-md hover:shadow-lg transition'>
-              <h3 className='text-2xl font-bold text-secondary mb-4'>🎁 Party Favors</h3>
-              <p className='text-gray-700 leading-relaxed'>
-                Party favors could range from imprinted school pens, bags with the school name, mugs, personalized t-shirts or custom calendars. Personalized costumes with school names make great keepsakes.
+                We prioritize safety with complete compliance to all regulations. Our team follows strict safety protocols ensuring a secure event for all attendees and participants.
               </p>
             </div>
           </div>
         </div>
 
-        {/* Features Section */}
+        {/* Capabilities */}
         <div className='mb-16'>
-          <h2 className='text-3xl font-bold mb-8 text-primary'>Our Features</h2>
+          <h2 className='text-3xl font-bold mb-8 text-primary'>Our Capabilities</h2>
           
           <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
             {[
-              { icon: '📸', title: 'Photography & Videography', desc: 'Professional photo and video coverage' },
-              { icon: '🎨', title: 'Theme Decoration', desc: 'Nostalgic and modern themes' },
-              { icon: '🎉', title: 'Entertainment', desc: 'Music, games and activities' },
-              { icon: '📝', title: 'Memory Collection', desc: 'Guest books and memory walls' },
-              { icon: '🎤', title: 'Live Music', desc: 'Professional DJ and musicians' },
-              { icon: '🏆', title: 'Memory Wall', desc: 'Interactive memory displays' }
+              { icon: '💡', title: 'RGB Laser Shows', desc: '30W Multi-Color laser displays' },
+              { icon: '🟢', title: 'Green Laser Effects', desc: '20W precision green laser systems' },
+              { icon: '🔊', title: 'Sound Sync', desc: 'Music synchronized laser displays' },
+              { icon: '🎆', title: 'Fireworks Integration', desc: 'Combined laser & fireworks shows' },
+              { icon: '📱', title: 'Smart Control', desc: 'Remote operation & automation' },
+              { icon: '🏆', title: 'Award Winning', desc: '150+ shows successfully completed' }
             ].map((feature, idx) => (
               <div key={idx} className='bg-gradient-to-br from-primary/5 to-secondary/5 p-6 rounded-lg text-center border border-primary/20 hover:shadow-lg transition'>
                 <p className='text-4xl mb-3'>{feature.icon}</p>
@@ -297,24 +356,11 @@ const ReunionDetail = () => {
           </div>
         </div>
 
-        
-
-    
-      
-
-        {/* CTA Section */}
-        <div className='text-center mb-16 bg-gradient-to-r from-primary/5 to-secondary/5 p-12 rounded-lg border border-primary/30'>
-          <h3 className='text-4xl font-bold mb-4 text-primary'>Plan Your Reunion Today</h3>
-          <p className='text-gray-700 text-lg mb-8 max-w-2xl mx-auto'>Let Ananta Events help you create unforgettable memories with your friends and classmates</p>
-          <button className='bg-primary text-white px-10 py-4 rounded-lg font-bold hover:opacity-90 transition text-lg shadow-lg'>
-            Contact Us Today
-          </button>
-        </div>
       </div>
 
-      
+    
     </div>
   );
 };
 
-export default ReunionDetail;
+export default LaserShowDetail;

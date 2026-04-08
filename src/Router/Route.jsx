@@ -35,6 +35,8 @@ import ConvocationDetail from "../Componetns/Services/SpecialEvent/Details/Convo
 import ReunionDetail from "../Componetns/Services/SpecialEvent/Details/ReunionDetail";
 import FashionShowDetail from "../Componetns/Services/SpecialEvent/Details/FashionShowDetail";
 import MusicConcertDetail from "../Componetns/Services/SpecialEvent/Details/MusicConcertDetail";
+import SportsManagementDetail from "../Componetns/Services/SpecialEvent/Details/SportsManagementDetail";
+import LaserShowDetail from "../Componetns/Services/SpecialEvent/Details/LaserShowDetail";
 
 // Title setter function
 const setTitle = (title) => {
@@ -139,6 +141,17 @@ export const router = createBrowserRouter([
         element: <MusicConcertDetail></MusicConcertDetail>,
         loader: setTitle("Live Music Concert - Ananta Events | Concert Organization Services")
       },
+      {
+        path: '/services/SpecialEvent/laser-show',
+        element: <LaserShowDetail></LaserShowDetail>,
+        loader: setTitle("Laser Show & Fireworks - Ananta Events | Professional Display Services")
+      },
+      {
+       path: '/services/SpecialEvent/sports-management',
+       element: <SportsManagementDetail></SportsManagementDetail>,
+        loader: setTitle("Sports Event Management - Ananta Events | Professional Sports Organization")
+},
+     
       // ============ END OF SPECIAL EVENT ROUTES ============
 
       {
