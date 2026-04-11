@@ -37,6 +37,17 @@ import FashionShowDetail from "../Componetns/Services/SpecialEvent/Details/Fashi
 import MusicConcertDetail from "../Componetns/Services/SpecialEvent/Details/MusicConcertDetail";
 import SportsManagementDetail from "../Componetns/Services/SpecialEvent/Details/SportsManagementDetail";
 import LaserShowDetail from "../Componetns/Services/SpecialEvent/Details/LaserShowDetail";
+import Media from "../Pages/Media/Media";
+import MediaGellary from "../Pages/Media/MediaGellary/MediaGellary";
+import MediaVideo from "../Pages/Media/MediaVideo/MediaVideo";
+import AdminLogin from "../Auth/Pages/AdminLogin";
+import ProtectedRoute from "../Componetns/ProtectedRoute";
+import AdminLayout from "../Admin/Layouts/AdminLayout";
+import Dashboard from "../Admin/pages/Dashboard";
+import EventsList from "../Admin/pages/Events/EventsList";
+import AddEvent from "../Admin/pages/Events/AddEvent";
+import UsersList from "../Admin/pages/Users/UsersList";
+import MediaList from "../Admin/pages/Media/MediaList";
 
 // Title setter function
 const setTitle = (title) => {
@@ -180,6 +191,19 @@ export const router = createBrowserRouter([
         loader: setTitle("Portfolio - Ananta Events | Our Successful Events Gallery")
       },
       {
+        path: '/media',
+        element: <Media></Media>,
+       
+      },
+      {
+        path: '/media/gallery',
+        element: <MediaGellary></MediaGellary>
+      },
+      {
+        path: '/media/video',
+        element: <MediaVideo></MediaVideo>
+      },
+      {
         path: '/contact',
         element: <Contact></Contact>,
         loader: setTitle("Contact Us - Ananta Events | Get Free Event Planning Consultation")
@@ -236,4 +260,42 @@ export const router = createBrowserRouter([
       },
     ]
   },
+
+  {
+  path: "/admin",
+  children: [
+    {
+      path: "login",
+      element: <AdminLogin></AdminLogin>,
+      loader: setTitle("Admin Login - Ananta Events")
+    },
+    {
+      path: "dashboard",
+      element: <ProtectedRoute><AdminLayout></AdminLayout></ProtectedRoute>,
+      loader: setTitle("Admin Dashboard"),
+      children: [
+        {
+          index: true,
+          element: <Dashboard></Dashboard>
+        },
+        {
+          path: "events",
+          element: <EventsList></EventsList>
+        },
+        {
+          path: "events/add",
+          element: <AddEvent></AddEvent>
+        },
+        {
+          path: "users",
+          element: <UsersList></UsersList>
+        },
+        {
+          path: "media",
+          element: <MediaList></MediaList>
+        }
+      ]
+    }
+  ]
+}
 ]);

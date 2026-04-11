@@ -7,6 +7,7 @@ const Navbar = () => {
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [isBookAnArtistOpen, setIsBookAnArtistOpen] = useState(false);
   const [isOpportunityOpen, setIsOpportunityOpen] = useState(false);
+  const [isMediaOpen, setIsMediaOpen] = useState(false);
   
   const location = useLocation();
 
@@ -22,7 +23,13 @@ const Navbar = () => {
     { name: "Book an Artist", path: "/bookAnArtists", hasDropdown: true },
     { name: "Opportunities", path: "/opportunities", hasDropdown: true },
     { name: "Portfolio", path: "/portfolio" },
+    { name: "Media", path: "/media", hasDropdown: true },
     { name: "Contact Us", path: "/contact" },
+  ];
+
+  const mediaDropdown = [
+    { name: "Gallery", path: "/media/gallery" },
+    { name: "Video", path: "/media/video" },
   ];
 
   const servicesDropdown = [
@@ -34,7 +41,6 @@ const Navbar = () => {
     { name: "Photography & Vedio Services", path: "/services/Photography&VedioServices" },
     { name: "Special Event", path: "/services/SpecialEvent" },
     { name: "Virtual Event", path: "/services/VirtualEvent" }
-   
   ];
 
   const bookAnArtistDropdown = [
@@ -58,6 +64,7 @@ const Navbar = () => {
     setIsServicesOpen(false);
     setIsBookAnArtistOpen(false);
     setIsOpportunityOpen(false);
+    setIsMediaOpen(false);
     setIsOpen(false);
     
     // If it's the same page, scroll to top
@@ -74,6 +81,7 @@ const Navbar = () => {
     if (linkName === "Services") return { items: servicesDropdown, isOpen: isServicesOpen, setOpen: setIsServicesOpen };
     if (linkName === "Book an Artist") return { items: bookAnArtistDropdown, isOpen: isBookAnArtistOpen, setOpen: setIsBookAnArtistOpen };
     if (linkName === "Opportunities") return { items: opportunitiesDropdown, isOpen: isOpportunityOpen, setOpen: setIsOpportunityOpen };
+    if (linkName === "Media") return { items: mediaDropdown, isOpen: isMediaOpen, setOpen: setIsMediaOpen };
     return null;
   };
 
