@@ -3,55 +3,51 @@ import {
   Star,
   MapPin,
   Wand2,
-  Users,
-  Award,
-  Sparkles,
   Globe,
-  ExternalLink,
-  Share2,
-  TrendingUp,
+  Sparkles,
 } from "lucide-react";
 
 const Magician = () => {
   const [magicians, setMagicians] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [selectedGenre, setSelectedGenre] = useState("All");
 
   useEffect(() => {
-    const fetchMagicians = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-
-        // Fetch local JSON data
-        const response = await fetch("../../../../public/MagiciansData/MagiciansData.json");
-        if (!response.ok) {
-          throw new Error("Failed to fetch magician data");
-        }
-        const data = await response.json();
-        setMagicians(data);
-      } catch (err) {
-        console.error("Error fetching magicians:", err);
-        setError("Failed to load magician data. Please try again later.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchMagicians();
   }, []);
 
-  // Get all unique genres
-  const allGenres = ["All", ...new Set(magicians.flatMap((m) => m.genres))];
+  const fetchMagicians = () => {
+    try {
+      setLoading(true);
+      setError(null);
 
-  // Filter magicians by genre
-  const filteredMagicians =
-    selectedGenre === "All"
-      ? magicians
-      : magicians.filter((m) => m.genres.includes(selectedGenre));
+      // Load from localStorage (Admin data)
+      const savedMagicians = localStorage.getItem('magicians');
+      if (savedMagicians) {
+        const data = JSON.parse(savedMagicians);
+        setMagicians(data);
+        setLoading(false);
+        return;
+      }
 
-  // Loading State
+      // Fallback to JSON file
+      fetch("../../../../public/MagiciansData/MagiciansData.json")
+        .then((res) => res.json())
+        .then((data) => {
+          setMagicians(data);
+          setLoading(false);
+        })
+        .catch(() => {
+          setError("Failed to load magician data");
+          setLoading(false);
+        });
+    } catch (err) {
+      console.error("Error fetching magicians:", err);
+      setError("Failed to load magician data. Please try again later.");
+      setLoading(false);
+    }
+  };
+
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-purple-50 to-indigo-100">
@@ -65,7 +61,6 @@ const Magician = () => {
     );
   }
 
-  // Error State
   if (error) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-purple-50 to-indigo-100">
@@ -80,12 +75,11 @@ const Magician = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-indigo-50 to-blue-50">
       {/* Header Section */}
-        <div className="border-b border-gray-200">
+      <div className="border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 py-12">
           <div className="flex gap-4 items-start">
             <div className="w-1.5 h-12 bg-primary rounded"></div>
             <div>
-                 
               <h1 className="text-4xl font-bold text-gray-900">
                 Bangladesh Best <span className="text-primary">Magician</span>
               </h1>
@@ -97,21 +91,20 @@ const Magician = () => {
         </div>
       </div>
 
-
       {/* Magicians Grid */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 pb-20">
-        {filteredMagicians.length === 0 ? (
+        {magicians.length === 0 ? (
           <div className="text-center py-12">
             <Wand2 className="w-16 h-16 text-gray-300 mx-auto mb-4" />
             <p className="text-gray-600 text-lg font-medium">
-              No magicians found for this type
+              No magicians found
             </p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredMagicians.map((magician) => (
+            {magicians.map((magician) => (
               <div
-                key={magician.id}
+                key={magician._id || magician.id}
                 className="group bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border border-purple-100 hover:border-primary/30"
               >
                 {/* Image Container */}
@@ -206,32 +199,29 @@ const Magician = () => {
                         Awards
                       </p>
                       <p className="font-bold text-primary text-lg">
-                        {magician.awards.length}
+                        {magician.awards?.length || 0}
                       </p>
                     </div>
                   </div>
 
                   {/* Magic Types */}
-                  <div className="mb-4">
-                    <p className="text-xs text-gray-500 uppercase tracking-wide font-semibold mb-2">
-                      Magic Specialties
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      {magician.genres.map((genre, idx) => (
-                        <span
-                          key={idx}
-                          className="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full font-medium hover:bg-primary/20 transition-colors"
-                        >
-                          {genre}
-                        </span>
-                      ))}
+                  {magician.genres && magician.genres.length > 0 && (
+                    <div className="mb-4">
+                      <p className="text-xs text-gray-500 uppercase tracking-wide font-semibold mb-2">
+                        Magic Specialties
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {magician.genres.map((genre, idx) => (
+                          <span
+                            key={idx}
+                            className="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full font-medium hover:bg-primary/20 transition-colors"
+                          >
+                            {genre}
+                          </span>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-               
-
-               
-
-                
+                  )}
                 </div>
               </div>
             ))}

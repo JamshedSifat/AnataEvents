@@ -13,6 +13,8 @@ const Sidebar = () => {
     { icon: '📸', name: 'Media', path: '/admin/media' },
     { icon: '🖼️', name: 'Gallery', path: '/admin/gallery' },
     { icon: '⚙️', name: 'Settings', path: '/admin/settings' },
+    { path: '/admin/dashboard/djs', label: 'DJs', icon: Package },
+    { path: '/admin/dashboard/singers', label: 'Singers', icon: Package },
   ];
 
   return (

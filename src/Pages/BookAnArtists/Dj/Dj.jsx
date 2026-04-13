@@ -6,14 +6,35 @@ const Dj = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/DjData/DjData.json') // Path to your DJ JSON
-      .then((res) => res.json())
-      .then((data) => {
+    fetchDjs();
+  }, []);
+
+  const fetchDjs = () => {
+    try {
+      setLoading(true);
+      
+      // Load from localStorage (Admin data)
+      const savedDjs = localStorage.getItem('djs');
+      if (savedDjs) {
+        const data = JSON.parse(savedDjs);
         setDjs(data);
         setLoading(false);
-      })
-      .catch(() => setLoading(false));
-  }, []);
+        return;
+      }
+
+      // Fallback to JSON file
+      fetch('/DjData/DjData.json')
+        .then((res) => res.json())
+        .then((data) => {
+          setDjs(data);
+          setLoading(false);
+        })
+        .catch(() => setLoading(false));
+    } catch (error) {
+      console.error('Error:', error);
+      setLoading(false);
+    }
+  };
 
   return (
     <section className="py-10 bg-gray-50">
@@ -25,7 +46,7 @@ const Dj = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {djs.map((dj) => (
             <div
-              key={dj.id}
+              key={dj._id || dj.id}
               className="card shadow-xl hover:scale-105 transition duration-300"
             >
               <figure className="relative">
@@ -34,8 +55,6 @@ const Dj = () => {
                   alt={dj.name}
                   className="h-56 w-full object-cover"
                 />
-
-                {/* Genre badge */}
                 <span className="absolute top-3 left-3 bg-primary text-white px-2 py-1 text-sm rounded">
                   {dj.genre}
                 </span>
@@ -47,12 +66,10 @@ const Dj = () => {
                   <span className="badge badge-primary ml-2">⭐ {dj.rating}</span>
                 </h3>
 
-                {/* Famous for */}
                 <p className="text-sm text-gray-600">{dj.famous_for}</p>
 
                 <div className="flex justify-between mt-4 text-sm">
                   <p>🕒 {dj.experience_years} yrs</p>
-
                   <button
                     onClick={() => setSelectedDj(dj)}
                     className="btn btn-primary btn-sm"
@@ -94,24 +111,30 @@ const Dj = () => {
                   <p><b>Country:</b> {selectedDj.country}</p>
                 </div>
 
-                <div className="mt-4">
-                  <h4 className="font-semibold">Awards:</h4>
-                  <ul className="list-disc ml-5 text-sm">
-                    {selectedDj.awards.map((award, i) => (
-                      <li key={i}>{award}</li>
-                    ))}
-                  </ul>
-                </div>
+                {selectedDj.awards?.length > 0 && (
+                  <div className="mt-4">
+                    <h4 className="font-semibold">Awards:</h4>
+                    <ul className="list-disc ml-5 text-sm">
+                      {selectedDj.awards.map((award, i) => (
+                        <li key={i}>{award}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
 
-                <div className="mt-4">
-                  <h4 className="font-semibold">Media Presence:</h4>
-                  <p className="text-sm">{selectedDj.media_presence}</p>
-                </div>
+                {selectedDj.media_presence && (
+                  <div className="mt-4">
+                    <h4 className="font-semibold">Media Presence:</h4>
+                    <p className="text-sm">{selectedDj.media_presence}</p>
+                  </div>
+                )}
 
-                <div className="mt-4">
-                  <h4 className="font-semibold">Social Followers:</h4>
-                  <p className="text-sm">{selectedDj.social_followers}</p>
-                </div>
+                {selectedDj.social_followers && (
+                  <div className="mt-4">
+                    <h4 className="font-semibold">Social Followers:</h4>
+                    <p className="text-sm">{selectedDj.social_followers}</p>
+                  </div>
+                )}
               </div>
             </div>
           </div>

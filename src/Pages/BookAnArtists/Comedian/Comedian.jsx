@@ -16,7 +16,16 @@ const Comedian = () => {
         setLoading(true);
         setError(null);
 
-        // Fetch local JSON data
+        // First try to load from localStorage (Admin data)
+        const savedComedians = localStorage.getItem('comedians');
+        if (savedComedians) {
+          const data = JSON.parse(savedComedians);
+          setComedians(data);
+          setLoading(false);
+          return;
+        }
+
+        // Fallback to JSON file
         const response = await fetch("../../../../public/ComedianData/comedians.json");
         if (!response.ok) {
           throw new Error("Failed to fetch comedian data");
@@ -69,7 +78,7 @@ const Comedian = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {comedians.map((comedian) => (
             <div
-              key={comedian.id}
+              key={comedian._id || comedian.id}
               className="group bg-white rounded-2xl shadow-md hover:shadow-2xl transition-shadow duration-300 overflow-hidden border border-gray-100"
             >
               {/* Image Container */}

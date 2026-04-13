@@ -48,6 +48,12 @@ import EventsList from "../Admin/pages/Events/EventsList";
 import AddEvent from "../Admin/pages/Events/AddEvent";
 import UsersList from "../Admin/pages/Users/UsersList";
 import MediaList from "../Admin/pages/Media/MediaList";
+import ServiceManagement from "../Admin/pages/Services/ServiceManagement";
+import ComedianManagement from "../Admin/pages/AdminBookAnArtists/ComedianManagement/ComedianManagement";
+import DancerManagement from "../Admin/pages/AdminBookAnArtists/DancerManagement/DancerManagement";
+import DjManagement from "../Admin/pages/AdminBookAnArtists/DjManagement/DjManagement";
+import MagicianManagement from "../Admin/pages/AdminBookAnArtists/MagicianManagement/MagicianManagement";
+import SingerManagement from "../Admin/pages/AdminBookAnArtists/SingerManagement/SingerManagement";
 
 // Title setter function
 const setTitle = (title) => {
@@ -261,41 +267,75 @@ export const router = createBrowserRouter([
     ]
   },
 
+// ADMIN ROUTES - CORRECTED
   {
-  path: "/admin",
-  children: [
-    {
-      path: "login",
-      element: <AdminLogin></AdminLogin>,
-      loader: setTitle("Admin Login - Ananta Events")
-    },
-    {
-      path: "dashboard",
-      element: <ProtectedRoute><AdminLayout></AdminLayout></ProtectedRoute>,
-      loader: setTitle("Admin Dashboard"),
-      children: [
-        {
-          index: true,
-          element: <Dashboard></Dashboard>
-        },
-        {
-          path: "events",
-          element: <EventsList></EventsList>
-        },
-        {
-          path: "events/add",
-          element: <AddEvent></AddEvent>
-        },
-        {
-          path: "users",
-          element: <UsersList></UsersList>
-        },
-        {
-          path: "media",
-          element: <MediaList></MediaList>
-        }
-      ]
-    }
-  ]
-}
+    path: "/admin",
+    children: [
+      {
+        path: "login",
+        element: <AdminLogin></AdminLogin>,
+        loader: setTitle("Admin Login - Ananta Events")
+      },
+      {
+        path: "dashboard",
+        element: <ProtectedRoute><AdminLayout></AdminLayout></ProtectedRoute>,
+        loader: setTitle("Admin Dashboard"),
+        children: [
+          {
+            index: true,
+            element: <Dashboard></Dashboard>
+          },
+          {
+            path: "events",
+            element: <EventsList></EventsList>
+          },
+          {
+            path: "events/add",
+            element: <AddEvent></AddEvent>
+          },
+          {
+            path: "users",
+            element: <UsersList></UsersList>
+          },
+          {
+            path: "media",
+            element: <MediaList></MediaList>
+          },
+          // ✨ নতুন route
+          {
+            path: "services",
+            element: <ServiceManagement></ServiceManagement>,
+            loader: setTitle("Service Management - Admin Dashboard")
+          },
+          {
+  path: "comedians",
+  element: <ComedianManagement></ComedianManagement>,
+  loader: setTitle("Comedian Management - Admin Dashboard")
+},
+{
+  path: "dancers",
+  element: <DancerManagement></DancerManagement>,
+  loader: setTitle("Dancer Management - Admin Dashboard")
+},
+{
+  path: "djs",
+  element: <DjManagement></DjManagement>,
+  loader: setTitle("DJ Management - Admin Dashboard")
+},
+{
+  path: "magicians",
+  element: <MagicianManagement></MagicianManagement>,
+  loader: setTitle("Magician Management - Admin Dashboard")
+},
+{
+  path: "singers",
+  element: <SingerManagement></SingerManagement>,
+  loader: setTitle("Singer Management - Admin Dashboard")
+},
+        ]
+      }
+    ]
+  }
+
+  
 ]);

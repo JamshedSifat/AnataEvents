@@ -1,24 +1,23 @@
-import React from 'react';
 import { Outlet } from 'react-router';
-import Sidebar from '../Components/Sidebar';
-import Header from '../Components/Header';
+import AdminSidebar from './AdminSidebar';
+import AdminHeader from './AdminHeader';
 
-const AdminLayout = () => {
+export default function AdminLayout() {
   return (
-    <div className='flex bg-gray-50 min-h-screen'>
+    <div className="flex h-screen bg-gray-100">
       {/* Sidebar */}
-      <Sidebar />
+      <AdminSidebar />
 
       {/* Main Content */}
-      <div className='flex-1'>
+      <div className="flex-1 flex flex-col overflow-hidden">
         {/* Header */}
-        <Header />
+        <AdminHeader />
 
         {/* Page Content */}
-        <Outlet />
+        <main className="flex-1 overflow-auto bg-gradient-to-br from-gray-50 to-gray-100">
+          <Outlet />
+        </main>
       </div>
     </div>
   );
-};
-
-export default AdminLayout;
+}

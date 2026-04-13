@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import FilterBar from "./FilterBar";
 
 const Singer = () => {
   const [singers, setSingers] = useState([]);
@@ -6,14 +7,35 @@ const Singer = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/SingersData/singersData.json") // JSON in public folder
-      .then((res) => res.json())
-      .then((data) => {
-        setSingers(data.singers); // access singers array
-        setLoading(false);
-      })
-      .catch(() => setLoading(false));
+    fetchSingers();
   }, []);
+
+  const fetchSingers = () => {
+    try {
+      setLoading(true);
+      
+      // Load from localStorage (Admin data)
+      const savedSingers = localStorage.getItem('singers');
+      if (savedSingers) {
+        const data = JSON.parse(savedSingers);
+        setSingers(data);
+        setLoading(false);
+        return;
+      }
+
+      // Fallback to JSON file
+      fetch("/SingersData/singersData.json")
+        .then((res) => res.json())
+        .then((data) => {
+          setSingers(data.singers);
+          setLoading(false);
+        })
+        .catch(() => setLoading(false));
+    } catch (error) {
+      console.error('Error:', error);
+      setLoading(false);
+    }
+  };
 
   return (
     <section className="py-10 bg-gray-50">
@@ -21,14 +43,15 @@ const Singer = () => {
         <h1 className="text-3xl sm:text-4xl font-bold text-center mb-10">
           Top Bangladeshi Singers
         </h1>
+        </div>
 
+      
         {loading && <p className="text-center text-primary">Loading Singers...</p>}
 
-        {/* Responsive grid: 1 col mobile, 2 col tablet, 3 col desktop */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {singers.map((singer) => (
             <div
-              key={singer.id}
+              key={singer._id || singer.id}
               className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-transform duration-300 hover:scale-105 overflow-hidden"
             >
               <figure className="relative h-56 sm:h-64 overflow-hidden">
@@ -96,48 +119,58 @@ const Singer = () => {
                   <p><b>Availability:</b> {selectedSinger.availability}</p>
                 </div>
 
-                <div className="mt-4">
-                  <h4 className="font-semibold">Popular Songs:</h4>
-                  <ul className="list-disc ml-5 text-sm sm:text-base">
-                    {selectedSinger.popularSongs.map((song, i) => (
-                      <li key={i}>{song}</li>
-                    ))}
-                  </ul>
-                </div>
+                {selectedSinger.popularSongs?.length > 0 && (
+                  <div className="mt-4">
+                    <h4 className="font-semibold">Popular Songs:</h4>
+                    <ul className="list-disc ml-5 text-sm sm:text-base">
+                      {selectedSinger.popularSongs.map((song, i) => (
+                        <li key={i}>{song}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
 
-                <div className="mt-4">
-                  <h4 className="font-semibold">Specialties:</h4>
-                  <ul className="list-disc ml-5 text-sm sm:text-base">
-                    {selectedSinger.specialties.map((sp, i) => (
-                      <li key={i}>{sp}</li>
-                    ))}
-                  </ul>
-                </div>
+                {selectedSinger.specialties?.length > 0 && (
+                  <div className="mt-4">
+                    <h4 className="font-semibold">Specialties:</h4>
+                    <ul className="list-disc ml-5 text-sm sm:text-base">
+                      {selectedSinger.specialties.map((sp, i) => (
+                        <li key={i}>{sp}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
 
-                <div className="mt-4">
-                  <h4 className="font-semibold">Awards:</h4>
-                  <ul className="list-disc ml-5 text-sm sm:text-base">
-                    {selectedSinger.awards.map((award, i) => (
-                      <li key={i}>{award}</li>
-                    ))}
-                  </ul>
-                </div>
+                {selectedSinger.awards?.length > 0 && (
+                  <div className="mt-4">
+                    <h4 className="font-semibold">Awards:</h4>
+                    <ul className="list-disc ml-5 text-sm sm:text-base">
+                      {selectedSinger.awards.map((award, i) => (
+                        <li key={i}>{award}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
 
-                <div className="mt-4 text-sm sm:text-base">
-                  <h4 className="font-semibold">Social Media:</h4>
-                  <p>Facebook: {selectedSinger.socialMedia.facebook}</p>
-                  {selectedSinger.socialMedia.instagram && (
-                    <p>Instagram: {selectedSinger.socialMedia.instagram}</p>
-                  )}
-                  {selectedSinger.socialMedia.youtube && (
-                    <p>YouTube: {selectedSinger.socialMedia.youtube}</p>
-                  )}
-                </div>
+                {selectedSinger.socialMedia && (
+                  <div className="mt-4 text-sm sm:text-base">
+                    <h4 className="font-semibold">Social Media:</h4>
+                    {selectedSinger.socialMedia.facebook && (
+                      <p>Facebook: {selectedSinger.socialMedia.facebook}</p>
+                    )}
+                    {selectedSinger.socialMedia.instagram && (
+                      <p>Instagram: {selectedSinger.socialMedia.instagram}</p>
+                    )}
+                    {selectedSinger.socialMedia.youtube && (
+                      <p>YouTube: {selectedSinger.socialMedia.youtube}</p>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
           </div>
         )}
-      </div>
+     
     </section>
   );
 };
