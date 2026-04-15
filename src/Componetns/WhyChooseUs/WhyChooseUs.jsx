@@ -38,6 +38,8 @@ const WhyChooseUs = () => {
   return (
     <section className="py-24 bg-gradient-to-b from-base-100 via-base-200 to-base-100 relative overflow-hidden">
 
+     
+
       {/* Glow Background */}
       <div className="absolute top-0 left-0 w-72 h-72 bg-primary/20 blur-[120px] rounded-full"></div>
       <div className="absolute bottom-0 right-0 w-72 h-72 bg-secondary/20 blur-[120px] rounded-full"></div>

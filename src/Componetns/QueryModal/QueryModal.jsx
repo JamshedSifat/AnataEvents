@@ -1,134 +1,3 @@
-// import React, { useState } from "react";
-// import { toast } from "react-toastify";
-
-// const QueryModal = ({ isOpen, setIsOpen }) => {
-
-//   const [formData, setFormData] = useState({
-//     name: "",
-//     phone: "",
-//     email: "",
-//     eventType: "",
-//     message: ""
-//   });
-
-//   const handleInputChange = (e) => {
-//     setFormData({
-//       ...formData,
-//       [e.target.name]: e.target.value
-//     });
-//   };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-
-//     toast.success("Your query has been submitted!", {
-//       position: "top-right",
-//       autoClose: 3000,
-//       theme: "colored"
-//     });
-
-//     setFormData({
-//       name: "",
-//       phone: "",
-//       email: "",
-//       eventType: "",
-//       message: ""
-//     });
-
-//     setIsOpen(false);
-//   };
-
-//   if (!isOpen) return null;
-
-//   return (
-//     <div className="modal modal-open">
-//       <div className="modal-box max-w-lg">
-
-//         <h3 className="font-bold text-2xl text-primary mb-6">
-//           Send Your Query
-//         </h3>
-
-//         <form onSubmit={handleSubmit} className="space-y-4">
-
-//           <input
-//             type="text"
-//             name="name"
-//             placeholder="Your Name"
-//             value={formData.name}
-//             onChange={handleInputChange}
-//             className="input input-bordered w-full"
-//             required
-//           />
-
-//           <input
-//             type="tel"
-//             name="phone"
-//             placeholder="Phone Number"
-//             value={formData.phone}
-//             onChange={handleInputChange}
-//             className="input input-bordered w-full"
-//             required
-//           />
-
-//           <input
-//             type="email"
-//             name="email"
-//             placeholder="Email"
-//             value={formData.email}
-//             onChange={handleInputChange}
-//             className="input input-bordered w-full"
-//           />
-
-//           <select
-//             name="eventType"
-//             value={formData.eventType}
-//             onChange={handleInputChange}
-//             className="select select-bordered w-full"
-//           >
-//             <option value="">Select Event</option>
-//             <option value="Wedding">Wedding</option>
-//             <option value="Corporate">Corporate</option>
-//             <option value="Birthday">Birthday</option>
-//           </select>
-
-//           <textarea
-//             name="message"
-//             value={formData.message}
-//             onChange={handleInputChange}
-//             placeholder="Message"
-//             className="textarea textarea-bordered w-full"
-//           ></textarea>
-
-//           <div className="modal-action">
-//             <button
-//               type="button"
-//               onClick={() => setIsOpen(false)}
-//               className="btn btn-outline"
-//             >
-//               Cancel
-//             </button>
-
-//             <button type="submit" className="btn btn-primary">
-//               Submit Query
-//             </button>
-//           </div>
-//         </form>
-
-//         <button
-//           onClick={() => setIsOpen(false)}
-//           className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-//         >
-//           ✕
-//         </button>
-
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default QueryModal;
-
-
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 
@@ -141,9 +10,9 @@ const QueryModal = ({ isOpen, setIsOpen }) => {
     message: ""
   });
 
-  const [activeTab, setActiveTab] = useState("form"); // "form", "whatsapp", "call"
-  const CONTACT_PHONE = "01540045974"; // Replace with your business phone number
-  const WHATSAPP_NUMBER = "8801540045974"; // Replace with your WhatsApp number
+  const [activeTab, setActiveTab] = useState("form");
+  const CONTACT_PHONE = "01813340400";
+  const WHATSAPP_NUMBER = "8801813340400";
 
   const handleInputChange = (e) => {
     setFormData({
@@ -209,19 +78,31 @@ const QueryModal = ({ isOpen, setIsOpen }) => {
         <div className="tabs tabs-bordered mb-6 gap-3">
           <button
             onClick={() => setActiveTab("form")}
-            className={`tab ${activeTab === "form" ? "tab-active" : ""} bg-primary text-white font-bold rounded-3xl`}
+            className={`tab rounded-3xl font-bold px-4 py-2 ${
+              activeTab === "form"
+                ? "bg-primary text-white tab-active"
+                : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+            }`}
           >
             📋 Form
           </button>
           <button
             onClick={() => setActiveTab("whatsapp")}
-            className={`tab ${activeTab === "whatsapp" ? "tab-active" : "bg-green-600 text-white font-bold rounded-3xl"} `}
+            className={`tab rounded-3xl font-bold px-4 py-2 ${
+              activeTab === "whatsapp"
+                ? "bg-green-600 text-white tab-active"
+                : "bg-green-200 text-green-700 hover:bg-green-300"
+            }`}
           >
             💬 WhatsApp
           </button>
           <button
             onClick={() => setActiveTab("call")}
-            className={`tab ${activeTab === "call" ? "tab-active" : ""} bg-blue-600 text-white font-bold rounded-3xl`}
+            className={`tab rounded-3xl font-bold px-4 py-2 ${
+              activeTab === "call"
+                ? "bg-blue-600 text-white tab-active"
+                : "bg-blue-200 text-blue-700 hover:bg-blue-300"
+            }`}
           >
             ☎️ Call
           </button>
@@ -322,7 +203,7 @@ const QueryModal = ({ isOpen, setIsOpen }) => {
 
               <button
                 onClick={handleWhatsApp}
-                className="btn btn-success text-white"
+                className="btn bg-green-600 hover:bg-green-700 text-white border-0"
               >
                 💬 Open WhatsApp
               </button>
@@ -358,7 +239,7 @@ const QueryModal = ({ isOpen, setIsOpen }) => {
 
               <button
                 onClick={handleDirectCall}
-                className="btn btn-error text-white"
+                className="btn bg-red-600 hover:bg-red-700 text-white border-0"
               >
                 ☎️ Call Now
               </button>

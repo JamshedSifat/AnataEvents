@@ -30,7 +30,7 @@ const Footer = () => {
         { icon: '📍', text: 'Ananta Events And Entertainment, 19 Green Road, Dhaka 1205' },
         { icon: '📞', text: '+880 1813340400' },
         { icon: '📞', text: '+880 1613340400' },
-        { icon: '✉️', text: 'hello@anantaevents.com' },
+        { icon: '✉️', text: 'anantaevents@gmail.com' },
         
     ];
 
