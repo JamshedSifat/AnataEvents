@@ -3,50 +3,43 @@ import { Link } from "react-router";
 import { ChevronRight, Sparkles } from "lucide-react";
 
 const BookAnArtists = () => {
-  const categories = [
-    {
-      name: "Singer",
-      icon: "🎤",
-      link: "/bookAnArtists/singer",
-      description: "Professional vocalists for all occasions",
-      artists: "50+ Artists"
-    },
-    {
-      name: "DJ",
-      icon: "🎧",
-      link: "/bookAnArtists/dj",
-      description: "Energy and music for your party",
-      artists: "30+ DJs"
-    },
-    {
-      name: "Comedian",
-      icon: "😂",
-      link: "/bookAnArtists/comedian",
-      description: "Laughter and entertainment guaranteed",
-      artists: "25+ Comedians"
-    },
-    {
-      name: "Magician",
-      icon: "🎩",
-      link: "/bookAnArtists/magician",
-      description: "Amazing illusions and wonder",
-      artists: "20+ Magicians"
-    },
-    {
-      name: "Band",
-      icon: "🎸",
-      link: "/bookAnArtists/band",
-      description: "Live music performances",
-      artists: "15+ Bands"
-    },
-    {
-      name: "Choreographer",
-      icon: "💃",
-      link: "/bookAnArtists/dancer",
-      description: "Dance shows and performances",
-      artists: "18+ Choreographers"
-    }
-  ];
+const categories = [
+  {
+    name: "Singer",
+    icon: "🎤",
+    link: "/bookAnArtists/singer",
+    description: "Professional vocalists for all occasions",
+    artists: "50+ Artists"
+  },
+  {
+    name: "DJ",
+    icon: "🎧",
+    link: "/bookAnArtists/dj",
+    description: "Energy and music for your party",
+    artists: "30+ DJs"
+  },
+  {
+    name: "Comedian",
+    icon: "😂",
+    link: "/bookAnArtists/comedian",
+    description: "Laughter and entertainment guaranteed",
+    artists: "25+ Comedians"
+  },
+  {
+    name: "Magician",
+    icon: "🎩",
+    link: "/bookAnArtists/magician",
+    description: "Amazing illusions and wonder",
+    artists: "20+ Magicians"
+  },
+  {
+    name: "Dancer",
+    icon: "💃",
+    link: "/bookAnArtists/dancer",
+    description: "Professional dancers for events and shows",
+    artists: "40+ Dancers"
+  }
+];
 
   return (
     <div className="min-h-screen bg-white">

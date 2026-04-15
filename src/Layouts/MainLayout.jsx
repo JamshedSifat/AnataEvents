@@ -6,7 +6,9 @@ import { ToastContainer } from 'react-toastify';
 
 
 
+
 const MainLayout = () => {
+ 
     return (
         <div className="min-h-screen flex flex-col bg-gradient-to-br from-red-50 via-pink-50 to-orange-50">
             <ToastContainer position="top-right" autoClose={3000} />
@@ -17,6 +19,7 @@ const MainLayout = () => {
             <div className="flex-1 mt-6">
                 <Outlet />
             </div>
+            
             <div className="">
                 <Footer />
             </div>

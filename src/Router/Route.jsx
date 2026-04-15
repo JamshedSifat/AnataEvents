@@ -58,6 +58,7 @@ import MediaManagement from "../Admin/pages/AdminMediaGellary/MediaManagement";
 import VideoManagement from "../Admin/pages/AdminMediaGellary/VideoManagement";
 import TestimonialManagement from "../Admin/pages/Testimonal/TestimonialManagement";
 import TeamManagement from "../Admin/pages/Team/TeamManagement";
+import CareerManagement from "../Admin/pages/AdminCarearOportunity/CareerManagement";
 
 // Title setter function
 const setTitle = (title) => {
@@ -355,6 +356,11 @@ export const router = createBrowserRouter([
   path: "team",
   element: <TeamManagement></TeamManagement>,
   loader: setTitle("Team Management - Admin Dashboard")
+},
+{
+  path: "careers",
+  element: <CareerManagement></CareerManagement>,
+  loader: setTitle("Career Management - Admin Dashboard")
 },
         ]
       }
