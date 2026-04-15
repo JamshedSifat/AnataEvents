@@ -5,18 +5,37 @@ const Testimonials = () => {
   const [current, setCurrent] = useState(0);
   const [loading, setLoading] = useState(true);
 
-  // Fetch testimonials
   useEffect(() => {
-    fetch("/Testimonals.json")
-      .then((res) => res.json())
-      .then((data) => {
-        setTestimonials(data);
-        setLoading(false);
-      })
-      .catch(() => setLoading(false));
+    loadTestimonials();
   }, []);
 
-  // Auto slider
+  const loadTestimonials = () => {
+    try {
+      setLoading(true);
+      
+      // Load from localStorage (Admin data)
+      const savedTestimonials = localStorage.getItem('testimonials');
+      if (savedTestimonials) {
+        const data = JSON.parse(savedTestimonials);
+        setTestimonials(data);
+        setLoading(false);
+        return;
+      }
+
+      // Fallback to JSON file
+      fetch("/Testimonals.json")
+        .then((res) => res.json())
+        .then((data) => {
+          setTestimonials(data);
+          setLoading(false);
+        })
+        .catch(() => setLoading(false));
+    } catch (error) {
+      console.error('Error:', error);
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     if (testimonials.length === 0) return;
 
@@ -54,7 +73,6 @@ const Testimonials = () => {
   return (
     <section className="py-10 bg-base-200 relative overflow-hidden">
       <div className="max-w-5xl mx-auto px-4">
-
         {/* Header */}
         <div className="text-center mb-14">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
@@ -67,11 +85,9 @@ const Testimonials = () => {
 
         {/* Testimonial Card */}
         <div className="relative">
-
           <div className="card bg-base-100 shadow-xl border border-base-300">
             <div className="card-body text-center p-4 md:p-12">
-
-              <div className="text-5xl text-primary/20 ">"</div>
+              <div className="text-5xl text-primary/20">"</div>
 
               {renderStars(t.rating)}
 
@@ -81,13 +97,10 @@ const Testimonials = () => {
 
               {/* Client */}
               <div className="flex items-center justify-center gap-4">
-
                 <div className="avatar">
-                  <div className="avatar">
-             <div className="w-14 rounded-full ring ring-primary ring-offset-2">
-                 <img src={t.image} alt={t.name} />
-                </div>
-                </div>
+                  <div className="w-14 rounded-full ring ring-primary ring-offset-2">
+                    <img src={t.image} alt={t.name} />
+                  </div>
                 </div>
 
                 <div className="text-left">
@@ -101,11 +114,13 @@ const Testimonials = () => {
                 </div>
               </div>
 
-              {/* <div className="mt-4">
-                <span className="badge badge-primary badge-outline">
-                  {t.eventType}
-                </span>
-              </div> */}
+              {t.eventType && (
+                <div className="mt-4">
+                  <span className="badge badge-primary badge-outline">
+                    {t.eventType}
+                  </span>
+                </div>
+              )}
             </div>
           </div>
 

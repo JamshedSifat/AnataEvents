@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router';
-import { LayoutDashboard, Package, Users, Image, LogOut } from 'lucide-react';
+import { LayoutDashboard, Package, Users, Image, LogOut, MessageSquare } from 'lucide-react';
 import { useContext } from 'react';
 import { AuthContext } from '../../Auth/Context/AuthContext';
 
@@ -19,6 +19,8 @@ export default function AdminSidebar() {
     { path: '/admin/dashboard/singers', label: 'Singers', icon: Package },
     { path: '/admin/dashboard/gallery', label: 'Gallery', icon: Package },
     { path: '/admin/dashboard/videos', label: 'Videos', icon: Package },
+    { path: '/admin/dashboard/testimonials', label: 'Testimonials', icon: MessageSquare },
+    { path: '/admin/dashboard/team', label: 'Team Members', icon: Users },
   ];
 
   const handleLogout = () => {
@@ -27,44 +29,46 @@ export default function AdminSidebar() {
   };
 
   return (
-    <aside className="w-64 bg-gradient-to-b from-purple-900 to-purple-800 text-white shadow-lg">
-      {/* Logo */}
-      <div className="p-6 border-b border-purple-700">
-        <h1 className="text-2xl font-bold">Anata Admin</h1>
-        <p className="text-sm text-purple-200">Event Management</p>
-      </div>
+   <aside className="w-64 min-h-screen flex flex-col bg-gradient-to-b from-purple-900 to-purple-800 text-white shadow-lg">
+  
+  {/* Logo */}
+  <div className="p-6 border-b border-purple-700">
+    <h1 className="text-2xl font-bold">Anata Admin</h1>
+    <p className="text-sm text-purple-200">Event Management</p>
+  </div>
 
-      {/* Menu */}
-      <nav className="mt-6 space-y-2 px-4">
-        {menuItems.map((item) => {
-          const Icon = item.icon;
-          return (
-            <Link
-              key={item.path}
-              to={item.path}
-              className={`flex items-center gap-3 px-4 py-3 rounded-lg transition ${
-                isActive(item.path)
-                  ? 'bg-purple-700 text-white'
-                  : 'text-purple-100 hover:bg-purple-700'
-              }`}
-            >
-              <Icon size={20} />
-              <span>{item.label}</span>
-            </Link>
-          );
-        })}
-      </nav>
-
-      {/* Logout */}
-      <div className="absolute bottom-6 left-4 right-4">
-        <button
-          onClick={handleLogout}
-          className="w-full flex items-center gap-3 px-4 py-3 bg-red-600 hover:bg-red-700 rounded-lg transition text-white"
+  {/* Menu */}
+  <nav className="mt-6 space-y-2 px-4">
+    {menuItems.map((item) => {
+      const Icon = item.icon;
+      return (
+        <Link
+          key={item.path}
+          to={item.path}
+          className={`flex items-center gap-3 px-4 py-3 rounded-lg transition ${
+            isActive(item.path)
+              ? 'bg-purple-700 text-white'
+              : 'text-purple-100 hover:bg-purple-700'
+          }`}
         >
-          <LogOut size={20} />
-          <span>Logout</span>
-        </button>
-      </div>
-    </aside>
+          <Icon size={20} />
+          <span>{item.label}</span>
+        </Link>
+      );
+    })}
+  </nav>
+
+  {/* Logout (Bottom e push korbe) */}
+  <div className="mt-auto   ">
+    <button
+      onClick={handleLogout}
+      className="flex items-center gap-3 px-4 py-3 bg-red-600 hover:bg-red-700 rounded-lg transition text-white w-full"
+    >
+      <LogOut size={20} />
+      <span>Logout</span>
+    </button>
+  </div>
+
+</aside>
   );
 }

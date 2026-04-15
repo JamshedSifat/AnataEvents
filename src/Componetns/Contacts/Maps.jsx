@@ -45,7 +45,7 @@ const Maps = () => {
                     🗺️ Get Directions
                 </a>
                 <a 
-                    href="tel:+8801XXXXXXXXX"
+                    href="tel:+8801813340400"
                     className="border-2 border-red-600 text-red-600 hover:bg-red-600 hover:text-white px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 text-center"
                 >
                     📞 Call Now

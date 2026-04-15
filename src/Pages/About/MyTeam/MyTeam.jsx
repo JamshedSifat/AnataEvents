@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Mail, Phone, Linkedin, Twitter, Facebook, Instagram } from 'lucide-react';
 
 const MyTeam = () => {
   const [data, setData] = useState([]);
@@ -9,7 +10,19 @@ const MyTeam = () => {
   useEffect(() => {
     const fetchTeamData = async () => {
       try {
-        // Fetch data from your JSON file
+        setLoading(true);
+
+        // Load from localStorage (Admin added data)
+        const savedTeamMembers = localStorage.getItem('teamMembers');
+        if (savedTeamMembers) {
+          const data = JSON.parse(savedTeamMembers);
+          setData(data);
+          setError(null);
+          setLoading(false);
+          return;
+        }
+
+        // Fallback to JSON file
         const response = await fetch('/About/About.json');
         
         if (!response.ok) {
@@ -33,9 +46,9 @@ const MyTeam = () => {
 
   if (loading) {
     return (
-      <section className=" bg-base-100">
+      <section className="py-20 bg-base-100">
         <div className="max-w-7xl mx-auto px-4 text-center">
-          <p className="text-neutral text-lg">Loading team data...</p>
+          <span className="loading loading-spinner loading-lg text-primary"></span>
         </div>
       </section>
     );
@@ -64,7 +77,7 @@ const MyTeam = () => {
             Meet Our <span className="text-primary">Expert Team</span>
           </h2>
           <p className="text-neutral max-w-2xl mx-auto">
-            Passionate professionals dedicated to making your brand succeed through strategic influencer marketing
+            Passionate professionals dedicated to making your brand succeed through strategic event management
           </p>
         </div>
 
@@ -87,7 +100,31 @@ const MyTeam = () => {
                 {/* Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 
-               
+                {/* Social Links on Hover */}
+                {hoveredMember === index && member.social && (
+                  <div className="absolute inset-0 flex items-center justify-center gap-3">
+                    {member.social.twitter && (
+                      <a href={member.social.twitter} target="_blank" rel="noopener noreferrer" className="btn btn-sm btn-circle bg-white text-primary hover:bg-primary hover:text-white">
+                        <Twitter className="w-4 h-4" />
+                      </a>
+                    )}
+                    {member.social.linkedin && (
+                      <a href={member.social.linkedin} target="_blank" rel="noopener noreferrer" className="btn btn-sm btn-circle bg-white text-primary hover:bg-primary hover:text-white">
+                        <Linkedin className="w-4 h-4" />
+                      </a>
+                    )}
+                    {member.social.facebook && (
+                      <a href={member.social.facebook} target="_blank" rel="noopener noreferrer" className="btn btn-sm btn-circle bg-white text-primary hover:bg-primary hover:text-white">
+                        <Facebook className="w-4 h-4" />
+                      </a>
+                    )}
+                    {member.social.instagram && (
+                      <a href={member.social.instagram} target="_blank" rel="noopener noreferrer" className="btn btn-sm btn-circle bg-white text-primary hover:bg-primary hover:text-white">
+                        <Instagram className="w-4 h-4" />
+                      </a>
+                    )}
+                  </div>
+                )}
               </div>
 
               {/* Content */}
@@ -101,6 +138,24 @@ const MyTeam = () => {
                 <p className="text-neutral text-xs md:text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   {member.description || "Expert professional"}
                 </p>
+
+                {/* Contact Info on Hover */}
+                {hoveredMember === index && (
+                  <div className="mt-3 space-y-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    {member.email && (
+                      <div className="flex items-center justify-center gap-2 text-xs text-gray-600 hover:text-primary">
+                        <Mail className="w-3 h-3" />
+                        <a href={`mailto:${member.email}`}>{member.email}</a>
+                      </div>
+                    )}
+                    {member.phone && (
+                      <div className="flex items-center justify-center gap-2 text-xs text-gray-600 hover:text-primary">
+                        <Phone className="w-3 h-3" />
+                        <a href={`tel:${member.phone}`}>{member.phone}</a>
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
 
               {/* Bottom accent line */}
