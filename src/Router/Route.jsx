@@ -54,6 +54,8 @@ import DancerManagement from "../Admin/pages/AdminBookAnArtists/DancerManagement
 import DjManagement from "../Admin/pages/AdminBookAnArtists/DjManagement/DjManagement";
 import MagicianManagement from "../Admin/pages/AdminBookAnArtists/MagicianManagement/MagicianManagement";
 import SingerManagement from "../Admin/pages/AdminBookAnArtists/SingerManagement/SingerManagement";
+import MediaManagement from "../Admin/pages/AdminMediaGellary/MediaManagement";
+import VideoManagement from "../Admin/pages/AdminMediaGellary/VideoManagement";
 
 // Title setter function
 const setTitle = (title) => {
@@ -331,6 +333,16 @@ export const router = createBrowserRouter([
   path: "singers",
   element: <SingerManagement></SingerManagement>,
   loader: setTitle("Singer Management - Admin Dashboard")
+},
+{
+  path: "gallery",
+  element: <MediaManagement></MediaManagement>,
+  loader: setTitle("Media Gallery Management - Admin Dashboard")
+},
+{
+  path: "videos",
+  element: <VideoManagement></VideoManagement>,
+  loader: setTitle("Video Management - Admin Dashboard")
 },
         ]
       }

@@ -17,6 +17,8 @@ export default function AdminSidebar() {
     { path: '/admin/dashboard/dancers', label: 'Dancers', icon: Package },
     { path: '/admin/dashboard/magicians', label: 'Magicians', icon: Package },
     { path: '/admin/dashboard/singers', label: 'Singers', icon: Package },
+    { path: '/admin/dashboard/gallery', label: 'Gallery', icon: Package },
+    { path: '/admin/dashboard/videos', label: 'Videos', icon: Package },
   ];
 
   const handleLogout = () => {

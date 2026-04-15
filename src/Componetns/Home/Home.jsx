@@ -12,6 +12,7 @@ import OurClients from '../OurClients/OurClients';
 import QueryModal from '../QueryModal/QueryModal'; // import modal
 import Services from '../Services/Services';
 import BlogCard from '../BlogCard/BlogCard';
+import MediaGallery from '../../Pages/Media/MediaGellary/MediaGellary';
 
 const Home = () => {
 
@@ -38,7 +39,8 @@ const Home = () => {
                 <Hero />
                 <WhyChooseUs />
                 <Services                                                                                                                     />
-                <Gallary />
+                {/* <Gallary /> */}
+                <MediaGallery></MediaGallery>
                 <Testimonials />
                 <OurClients />
                 <BlogCard></BlogCard>

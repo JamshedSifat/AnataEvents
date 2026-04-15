@@ -1,84 +1,66 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const MediaGallery = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedImage, setSelectedImage] = useState(null);
+  const [medias, setMedias] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // Gallery Images Data
-  const galleryImages = [
-    {
-      id: 1,
-      title: 'Corporate Event Setup',
-      category: 'corporate',
-      url: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop'
-    },
-    {
-      id: 2,
-      title: 'Wedding Decoration',
-      category: 'wedding',
-      url: 'https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=600&h=400&fit=crop'
-    },
-    {
-      id: 3,
-      title: 'Concert Stage',
-      category: 'concert',
-      url: 'https://images.unsplash.com/photo-1511379938547-c1f69b13e835?w=600&h=400&fit=crop'
-    },
-    {
-      id: 4,
-      title: 'Fashion Show Runway',
-      category: 'fashion',
-      url: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&h=400&fit=crop'
-    },
-    {
-      id: 5,
-      title: 'Award Show Stage',
-      category: 'award',
-      url: 'https://images.unsplash.com/photo-1487180144351-b8472da7d491?w=600&h=400&fit=crop'
-    },
-    {
-      id: 6,
-      title: 'Exhibition Booth',
-      category: 'exhibition',
-      url: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=600&h=400&fit=crop'
-    },
-    {
-      id: 7,
-      title: 'Birthday Party Decor',
-      category: 'party',
-      url: 'https://images.unsplash.com/photo-1540575467063-178f50902556?w=600&h=400&fit=crop'
-    },
-    {
-      id: 8,
-      title: 'Product Launch Event',
-      category: 'corporate',
-      url: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop'
-    },
-    {
-      id: 9,
-      title: 'Conference Hall',
-      category: 'conference',
-      url: 'https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=600&h=400&fit=crop'
-    },
-    {
-      id: 10,
-      title: 'Gala Dinner',
-      category: 'corporate',
-      url: 'https://images.unsplash.com/photo-1511379938547-c1f69b13e835?w=600&h=400&fit=crop'
-    },
-    {
-      id: 11,
-      title: 'Trade Show',
-      category: 'exhibition',
-      url: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&h=400&fit=crop'
-    },
-    {
-      id: 12,
-      title: 'Wedding Reception',
-      category: 'wedding',
-      url: 'https://images.unsplash.com/photo-1487180144351-b8472da7d491?w=600&h=400&fit=crop'
+  useEffect(() => {
+    loadMedias();
+  }, []);
+
+  const loadMedias = () => {
+    try {
+      setLoading(true);
+      
+      // Load from localStorage (Admin data)
+      const savedMedias = localStorage.getItem('medias');
+      if (savedMedias) {
+        const data = JSON.parse(savedMedias);
+        setMedias(data);
+        setLoading(false);
+        return;
+      }
+
+      // Default sample medias
+      const sampleMedias = [
+        {
+          _id: '1',
+          title: 'Corporate Event Setup',
+          category: 'corporate',
+          url: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop',
+          description: 'Professional corporate event setup'
+        },
+        {
+          _id: '2',
+          title: 'Wedding Decoration',
+          category: 'wedding',
+          url: 'https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=600&h=400&fit=crop',
+          description: 'Beautiful wedding decorations'
+        },
+        {
+          _id: '3',
+          title: 'Concert Stage',
+          category: 'concert',
+          url: 'https://images.unsplash.com/photo-1511379938547-c1f69b13e835?w=600&h=400&fit=crop',
+          description: 'Professional concert stage setup'
+        },
+        {
+          _id: '4',
+          title: 'Fashion Show Runway',
+          category: 'fashion',
+          url: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&h=400&fit=crop',
+          description: 'Fashion show runway'
+        },
+      ];
+      setMedias(sampleMedias);
+      setLoading(false);
+    } catch (error) {
+      console.error('Error loading medias:', error);
+      setLoading(false);
     }
-  ];
+  };
 
   const categories = [
     { id: 'all', label: 'All' },
@@ -93,16 +75,25 @@ const MediaGallery = () => {
   ];
 
   const filteredImages = selectedCategory === 'all' 
-    ? galleryImages 
-    : galleryImages.filter(image => image.category === selectedCategory);
+    ? medias
+    : medias.filter(image => image.category === selectedCategory);
 
   return (
-    <div className='min-h-screen bg-white pt-24'>
+    <div className='min-h-screen bg-white '>
       {/* Title */}
-      <div className='pb-12 text-center px-4'>
-        <h1 className='text-5xl md:text-6xl font-bold text-primary mb-4'>Gallery</h1>
-        <p className='text-gray-600 text-lg'>Explore our event photos</p>
-      </div>
+     <div className="text-center mb-16">
+                    <div className="badge badge-primary badge-lg mb-4">
+                        📸 Gallery
+                    </div>
+
+                    <h2 className="text-4xl md:text-5xl font-playfair font-bold text-base-content mb-6">
+                        Event <span className="text-primary">Gallery</span>
+                    </h2>
+
+                    <p className="text-lg text-base-content/70 max-w-2xl mx-auto">
+                        Explore our stunning collection of events and venues that showcase the beauty and elegance of our work
+                    </p>
+                </div>
 
       {/* Main Content */}
       <div className='max-w-7xl mx-auto px-4 pb-16'>
@@ -123,11 +114,23 @@ const MediaGallery = () => {
           ))}
         </div>
 
-        {/* Gallery Grid - Only Images */}
+        {loading && (
+          <div className='text-center py-12'>
+            <p className='text-gray-600'>Loading gallery...</p>
+          </div>
+        )}
+
+        {!loading && filteredImages.length === 0 && (
+          <div className='text-center py-12'>
+            <p className='text-gray-600'>No images in this category</p>
+          </div>
+        )}
+
+        {/* Gallery Grid */}
         <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
           {filteredImages.map((image) => (
             <div 
-              key={image.id}
+              key={image._id}
               onClick={() => setSelectedImage(image)}
               className='group cursor-pointer overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300'
             >
@@ -158,6 +161,11 @@ const MediaGallery = () => {
             <p className='text-white text-center mt-4 text-lg font-semibold'>
               {selectedImage.title}
             </p>
+            {selectedImage.description && (
+              <p className='text-gray-300 text-center mt-2'>
+                {selectedImage.description}
+              </p>
+            )}
           </div>
 
           {/* Close Button */}

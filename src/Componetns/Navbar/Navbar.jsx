@@ -240,11 +240,11 @@ const Navbar = () => {
           </div>
 
           {/* CTA Button */}
-          <div className="hidden md:block">
+          {/* <div className="hidden md:block">
             <button className="bg-primary hover:bg-secondary text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300">
               Get Quote
             </button>
-          </div>
+          </div> */}
 
           {/* Mobile Toggle Button */}
           <div className="md:hidden">
@@ -269,12 +269,12 @@ const Navbar = () => {
             <div className="px-4 py-6 space-y-2">
               {renderMobileNavLinks()}
               
-              <button 
+              {/* <button 
                 onClick={() => setIsOpen(false)}
                 className="w-full mt-6 bg-primary hover:bg-secondary text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300"
               >
                 Get Quote
-              </button>
+              </button> */}
             </div>
           </div>
         )}

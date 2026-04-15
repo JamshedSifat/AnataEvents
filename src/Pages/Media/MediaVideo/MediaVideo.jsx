@@ -1,83 +1,58 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const MediaVideo = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [videos, setVideos] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // Video Data
-  const videos = [
-    {
-      id: 1,
-      title: 'Corporate Event Highlight',
-      category: 'corporate',
-      url: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-      description: 'Professional corporate event management and execution',
-      thumbnail: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop'
-    },
-    {
-      id: 2,
-      title: 'Wedding Ceremony',
-      category: 'wedding',
-      url: 'https://www.youtube.com/embed/9bZkp7q19f0',
-      description: 'Beautiful wedding planning and decoration',
-      thumbnail: 'https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=400&h=300&fit=crop'
-    },
-    {
-      id: 3,
-      title: 'Concert Production',
-      category: 'concert',
-      url: 'https://www.youtube.com/embed/jNQXAC9IVRw',
-      description: 'Live music show and concert organization',
-      thumbnail: 'https://images.unsplash.com/photo-1511379938547-c1f69b13e835?w=400&h=300&fit=crop'
-    },
-    {
-      id: 4,
-      title: 'Fashion Show',
-      category: 'fashion',
-      url: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-      description: 'Professional fashion event management',
-      thumbnail: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=400&h=300&fit=crop'
-    },
-    {
-      id: 5,
-      title: 'Award Show Setup',
-      category: 'award',
-      url: 'https://www.youtube.com/embed/9bZkp7q19f0',
-      description: 'Award show organization and production',
-      thumbnail: 'https://images.unsplash.com/photo-1487180144351-b8472da7d491?w=400&h=300&fit=crop'
-    },
-    {
-      id: 6,
-      title: 'Virtual Event',
-      category: 'virtual',
-      url: 'https://www.youtube.com/embed/jNQXAC9IVRw',
-      description: 'Seamless virtual event management',
-      thumbnail: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=300&fit=crop'
-    },
-    {
-      id: 7,
-      title: 'Exhibition Setup',
-      category: 'exhibition',
-      url: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-      description: 'Exhibition stall design and fabrication',
-      thumbnail: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop'
-    },
-    {
-      id: 8,
-      title: 'Birthday Party',
-      category: 'party',
-      url: 'https://www.youtube.com/embed/9bZkp7q19f0',
-      description: 'Fun and engaging birthday celebration',
-      thumbnail: 'https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=400&h=300&fit=crop'
-    },
-    {
-      id: 9,
-      title: 'Product Launch',
-      category: 'corporate',
-      url: 'https://www.youtube.com/embed/jNQXAC9IVRw',
-      description: 'Professional product launch event',
-      thumbnail: 'https://images.unsplash.com/photo-1511379938547-c1f69b13e835?w=400&h=300&fit=crop'
+  useEffect(() => {
+    loadVideos();
+  }, []);
+
+  const loadVideos = () => {
+    try {
+      setLoading(true);
+      
+      // Load from localStorage (Admin data)
+      const savedVideos = localStorage.getItem('videos');
+      if (savedVideos) {
+        const data = JSON.parse(savedVideos);
+        setVideos(data);
+        setLoading(false);
+        return;
+      }
+
+      // Default sample videos
+      const sampleVideos = [
+        {
+          _id: '1',
+          title: 'Corporate Event Highlight',
+          category: 'corporate',
+          youtubeId: 'dQw4w9WgXcQ',
+          description: 'Professional corporate event management and execution'
+        },
+        {
+          _id: '2',
+          title: 'Wedding Ceremony',
+          category: 'wedding',
+          youtubeId: '9bZkp7q19f0',
+          description: 'Beautiful wedding planning and decoration'
+        },
+        {
+          _id: '3',
+          title: 'Concert Production',
+          category: 'concert',
+          youtubeId: 'jNQXAC9IVRw',
+          description: 'Live music show and concert organization'
+        }
+      ];
+      setVideos(sampleVideos);
+      setLoading(false);
+    } catch (error) {
+      console.error('Error loading videos:', error);
+      setLoading(false);
     }
-  ];
+  };
 
   const categories = [
     { id: 'all', label: 'All Videos' },
@@ -91,44 +66,46 @@ const MediaVideo = () => {
     { id: 'party', label: 'Party' }
   ];
 
-  // Filter videos based on selected category
   const filteredVideos = selectedCategory === 'all' 
     ? videos 
     : videos.filter(video => video.category === selectedCategory);
 
-  return (
-    <div className='min-h-screen bg-white  '>
-       {/* Title Section */}
-<div className='pt-14 pb-8 text-center'>
-  <h1 className='text-5xl md:text-6xl font-bold text-primary mb-4'>Media Videos</h1>
-  <p className='text-gray-600 text-lg max-w-2xl mx-auto'>
-    Explore our collection of professionally produced event videos
-  </p>
-</div>
+  const featuredVideo = videos.length > 0 ? videos[0] : null;
 
-{/* Hero Section */}
-<div className='max-w-7xl mx-auto relative h-80 md:h-96 overflow-hidden bg-black rounded-lg shadow-lg mb-16'>
-  <iframe
-    width='100%'
-    height='100%'
-    src='https://www.youtube.com/embed/dQw4w9WgXcQ'
-    title='Our Event Videos'
-    frameBorder='0'
-    allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-    allowFullScreen
-    className='w-full h-80 md:h-96'
-  ></iframe>
-  
-  {/* Content Overlay */}
-  <div className='absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent'></div>
-  
-  <div className='absolute bottom-0 left-0 right-0 text-white p-8'>
-    <div className='max-w-4xl mx-auto'>
-      <h2 className='text-3xl md:text-4xl font-bold mb-2'>Featured Event Video</h2>
-      <p className='text-gray-200'>Watch our professional event management in action</p>
-    </div>
-  </div>
-</div>
+  return (
+    <div className='min-h-screen bg-white'>
+      {/* Title Section */}
+      <div className='pt-14 pb-8 text-center'>
+        <h1 className='text-5xl md:text-6xl font-bold text-primary mb-4'>Media Videos</h1>
+        <p className='text-gray-600 text-lg max-w-2xl mx-auto'>
+          Explore our collection of professionally produced event videos
+        </p>
+      </div>
+
+      {/* Hero Section */}
+      {featuredVideo && (
+        <div className='max-w-7xl mx-auto px-4 relative h-80 md:h-96 overflow-hidden bg-black rounded-lg shadow-lg mb-16'>
+          <iframe
+            width='100%'
+            height='100%'
+            src={`https://www.youtube.com/embed/${featuredVideo.youtubeId}`}
+            title='Featured Video'
+            frameBorder='0'
+            allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+            allowFullScreen
+            className='w-full h-80 md:h-96'
+          ></iframe>
+          
+          <div className='absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent'></div>
+          
+          <div className='absolute bottom-0 left-0 right-0 text-white p-8'>
+            <div className='max-w-4xl mx-auto'>
+              <h2 className='text-3xl md:text-4xl font-bold mb-2'>Featured Event Video</h2>
+              <p className='text-gray-200'>Watch our professional event management in action</p>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Main Content */}
       <div className='max-w-7xl mx-auto px-4 py-16'>
@@ -168,7 +145,7 @@ const MediaVideo = () => {
           {filteredVideos.length > 0 ? (
             filteredVideos.map((video) => (
               <div 
-                key={video.id} 
+                key={video._id} 
                 className='bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group'
               >
                 {/* Video Thumbnail */}
@@ -176,7 +153,7 @@ const MediaVideo = () => {
                   <iframe
                     width='100%'
                     height='100%'
-                    src={video.url}
+                    src={`https://www.youtube.com/embed/${video.youtubeId}`}
                     title={video.title}
                     frameBorder='0'
                     allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
@@ -203,9 +180,14 @@ const MediaVideo = () => {
                   </p>
 
                   {/* Watch Button */}
-                  <button className='w-full bg-primary hover:bg-secondary text-white py-2 rounded-lg font-semibold transition-all duration-300'>
+                  <a 
+                    href={`https://www.youtube.com/watch?v=${video.youtubeId}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className='w-full block text-center bg-primary hover:bg-secondary text-white py-2 rounded-lg font-semibold transition-all duration-300'
+                  >
                     Watch Full Video
-                  </button>
+                  </a>
                 </div>
               </div>
             ))
