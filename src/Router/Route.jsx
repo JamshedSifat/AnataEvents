@@ -272,12 +272,12 @@ export const router = createBrowserRouter([
         element: <VendorRegistration></VendorRegistration>
       },
       {
-  path: '/blog',
+  path: '/media/blog',
   element: <PostCard></PostCard>,
   loader: setTitle("Blog - Ananta Events | Event Planning Tips & Ideas")
 },
 {
-  path: '/blog/:id',
+  path: '/media/blog/:id',
   element: <PostCardDetails></PostCardDetails>,
   loader: setTitle("Blog Details - Ananta Events | Event Planning Article")
 },

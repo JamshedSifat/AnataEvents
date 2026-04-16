@@ -1,14 +1,19 @@
+// File: BlogCardItem.jsx
 import React from 'react';
 import { Calendar, User, ArrowRight } from 'lucide-react';
 
 const BlogCardItem = ({ blog, featured = false }) => {
   return (
-    <a href={`/blog/${blog._id}`}>
+    <a href={`/media/blog/${blog._id}`}>
       <div className={`bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer ${
-        featured ? 'md:flex' : ''
+        featured ? 'lg:flex' : ''
       }`}>
         {/* Image */}
-        <div className={`relative overflow-hidden ${featured ? 'md:w-1/3 h-64 md:h-auto' : 'w-full h-48'}`}>
+        <div className={`relative overflow-hidden ${
+          featured 
+            ? 'w-full h-48 sm:h-56 lg:w-1/2 lg:h-auto' 
+            : 'w-full h-48'
+        }`}>
           <img
             src={blog.image}
             alt={blog.title}
@@ -20,35 +25,43 @@ const BlogCardItem = ({ blog, featured = false }) => {
         </div>
 
         {/* Content */}
-        <div className={`p-6 ${featured ? 'md:w-2/3' : 'w-full'} flex flex-col justify-between`}>
+        <div className={`p-4 sm:p-6 ${
+          featured 
+            ? 'w-full lg:w-1/2' 
+            : 'w-full'
+        } flex flex-col justify-between`}>
           {/* Title */}
           <div>
-            <h2 className="text-xl md:text-2xl font-bold text-gray-900 line-clamp-2 hover:text-primary transition mb-2">
+            <h2 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 line-clamp-2 hover:text-primary transition mb-2">
               {blog.title}
             </h2>
 
             {/* Meta Info */}
-            <div className="flex flex-wrap gap-4 text-sm text-gray-600 mb-3">
+            <div className="flex flex-wrap gap-3 sm:gap-4 text-xs sm:text-sm text-gray-600 mb-3">
               <div className="flex items-center gap-1">
-                <Calendar className="w-4 h-4" />
-                <span>{new Date(blog.date).toLocaleDateString()}</span>
+                <Calendar className="w-3 h-3 sm:w-4 sm:h-4" />
+                <span>{new Date(blog.date).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}</span>
               </div>
               <div className="flex items-center gap-1">
-                <User className="w-4 h-4" />
+                <User className="w-3 h-3 sm:w-4 sm:h-4" />
                 <span>{blog.author}</span>
               </div>
             </div>
 
             {/* Excerpt */}
-            <p className="text-gray-600 line-clamp-2 mb-4 text-sm">
+            <p className="text-gray-600 line-clamp-2 mb-4 text-xs sm:text-sm">
               {blog.excerpt}
             </p>
           </div>
 
           {/* Read More Link */}
-          <div className="flex items-center text-primary font-semibold hover:gap-2 transition-all text-sm">
+          <div className="flex items-center text-primary font-semibold hover:gap-2 transition-all text-xs sm:text-sm">
             <span>Read More</span>
-            <ArrowRight className="w-4 h-4 ml-2" />
+            <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-2" />
           </div>
         </div>
       </div>
