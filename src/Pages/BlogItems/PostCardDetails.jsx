@@ -1,8 +1,8 @@
-// File: PostCardDetails.jsx (Updated with JSON import)
+// File: src/Componetns/PostCardDetails.jsx (Without utility)
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 import { Calendar, User, ArrowLeft } from 'lucide-react';
-import blogsData from '../../../public/Blog.json'; 
+import blogsData from '../../../public/Blog.json';
 
 const PostCardDetails = () => {
   const { id } = useParams();
@@ -18,14 +18,13 @@ const PostCardDetails = () => {
     try {
       setLoading(true);
 
+      // ✅ Direct localStorage
       let blogs = [];
-
-      // localStorage থেকে load করুন
       const savedBlogs = localStorage.getItem('blogs');
+      
       if (savedBlogs) {
         blogs = JSON.parse(savedBlogs);
       } else if (blogsData && Array.isArray(blogsData)) {
-        // JSON file থেকে load করুন
         blogs = blogsData;
       }
 
@@ -176,7 +175,7 @@ const PostCardDetails = () => {
             </div>
           )}
 
-          {/* Share Section (Optional) */}
+          {/* Share Section */}
           <div className="mt-12 pt-8 border-t-2 border-gray-200">
             <h3 className="text-lg sm:text-xl font-bold mb-4 text-gray-900">Share This Article</h3>
             <div className="flex flex-wrap gap-3">

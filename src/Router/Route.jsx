@@ -61,6 +61,7 @@ import TeamManagement from "../Admin/pages/Team/TeamManagement";
 import CareerManagement from "../Admin/pages/AdminCarearOportunity/CareerManagement";
 import PostCard from "../Pages/BlogItems/PostCard";
 import PostCardDetails from "../Pages/BlogItems/PostCardDetails";
+import BlogManagement from "../Admin/pages/Blog/BlogManagement";
 
 // Title setter function
 const setTitle = (title) => {
@@ -373,6 +374,11 @@ export const router = createBrowserRouter([
   path: "careers",
   element: <CareerManagement></CareerManagement>,
   loader: setTitle("Career Management - Admin Dashboard")
+},
+{
+  path: "blogs",
+  element: <BlogManagement></BlogManagement>,
+  loader: setTitle("Blog Management - Admin Dashboard")
 },
         ]
       }

@@ -25,6 +25,7 @@ export default function AdminSidebar() {
     { path: '/admin/dashboard/testimonials', label: 'Testimonials', icon: MessageSquare },
     { path: '/admin/dashboard/team', label: 'Team Members', icon: Users },
     { path: '/admin/dashboard/careers', label: 'Career Opportunities', icon: Briefcase },
+    { path: '/admin/dashboard/blogs', label: 'Blogs', icon: Briefcase },
   ];
 
   const handleLogout = () => {

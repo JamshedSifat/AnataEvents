@@ -1,8 +1,8 @@
-// File: PostCard.jsx (updated)
+// File: src/Componetns/PostCard.jsx (Without utility)
 import React, { useState, useEffect } from 'react';
 import { Search, Calendar, User } from 'lucide-react';
 import BlogCardItem from './BlogCardItem';
-import blogsData from '../../../public/Blog.json'; 
+import blogsData from '../../../public/Blog.json';
 
 const PostCard = () => {
   const [blogs, setBlogs] = useState([]);
@@ -19,22 +19,19 @@ const PostCard = () => {
     try {
       setLoading(true);
 
+      // ✅ Direct localStorage
+      let data = [];
       const savedBlogs = localStorage.getItem('blogs');
+      
       if (savedBlogs) {
-        const data = JSON.parse(savedBlogs);
-        setBlogs(data); // ✅ localStorage থেকে সরাসরি array
-        setFilteredBlogs(data);
-        setLoading(false);
-        return;
+        data = JSON.parse(savedBlogs);
+      } else if (blogsData && Array.isArray(blogsData)) {
+        data = blogsData;
+        localStorage.setItem('blogs', JSON.stringify(data));
       }
 
-      // ✅ JSON file থেকে load করুন
-      if (blogsData && Array.isArray(blogsData)) {
-        setBlogs(blogsData);
-        setFilteredBlogs(blogsData);
-        localStorage.setItem('blogs', JSON.stringify(blogsData)); 
-      }
-      
+      setBlogs(data);
+      setFilteredBlogs(data);
       setLoading(false);
     } catch (error) {
       console.error('Error loading blogs:', error);
