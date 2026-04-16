@@ -30,6 +30,7 @@ const Navbar = () => {
   const mediaDropdown = [
     { name: "Gallery", path: "/media/gallery" },
     { name: "Video", path: "/media/video" },
+    { name: "Blog", path: "/media/blog" },
   ];
 
   const servicesDropdown = [

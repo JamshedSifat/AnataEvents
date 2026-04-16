@@ -14,8 +14,8 @@ import WeddingPlannerManagement from "../Componetns/Services/WeddingPlannerManag
 import PhotographyVedioServices from "../Componetns/Services/PhotographyVedioServices/PhotographyVedioServices";
 
 import VirtualEvent from "../Componetns/Services/VirtualEvent/VirtualEvent";
-import BlogDetails from "../Pages/BlogDetails/BlogDetails";
-import BlogCard from "../Componetns/BlogCard/BlogCard";
+// import BlogDetails from "../Pages/BlogDetails/BlogDetails";
+// import BlogCard from "../Componetns/BlogCard/BlogCard";
 import BookAnArtists from "../Pages/BookAnArtists/BookAnArtists";
 import Singer from "../Pages/BookAnArtists/Singers/Singer";
 import Dj from "../Pages/BookAnArtists/Dj/Dj";
@@ -59,6 +59,8 @@ import VideoManagement from "../Admin/pages/AdminMediaGellary/VideoManagement";
 import TestimonialManagement from "../Admin/pages/Testimonal/TestimonialManagement";
 import TeamManagement from "../Admin/pages/Team/TeamManagement";
 import CareerManagement from "../Admin/pages/AdminCarearOportunity/CareerManagement";
+import PostCard from "../Pages/BlogItems/PostCard";
+import PostCardDetails from "../Pages/BlogItems/PostCardDetails";
 
 // Title setter function
 const setTitle = (title) => {
@@ -186,16 +188,16 @@ export const router = createBrowserRouter([
         element: <About></About>,
         loader: setTitle("About Us - Ananta Events | 16+ Years Experience in Event Planning")
       },
-      {
-        path: '/blog',
-        element: <BlogCard></BlogCard>,
-        loader: setTitle("Blog - Ananta Events | Event Planning Tips & Ideas")
-      },
-      {
-        path: '/blog/:id',
-        element: <BlogDetails></BlogDetails>,
-        loader: setTitle("Blog Details - Ananta Events | Event Planning Article")
-      },
+      // {
+      //   path: '/blog',
+      //   element: <BlogCard></BlogCard>,
+      //   loader: setTitle("Blog - Ananta Events | Event Planning Tips & Ideas")
+      // },
+      // {
+      //   path: '/blog/:id',
+      //   element: <BlogDetails></BlogDetails>,
+      //   loader: setTitle("Blog Details - Ananta Events | Event Planning Article")
+      // },
       {
         path: '/portfolio',
         element: <Portfolio></Portfolio>,
@@ -269,6 +271,16 @@ export const router = createBrowserRouter([
         path: '/opportunities/vendor-registration',
         element: <VendorRegistration></VendorRegistration>
       },
+      {
+  path: '/blog',
+  element: <PostCard></PostCard>,
+  loader: setTitle("Blog - Ananta Events | Event Planning Tips & Ideas")
+},
+{
+  path: '/blog/:id',
+  element: <PostCardDetails></PostCardDetails>,
+  loader: setTitle("Blog Details - Ananta Events | Event Planning Article")
+},
     ]
   },
 
@@ -369,3 +381,9 @@ export const router = createBrowserRouter([
 
   
 ]);
+
+
+
+
+
+

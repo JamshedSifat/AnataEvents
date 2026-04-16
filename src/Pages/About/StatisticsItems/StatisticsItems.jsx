@@ -14,7 +14,7 @@ const StatisticsItems = () => {
     const fetchAboutData = async () => {
       try {
         // ✅ FIXED PATH (IMPORTANT)
-        const response = await fetch('/About/About.json');
+        const response = await fetch('/public/About/About.json');
 
         if (!response.ok) {
           throw new Error('Failed to load data');
