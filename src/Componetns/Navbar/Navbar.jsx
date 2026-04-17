@@ -95,9 +95,8 @@ const Navbar = () => {
         return (
           <div
             key={link.name}
-            className="relative"
-            onMouseEnter={() => dropdown.setOpen(true)}
-            onMouseLeave={() => dropdown.setOpen(false)}
+            className="relative group"
+            // ✅ Remove onMouseLeave from parent, handle it better
           >
             <NavLink
               to={link.path}
@@ -107,6 +106,9 @@ const Navbar = () => {
                   isActive ? 'text-primary bg-base-200' : 'text-base-content'
                 }`
               }
+              // ✅ Show dropdown on hover
+              onMouseEnter={() => dropdown.setOpen(true)}
+              onMouseLeave={() => dropdown.setOpen(false)}
             >
               <span>{link.name}</span>
               <span className={`transition-transform duration-300 ${dropdown.isOpen ? "rotate-180" : ""}`}>
@@ -114,27 +116,33 @@ const Navbar = () => {
               </span>
             </NavLink>
 
-            {/* Dropdown Menu */}
-            {dropdown.isOpen && (
-              <div className="absolute top-full left-0 mt-2 w-64 bg-base-100 rounded-xl shadow-lg border border-base-300 z-50 p-2">
-                {dropdown.items.map((item) => (
-                  <NavLink
-                    key={item.name}
-                    to={item.path}
-                    onClick={() => handleNavigation(item.path)}
-                    className={({ isActive }) =>
-                      `block px-4 py-2 rounded-lg transition-all duration-300 ${
-                        isActive
-                          ? 'bg-primary text-white'
-                          : 'text-base-content hover:bg-primary hover:text-white'
-                      }`
-                    }
-                  >
-                    {item.name}
-                  </NavLink>
-                ))}
-              </div>
-            )}
+            {/* ✅ Dropdown Menu - Fixed positioning */}
+            <div
+              className={`absolute top-full left-0 mt-1 w-64 bg-base-100 rounded-xl shadow-lg border border-base-300 z-50 p-2 transition-all duration-300 origin-top ${
+                dropdown.isOpen 
+                  ? 'opacity-100 visible scale-y-100' 
+                  : 'opacity-0 invisible scale-y-95'
+              }`}
+              onMouseEnter={() => dropdown.setOpen(true)}
+              onMouseLeave={() => dropdown.setOpen(false)}
+            >
+              {dropdown.items.map((item) => (
+                <NavLink
+                  key={item.name}
+                  to={item.path}
+                  onClick={() => handleNavigation(item.path)}
+                  className={({ isActive }) =>
+                    `block px-4 py-2 rounded-lg transition-all duration-300 ${
+                      isActive
+                        ? 'bg-primary text-white'
+                        : 'text-base-content hover:bg-primary hover:text-white'
+                    }`
+                  }
+                >
+                  {item.name}
+                </NavLink>
+              ))}
+            </div>
           </div>
         );
       }
@@ -231,7 +239,7 @@ const Navbar = () => {
                 src={logo}
                    alt='anantaEvents'
                     className="w-32 h-auto object-contain "
-/>
+              />
             </NavLink>
           </div>
 
