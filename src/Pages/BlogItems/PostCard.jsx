@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { Search, Calendar, User } from 'lucide-react';
 import BlogCardItem from './BlogCardItem';
 import blogsData from '../../../public/Blog.json';
+import ArchiveItems from './ArchiveItems';
+import RecentBlogPosts from './RecentBlogPost';
 
 const PostCard = () => {
   const [blogs, setBlogs] = useState([]);
@@ -151,48 +153,11 @@ const PostCard = () => {
                 ))}
               </div>
             </div>
+                {/* Recent Post */}
+            <RecentBlogPosts></RecentBlogPosts>
 
-            {/* Recent Posts */}
-            <div className="bg-white rounded-lg shadow-md p-4 sm:p-6">
-              <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-gray-900">Recent Posts</h3>
-              <div className="space-y-3 sm:space-y-4">
-                {blogs.slice(0, 5).map(blog => (
-                  <a
-                    key={blog._id}
-                    href={`/media/blog/${blog._id}`}
-                    className="block group"
-                  >
-                    <h4 className="font-semibold text-gray-900 group-hover:text-primary transition line-clamp-2 text-xs sm:text-sm">
-                      {blog.title}
-                    </h4>
-                    <p className="text-xs text-gray-500 mt-1 flex items-center gap-1">
-                      <Calendar className="w-3 h-3" />
-                      {new Date(blog.date).toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
-                      })}
-                    </p>
-                  </a>
-                ))}
-              </div>
-            </div>
-
-            {/* Archive */}
-            <div className="bg-white rounded-lg shadow-md p-4 sm:p-6">
-              <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-gray-900">Archive</h3>
-              <div className="space-y-2">
-                {['April 2024', 'March 2024', 'February 2024', 'January 2024'].map((month) => (
-                  <a
-                    key={month}
-                    href="#"
-                    className="block text-xs sm:text-sm text-primary hover:underline"
-                  >
-                    {month}
-                  </a>
-                ))}
-              </div>
-            </div>
+             {/* Archive */}
+            <ArchiveItems></ArchiveItems>
 
             {/* Latest News */}
             <div className="bg-gradient-to-r from-primary to-secondary rounded-lg shadow-md p-4 sm:p-6 text-white">

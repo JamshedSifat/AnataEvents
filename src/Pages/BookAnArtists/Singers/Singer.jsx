@@ -48,7 +48,7 @@ const Singer = () => {
       
         {loading && <p className="text-center text-primary">Loading Singers...</p>}
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 w-10/12 mx-auto">
           {singers.map((singer) => (
             <div
               key={singer._id || singer.id}
