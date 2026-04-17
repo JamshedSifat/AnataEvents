@@ -1,3 +1,4 @@
+// File: src/Pages/VendorRegistration/VendorRegistration.jsx (Fixed)
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 
@@ -14,12 +15,16 @@ export default function VendorRegistration() {
     website: '',
     documents: null,
     documentFileName: '',
+    documentBase64: '', // ✅ ADD THIS
     galleryImages: [],
+    galleryImageBase64: [],
     galleryImageNames: [],
     bankName: '',
     accountNumber: '',
     agreement: false
   });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const serviceCategories = [
     'Catering',
@@ -42,32 +47,68 @@ export default function VendorRegistration() {
     }));
   };
 
-  const handleDocumentUpload = (e) => {
+  // ✅ Convert file to Base64
+  const fileToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  };
+
+  // ✅ Handle Document Upload with Base64 Conversion
+  const handleDocumentUpload = async (e) => {
     const file = e.target.files[0];
     if (file) {
-      setFormData(prev => ({
-        ...prev,
-        documents: file,
-        documentFileName: file.name
-      }));
-      toast.success('✓ Document uploaded: ' + file.name);
+      try {
+        toast.info('Converting document...');
+        const base64 = await fileToBase64(file);
+        setFormData(prev => ({
+          ...prev,
+          documents: file,
+          documentFileName: file.name,
+          documentBase64: base64 // ✅ SAVE BASE64
+        }));
+        toast.success('✓ Document uploaded: ' + file.name);
+      } catch (error) {
+        toast.error('Error uploading document');
+        console.error(error);
+      }
     }
   };
 
-  const handleGalleryUpload = (e) => {
+  const handleGalleryUpload = async (e) => {
     const files = Array.from(e.target.files);
     if (files.length > 0) {
       const newFiles = formData.galleryImages.concat(files);
+      
       if (newFiles.length > 10) {
         toast.error('Maximum 10 images allowed');
         return;
       }
-      setFormData(prev => ({
-        ...prev,
-        galleryImages: newFiles,
-        galleryImageNames: newFiles.map(f => f.name)
-      }));
-      toast.success('✓ ' + files.length + ' image(s) added');
+
+      try {
+        toast.info('Converting images...');
+        
+        const base64Array = [];
+        for (const file of files) {
+          const base64 = await fileToBase64(file);
+          base64Array.push(base64);
+        }
+
+        setFormData(prev => ({
+          ...prev,
+          galleryImages: newFiles,
+          galleryImageBase64: [...prev.galleryImageBase64, ...base64Array],
+          galleryImageNames: newFiles.map(f => f.name)
+        }));
+
+        toast.success('✓ ' + files.length + ' image(s) converted and added');
+      } catch (error) {
+        toast.error('Error converting images');
+        console.error(error);
+      }
     }
   };
 
@@ -75,12 +116,13 @@ export default function VendorRegistration() {
     setFormData(prev => ({
       ...prev,
       galleryImages: prev.galleryImages.filter((_, i) => i !== index),
+      galleryImageBase64: prev.galleryImageBase64.filter((_, i) => i !== index),
       galleryImageNames: prev.galleryImageNames.filter((_, i) => i !== index)
     }));
     toast.info('Image removed');
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     if (!formData.businessName) {
@@ -112,9 +154,67 @@ export default function VendorRegistration() {
       return;
     }
 
-    toast.success('✓ Registration submitted successfully! We will verify and contact you soon.');
-    
-    // Reset form
+    try {
+      setIsSubmitting(true);
+
+      const newVendor = {
+        id: Date.now(),
+        businessName: formData.businessName,
+        ownerName: formData.ownerName,
+        email: formData.email,
+        phone: formData.phone,
+        serviceCategory: formData.serviceCategory,
+        experience: formData.experience,
+        businessAddress: formData.businessAddress,
+        description: formData.description,
+        website: formData.website,
+        documentFileName: formData.documentFileName,
+        documentBase64: formData.documentBase64, // ✅ SAVE DOCUMENT BASE64
+        galleryImages: formData.galleryImageBase64,
+        galleryImageNames: formData.galleryImageNames,
+        bankName: formData.bankName,
+        accountNumber: formData.accountNumber,
+        status: 'Pending',
+        registrationDate: new Date().toLocaleDateString()
+      };
+
+      const existingVendors = localStorage.getItem('vendors');
+      const vendors = existingVendors ? JSON.parse(existingVendors) : [];
+      vendors.push(newVendor);
+      localStorage.setItem('vendors', JSON.stringify(vendors));
+
+      toast.success('✓ Registration submitted successfully!');
+      
+      setFormData({
+        businessName: '',
+        ownerName: '',
+        email: '',
+        phone: '',
+        serviceCategory: '',
+        experience: '',
+        businessAddress: '',
+        description: '',
+        website: '',
+        documents: null,
+        documentFileName: '',
+        documentBase64: '',
+        galleryImages: [],
+        galleryImageBase64: [],
+        galleryImageNames: [],
+        bankName: '',
+        accountNumber: '',
+        agreement: false
+      });
+
+      setIsSubmitting(false);
+    } catch (error) {
+      toast.error('Error submitting registration');
+      console.error(error);
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleReset = () => {
     setFormData({
       businessName: '',
       ownerName: '',
@@ -127,7 +227,9 @@ export default function VendorRegistration() {
       website: '',
       documents: null,
       documentFileName: '',
+      documentBase64: '',
       galleryImages: [],
+      galleryImageBase64: [],
       galleryImageNames: [],
       bankName: '',
       accountNumber: '',
@@ -136,7 +238,7 @@ export default function VendorRegistration() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 py-12 px-4">
+    <div className="min-h-screen bg-gray-100 py-12 px-4 pt-28">
       <div className="max-w-3xl mx-auto">
         
         {/* Header */}
@@ -163,7 +265,8 @@ export default function VendorRegistration() {
                   value={formData.businessName}
                   onChange={handleChange}
                   placeholder="Enter your business name"
-                  className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="input input-bordered w-full"
+                  disabled={isSubmitting}
                 />
               </div>
 
@@ -176,7 +279,8 @@ export default function VendorRegistration() {
                     value={formData.ownerName}
                     onChange={handleChange}
                     placeholder="Owner's full name"
-                    className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="input input-bordered w-full"
+                    disabled={isSubmitting}
                   />
                 </div>
 
@@ -186,7 +290,8 @@ export default function VendorRegistration() {
                     name="serviceCategory"
                     value={formData.serviceCategory}
                     onChange={handleChange}
-                    className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="select select-bordered w-full"
+                    disabled={isSubmitting}
                   >
                     <option value="">-- Select Category --</option>
                     {serviceCategories.map((cat, idx) => (
@@ -204,7 +309,8 @@ export default function VendorRegistration() {
                   onChange={handleChange}
                   placeholder="Describe your business, services, experience, and what makes you special..."
                   rows="4"
-                  className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="textarea textarea-bordered w-full"
+                  disabled={isSubmitting}
                 />
               </div>
             </div>
@@ -222,7 +328,8 @@ export default function VendorRegistration() {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="your@email.com"
-                    className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="input input-bordered w-full"
+                    disabled={isSubmitting}
                   />
                 </div>
 
@@ -234,7 +341,8 @@ export default function VendorRegistration() {
                     value={formData.phone}
                     onChange={handleChange}
                     placeholder="+880 1XXXXXXXXX"
-                    className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="input input-bordered w-full"
+                    disabled={isSubmitting}
                   />
                 </div>
               </div>
@@ -247,7 +355,8 @@ export default function VendorRegistration() {
                   value={formData.businessAddress}
                   onChange={handleChange}
                   placeholder="Enter full business address"
-                  className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="input input-bordered w-full"
+                  disabled={isSubmitting}
                 />
               </div>
 
@@ -260,7 +369,8 @@ export default function VendorRegistration() {
                     value={formData.website}
                     onChange={handleChange}
                     placeholder="https://yourbusiness.com"
-                    className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="input input-bordered w-full"
+                    disabled={isSubmitting}
                   />
                 </div>
 
@@ -272,7 +382,8 @@ export default function VendorRegistration() {
                     value={formData.experience}
                     onChange={handleChange}
                     placeholder="e.g., 5"
-                    className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="input input-bordered w-full"
+                    disabled={isSubmitting}
                   />
                 </div>
               </div>
@@ -282,13 +393,14 @@ export default function VendorRegistration() {
             <div className="border-b pb-6">
               <h3 className="text-2xl font-bold mb-4 text-blue-600">📄 Documents</h3>
               
-              <div className="border-2 border-dashed border-blue-300 rounded-lg p-6 text-center bg-blue-50 cursor-pointer">
+              <div className="border-2 border-dashed border-blue-300 rounded-lg p-6 text-center bg-blue-50 cursor-pointer hover:bg-blue-100 transition">
                 <label className="cursor-pointer">
                   <input
                     type="file"
                     accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"
                     onChange={handleDocumentUpload}
                     className="hidden"
+                    disabled={isSubmitting}
                   />
                   <div>
                     <p className="text-2xl mb-2">📎</p>
@@ -307,7 +419,7 @@ export default function VendorRegistration() {
               <h3 className="text-2xl font-bold mb-4 text-blue-600">🖼️ Business Gallery</h3>
               <p className="text-gray-600 text-sm mb-4">Upload up to 10 images of your work/services</p>
               
-              <div className="border-2 border-dashed border-blue-300 rounded-lg p-6 text-center bg-blue-50 cursor-pointer">
+              <div className="border-2 border-dashed border-blue-300 rounded-lg p-6 text-center bg-blue-50 cursor-pointer hover:bg-blue-100 transition">
                 <label className="cursor-pointer">
                   <input
                     type="file"
@@ -315,6 +427,7 @@ export default function VendorRegistration() {
                     accept="image/jpeg,image/jpg,image/png,image/gif"
                     onChange={handleGalleryUpload}
                     className="hidden"
+                    disabled={isSubmitting}
                   />
                   <div>
                     <p className="text-2xl mb-2">📸</p>
@@ -325,20 +438,31 @@ export default function VendorRegistration() {
               </div>
 
               {/* Gallery Preview */}
-              {formData.galleryImages.length > 0 && (
+              {formData.galleryImageBase64.length > 0 && (
                 <div className="mt-4">
-                  <p className="font-bold mb-2">Uploaded Images ({formData.galleryImages.length}):</p>
+                  <p className="font-bold mb-2">Uploaded Images ({formData.galleryImageBase64.length}) - Preview:</p>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    {formData.galleryImageNames.map((name, idx) => (
-                      <div key={idx} className="relative bg-gray-200 rounded-lg p-4 text-center">
-                        <p className="text-sm text-gray-700 truncate">{name}</p>
-                        <button
-                          type="button"
-                          onClick={() => removeGalleryImage(idx)}
-                          className="mt-2 bg-red-500 text-white text-xs py-1 px-2 rounded hover:bg-red-600"
-                        >
-                          Remove
-                        </button>
+                    {formData.galleryImageBase64.map((base64, idx) => (
+                      <div key={idx} className="relative bg-gray-200 rounded-lg overflow-hidden h-32">
+                        <img 
+                          src={base64} 
+                          alt={`Preview ${idx + 1}`}
+                          className="w-full h-full object-cover"
+                        />
+                        
+                        <div className="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-50 transition flex items-center justify-center opacity-0 hover:opacity-100">
+                          <button
+                            type="button"
+                            onClick={() => removeGalleryImage(idx)}
+                            className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded font-bold"
+                          >
+                            ✕ Remove
+                          </button>
+                        </div>
+
+                        <p className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-70 text-white text-xs p-1 truncate">
+                          {formData.galleryImageNames[idx]}
+                        </p>
                       </div>
                     ))}
                   </div>
@@ -359,7 +483,8 @@ export default function VendorRegistration() {
                     value={formData.bankName}
                     onChange={handleChange}
                     placeholder="e.g., Dhaka Bank"
-                    className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="input input-bordered w-full"
+                    disabled={isSubmitting}
                   />
                 </div>
 
@@ -371,7 +496,8 @@ export default function VendorRegistration() {
                     value={formData.accountNumber}
                     onChange={handleChange}
                     placeholder="Account number (hidden in list)"
-                    className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="input input-bordered w-full"
+                    disabled={isSubmitting}
                   />
                 </div>
               </div>
@@ -385,7 +511,8 @@ export default function VendorRegistration() {
                   name="agreement"
                   checked={formData.agreement}
                   onChange={handleChange}
-                  className="w-4 h-4 mr-3 mt-1 cursor-pointer"
+                  className="checkbox checkbox-primary mr-3 mt-1"
+                  disabled={isSubmitting}
                 />
                 <span className="text-gray-700">
                   I agree to AnataEvents terms and conditions. I confirm that all information provided is accurate and my business is legally registered.
@@ -397,31 +524,23 @@ export default function VendorRegistration() {
             <div className="flex gap-4 pt-4">
               <button
                 type="submit"
-                className="flex-1 bg-blue-600 text-white py-3 rounded-lg font-bold text-lg hover:bg-blue-700 transition-all"
+                className="flex-1 bg-blue-600 text-white py-3 rounded-lg font-bold text-lg hover:bg-blue-700 transition-all disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                disabled={isSubmitting}
               >
-                ✓ Submit Registration
+                {isSubmitting ? (
+                  <>
+                    <span className="loading loading-spinner loading-sm"></span>
+                    Submitting...
+                  </>
+                ) : (
+                  '✓ Submit Registration'
+                )}
               </button>
               <button
-                type="reset"
-                onClick={() => setFormData({
-                  businessName: '',
-                  ownerName: '',
-                  email: '',
-                  phone: '',
-                  serviceCategory: '',
-                  experience: '',
-                  businessAddress: '',
-                  description: '',
-                  website: '',
-                  documents: null,
-                  documentFileName: '',
-                  galleryImages: [],
-                  galleryImageNames: [],
-                  bankName: '',
-                  accountNumber: '',
-                  agreement: false
-                })}
-                className="flex-1 bg-gray-300 text-gray-800 py-3 rounded-lg font-bold text-lg hover:bg-gray-400 transition-all"
+                type="button"
+                onClick={handleReset}
+                className="flex-1 bg-gray-300 text-gray-800 py-3 rounded-lg font-bold text-lg hover:bg-gray-400 transition-all disabled:bg-gray-200 disabled:cursor-not-allowed"
+                disabled={isSubmitting}
               >
                 Clear Form
               </button>
@@ -430,9 +549,9 @@ export default function VendorRegistration() {
         </div>
 
         {/* Info Box */}
-        <div className="bg-red-50 border-l-7 border-primary p-6 rounded-lg">
+        <div className="bg-red-50 border-l-4 border-primary p-6 rounded-lg">
           <h4 className="font-bold text-primary text-xl mb-3">✓ What We're Looking For:</h4>
-          <ul className="space-y-2 text-gray-700 text-xl">
+          <ul className="space-y-2 text-gray-700">
             <li>✓ Professional business license/certificate</li>
             <li>✓ Quality portfolio images of your work</li>
             <li>✓ Active social media presence (bonus)</li>

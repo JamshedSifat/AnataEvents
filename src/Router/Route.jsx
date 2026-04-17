@@ -62,6 +62,8 @@ import CareerManagement from "../Admin/pages/AdminCarearOportunity/CareerManagem
 import PostCard from "../Pages/BlogItems/PostCard";
 import PostCardDetails from "../Pages/BlogItems/PostCardDetails";
 import BlogManagement from "../Admin/pages/Blog/BlogManagement";
+import PortfolioManagement from "../Admin/pages/AdminProtfolio/ProtfolioManagement";
+import VendorManagement from "../Admin/pages/AdminOpportunity/Vendor/VendorManagement";
 
 // Title setter function
 const setTitle = (title) => {
@@ -380,6 +382,16 @@ export const router = createBrowserRouter([
   element: <BlogManagement></BlogManagement>,
   loader: setTitle("Blog Management - Admin Dashboard")
 },
+  {
+  path: 'portfolio',  // Note: "portfolio" (not "protfolio")
+  element: <PortfolioManagement />,
+  loader: setTitle("Portfolio Management - Admin Dashboard")
+},
+{
+  path: 'vendors',
+  element: <VendorManagement />,
+  loader: setTitle("Vendor Management - Admin Dashboard")
+}
         ]
       }
     ]
