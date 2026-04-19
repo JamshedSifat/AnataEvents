@@ -64,6 +64,7 @@ import PostCardDetails from "../Pages/BlogItems/PostCardDetails";
 import BlogManagement from "../Admin/pages/Blog/BlogManagement";
 import PortfolioManagement from "../Admin/pages/AdminProtfolio/ProtfolioManagement";
 import VendorManagement from "../Admin/pages/AdminOpportunity/Vendor/VendorManagement";
+import AdminCorporateEvents from "../Admin/pages/AdminCorporoateEvents/AdminCorporateEvents";
 
 // Title setter function
 const setTitle = (title) => {
@@ -95,7 +96,7 @@ export const router = createBrowserRouter([
         loader: setTitle("Corporate Events - Ananta Events | Business Event Management")
       },
       {
-        path: '/services/CorporateEvent/:id',
+        path: '/services/corporate-events/:id',
         element: <CorporateEventDetails></CorporateEventDetails>,
         loader: setTitle("Corporate Events - Ananta Events | Business Event Management")
       },
@@ -391,7 +392,11 @@ export const router = createBrowserRouter([
   path: 'vendors',
   element: <VendorManagement />,
   loader: setTitle("Vendor Management - Admin Dashboard")
-}
+},
+ {
+      path: 'corporate-events',
+      element: <AdminCorporateEvents />
+    },
         ]
       }
     ]

@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router';
-import { LayoutDashboard, Package, Users, Image, LogOut, MessageSquare, Briefcase } from 'lucide-react';
+import { LayoutDashboard, Package, Users, Image, LogOut, MessageSquare, Briefcase, Calendar } from 'lucide-react';
 import { useContext } from 'react';
 import { AuthContext } from '../../Auth/Context/AuthContext';
 
@@ -28,6 +28,11 @@ export default function AdminSidebar() {
     { path: '/admin/dashboard/blogs', label: 'Blogs', icon: Briefcase },
     { path: '/admin/dashboard/portfolio', label: 'Protfolio', icon: Briefcase },
     { path: '/admin/dashboard/vendors', label: 'Vendors', icon: Briefcase },
+     { 
+      path: '/admin/dashboard/corporate-events', 
+      label: 'Corporate Events', 
+      icon: Calendar 
+    },
      
   ];
 
