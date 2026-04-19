@@ -26,7 +26,7 @@ const Comedian = () => {
         }
 
         // Fallback to JSON file
-        const response = await fetch("../../../../public/ComedianData/comedians.json");
+        const response = await fetch("/public/ComedianData/comedians.json");
         if (!response.ok) {
           throw new Error("Failed to fetch comedian data");
         }
