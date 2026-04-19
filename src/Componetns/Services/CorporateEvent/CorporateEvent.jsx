@@ -1,6 +1,8 @@
-// File: src/Pages/Services/CorporateEvent.jsx (Fixed)
+// File: src/Pages/Services/CorporateEvent.jsx
 import React from "react";
 import CorporateEventsList from "./CorporateEventsList";
+
+import CorporateFAQ from "../../FAQ/CorporateFAQ";
 
 
 const CorporateEvent = () => {
@@ -8,7 +10,7 @@ const CorporateEvent = () => {
     <section className="min-h-screen bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center  ">
+        <div className="text-center mb-16 py-20">
           <div className="inline-block mb-4">
             <span className="bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-semibold border border-primary/30">
               CORPORATE SOLUTIONS
@@ -24,8 +26,9 @@ const CorporateEvent = () => {
             Ananta Events and Entertainment is one of Bangladesh's best corporate event management companies. In Dhaka, Bangladesh, we are regarded as the best corporate event planners. We provide professional event management services, project scheduling, meeting, and brand activation events, show organizing, product launching events, exhibition stall construction, Exhibition stand Fabrication, exhibition booth production and location procurement.
           </p>
         </div>
+
         {/* Services List */}
-      <CorporateEventsList />
+        <CorporateEventsList />
 
         {/* Main Content */}
         <div className="mb-20 space-y-6 pb-20">
@@ -40,16 +43,13 @@ const CorporateEvent = () => {
 
             <h3 className="text-2xl font-bold mt-6">What a Company expect from a Corporate Event management company in Bangladesh?</h3>
 
-            <p>A Corporate Event management company take the responsibility to organize an event from the planning to execution. Firstly, we understand the client's requirements make a scratch. Then we make the plan and execution the event either it corporate or social events. When planning any kind of event in Dhaka, chose us as your event planner, we take all the smaller task from your shoulders and run your event smoothly in professional manners.
-
-The trend of hiring an event management company peoples should hire a experienced team. We proving services to our clients on meetings, incentives, conferences and exhibitions. From 2009 we helping our clients on product launches, celebratory milestones, Shop Activation activities, promotion of their business, networking event, expositions, trade shows, seminars, Business dinner, galas are all types of corporate events & MICE- Meetings Incentives Conferences Events event Services.
-
-When you are looking for Corporate event management companies in Dhaka Bangladesh, you may research who is the best on corporate event planning. The important thing to select a company bases on their in-house event logistics, production facilities, execution team and safety measurement process. Ananta Events and Entertainment is the complete pack of above-mentioned point.</p>
+            <p>A Corporate Event management company take the responsibility to organize an event from the planning to execution. Firstly, we understand the client's requirements make a scratch. Then we make the plan and execution the event either it corporate or social events...</p>
           </div>
         </div>
       </div>
 
-      
+      {/* ✅ Corporate FAQs */}
+      <CorporateFAQ />
     </section>
   );
 };

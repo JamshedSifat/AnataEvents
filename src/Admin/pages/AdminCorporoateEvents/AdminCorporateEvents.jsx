@@ -1,6 +1,6 @@
-// File: src/Admin/Pages/CorporateEvents/AdminCorporateEvents.jsx (Updated - Multiple Images, No ID)
+// File: src/Admin/Pages/CorporateEvents/AdminCorporateEvents.jsx (Updated - Better Image Section)
 import React, { useState, useEffect } from 'react';
-import { Trash2, Edit, Plus, Search, Eye, X, Upload, Trash } from 'lucide-react';
+import { Trash2, Edit, Plus, Search, Eye, X, Upload, Trash, Image as ImageIcon } from 'lucide-react';
 import corporateEventsData from '../../../../public/CorporateEvents/CorporateEvents.json';
 
 const AdminCorporateEvents = () => {
@@ -142,6 +142,22 @@ const AdminCorporateEvents = () => {
   // ✅ Remove image
   const removeImage = (index) => {
     setGalleryImages(prev => prev.filter((_, i) => i !== index));
+  };
+
+  // ✅ Move image up
+  const moveImageUp = (index) => {
+    if (index === 0) return;
+    const newImages = [...galleryImages];
+    [newImages[index - 1], newImages[index]] = [newImages[index], newImages[index - 1]];
+    setGalleryImages(newImages);
+  };
+
+  // ✅ Move image down
+  const moveImageDown = (index) => {
+    if (index === galleryImages.length - 1) return;
+    const newImages = [...galleryImages];
+    [newImages[index + 1], newImages[index]] = [newImages[index], newImages[index + 1]];
+    setGalleryImages(newImages);
   };
 
   const handleSaveEvent = () => {
@@ -343,7 +359,7 @@ const AdminCorporateEvents = () => {
                   <label className="text-sm text-gray-600 font-semibold mb-3 block">Gallery Images ({selectedEvent.images.length})</label>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                     {selectedEvent.images.map((img, idx) => (
-                      <div key={idx} className="relative rounded-lg overflow-hidden">
+                      <div key={idx} className="relative rounded-lg overflow-hidden group">
                         <img 
                           src={img} 
                           alt={`Image ${idx + 1}`} 
@@ -353,10 +369,13 @@ const AdminCorporateEvents = () => {
                           }}
                         />
                         {idx === 0 && (
-                          <div className="absolute top-2 left-2 bg-primary text-white text-xs px-2 py-1 rounded">
+                          <div className="absolute top-2 left-2 bg-primary text-white text-xs px-2 py-1 rounded font-semibold">
                             Main
                           </div>
                         )}
+                        <div className="absolute bottom-0 left-0 right-0 bg-black/30 px-2 py-1 text-white text-xs">
+                          {idx + 1} / {selectedEvent.images.length}
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -389,7 +408,7 @@ const AdminCorporateEvents = () => {
 
               <div>
                 <label className="text-sm text-gray-600 font-semibold">Content</label>
-                <p className="text-gray-900 mt-2 whitespace-pre-wrap">{selectedEvent.content}</p>
+                <p className="text-gray-900 mt-2 whitespace-pre-wrap max-h-48 overflow-y-auto">{selectedEvent.content}</p>
               </div>
             </div>
           </div>
@@ -476,79 +495,129 @@ const AdminCorporateEvents = () => {
                 </div>
               </div>
 
-              {/* ✅ Images Section */}
-              <div className="border-2 border-dashed border-gray-300 rounded-lg p-6">
-                <h3 className="text-lg font-semibold mb-4 text-gray-900">
-                  Add Images ({galleryImages.length})
-                </h3>
-
-                {/* Option 1: File Upload */}
-                <div className="mb-6">
-                  <label className="block text-sm font-semibold mb-2">Option 1: Upload Multiple Files</label>
-                  <label className="flex items-center justify-center gap-2 cursor-pointer hover:bg-gray-50 p-4 rounded border-2 border-gray-300">
-                    <Upload className="w-5 h-5 text-primary" />
-                    <span className="text-sm font-semibold text-gray-700">Click to upload images</span>
-                    <input
-                      type="file"
-                      multiple
-                      accept="image/*"
-                      onChange={handleImageUpload}
-                      className="hidden"
-                    />
-                  </label>
+              {/* ✅ UPDATED Images Section */}
+              <div className="bg-gradient-to-br from-gray-50 to-gray-100 border-2 border-gray-300 rounded-lg p-6">
+                <div className="flex items-center gap-2 mb-4">
+                  <ImageIcon className="w-6 h-6 text-primary" />
+                  <h3 className="text-lg font-bold text-gray-900">
+                    Gallery Images ({galleryImages.length})
+                  </h3>
                 </div>
 
-                {/* Option 2: Image URL */}
-                <div className="mb-6">
-                  <label className="block text-sm font-semibold mb-2">Option 2: Add Image URL</label>
-                  <div className="flex gap-2">
-                    <input
-                      type="url"
-                      value={newImageUrl}
-                      onChange={(e) => setNewImageUrl(e.target.value)}
-                      placeholder="https://example.com/image.jpg"
-                      className="input input-bordered flex-1"
-                      onKeyPress={(e) => e.key === 'Enter' && addImageFromUrl()}
-                    />
-                    <button
-                      onClick={addImageFromUrl}
-                      className="btn btn-primary"
-                    >
-                      Add
-                    </button>
+                {/* Upload Methods */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                  {/* File Upload */}
+                  <div>
+                    <label className="block text-sm font-semibold mb-2 text-gray-700">📁 File Upload</label>
+                    <label className="flex flex-col items-center justify-center gap-2 cursor-pointer hover:bg-white/70 p-4 rounded-lg border-2 border-dashed border-primary/50 transition">
+                      <Upload className="w-6 h-6 text-primary" />
+                      <span className="text-sm font-semibold text-gray-700 text-center">Select multiple images</span>
+                      <input
+                        type="file"
+                        multiple
+                        accept="image/*"
+                        onChange={handleImageUpload}
+                        className="hidden"
+                      />
+                    </label>
+                  </div>
+
+                  {/* URL Input */}
+                  <div>
+                    <label className="block text-sm font-semibold mb-2 text-gray-700">🔗 Image URL</label>
+                    <div className="flex gap-2 flex-col">
+                      <input
+                        type="url"
+                        value={newImageUrl}
+                        onChange={(e) => setNewImageUrl(e.target.value)}
+                        placeholder="https://example.com/image.jpg"
+                        className="input input-bordered input-sm"
+                        onKeyPress={(e) => e.key === 'Enter' && addImageFromUrl()}
+                      />
+                      <button
+                        onClick={addImageFromUrl}
+                        className="btn btn-primary btn-sm"
+                      >
+                        Add URL
+                      </button>
+                    </div>
                   </div>
                 </div>
 
                 {/* Gallery Preview */}
                 {galleryImages.length > 0 && (
                   <div>
-                    <label className="block text-sm font-semibold mb-3">Gallery Preview</label>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    <label className="block text-sm font-semibold mb-3 text-gray-900">Preview & Manage</label>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 bg-white p-4 rounded-lg">
                       {galleryImages.map((img, idx) => (
-                        <div key={idx} className="relative rounded-lg overflow-hidden group">
-                          <img 
-                            src={img} 
-                            alt={`Image ${idx + 1}`} 
-                            className="w-full h-24 object-cover"
-                            onError={(e) => {
-                              e.target.src = 'https://via.placeholder.com/200x150?text=Error';
-                            }}
-                          />
-                          <button
-                            type="button"
-                            onClick={() => removeImage(idx)}
-                            className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition"
-                          >
-                            <Trash className="w-6 h-6 text-white" />
-                          </button>
-                          {idx === 0 && (
-                            <div className="absolute top-1 left-1 bg-primary text-white text-xs px-1.5 py-0.5 rounded">
-                              Main
-                            </div>
-                          )}
+                        <div key={idx} className="relative group">
+                          {/* Image */}
+                          <div className="relative overflow-hidden rounded-lg h-28 bg-gray-200">
+                            <img 
+                              src={img} 
+                              alt={`Image ${idx + 1}`} 
+                              className="w-full h-full object-cover group-hover:scale-105 transition"
+                              onError={(e) => {
+                                e.target.src = 'https://via.placeholder.com/200x150?text=Error';
+                              }}
+                            />
+                            {idx === 0 && (
+                              <div className="absolute top-1 left-1 bg-primary text-white text-xs px-2 py-1 rounded font-bold">
+                                Main
+                              </div>
+                            )}
+                          </div>
+
+                          {/* Actions */}
+                          <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-1 rounded-lg">
+                            {/* Move Up */}
+                            {idx > 0 && (
+                              <button
+                                type="button"
+                                onClick={() => moveImageUp(idx)}
+                                className="p-1 bg-primary text-white rounded hover:bg-primary/80"
+                                title="Move up"
+                              >
+                                ⬆
+                              </button>
+                            )}
+
+                            {/* Move Down */}
+                            {idx < galleryImages.length - 1 && (
+                              <button
+                                type="button"
+                                onClick={() => moveImageDown(idx)}
+                                className="p-1 bg-primary text-white rounded hover:bg-primary/80"
+                                title="Move down"
+                              >
+                                ⬇
+                              </button>
+                            )}
+
+                            {/* Delete */}
+                            <button
+                              type="button"
+                              onClick={() => removeImage(idx)}
+                              className="p-1 bg-red-600 text-white rounded hover:bg-red-700"
+                              title="Delete"
+                            >
+                              <Trash className="w-4 h-4" />
+                            </button>
+                          </div>
+
+                          {/* Index */}
+                          <p className="text-xs text-gray-500 mt-1 text-center">
+                            {idx + 1} / {galleryImages.length}
+                          </p>
                         </div>
                       ))}
                     </div>
+                  </div>
+                )}
+
+                {galleryImages.length === 0 && (
+                  <div className="text-center py-8 text-gray-500">
+                    <p className="text-sm">No images added yet</p>
                   </div>
                 )}
               </div>

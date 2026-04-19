@@ -65,6 +65,8 @@ import BlogManagement from "../Admin/pages/Blog/BlogManagement";
 import PortfolioManagement from "../Admin/pages/AdminProtfolio/ProtfolioManagement";
 import VendorManagement from "../Admin/pages/AdminOpportunity/Vendor/VendorManagement";
 import AdminCorporateEvents from "../Admin/pages/AdminCorporoateEvents/AdminCorporateEvents";
+import HomeFAQ from "../Admin/pages/AdminFAQ/HomeFAQ";
+// import CorporateFAQ from "../Admin/pages/AdminFAQ/CorporateFAQ";
 
 // Title setter function
 const setTitle = (title) => {
@@ -397,6 +399,14 @@ export const router = createBrowserRouter([
       path: 'corporate-events',
       element: <AdminCorporateEvents />
     },
+ {
+      path: 'faqs',
+      element:<HomeFAQ></HomeFAQ>
+    },
+//  {
+//       path: 'faqs',
+//       element:<CorporateFAQ></CorporateFAQ>
+//     },
         ]
       }
     ]

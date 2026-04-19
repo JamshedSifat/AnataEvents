@@ -1,4 +1,4 @@
-// File: src/Components/RecentPosts/RecentPosts.jsx
+// File: src/Components/RecentPosts/RecentPosts.jsx (Updated)
 import React, { useState, useEffect } from 'react';
 import { Calendar } from 'lucide-react';
 
@@ -50,14 +50,17 @@ const RecentBlogPosts = ({ limit = 5, columns = 1 }) => {
     );
   }
 
+  // ✅ Grid layout: lg 2 columns, others 1 column
+  const gridClass = columns === 2 
+    ? 'grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4'
+    : columns === 3
+    ? 'grid grid-cols-1 lg:grid-cols-3 gap-3 sm:gap-4'
+    : 'space-y-3 sm:space-y-4';
+
   return (
     <div className="bg-white rounded-lg shadow-md p-4 sm:p-6">
       <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-gray-900">Recent Posts</h3>
-      <div className={`grid gap-3 sm:gap-4 ${
-        columns === 2 ? 'grid-cols-1 sm:grid-cols-2' :
-        columns === 3 ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3' :
-        'space-y-3 sm:space-y-4'
-      }`}>
+      <div className={gridClass}>
         {blogs.map(blog => (
           <a
             key={blog._id}
@@ -71,6 +74,9 @@ const RecentBlogPosts = ({ limit = 5, columns = 1 }) => {
                   src={blog.image}
                   alt={blog.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  onError={(e) => {
+                    e.target.src = 'https://via.placeholder.com/400x300?text=Blog';
+                  }}
                 />
               </div>
             )}

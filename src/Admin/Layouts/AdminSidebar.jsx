@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router';
-import { LayoutDashboard, Package, Users, Image, LogOut, MessageSquare, Briefcase, Calendar } from 'lucide-react';
+import { LayoutDashboard, Package, Users, Image, LogOut, MessageSquare, Briefcase, Calendar, HelpCircle } from 'lucide-react';
 import { useContext } from 'react';
 import { AuthContext } from '../../Auth/Context/AuthContext';
 
@@ -33,6 +33,12 @@ export default function AdminSidebar() {
       label: 'Corporate Events', 
       icon: Calendar 
     },
+     { 
+    path: '/admin/dashboard/faqs', 
+    label: 'HomeFAQs', 
+    icon: HelpCircle
+  },
+  
      
   ];
 

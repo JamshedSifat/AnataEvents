@@ -6,13 +6,17 @@ import Hero from '../Hero/Hero';
 import Navbar from '../Navbar/Navbar';
 import Gallary from '../Gallary/Gallary';
 import EventCoverage from '../EventCoverage/EventCoverage';
-import FAQ from '../FAQ/FAQ';
+
 import Testimonials from '../Testimonials/Testimonials';
 import OurClients from '../OurClients/OurClients';
 import QueryModal from '../QueryModal/QueryModal'; // import modal
 import Services from '../Services/Services';
-import BlogCard from '../BlogCard/BlogCard';
+
 import MediaGallery from '../../Pages/Media/MediaGellary/MediaGellary';
+import HomeFAQ from '../FAQ/HomeFAQ';
+import PostCard from '../../Pages/BlogItems/PostCard';
+import RecentBlogPosts from '../../Pages/BlogItems/RecentBlogPost';
+
 
 const Home = () => {
 
@@ -43,9 +47,16 @@ const Home = () => {
                 <MediaGallery></MediaGallery>
                 <Testimonials />
                 <OurClients />
-                <BlogCard></BlogCard>
                 <EventCoverage />
-                <FAQ />
+                <HomeFAQ />
+               
+                <div className="">
+                    <div className="bg-white">
+                        <h1 className="text-5xl text-center py-6 font-bold">Our <span className="text-primary">Blogs</span></h1>
+                        <p className="text-gray-600 text-center ">Stay updated with the latest event management tips, trends, and insights</p>
+                    </div>
+                    <RecentBlogPosts limit={6} columns={3}></RecentBlogPosts>
+                </div>
             </main>
 
             {/* Query Modal */}

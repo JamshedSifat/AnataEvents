@@ -5,25 +5,19 @@ const Hero = () => {
 
     const heroSlides = [
         {
-            title: "Creating Extraordinary",
-            subtitle: "Luxury Events",
-            description: "Transform your special moments into unforgettable experiences with our premium event planning services.",
-            image: "https://i.pinimg.com/736x/e2/15/a3/e215a3084956ce5be9a8195e14a51521.jpg",
-            stats: "500+ Events Planned"
+            // title: "Creating Extraordinary",
+            // subtitle: "Luxury Events",
+            // description: "Transform your special moments into unforgettable experiences with our premium event planning services.",
+            image: "https://www.anantabd.net/wp-content/uploads/2022/10/IMG_0386.jpg",
+            // stats: "500+ Events Planned"
         },
+        
         {
-            title: "Luxury Wedding",
-            subtitle: "Planning",
-            description: "From intimate ceremonies to grand celebrations, we bring your dream wedding to life with impeccable attention to detail.",
-            image: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80",
-            stats: "15+ Years Experience"
-        },
-        {
-            title: "Premium Corporate",
-            subtitle: "Events",
-            description: "Elevate your business gatherings with sophisticated corporate event planning that impresses and inspires.",
-            image: "https://i.pinimg.com/736x/a2/dd/49/a2dd4904d3bf2f10bfc9ca316b5062b2.jpg",
-            stats: "1000+ Happy Clients"
+            // title: "Premium Corporate",
+            // subtitle: "Events",
+            // description: "Elevate your business gatherings with sophisticated corporate event planning that impresses and inspires.",
+            image: "https://www.anantabd.net/wp-content/uploads/2020/01/iscea-night-10.jpg",
+            // stats: "1000+ Happy Clients"
         }
     ];
 
@@ -63,19 +57,19 @@ const Hero = () => {
             <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                 <div className="space-y-5">
                     {/* Badge */}
-                    <div className="inline-flex items-center px-4 py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white text-sm font-medium">
+                    {/* <div className="inline-flex items-center px-4 py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white text-sm font-medium">
                         <span className="mr-2">🏆</span>
                         <span>{heroSlides[currentSlide].stats}</span>
-                    </div>
+                    </div> */}
 
                     {/* Main Heading */}
                     <div className="space-y-4">
-                        <h1 className="text-5xl md:text-7xl lg:text-8xl font-playfair font-bold text-white leading-tight">
+                        {/* <h1 className="text-5xl md:text-7xl lg:text-8xl font-playfair font-bold text-white leading-tight">
                             {heroSlides[currentSlide].title}
                             <span className="block bg-gradient-to-r from-primary  via-red-600 to-pink-800 bg-clip-text text-transparent">
                                 {heroSlides[currentSlide].subtitle}
                             </span>
-                        </h1>
+                        </h1> */}
                         
                         <p className="text-xl md:text-2xl text-gray-200 max-w-4xl mx-auto leading-relaxed">
                             {heroSlides[currentSlide].description}
@@ -83,7 +77,7 @@ const Hero = () => {
                     </div>
 
                     {/* CTA Buttons */}
-                    <div className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-8">
+                    {/* <div className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-8">
                         <button className="group relative bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-primary text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-red-500/25">
                             <span className="flex items-center space-x-2">
                                 <span>Plan Your Event</span>
@@ -97,10 +91,10 @@ const Hero = () => {
                                 <span className="group-hover:rotate-12 transition-transform duration-300">🖼️</span>
                             </span>
                         </button>
-                    </div>
+                    </div> */}
 
                     {/* Trust Indicators */}
-                    <div className="pt-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-white">
+                    {/* <div className="pt-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-white">
                         <div className="space-y-2">
                             <div className="text-3xl font-bold bg-gradient-to-r from-primary to-red-600 bg-clip-text text-transparent">
                                 500+
@@ -119,7 +113,7 @@ const Hero = () => {
                             </div>
                             <div className="text-sm text-gray-300">Client Satisfaction</div>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
 
