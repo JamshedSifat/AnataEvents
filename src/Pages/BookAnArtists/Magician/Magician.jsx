@@ -31,7 +31,7 @@ const Magician = () => {
       }
 
       // Fallback to JSON file
-      fetch("/public/MagiciansData/MagiciansData.json")
+      fetch("/MagiciansData/MagiciansData.json")
         .then((res) => res.json())
         .then((data) => {
           setMagicians(data);
