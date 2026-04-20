@@ -1,4 +1,4 @@
-// File: src/Admin/Pages/TalentHunt/AdminTalentHunt.jsx (Complete - Video Removed)
+
 import React, { useState, useEffect } from 'react';
 import { Trash2, Edit, Plus, Search, Eye, X, Mail, Phone, CheckCircle, Clock, AlertCircle, Download } from 'lucide-react';
 
