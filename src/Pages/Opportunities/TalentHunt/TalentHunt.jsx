@@ -183,7 +183,7 @@ export default function TalentHunt() {
                     value={formData.fullName}
                     onChange={handleChange}
                     placeholder="Enter your full name"
-                    className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
                   />
                 </div>
 
@@ -197,7 +197,7 @@ export default function TalentHunt() {
                       value={formData.email}
                       onChange={handleChange}
                       placeholder="your@email.com"
-                      className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                      className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
                     />
                   </div>
 
@@ -209,7 +209,7 @@ export default function TalentHunt() {
                       value={formData.phone}
                       onChange={handleChange}
                       placeholder="+880 1XXXXXXXXX"
-                      className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                      className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
                     />
                   </div>
                 </div>
@@ -222,7 +222,7 @@ export default function TalentHunt() {
                       name="talentCategory"
                       value={formData.talentCategory}
                       onChange={handleChange}
-                      className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                      className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
                     >
                       <option value="">-- Select --</option>
                       {talentCategories.map((cat, idx) => (
@@ -239,7 +239,7 @@ export default function TalentHunt() {
                       value={formData.experience}
                       onChange={handleChange}
                       placeholder="e.g., 3"
-                      className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                      className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
                     />
                   </div>
                 </div>
@@ -253,7 +253,7 @@ export default function TalentHunt() {
                     onChange={handleChange}
                     placeholder="Tell us about yourself..."
                     rows="3"
-                    className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
                   />
                 </div>
 
@@ -266,7 +266,7 @@ export default function TalentHunt() {
                     value={formData.portfolioLink}
                     onChange={handleChange}
                     placeholder="https://myportfolio.com"
-                    className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
                   />
                 </div>
 
@@ -279,7 +279,7 @@ export default function TalentHunt() {
                     value={formData.socialMedia}
                     onChange={handleChange}
                     placeholder="https://instagram.com/yourprofile"
-                    className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
                   />
                 </div>
 
@@ -294,7 +294,7 @@ export default function TalentHunt() {
                     />
                     <div>
                       <p className="text-2xl mb-2">🎥</p>
-                      <p className="font-bold text-purple-600">Upload Video</p>
+                      <p className="font-bold text-red-600">Upload Video</p>
                       <p className="text-gray-600 text-sm mt-1">
                         {formData.videoFileName || 'Click to upload'}
                       </p>
@@ -320,7 +320,7 @@ export default function TalentHunt() {
                 <div className="flex gap-4 pt-4">
                   <button
                     type="submit"
-                    className="flex-1 bg-purple-600 text-white py-2 rounded-lg font-bold hover:bg-purple-700 transition-all"
+                    className="flex-1 bg-primary text-white py-2 rounded-lg font-bold hover:bg-pink-700 transition-all"
                   >
                     Submit
                   </button>

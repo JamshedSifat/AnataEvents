@@ -48,7 +48,6 @@ const Home = () => {
                 <Testimonials />
                 <OurClients />
                 <EventCoverage />
-                <HomeFAQ />
                
                 <div className="">
                     <div className="bg-white">
@@ -57,6 +56,8 @@ const Home = () => {
                     </div>
                     <RecentBlogPosts limit={6} columns={3}></RecentBlogPosts>
                 </div>
+                
+                <HomeFAQ />
             </main>
 
             {/* Query Modal */}

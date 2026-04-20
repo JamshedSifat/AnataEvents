@@ -256,10 +256,10 @@ export default function ArtistRegistration() {
               className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500"
             >
               <option value="">-- Select Rate Range --</option>
-              <option value="৳5,000 - ৳10,000">৳5,000 - ৳10,000</option>
-              <option value="৳10,000 - ৳25,000">৳10,000 - ৳25,000</option>
-              <option value="৳25,000 - ৳50,000">৳25,000 - ৳50,000</option>
-              <option value="৳50,000+">৳50,000+</option>
+              <option value="৳5,000 - ৳10,000">$5,000 - $10,000</option>
+              <option value="৳10,000 - ৳25,000">$10,000 - $25,000</option>
+              <option value="৳25,000 - ৳50,000">$25,000 - $50,000</option>
+              <option value="৳50,000+">$50,000+</option>
             </select>
           </div>
 
