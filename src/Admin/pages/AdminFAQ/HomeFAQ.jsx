@@ -207,7 +207,7 @@ const HomeFAQ = () => {
   }
 
   return (
-    <div>
+    <div className="mt-4 w-11/12 mx-auto">
       {/* Header */}
       <div className="mb-8">
         <div className="flex justify-between items-center mb-4">

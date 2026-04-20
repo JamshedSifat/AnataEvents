@@ -66,6 +66,9 @@ import PortfolioManagement from "../Admin/pages/AdminProtfolio/ProtfolioManageme
 import VendorManagement from "../Admin/pages/AdminOpportunity/Vendor/VendorManagement";
 import AdminCorporateEvents from "../Admin/pages/AdminCorporoateEvents/AdminCorporateEvents";
 import HomeFAQ from "../Admin/pages/AdminFAQ/HomeFAQ";
+import AdminArtists from "../Admin/pages/AdminOpportunity/Artists/AdminArtists";
+import AdminTalentHunt from "../Admin/pages/AdminOpportunity/TalentHunt/AdminTalentHunt";
+
 // import CorporateFAQ from "../Admin/pages/AdminFAQ/CorporateFAQ";
 
 // Title setter function
@@ -403,6 +406,14 @@ export const router = createBrowserRouter([
       path: 'faqs',
       element:<HomeFAQ></HomeFAQ>
     },
+    {
+  path: 'artists',
+  element: <AdminArtists />
+},
+{
+  path: 'talent-hunt',
+  element: <AdminTalentHunt />
+}
 //  {
 //       path: 'faqs',
 //       element:<CorporateFAQ></CorporateFAQ>

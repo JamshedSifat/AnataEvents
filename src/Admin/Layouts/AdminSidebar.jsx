@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router';
-import { LayoutDashboard, Package, Users, Image, LogOut, MessageSquare, Briefcase, Calendar, HelpCircle } from 'lucide-react';
+import { LayoutDashboard, Package, Users, Image, LogOut, MessageSquare, Briefcase, Calendar, HelpCircle, Music, Sparkles } from 'lucide-react';
 import { useContext } from 'react';
 import { AuthContext } from '../../Auth/Context/AuthContext';
 
@@ -16,28 +16,28 @@ export default function AdminSidebar() {
     { path: '/admin/dashboard/services', label: 'Services', icon: Package },
     // { path: '/admin/dashboard/events', label: 'Events', icon: Package },
     // { path: '/admin/dashboard/users', label: 'Users', icon: Users },
+    { path: '/admin/dashboard/gallery', label: 'Gallery', icon: Image },
+    { path: '/admin/dashboard/videos', label: 'Videos', icon: Package },
+    { path: '/admin/dashboard/portfolio', label: 'Protfolio', icon: Briefcase },
+    { path: '/admin/dashboard/team', label: 'Team Members', icon: Users },
     { path: '/admin/dashboard/comedians', label: 'Comedians', icon: Package },
     { path: '/admin/dashboard/dancers', label: 'Dancers', icon: Package },
     { path: '/admin/dashboard/magicians', label: 'Magicians', icon: Package },
     { path: '/admin/dashboard/singers', label: 'Singers', icon: Package },
-    { path: '/admin/dashboard/gallery', label: 'Gallery', icon: Image },
-    { path: '/admin/dashboard/videos', label: 'Videos', icon: Package },
     { path: '/admin/dashboard/testimonials', label: 'Testimonials', icon: MessageSquare },
-    { path: '/admin/dashboard/team', label: 'Team Members', icon: Users },
+    { path: '/admin/dashboard/vendors', label: 'Vendors', icon: Briefcase },
+    { path: '/admin/dashboard/artists', label: 'Artists',  icon: Music  },
+      { 
+      path: '/admin/dashboard/talent-hunt', 
+      label: 'Talent Hunt', 
+      icon: Sparkles 
+    },
     { path: '/admin/dashboard/careers', label: 'Career Opportunities', icon: Briefcase },
     { path: '/admin/dashboard/blogs', label: 'Blogs', icon: Briefcase },
-    { path: '/admin/dashboard/portfolio', label: 'Protfolio', icon: Briefcase },
-    { path: '/admin/dashboard/vendors', label: 'Vendors', icon: Briefcase },
-     { 
-      path: '/admin/dashboard/corporate-events', 
-      label: 'Corporate Events', 
-      icon: Calendar 
-    },
-     { 
-    path: '/admin/dashboard/faqs', 
-    label: 'HomeFAQs', 
-    icon: HelpCircle
-  },
+  
+    { 
+      path: '/admin/dashboard/corporate-events', label: 'Corporate Events', icon: Calendar },
+    { path: '/admin/dashboard/faqs', label: 'FAQs', icon: HelpCircle},
   
      
   ];

@@ -5,7 +5,7 @@ import AdminSidebar from './AdminSidebar';
 
 const AdminLayout = () => {
   return (
-    <div className="flex">
+    <div className="flex w-11/12 mx-auto mt-4 ">
       <AdminSidebar />
       {/* Main content - Sidebar এর পর শুরু হবে */}
       <main className="flex-1 ml-64 bg-gray-50 min-h-screen">

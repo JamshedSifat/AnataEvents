@@ -176,7 +176,7 @@ const VendorManagement = () => {
   }
 
   return (
-    <div>
+    <div  className=" mt-6 w-11/12 mx-auto">
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">Vendor Management</h1>
