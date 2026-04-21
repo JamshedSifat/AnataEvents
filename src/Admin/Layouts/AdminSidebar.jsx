@@ -1,4 +1,4 @@
-// File: src/Admin/Components/AdminSidebar.jsx (Fixed)
+
 import { Link, useLocation } from 'react-router';
 import { LayoutDashboard, Package, Users, Image, LogOut, MessageSquare, Briefcase, Calendar, HelpCircle, Music, Sparkles } from 'lucide-react';
 import { useContext } from 'react';

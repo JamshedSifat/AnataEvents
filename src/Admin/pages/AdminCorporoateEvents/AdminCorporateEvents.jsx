@@ -1,4 +1,4 @@
-// File: src/Admin/Pages/CorporateEvents/AdminCorporateEvents.jsx (Updated - Better Image Section)
+
 import React, { useState, useEffect } from 'react';
 import { Trash2, Edit, Plus, Search, Eye, X, Upload, Trash, Image as ImageIcon } from 'lucide-react';
 import corporateEventsData from '../../../../public/CorporateEvents/CorporateEvents.json';

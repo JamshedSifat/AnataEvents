@@ -1,4 +1,4 @@
-// File: src/Admin/Pages/Influencers/AdminInfluencers.jsx (New - Influencer Management Panel)
+
 import React, { useState, useEffect } from 'react';
 import { Trash2, Edit, Plus, Search, Eye, Image as ImageIcon } from 'lucide-react';
 
