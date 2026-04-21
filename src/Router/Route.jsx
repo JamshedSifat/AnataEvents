@@ -68,6 +68,11 @@ import AdminCorporateEvents from "../Admin/pages/AdminCorporoateEvents/AdminCorp
 import HomeFAQ from "../Admin/pages/AdminFAQ/HomeFAQ";
 import AdminArtists from "../Admin/pages/AdminOpportunity/Artists/AdminArtists";
 import AdminTalentHunt from "../Admin/pages/AdminOpportunity/TalentHunt/AdminTalentHunt";
+import AdminExhibitionStall from "../Admin/pages/ExhibitionStall/AdminExhibitionStall";
+import ExhibitionEventDetails from "../Componetns/Services/BestExhibitionStallDesgin/ExhibitionEventDetails";
+import AdminHero from "../Admin/Components/Home/AdminHero";
+import AdminInfluencers from "../Admin/Components/AdminInfluencer/AdminInfluencers";
+
 
 // import CorporateFAQ from "../Admin/pages/AdminFAQ/CorporateFAQ";
 
@@ -109,6 +114,10 @@ export const router = createBrowserRouter([
         path: '/services/BestExhibitionStallDesgin',
         element: <BestExhibitionStallDesgin></BestExhibitionStallDesgin>,
         loader: setTitle("Exhibition Stall Design - Ananta Events | Professional Booth Design")
+      },
+      {
+      path: '/services/exhibition-events/:id',
+       element: <ExhibitionEventDetails />
       },
       {
         path: '/services/InfluencerMarketingAgency',
@@ -327,7 +336,10 @@ export const router = createBrowserRouter([
             path: "media",
             element: <MediaList></MediaList>
           },
-          // ✨ নতুন route
+          {
+            path:"hero",
+            element:<AdminHero></AdminHero>
+          },
           {
             path: "services",
             element: <ServiceManagement></ServiceManagement>,
@@ -413,11 +425,16 @@ export const router = createBrowserRouter([
 {
   path: 'talent-hunt',
   element: <AdminTalentHunt />
-}
-//  {
-//       path: 'faqs',
-//       element:<CorporateFAQ></CorporateFAQ>
-//     },
+},
+{
+  path: 'exhibition-stall',
+  element: <AdminExhibitionStall />
+},
+{
+  path: 'influencers',
+  element: <AdminInfluencers />
+},
+
         ]
       }
     ]

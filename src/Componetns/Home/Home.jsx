@@ -49,12 +49,14 @@ const Home = () => {
                 <OurClients />
                 <EventCoverage />
                
-                <div className="">
-                    <div className="bg-white">
+                <div className="bg-white p-8">
+                    <div className=" my-8 max-w-7xl mx-auto">
+                    <div className=" ">
                         <h1 className="text-5xl text-center py-6 font-bold">Our <span className="text-primary">Blogs</span></h1>
-                        <p className="text-gray-600 text-center ">Stay updated with the latest event management tips, trends, and insights</p>
+                        <p className="text-gray-600 text-center text-xl">Stay updated with the latest event management tips, trends, and insights</p>
                     </div>
-                    <RecentBlogPosts limit={6} columns={3}></RecentBlogPosts>
+                    <RecentBlogPosts limit={6} columns={3} className="max-w-7xl mx-auto"></RecentBlogPosts>
+                </div>
                 </div>
                 
                 <HomeFAQ />

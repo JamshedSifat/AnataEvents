@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router';
+
 
 const MyJourney = () => {
     return (
@@ -32,14 +34,23 @@ Our <strong>15+ years of hands-on experience</strong> allow us to anticipate cha
                             </p>
                         </div>
 
-                        <div className="flex flex-col sm:flex-row gap-4">
-                            <button className="bg-gradient-to-r from-red-600 to-pink-500 hover:from-red-700 hover:to-pink-600 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105">
-                                Our Portfolio
-                            </button>
-                            <button className="border-2 border-red-600 text-red-600 hover:bg-red-600 hover:text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300">
-                                Meet the Team
-                            </button>
-                        </div>
+                      <div className="flex flex-col sm:flex-row gap-4">
+  
+  <Link
+    to="/portfolio"
+    className="bg-gradient-to-r from-red-600 to-pink-500 hover:from-red-700 hover:to-pink-600 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105"
+  >
+    Portfolio
+  </Link>
+
+  <Link
+      
+    className="border-2 border-red-600 text-red-600 hover:bg-red-600 hover:text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300"
+  >
+    Meet the Team
+  </Link>
+
+</div>
                     </div>
 
                     {/* Right Image */}

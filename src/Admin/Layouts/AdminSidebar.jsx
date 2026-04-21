@@ -1,3 +1,4 @@
+// File: src/Admin/Components/AdminSidebar.jsx (Fixed)
 import { Link, useLocation } from 'react-router';
 import { LayoutDashboard, Package, Users, Image, LogOut, MessageSquare, Briefcase, Calendar, HelpCircle, Music, Sparkles } from 'lucide-react';
 import { useContext } from 'react';
@@ -12,13 +13,11 @@ export default function AdminSidebar() {
   };
 
   const menuItems = [
-    // { path: '/admin/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+    { path: '/admin/dashboard/hero', label: 'Hero', icon: Music },
     { path: '/admin/dashboard/services', label: 'Services', icon: Package },
-    // { path: '/admin/dashboard/events', label: 'Events', icon: Package },
-    // { path: '/admin/dashboard/users', label: 'Users', icon: Users },
     { path: '/admin/dashboard/gallery', label: 'Gallery', icon: Image },
     { path: '/admin/dashboard/videos', label: 'Videos', icon: Package },
-    { path: '/admin/dashboard/portfolio', label: 'Protfolio', icon: Briefcase },
+    { path: '/admin/dashboard/portfolio', label: 'Portfolio', icon: Briefcase },
     { path: '/admin/dashboard/team', label: 'Team Members', icon: Users },
     { path: '/admin/dashboard/comedians', label: 'Comedians', icon: Package },
     { path: '/admin/dashboard/dancers', label: 'Dancers', icon: Package },
@@ -26,20 +25,14 @@ export default function AdminSidebar() {
     { path: '/admin/dashboard/singers', label: 'Singers', icon: Package },
     { path: '/admin/dashboard/testimonials', label: 'Testimonials', icon: MessageSquare },
     { path: '/admin/dashboard/vendors', label: 'Vendors', icon: Briefcase },
-    { path: '/admin/dashboard/artists', label: 'Artists',  icon: Music  },
-      { 
-      path: '/admin/dashboard/talent-hunt', 
-      label: 'Talent Hunt', 
-      icon: Sparkles 
-    },
+    { path: '/admin/dashboard/artists', label: 'Artists', icon: Music },
+    { path: '/admin/dashboard/talent-hunt', label: 'Talent Hunt', icon: Sparkles },
     { path: '/admin/dashboard/careers', label: 'Career Opportunities', icon: Briefcase },
     { path: '/admin/dashboard/blogs', label: 'Blogs', icon: Briefcase },
-  
-    { 
-      path: '/admin/dashboard/corporate-events', label: 'Corporate Events', icon: Calendar },
-    { path: '/admin/dashboard/faqs', label: 'FAQs', icon: HelpCircle},
-  
-     
+    { path: '/admin/dashboard/corporate-events', label: 'Corporate Events', icon: Calendar },
+    { path: '/admin/dashboard/influencers', label: 'Influencers', icon: Users },
+    { path: '/admin/dashboard/faqs', label: 'FAQs', icon: HelpCircle },
+    { path: '/admin/dashboard/exhibition-stall', label: 'Exhibition Stall Design', icon: Sparkles },
   ];
 
   const handleLogout = () => {
@@ -52,7 +45,7 @@ export default function AdminSidebar() {
       
       {/* Logo */}
       <div className="p-6 border-b border-white/10 flex-shrink-0">
-        <h1 className="text-2xl font-bold">Ananta Admin</h1>
+        <h1 className="text-2xl font-bold">Anata Admin</h1>
         <p className="text-sm text-white/70">Event Management</p>
       </div>
 

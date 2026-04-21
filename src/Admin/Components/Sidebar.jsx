@@ -15,6 +15,7 @@ const Sidebar = () => {
     { icon: '⚙️', name: 'Settings', path: '/admin/settings' },
     { path: '/admin/dashboard/djs', label: 'DJs', icon: Package },
     { path: '/admin/dashboard/singers', label: 'Singers', icon: Package },
+    
   ];
 
   return (

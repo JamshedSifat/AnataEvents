@@ -1,33 +1,104 @@
+// File: src/Components/Hero.jsx (Updated - Removed Title)
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router';
 
 const Hero = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
+    const [heroSlides, setHeroSlides] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-    const heroSlides = [
-        {
-            // title: "Creating Extraordinary",
-            // subtitle: "Luxury Events",
-            // description: "Transform your special moments into unforgettable experiences with our premium event planning services.",
-            image: "https://www.anantabd.net/wp-content/uploads/2022/10/IMG_0386.jpg",
-            // stats: "500+ Events Planned"
-        },
-        
-        {
-            // title: "Premium Corporate",
-            // subtitle: "Events",
-            // description: "Elevate your business gatherings with sophisticated corporate event planning that impresses and inspires.",
-            image: "https://www.anantabd.net/wp-content/uploads/2020/01/iscea-night-10.jpg",
-            // stats: "1000+ Happy Clients"
+    // Load slides from localStorage
+    useEffect(() => {
+        loadSlides();
+    }, []);
+
+    const loadSlides = () => {
+        try {
+            setLoading(true);
+            
+            // Default slides with all content
+            const defaultSlides = [
+                {
+                    subtitle: "Luxury Events",
+                    description: "Transform your special moments into unforgettable experiences with our premium event planning services.",
+                    image: "https://www.anantabd.net/wp-content/uploads/2022/10/IMG_0386.jpg",
+                    stats: "500+ Events Planned"
+                },
+                {
+                    subtitle: "Events",
+                    description: "Elevate your business gatherings with sophisticated corporate event planning that impresses and inspires.",
+                    image: "https://www.anantabd.net/wp-content/uploads/2020/01/iscea-night-10.jpg",
+                    stats: "1000+ Happy Clients"
+                }
+            ];
+
+            // Try to load from localStorage
+            if (typeof window !== 'undefined' && window.localStorage) {
+                const savedSlides = localStorage.getItem('heroSlides');
+                
+                if (savedSlides) {
+                    try {
+                        const parsedSlides = JSON.parse(savedSlides);
+                        if (Array.isArray(parsedSlides) && parsedSlides.length > 0) {
+                            // Map to expected format (without title)
+                            const formattedSlides = parsedSlides
+                                .sort((a, b) => (a.order || 0) - (b.order || 0))
+                                .map(slide => ({
+                                    subtitle: slide.subtitle || "",
+                                    description: slide.description || "",
+                                    image: slide.image,
+                                    stats: slide.stats || ""
+                                }));
+                            
+                            setHeroSlides(formattedSlides);
+                            setLoading(false);
+                            return;
+                        }
+                    } catch (e) {
+                        console.error('Error parsing hero slides:', e);
+                    }
+                }
+            }
+
+            // Use default slides if localStorage is empty
+            setHeroSlides(defaultSlides);
+            setLoading(false);
+        } catch (error) {
+            console.error('Error loading hero slides:', error);
+            setLoading(false);
         }
-    ];
+    };
 
     // Auto slide functionality
     useEffect(() => {
+        if (heroSlides.length === 0) return;
+
         const interval = setInterval(() => {
             setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
         }, 5000);
+
         return () => clearInterval(interval);
     }, [heroSlides.length]);
+
+    if (loading) {
+        return (
+            <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gray-900">
+                <div className="flex items-center justify-center">
+                    <span className="loading loading-spinner loading-lg text-primary"></span>
+                </div>
+            </section>
+        );
+    }
+
+    if (heroSlides.length === 0) {
+        return (
+            <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gray-900">
+                <div className="text-center text-white">
+                    <p className="text-xl">No hero slides available</p>
+                </div>
+            </section>
+        );
+    }
 
     return (
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -41,8 +112,11 @@ const Hero = () => {
                 >
                     <img
                         src={slide.image}
-                        alt={slide.title}
+                        alt={slide.subtitle || `Hero Slide ${index + 1}`}
                         className="w-full h-full object-cover"
+                        onError={(e) => {
+                            e.target.src = 'https://via.placeholder.com/1920x1080?text=Hero+Slide';
+                        }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30"></div>
                 </div>
@@ -57,95 +131,109 @@ const Hero = () => {
             <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                 <div className="space-y-5">
                     {/* Badge */}
-                    {/* <div className="inline-flex items-center px-4 py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white text-sm font-medium">
-                        <span className="mr-2">🏆</span>
-                        <span>{heroSlides[currentSlide].stats}</span>
-                    </div> */}
+                    {heroSlides[currentSlide].stats && (
+                        <div className="inline-flex items-center px-4 py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white text-sm font-medium">
+                            <span className="mr-2">🏆</span>
+                            <span>{heroSlides[currentSlide].stats}</span>
+                        </div>
+                    )}
 
-                    {/* Main Heading */}
+                    {/* Main Heading - Only Subtitle (no title) */}
                     <div className="space-y-4">
-                        {/* <h1 className="text-5xl md:text-7xl lg:text-8xl font-playfair font-bold text-white leading-tight">
-                            {heroSlides[currentSlide].title}
-                            <span className="block bg-gradient-to-r from-primary  via-red-600 to-pink-800 bg-clip-text text-transparent">
+                        {heroSlides[currentSlide].subtitle && (
+                            <h1 className="text-5xl md:text-7xl lg:text-8xl font-playfair font-bold bg-gradient-to-r from-primary via-red-600 to-pink-800 bg-clip-text text-transparent leading-tight">
                                 {heroSlides[currentSlide].subtitle}
-                            </span>
-                        </h1> */}
+                            </h1>
+                        )}
                         
-                        <p className="text-xl md:text-2xl text-gray-200 max-w-4xl mx-auto leading-relaxed">
-                            {heroSlides[currentSlide].description}
-                        </p>
+                        {heroSlides[currentSlide].description && (
+                            <p className="text-xl md:text-2xl text-gray-200 max-w-4xl mx-auto leading-relaxed">
+                                {heroSlides[currentSlide].description}
+                            </p>
+                        )}
                     </div>
 
                     {/* CTA Buttons */}
-                    {/* <div className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-8">
-                        <button className="group relative bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-primary text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-red-500/25">
-                            <span className="flex items-center space-x-2">
-                                <span>Plan Your Event</span>
-                                <span className="group-hover:translate-x-1 transition-transform duration-300">🎭</span>
-                            </span>
-                        </button>
+                    <div className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-8">
+                        <Link
+                            to="/contact"
+                            className="group relative bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-primary text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-red-500/25 flex items-center space-x-2"
+                        >
+                            <span>Plan Your Event</span>
+                            <span className="group-hover:translate-x-1 transition-transform duration-300">🎭</span>
+                        </Link>
                         
-                        <button className="group relative border-2 border-white/30 text-white hover:border-white/50 hover:bg-white/10 backdrop-blur-md px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105">
-                            <span className="flex items-center space-x-2">
-                                <span>View Portfolio</span>
-                                <span className="group-hover:rotate-12 transition-transform duration-300">🖼️</span>
-                            </span>
-                        </button>
-                    </div> */}
+                        <Link
+                            to="/portfolio"
+                            className="group relative border-2 border-white/30 text-white hover:border-white/50 hover:bg-white/10 backdrop-blur-md px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 flex items-center space-x-2"
+                        >
+                            <span>View Portfolio</span>
+                            <span className="group-hover:rotate-12 transition-transform duration-300">🖼️</span>
+                        </Link>
+                    </div>
 
                     {/* Trust Indicators */}
-                    {/* <div className="pt-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-white">
+                    <div className="pt-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-white">
                         <div className="space-y-2">
-                            <div className="text-3xl font-bold bg-gradient-to-r from-primary to-red-600 bg-clip-text text-transparent">
+                            <div className="text-4xl font-bold bg-white bg-clip-text text-transparent">
                                 500+
                             </div>
                             <div className="text-sm text-gray-300">Events Planned</div>
                         </div>
                         <div className="space-y-2">
-                            <div className="text-3xl font-bold bg-gradient-to-r from-primary to-red-600 bg-clip-text text-transparent">
+                            <div className="text-4xl font-bold bg-white bg-clip-text text-transparent">
                                 15+
                             </div>
                             <div className="text-sm text-gray-300">Years Experience</div>
                         </div>
                         <div className="space-y-2">
-                            <div className="text-3xl font-bold bg-gradient-to-r from-primary to-red-600 bg-clip-text text-transparent">
+                            <div className="text-4xl font-bold bg-white bg-clip-text text-transparent">
                                 98%
                             </div>
                             <div className="text-sm text-gray-300">Client Satisfaction</div>
                         </div>
-                    </div> */}
+                    </div>
                 </div>
             </div>
 
             {/* Slide Indicators */}
-            <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3 z-20">
-                {heroSlides.map((_, index) => (
-                    <button
-                        key={index}
-                        onClick={() => setCurrentSlide(index)}
-                        className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                            index === currentSlide
-                                ? 'bg-gradient-to-r from-red-500 to-pink-500 w-8'
-                                : 'bg-white/30 hover:bg-white/50'
-                        }`}
-                    />
-                ))}
-            </div>
+            {heroSlides.length > 1 && (
+                <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3 z-20">
+                    {heroSlides.map((_, index) => (
+                        <button
+                            key={index}
+                            onClick={() => setCurrentSlide(index)}
+                            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                                index === currentSlide
+                                    ? 'bg-gradient-to-r from-red-500 to-pink-500 w-8'
+                                    : 'bg-white/30 hover:bg-white/50'
+                            }`}
+                            aria-label={`Go to slide ${index + 1}`}
+                        />
+                    ))}
+                </div>
+            )}
 
             {/* Navigation Arrows */}
-            <button
-                onClick={() => setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length)}
-                className="absolute left-6 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/10 backdrop-blur-md border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300 z-20"
-            >
-                ←
-            </button>
-            
-            <button
-                onClick={() => setCurrentSlide((prev) => (prev + 1) % heroSlides.length)}
-                className="absolute right-6 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/10 backdrop-blur-md border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300 z-20"
-            >
-                →
-            </button>
+            {heroSlides.length > 1 && (
+                <>
+                    <button
+                        onClick={() => setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length)}
+                        className="absolute left-6 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/10 backdrop-blur-md border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300 z-20"
+                        aria-label="Previous slide"
+                    >
+                        ←
+                    </button>
+                    
+                    <button
+                        onClick={() => setCurrentSlide((prev) => (prev + 1) % heroSlides.length)}
+                        className="absolute right-6 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/10 backdrop-blur-md border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300 z-20"
+                        aria-label="Next slide"
+                    >
+                        →
+                    </button>
+                </>
+            )}
 
             {/* Scroll Down Indicator */}
             <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 animate-bounce">

@@ -46,7 +46,7 @@ const MyTeam = () => {
 
   if (loading) {
     return (
-      <section className="py-20 bg-base-100">
+      <section  className="py-20 bg-base-100">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <span className="loading loading-spinner loading-lg text-primary"></span>
         </div>
