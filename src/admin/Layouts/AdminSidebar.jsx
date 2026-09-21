@@ -2,7 +2,7 @@
 import { Link, useLocation } from 'react-router';
 import { LayoutDashboard, Package, Users, Image, LogOut, MessageSquare, Briefcase, Calendar, HelpCircle, Music, Sparkles } from 'lucide-react';
 import { useContext } from 'react';
-import { AuthContext } from '../../Auth/Context/AuthContext';
+import { AuthContext } from '../../auth/Context/AuthContext';
 
 export default function AdminSidebar() {
   const location = useLocation();

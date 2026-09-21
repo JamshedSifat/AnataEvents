@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { AuthContext } from '../../Auth/Context/AuthContext';
+import { AuthContext } from '../../auth/Context/AuthContext';
 
 const Header = () => {
   const { admin } = useContext(AuthContext);

@@ -1,4 +1,4 @@
-// File: src/Componetns/PostCard.jsx (Without utility)
+// File: src/components/PostCard.jsx (Without utility)
 import React, { useState, useEffect } from 'react';
 import { Search, Calendar, User } from 'lucide-react';
 import BlogCardItem from './BlogCardItem';

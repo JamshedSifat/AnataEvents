@@ -7,7 +7,7 @@ import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import EventsList from "../../../Admin/pages/Events/EventsList";
+import EventsList from "../../../admin/pages/Events/EventsList";
 import ExhibitionEventsList from "./ExhibitionEventsList";
 
 const BestExhibitionStallDesign = () => {

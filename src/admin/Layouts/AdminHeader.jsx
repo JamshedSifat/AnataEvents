@@ -1,6 +1,6 @@
 import { Bell, User, Settings } from 'lucide-react';
 import { useContext } from 'react';
-import { AuthContext } from '../../Auth/Context/AuthContext';
+import { AuthContext } from '../../auth/Context/AuthContext';
 
 export default function AdminHeader() {
   const { admin } = useContext(AuthContext);

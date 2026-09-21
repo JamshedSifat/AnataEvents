@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { NavLink, useLocation } from 'react-router';
 import { Image, BookOpen, Play } from 'lucide-react';
-import Gallery from '../../Componetns/Gallary/Gallary';
+import Gallery from '../../components/Gallary/Gallary';
 import BlogCardItem from '../BlogItems/BlogCardItem';
 import MediaVideo from './MediaVideo/MediaVideo';
 
@@ -142,7 +142,7 @@ const Media = () => {
 
 // ✅ Gallery Page Component
 const GalleryPage = () => {
-  const Gallery = React.lazy(() => import('../../Componetns/Gallary/Gallary'));
+  const Gallery = React.lazy(() => import('../../components/Gallary/Gallary'));
   
   return (
     <React.Suspense fallback={<div className="text-center py-12"><span className="loading loading-spinner loading-lg text-primary"></span></div>}>
@@ -153,7 +153,7 @@ const GalleryPage = () => {
 
 // ✅ Blog Page Component
 const BlogPage = () => {
-  const PostCard = React.lazy(() => import('../../Pages/BlogItems/BlogCardItem'));
+  const PostCard = React.lazy(() => import('../../pages/BlogItems/BlogCardItem'));
   
   return (
     <React.Suspense fallback={<div className="text-center py-12"><span className="loading loading-spinner loading-lg text-primary"></span></div>}>

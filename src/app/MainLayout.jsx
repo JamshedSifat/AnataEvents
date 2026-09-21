@@ -1,7 +1,7 @@
 import React from 'react';
 import { Outlet } from 'react-router';
-import Footer from '../Componetns/Footer/Footer';
-import Navbar from '../Componetns/Navbar/Navbar';
+import Footer from '../components/Footer/Footer';
+import Navbar from '../components/Navbar/Navbar';
 import { ToastContainer } from 'react-toastify';
 
 

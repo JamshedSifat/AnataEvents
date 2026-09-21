@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import SocialMedia from '../../Componetns/Contacts/SocialMedia';
-import Maps from '../../Componetns/Contacts/Maps';
-import ContactCard from '../../Componetns/Contacts/ContactCard';
-import ContactForm from '../../Componetns/Contacts/ContactForm';
+import SocialMedia from '../../components/Contacts/SocialMedia';
+import Maps from '../../components/Contacts/Maps';
+import ContactCard from '../../components/Contacts/ContactCard';
+import ContactForm from '../../components/Contacts/ContactForm';
 
 
 const Contact = () => {

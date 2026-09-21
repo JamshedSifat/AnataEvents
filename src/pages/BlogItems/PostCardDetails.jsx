@@ -1,4 +1,4 @@
-// File: src/Componetns/PostCardDetails.jsx (Without utility)
+// File: src/components/PostCardDetails.jsx (Without utility)
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 import { Calendar, User, ArrowLeft } from 'lucide-react';

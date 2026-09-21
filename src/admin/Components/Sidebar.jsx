@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { NavLink } from 'react-router';
-import { AuthContext } from '../../Auth/Context/AuthContext';
+import { AuthContext } from '../../auth/Context/AuthContext';
 
 const Sidebar = () => {
   const { logout } = useContext(AuthContext);

@@ -12,10 +12,10 @@ import OurClients from '../OurClients/OurClients';
 import QueryModal from '../QueryModal/QueryModal'; // import modal
 import Services from '../Services/Services';
 
-import MediaGallery from '../../Pages/Media/MediaGellary/MediaGellary';
+import MediaGallery from '../../pages/Media/MediaGellary/MediaGellary';
 import HomeFAQ from '../FAQ/HomeFAQ';
-import PostCard from '../../Pages/BlogItems/PostCard';
-import RecentBlogPosts from '../../Pages/BlogItems/RecentBlogPost';
+import PostCard from '../../pages/BlogItems/PostCard';
+import RecentBlogPosts from '../../pages/BlogItems/RecentBlogPost';
 
 
 const Home = () => {
