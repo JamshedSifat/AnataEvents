@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import TalentHuntFeature from './TalentHuntFeature';
+import { formsApi } from '../../../services/forms';
 
 export default function TalentHunt() {
   const [showModal, setShowModal] = useState(false);

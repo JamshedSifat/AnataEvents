@@ -3,9 +3,14 @@ import SocialMedia from '../../components/Contacts/SocialMedia';
 import Maps from '../../components/Contacts/Maps';
 import ContactCard from '../../components/Contacts/ContactCard';
 import ContactForm from '../../components/Contacts/ContactForm';
+import { formsApi } from '../../services/forms';
+import { extractError } from '../../services/api';
+import { toast } from 'react-toastify';
 
 
 const Contact = () => {
+    const [submitting, setSubmitting] = useState(false);
+    const [fieldErrors, setFieldErrors] = useState({});
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -25,10 +30,31 @@ const Contact = () => {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Handle form submission logic here
-        console.log('Form submitted:', formData);
+        setSubmitting(true);
+        setFieldErrors({});
+        try {
+            await formsApi.contact({
+                full_name: [formData.firstName, formData.lastName].filter(Boolean).join(' ').trim(),
+                email: formData.email,
+                phone: formData.phone,
+                subject: formData.eventType || 'Website enquiry',
+                event_type: formData.eventType || '',
+                event_date: formData.eventDate || null,
+                budget: formData.budget || '',
+                message: formData.message || formData.details || 'Website contact form submission',
+                source_path: '/contact',
+            });
+            toast.success('Thank you! Your enquiry has been sent — we will reply shortly.');
+            setFormData({});
+        } catch (error) {
+            const parsed = extractError(error);
+            setFieldErrors(parsed.fieldErrors || {});
+            toast.error(parsed.message);
+        } finally {
+            setSubmitting(false);
+        }
     };
 
     const eventTypes = [

@@ -1,6 +1,7 @@
 // File: src/Pages/ArtistRegistration/ArtistRegistration.jsx (Updated - Saves to localStorage)
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
+import { formsApi } from '../../../services/forms';
 
 export default function ArtistRegistration() {
   const [formData, setFormData] = useState({
@@ -42,7 +43,7 @@ export default function ArtistRegistration() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     // Validation
@@ -68,30 +69,17 @@ export default function ArtistRegistration() {
     }
 
     try {
-      // Generate unique ID
-      const newArtist = {
-        ...formData,
-        _id: `artist-${Date.now()}`
-      };
-
-      // Get existing artists
-      let existingArtists = [];
-      const savedArtists = localStorage.getItem('artists');
-      if (savedArtists) {
-        existingArtists = JSON.parse(savedArtists);
-      }
-
-      // Check if email already exists
-      if (existingArtists.some(a => a.email === formData.email)) {
-        toast.error('Email already registered');
-        return;
-      }
-
-      // Add new artist
-      existingArtists.push(newArtist);
-
-      // Save to localStorage
-      localStorage.setItem('artists', JSON.stringify(existingArtists));
+      await formsApi.artistApplication({
+        full_name: formData.artistName,
+        stage_name: formData.stageName || '',
+        email: formData.email,
+        phone: formData.phone,
+        category: formData.artForm || 'other',
+        experience_years: Number(formData.experience) || 0,
+        bio: formData.bio || '',
+        portfolio_url: formData.youtube || formData.instagram || formData.facebook || '',
+        source_path: '/opportunities/artist-registration',
+      });
 
       toast.success('✓ Registration submitted successfully! Our team will review your profile.');
       

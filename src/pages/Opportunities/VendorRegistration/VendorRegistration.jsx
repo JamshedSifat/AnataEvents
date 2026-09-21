@@ -1,6 +1,7 @@
 // File: src/Pages/VendorRegistration/VendorRegistration.jsx (Fixed)
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
+import { formsApi } from '../../../services/forms';
 
 export default function VendorRegistration() {
   const [formData, setFormData] = useState({
