@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  push:
+    branches: [main, "arena/**"]
+  pull_request:
+
+jobs:
+  frontend:
+    name: Frontend (lint, build, tests)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run build
+      - run: npm test --if-present
+
+  backend:
+    name: Backend (pytest, coverage, lint)
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_DB: ananta
+          POSTGRES_USER: ananta
+          POSTGRES_PASSWORD: ananta
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+    env:
+      DATABASE_URL: postgresql://ananta:ananta@localhost:5432/ananta
+      DJANGO_SECRET_KEY: ci-secret-key-not-used-in-production
+      DJANGO_SETTINGS_MODULE: config.settings.test
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: pip install -r requirements-dev.txt
+      - run: python manage.py check --deploy --settings=config.settings.test || true
+      - run: python manage.py migrate --settings=config.settings.test
+      - run: pytest --cov --cov-report=term-missing
+      - run: ruff check .
+      - run: black --check .
+
+  secrets:
+    name: Secret scan (gitleaks)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

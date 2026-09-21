@@ -13,7 +13,7 @@ const MyTeam = () => {
       try {
         setLoading(true);
         const data = await contentApi.team();
-        setTeamMembers(
+        setData(
           data.map((member) => ({
             _id: member.id,
             name: member.name,
@@ -31,7 +31,7 @@ const MyTeam = () => {
           }))
         );
       } catch (error) {
-        setTeamMembers([]);
+        setData([]);
       } finally {
         setLoading(false);
       }

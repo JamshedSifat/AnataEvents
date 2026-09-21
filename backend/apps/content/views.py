@@ -2,6 +2,10 @@
 
 from __future__ import annotations
 
+# --------------------------------------------------------------------------- #
+# Mixins
+# --------------------------------------------------------------------------- #
+import django_filters
 from django.db.models import Count, F, Q
 from django.utils import timezone
 from drf_spectacular.utils import extend_schema
@@ -35,12 +39,6 @@ from apps.content.models import (
     Testimonial,
     Video,
 )
-
-
-# --------------------------------------------------------------------------- #
-# Mixins
-# --------------------------------------------------------------------------- #
-import django_filters
 
 
 class ServiceEntryFilter(django_filters.FilterSet):

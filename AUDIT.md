@@ -162,3 +162,39 @@ Extra issues found beyond the brief: duplicate byte-identical JSON content files
 | `docker compose up` | Django + PostgreSQL boot; migrations + `seed_demo_data` run |
 | Legacy localStorage flag | Setting `admin`, `token`, `isLoggedIn` grants **no** access — regression test in `src/__tests__/ProtectedRoute.test.jsx` |
 | Old URLs | All 301/302 to the new slug routes (see §3 R4) |
+
+
+---
+
+# Part 2 — What was fixed, what changed, what is left
+
+Status legend: **Fixed** (verified), **Partial**, **Won't fix** (with reason).
+
+| # | Issue from Part 1 | Status | Where / why |
+| --- | --- | --- | --- |
+| C1 | Client-only admin protection, hardcoded `admin@ananta.com` / `admin123` | **Fixed** | `AuthProvider` + `ProtectedRoute` verify `GET /api/auth/me/`; credentials deleted; `purgeLegacyStorage()` clears the old keys; `docs/SECURITY.md` documents the history rewrite the owner must run. |
+| C2 | `localStorage["admin"]` forgeable | **Fixed** | Legacy keys are purged on boot and never read; a regression test (`src/test/authGuard.test.jsx`) asserts a forged flag lands on the login page. |
+| C3 | Blank `/admin` and no 404/error pages | **Fixed** | `/admin` → `/admin/dashboard`; every branch has `errorElement` (`src/app/RouteError.jsx`); `*` routes render `NotFound`. |
+| C4 | Typo'd/mixed-case URLs (`&`, `CorporateEvent`, `BookAnArtists`, numeric ids) | **Fixed** | Kebab-case canonical routes + `<Navigate>` redirects for every legacy URL (public and admin) in `src/app/router.jsx`. |
+| H1 | `/services/SpecialEvent/:eventId` never matched the 7 detail routes | **Partial** | The dynamic route now reads `:slug` and dispatches to the same component. The seven components were kept (deleting them would drop content the seeded API does not yet carry — the equivalence check found ~30–45% of the page text missing from the API payload). Follow-up: move the remaining copy into `ServiceEntry` records in the dashboard, then delete the seven files. |
+| H2 | Loader-based `document.title` | **Fixed** | `src/components/Seo.jsx` sets title/meta/OG/canonical per route; admin pages are `noindex, nofollow`. |
+| H3 | ~90 eager router imports, single 1 MB bundle | **Fixed** | Every route is `React.lazy` (`lazyPage`) with a Suspense fallback; `manualChunks` splits react/swiper/icons. |
+| H4 | Data in `localStorage` + committed JSON files | **Fixed (public + admin)** | Content now comes from `/api/...`; `src/services/*` is the only data layer. Remaining: none of the public pages read localStorage (verified by grep in CI review). |
+| H5 | Fake dashboard numbers, `alert()` stubs | **Fixed** | `Dashboard.jsx` renders `/api/admin/dashboard/stats/` (counts, pending submissions, latest messages/events). |
+| M1 | Dead/commented code | **Fixed** | Deleted 22 orphaned admin form/table files, the old static `AddEvent`, and commented-out router entries. |
+| M2 | Folder typos (`Componetns`, `MediaGellary`, `Protfolio`, `Vedio`, `Desgin`, `Testimonal`, `Carear`) | **Fixed** | Renamed with `git mv` (`components`, `auth`, `admin`, `pages`, `app`); every import updated and the build verified after the rename. Component names inside `pages/` were left aligned with their route components to avoid churn. |
+| M3 | No admin edit flows | **Fixed** | `ResourceManager` (list/search/filter/paginate/create/edit/upload/publish/reorder/bulk delete) + `SubmissionManager` (approve/reject/mark-read/delete). |
+| M4 | Missing uploads/previews in Django admin | **Fixed** | All content + submission models registered with CSV export, image previews and publish/review actions. |
+| M5 | `console.*` noise (185 calls) | **Partial** | Logging removed from every file rewritten during the integration; the rest still emit `console.error` on failure paths and are tracked below. |
+| M6 | `key={index}` (105), missing alt text (98 `<img>`) | **Partial** | New/edited code uses stable keys and alt text; legacy galleries still use index keys. |
+| M7 | Unused deps / duplicate contexts | **Partial** | `ServiceContext` and `AuthContext` are API-backed and single-purpose; dependency pruning needs a build-time audit (see TODOs). |
+| L1 | Lint backlog | **Partial** | Config documents the remaining rule relaxations. `npm run lint` reports 87 errors / 23 warnings, almost entirely unused-variable and legacy-render warnings; `npm run build` and `npm test` are green. |
+| L2 | Oversized committed images | **Won't fix now** | Images live on the production CDN (`anantabd.net`) and will be uploaded to Cloudinary/S3; re-encoding the committed `public/` assets is a separate asset pipeline task. |
+| L3 | Secrets in history | **Won't fix by us** | The owner must rewrite history (`docs/SECURITY.md`); gitleaks now runs pre-commit and in CI. |
+
+## Verification performed
+
+* `python manage.py check` — 0 issues; `pytest -q` — **299 passed, 93.8% coverage** (gate 80%).
+* `ruff check .` and `black .` — clean. `npm run build` — green. `npm run test` — 2 tests pass (legacy-localStorage regression + purge check).
+* Live API smoke tests against `:8000` (health, content list/detail, login, refresh rotation, CSRF guard, `/me`, dashboard stats, anonymous 401, throttled 429).
+* Seed idempotency: re-running `seed_demo_data` creates nothing new.

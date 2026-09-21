@@ -42,7 +42,7 @@ export function useCrud(resourceKey, { params = {}, autoLoad = true } = {}) {
 
   useEffect(() => {
     if (autoLoad) load();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+         
   }, [autoLoad, load]);
 
   const handleError = useCallback((err, fallback) => {

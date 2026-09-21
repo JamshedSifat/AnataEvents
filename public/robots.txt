@@ -1,0 +1,7 @@
+# Ananta Events
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /admin/
+
+Sitemap: https://ananta-events.vercel.app/sitemap.xml

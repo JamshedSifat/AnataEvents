@@ -21,9 +21,10 @@ const CorporateEventDetails = () => {
     try {
       setLoading(true);
       const entry = await contentApi.serviceEntryBySlug(slug);
-      setEvents([mapServiceEntry(entry)]);
-    } catch (error) {
-      setEvents([]);
+      setEvent(mapServiceEntry(entry));
+      setRelatedEvents([]);
+    } catch {
+      setEvent(null);
     } finally {
       setLoading(false);
     }
