@@ -1,0 +1,55 @@
+# Local/production-parity stack: Django API + PostgreSQL.
+#   cp backend/.env.example backend/.env  (then edit)
+#   docker compose up --build
+# The entrypoint applies migrations and (optionally) loads demo content.
+name: ananta-events
+
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-ananta}
+      POSTGRES_USER: ${POSTGRES_USER:-ananta}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-ananta}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-ananta} -d ${POSTGRES_DB:-ananta}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DJANGO_SETTINGS_MODULE: ${DJANGO_SETTINGS_MODULE:-config.settings.dev}
+      DEBUG: ${DEBUG:-True}
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:-django-insecure-dev-only-key-not-for-production}
+      DATABASE_URL: postgres://${POSTGRES_USER:-ananta}:${POSTGRES_PASSWORD:-ananta}@db:5432/${POSTGRES_DB:-ananta}
+      ALLOWED_HOSTS: ${ALLOWED_HOSTS:-localhost,127.0.0.1,0.0.0.0,api}
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS:-http://localhost:5173,http://127.0.0.1:5173}
+      CSRF_TRUSTED_ORIGINS: ${CSRF_TRUSTED_ORIGINS:-http://localhost:5173,http://127.0.0.1:5173}
+      REFRESH_COOKIE_SECURE: ${REFRESH_COOKIE_SECURE:-False}
+      SITE_URL: ${SITE_URL:-http://localhost:5173}
+      SEED_DEMO_DATA: ${SEED_DEMO_DATA:-True}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-}
+      STORAGE_BACKEND: ${STORAGE_BACKEND:-local}
+    ports:
+      - "8000:8000"
+    volumes:
+      - media_data:/app/media
+    command: ["/app/docker-entrypoint.sh"]
+
+volumes:
+  postgres_data:
+  media_data:

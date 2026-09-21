@@ -1,0 +1,33 @@
+# Production dependencies — pinned. Install with:
+#   python -m pip install -r requirements.txt
+# Dev/test tooling lives in requirements-dev.txt.
+
+# --- Framework -------------------------------------------------------------
+Django==5.2.17
+
+# --- API -------------------------------------------------------------------
+djangorestframework==3.18.1
+djangorestframework_simplejwt==5.5.1
+drf-spectacular==0.30.0
+django-filter==26.1
+
+# --- Configuration / infra -------------------------------------------------
+django-environ==0.14.0
+django-cors-headers==4.9.0
+whitenoise==6.12.0
+gunicorn==26.2.0
+psycopg==3.3.6
+psycopg-binary==3.3.6
+
+# --- Auth hardening --------------------------------------------------------
+django-axes==8.3.1
+argon2-cffi==25.1.0
+
+# --- Media -----------------------------------------------------------------
+pillow==12.3.0
+django-storages==1.14.6
+cloudinary==1.46.2
+
+# --- Content sanitisation --------------------------------------------------
+bleach==6.4.0
+tinycss2==1.5.1

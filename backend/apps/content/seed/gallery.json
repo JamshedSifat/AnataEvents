@@ -1,0 +1,142 @@
+[
+  {
+    "id": 1,
+    "src": "https://www.anantabd.net/wp-content/uploads/2020/01/lead-speak-conference-7.jpg",
+    "category": "Weddings",
+    "title": "Elegant Garden Wedding",
+    "description": "A romantic outdoor ceremony with stunning floral arrangements"
+  },
+  {
+    "id": 2,
+    "src": "https://www.anantabd.net/wp-content/uploads/2020/01/FB_IMG_1537774290882.jpg",
+    "category": "Corporate",
+    "title": "Tech Conference Hall",
+    "description": "Modern conference setup with cutting-edge technology"
+  },
+  {
+    "id": 3,
+    "src": "https://www.anantabd.net/wp-content/uploads/2020/01/FB_IMG_1537774282179.jpg",
+    "category": "Galas",
+    "title": "Luxury Charity Gala",
+    "description": "Sophisticated evening gala with elegant table settings"
+  },
+  {
+    "id": 4,
+    "src": "https://www.anantabd.net/wp-content/uploads/2020/01/lead-speak-conference-8.jpg",
+    "category": "Private",
+    "title": "Anniversary Celebration",
+    "description": "Intimate family celebration with personal touches"
+  },
+  {
+    "id": 5,
+    "src": "https://www.anantabd.net/wp-content/uploads/2020/01/lead-speak-conference-13.jpg",
+    "category": "Venues",
+    "title": "Beachfront Venue",
+    "description": "Stunning oceanfront location for destination events"
+  },
+  {
+    "id": 6,
+    "src": "https://www.anantabd.net/wp-content/uploads/2020/01/iscea-night-6.jpg",
+    "category": "Corporate",
+    "title": "Product Launch Setup",
+    "description": "Creative product launch with interactive displays"
+  },
+  {
+    "id": 7,
+    "src": "https://www.anantabd.net/wp-content/uploads/2020/01/iscea-night-12.jpg",
+    "category": "Weddings",
+    "title": "Royal Wedding Ceremony",
+    "description": "Grand traditional wedding with luxurious decorations"
+  },
+  {
+    "id": 8,
+    "src": "https://www.anantabd.net/wp-content/uploads/2020/01/iscea-night-15.jpg",
+    "category": "Private",
+    "title": "Birthday Celebration",
+    "description": "Vibrant birthday party with custom decorations"
+  },
+  {
+    "id": 9,
+    "src": "https://www.anantabd.net/wp-content/uploads/2020/01/iscea-night-11.jpg",
+    "category": "Galas",
+    "title": "Awards Ceremony",
+    "description": "Prestigious awards ceremony with elegant staging"
+  },
+  {
+    "id": 10,
+    "src": "https://www.anantabd.net/wp-content/uploads/2020/04/gaye-holud-stage11.jpg",
+    "category": "Venues",
+    "title": "Historic Mansion",
+    "description": "Classic venue with timeless architectural beauty"
+  },
+  {
+    "id": 11,
+    "src": "https://www.anantabd.net/wp-content/uploads/2021/12/ZKR_2028.jpg",
+    "category": "Weddings",
+    "title": "Outdoor Reception",
+    "description": "Magical evening reception under twinkling lights"
+  },
+  {
+    "id": 12,
+    "src": "https://www.anantabd.net/wp-content/uploads/2021/12/ZKR_1535.jpg",
+    "category": "Corporate",
+    "title": "Business Summit",
+    "description": "Professional networking event with modern setup"
+  },
+  {
+    "id": 13,
+    "src": "https://www.anantabd.net/wp-content/uploads/2022/08/ZKR_9740.jpg",
+    "category": "Venues",
+    "title": "Modern Event Hall",
+    "description": "Contemporary venue with flexible space design"
+  },
+  {
+    "id": 14,
+    "src": "https://www.anantabd.net/wp-content/uploads/2022/10/Galaxy3.jpg",
+    "category": "Private",
+    "title": "Garden Party",
+    "description": "Charming garden party with natural beauty"
+  },
+  {
+    "id": 15,
+    "src": "https://www.anantabd.net/wp-content/uploads/2022/10/p8-1.jpg",
+    "category": "Galas",
+    "title": "Fundraising Dinner",
+    "description": "Elegant fundraising event with formal dining"
+  },
+   {
+    "id": 16,
+    "src": "https://www.anantabd.net/wp-content/uploads/2024/08/01-187.jpg",
+    "category": "Private",
+    "title": "Garden Party",
+    "description": "Charming garden party with natural beauty"
+  },
+   {
+    "id": 17,
+    "src": "https://www.anantabd.net/wp-content/uploads/2024/08/01-187.jpg",
+    "category": "Private",
+    "title": "Garden Party",
+    "description": "Charming garden party with natural beauty"
+  },
+   {
+    "id": 18,
+    "src": "https://www.anantabd.net/wp-content/uploads/2024/08/01-114.jpg",
+    "category": "Private",
+    "title": "Garden Party",
+    "description": "Charming garden party with natural beauty"
+  },
+   {
+    "id": 19,
+    "src": "https://www.anantabd.net/wp-content/uploads/2025/07/sercices.jpg",
+    "category": "Private",
+    "title": "Garden Party",
+    "description": "Charming garden party with natural beauty"
+  },
+   {
+    "id": 20,
+    "src": "https://www.anantabd.net/wp-content/uploads/2020/01/huawei-solar-conference-9-1.jpg",
+    "category": "Private",
+    "title": "Garden Party",
+    "description": "Charming garden party with natural beauty"
+  }
+]
