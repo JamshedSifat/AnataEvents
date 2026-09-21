@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import exhibitionEventsData from '../../../../public/ExhibitionStallData/ExhibitionStallData.json';
 import ExhibitionEventCard from './ExhibitionEventCard';
+import { contentApi } from '../../../services/content';
+import { mapServiceEntry } from '../../../services/mappers';
 
 const ExhibitionEventsList = () => {
   const [events, setEvents] = useState([]);
@@ -8,7 +10,26 @@ const ExhibitionEventsList = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    loadEvents();
+    let active = true;
+    const fetchEvents = async () => {
+      try {
+        setLoading(true);
+        const data = await contentApi.serviceEntries({ service: 'exhibition-stall-design', page_size: 50 });
+        if (active) setEvents(data.map(mapServiceEntry));
+        setError(null);
+      } catch (error) {
+        if (active) {
+          setEvents([]);
+          setError('Could not load these pages right now.');
+        }
+      } finally {
+        if (active) setLoading(false);
+      }
+    };
+    fetchEvents();
+    return () => {
+      active = false;
+    };
   }, []);
 
   const loadEvents = () => {

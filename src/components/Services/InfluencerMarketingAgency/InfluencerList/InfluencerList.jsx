@@ -5,6 +5,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
+import { contentApi } from '../../../../services/content';
 
 const InfluencerList = () => {
   const [selectedInfluencer, setSelectedInfluencer] = useState(null);
@@ -15,140 +16,28 @@ const InfluencerList = () => {
     loadInfluencers();
   }, []);
 
-  const loadInfluencers = () => {
+  const loadInfluencers = async () => {
     try {
       setLoading(true);
-
-      const defaultInfluencers = [
-        {
-          _id: '1',
-          name: "Nodi Chowdhury",
-          category: "Fashion",
-          followers: "250K",
-          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPrYP2N4PqKhrbzA0fT9vsJtQ26ti9OUf4Eg&s",
-          description: "Fashion influencer with trending styles",
-          engagement: "4.2%",
-          posts: "14",
-          platforms: ["Instagram", "TikTok", "YouTube"],
-          bio: "Fashion enthusiast sharing latest trends and styling tips",
-          avgReach: "125K per post"
-        },
-        {
-          _id: '2',
-          name: "Ayman Sadiq",
-          category: "Education",
-          followers: "2.3M+",
-          image: "https://yt3.googleusercontent.com/NtAHSyzlrYdBt_Mpbr5UeV3Vs2OMEseNRB6VdCufotcWIOfC2842LlfsshCpYyO3J0HoZ0gw=s900-c-k-c0x00ffffff-no-rj",
-          description: "Founder of 10 Minute School, motivational speaker",
-          engagement: "5.5%",
-          posts: "25",
-          platforms: ["YouTube", "Facebook"],
-          bio: "Education, skills, and self-development content",
-          avgReach: "500K per post"
-        },
-        {
-          _id: '3',
-          name: "Raba Khan",
-          category: "Comedy",
-          followers: "790K+",
-          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7JIKVJnOQM3saYU8EfyV_wUgefTm6FFsxQQ&s",
-          description: "Comedy and lifestyle content creator",
-          engagement: "6.1%",
-          posts: "20",
-          platforms: ["YouTube", "Instagram"],
-          bio: "Satirical videos about Bengali life",
-          avgReach: "350K per post"
-        },
-        {
-          _id: '4',
-          name: "Salahuddin Sumon",
-          category: "Travel",
-          followers: "2.9M+",
-          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNP9JniiQ2CEGtcg0O-cRB7yGndgysOrUWMQ&s",
-          description: "Travel vlogger and storyteller",
-          engagement: "5.8%",
-          posts: "18",
-          platforms: ["YouTube", "Facebook"],
-          bio: "Travel documentaries and global exploration",
-          avgReach: "700K per post"
-        },
-        {
-          _id: '5',
-          name: "Nadir Nibras",
-          category: "Travel",
-          followers: "2.2M+",
-          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9iVVjj088WTV7mGhTQnyNMYSMiQudhSKrEA&s",
-          description: "Travel filmmaker and vlogger",
-          engagement: "5.2%",
-          posts: "16",
-          platforms: ["YouTube", "Instagram"],
-          bio: "Travel stories, culture, and experiences",
-          avgReach: "600K per post"
-        },
-        {
-          _id: '6',
-          name: "RnaR (Rakib)",
-          category: "Entertainment",
-          followers: "1.9M+",
-          image: "https://ecdn.dhakatribune.net/contents/cache/images/1200x630x1xxxxx1/uploads/dten/2023/05/16/278960849-564053261799700-1289283670046029060-n.jpeg",
-          description: "Film reviewer and content creator",
-          engagement: "6.5%",
-          posts: "14",
-          platforms: ["YouTube"],
-          bio: "Movie reviews and media analysis",
-          avgReach: "550K per post"
-        },
-        {
-          _id: '7',
-          name: "Tahseenation",
-          category: "Tech",
-          followers: "600K+",
-          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpJ8d1BSGSV774b07m7j4JEGa4kJm2iPOxxg&s",
-          description: "Tech reviewer and gadget expert",
-          engagement: "4.8%",
-          posts: "20",
-          platforms: ["YouTube", "Facebook"],
-          bio: "Tech reviews and smartphone analysis",
-          avgReach: "300K per post"
-        },
-        {
-          _id: '8',
-          name: "Rafsan The Choto Bhai",
-          category: "Food",
-          followers: "1.5M+",
-          image: "https://upload.wikimedia.org/wikipedia/commons/4/4f/Iftekhar_Rafsan_%28Rafsan_thechotobhai%29.jpg",
-          description: "Food vlogger and reviewer",
-          engagement: "6.9%",
-          posts: "22",
-          platforms: ["YouTube", "Facebook"],
-          bio: "Food reviews and restaurant experiences",
-          avgReach: "650K per post"
-        }
-      ];
-
-      // Try to load from localStorage
-      if (typeof window !== 'undefined' && window.localStorage) {
-        const savedInfluencers = localStorage.getItem('influencers');
-
-        if (savedInfluencers) {
-          try {
-            const parsedInfluencers = JSON.parse(savedInfluencers);
-            if (Array.isArray(parsedInfluencers) && parsedInfluencers.length > 0) {
-              setInfluencersList(parsedInfluencers);
-              setLoading(false);
-              return;
-            }
-          } catch (e) {
-            console.error('Error parsing influencers:', e);
-          }
-        }
-      }
-
-      // Use default influencers if localStorage is empty
-      setInfluencersList(defaultInfluencers);
-      setLoading(false);
+      const data = await contentApi.influencers({ page_size: 100 });
+      setInfluencersList(
+        data.map((item) => ({
+          _id: item.id,
+          name: item.name,
+          username: item.handle,
+          followers: item.followers,
+          engagement: item.engagement_rate,
+          niche: item.niche,
+          city: item.city,
+          bio: item.bio,
+          platforms: item.platform ? [item.platform] : [],
+          image: item.image_src || '',
+          profileUrl: item.profile_url,
+        }))
+      );
     } catch (error) {
-      console.error('Error loading influencers:', error);
+      setInfluencersList([]);
+    } finally {
       setLoading(false);
     }
   };

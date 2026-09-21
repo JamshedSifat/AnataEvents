@@ -1,5 +1,6 @@
 // File: src/Components/HomeFAQ.jsx (For Home Page)
 import React, { useState, useEffect } from "react";
+import { contentApi } from '../../services/content';
 
 const HomeFAQ = () => {
   const [faqData, setFaqData] = useState([]);
@@ -20,35 +21,12 @@ const HomeFAQ = () => {
     }
   };
 
-  const loadFAQs = () => {
+  const loadFAQs = async () => {
     try {
-      setLoading(true);
-      
-      // Load Home FAQs from localStorage
-      const savedFAQs = localStorage.getItem('homeFAQs');
-      
-      if (savedFAQs) {
-        const data = JSON.parse(savedFAQs);
-        setFaqData(data);
-      } else {
-        // Fallback to default data
-        const defaultData = [
-          {
-            _id: 'home-faq-1',
-            question: "What is Ananta Events & Entertainment?",
-            answer: "Ananta Events & Entertainment is a leading event management company in Bangladesh specializing in creating memorable experiences for corporate, social, and cultural events."
-          },
-         
-        ];
-        
-        setFaqData(defaultData);
-        localStorage.setItem('homeFAQs', JSON.stringify(defaultData));
-      }
-      
-      setLoading(false);
+      const data = await contentApi.faqs({ section: 'home', page_size: 100 });
+      setFaqs(data.map((faq) => ({ _id: faq.id, question: faq.question, answer: faq.answer })));
     } catch (error) {
-      console.error('Error loading FAQs:', error);
-      setLoading(false);
+      setFaqs([]);
     }
   };
 

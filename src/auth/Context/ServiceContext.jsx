@@ -1,126 +1,49 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useEffect, useMemo, useState } from 'react';
 
-export const ServiceContext = createContext();
+import { contentApi } from '../../services/content';
+import { mapService } from '../../services/mappers';
 
+export const ServiceContext = createContext({ services: [], loading: true, error: null, refetch: () => {} });
+
+/**
+ * Site-wide services list, loaded once from the API.
+ *
+ * The old implementation seeded fake services from localStorage which meant a
+ * visitor could see stale admin-only data; now the API is the only source.
+ */
 export const ServiceProvider = ({ children }) => {
   const [services, setServices] = useState([]);
-  const [filteredServices, setFilteredServices] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [reloadKey, setReloadKey] = useState(0);
 
-  // Load services from localStorage
   useEffect(() => {
-    const savedServices = localStorage.getItem('anataServices');
-    if (savedServices) {
-      setServices(JSON.parse(savedServices));
-      setFilteredServices(JSON.parse(savedServices));
-    } else {
-      // Initial mock data
-      const initialServices = [
-        {
-          id: 1,
-          name: 'Corporate Event Management',
-          category: 'Corporate',
-          description: 'Professional corporate event planning and execution',
-          price: 50000,
-          image: 'https://via.placeholder.com/300x200?text=Corporate+Event',
-          status: 'Active'
-        },
-        {
-          id: 2,
-          name: 'Wedding Planning',
-          category: 'Wedding',
-          description: 'Complete wedding planning and coordination services',
-          price: 100000,
-          image: 'https://via.placeholder.com/300x200?text=Wedding',
-          status: 'Active'
-        },
-        {
-          id: 3,
-          name: 'Photography & Videography',
-          category: 'Media',
-          description: 'Professional photo and video coverage',
-          price: 30000,
-          image: 'https://via.placeholder.com/300x200?text=Photography',
-          status: 'Active'
+    let active = true;
+    (async () => {
+      try {
+        setLoading(true);
+        const data = await contentApi.services({ page_size: 50 });
+        if (active) {
+          setServices(data.map(mapService));
+          setError(null);
         }
-      ];
-      setServices(initialServices);
-      setFilteredServices(initialServices);
-      localStorage.setItem('anataServices', JSON.stringify(initialServices));
-    }
-  }, []);
-
-  // Add service
-  const addService = (newService) => {
-    const service = {
-      ...newService,
-      id: Date.now()
+      } catch (err) {
+        if (active) setError('Could not load services.');
+      } finally {
+        if (active) setLoading(false);
+      }
+    })();
+    return () => {
+      active = false;
     };
-    const updatedServices = [...services, service];
-    setServices(updatedServices);
-    setFilteredServices(updatedServices);
-    localStorage.setItem('anataServices', JSON.stringify(updatedServices));
-    return service;
-  };
+  }, [reloadKey]);
 
-  // Update service
-  const updateService = (id, updatedService) => {
-    const updatedServices = services.map(service =>
-      service.id === id ? { ...service, ...updatedService } : service
-    );
-    setServices(updatedServices);
-    setFilteredServices(updatedServices);
-    localStorage.setItem('anataServices', JSON.stringify(updatedServices));
-  };
-
-  // Delete service
-  const deleteService = (id) => {
-    const updatedServices = services.filter(service => service.id !== id);
-    setServices(updatedServices);
-    setFilteredServices(updatedServices);
-    localStorage.setItem('anataServices', JSON.stringify(updatedServices));
-  };
-
-  // Search services
-  const searchServices = (term) => {
-    setSearchTerm(term);
-    if (term.trim() === '') {
-      setFilteredServices(services);
-    } else {
-      const filtered = services.filter(service =>
-        service.name.toLowerCase().includes(term.toLowerCase()) ||
-        service.category.toLowerCase().includes(term.toLowerCase())
-      );
-      setFilteredServices(filtered);
-    }
-  };
-
-  // Get statistics
-  const getStats = () => {
-    return {
-      totalServices: services.length,
-      activeServices: services.filter(s => s.status === 'Active').length,
-      inactiveServices: services.filter(s => s.status === 'Inactive').length,
-      totalRevenue: services.reduce((sum, s) => sum + (s.price || 0), 0)
-    };
-  };
-
-  return (
-    <ServiceContext.Provider
-      value={{
-        services,
-        filteredServices,
-        searchTerm,
-        loading,
-        addService,
-        updateService,
-        deleteService,
-        searchServices,
-        getStats
-      }}
-    >
-      {children}
-    </ServiceContext.Provider>
+  const value = useMemo(
+    () => ({ services, loading, error, refetch: () => setReloadKey((key) => key + 1) }),
+    [services, loading, error],
   );
+
+  return <ServiceContext.Provider value={value}>{children}</ServiceContext.Provider>;
 };
+
+export default ServiceProvider;

@@ -3,9 +3,11 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 import { ArrowLeft, Calendar, User, ChevronLeft, ChevronRight } from 'lucide-react';
 import corporateEventsData from '../../../../public/CorporateEvents/CorporateEvents.json';
+import { contentApi } from '../../../services/content';
+import { mapServiceEntry } from '../../../services/mappers';
 
 const CorporateEventDetails = () => {
-  const { id } = useParams();
+  const { slug } = useParams();
   const [event, setEvent] = useState(null);
   const [relatedEvents, setRelatedEvents] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -15,46 +17,14 @@ const CorporateEventDetails = () => {
     loadEventDetail();
   }, [id]);
 
-  const loadEventDetail = () => {
+  const loadEventDetail = async () => {
     try {
       setLoading(true);
-
-      let events = [];
-      const savedEvents = localStorage.getItem('corporateEvents');
-      
-      if (savedEvents) {
-        events = JSON.parse(savedEvents);
-      } else if (corporateEventsData && Array.isArray(corporateEventsData)) {
-        events = corporateEventsData;
-        localStorage.setItem('corporateEvents', JSON.stringify(events));
-      }
-
-      console.log('All events:', events);
-      console.log('Looking for ID:', id);
-
-      const foundEvent = events.find(e => e._id === id);
-
-      console.log('Found event:', foundEvent);
-
-      if (!foundEvent) {
-        console.error('Event not found with id:', id);
-        setLoading(false);
-        return;
-      }
-
-      setEvent(foundEvent);
-      setCurrentImageIndex(0);
-
-      if (foundEvent) {
-        const related = events
-          .filter(e => (e.category || 'Other') === (foundEvent.category || 'Other') && e._id !== foundEvent._id)
-          .slice(0, 3);
-        setRelatedEvents(related);
-      }
-
-      setLoading(false);
+      const entry = await contentApi.serviceEntryBySlug(slug);
+      setEvents([mapServiceEntry(entry)]);
     } catch (error) {
-      console.error('Error loading event:', error);
+      setEvents([]);
+    } finally {
       setLoading(false);
     }
   };

@@ -1,5 +1,6 @@
 // File: src/Components/FAQ.jsx (Updated - Corporate FAQ for Frontend)
 import React, { useState, useEffect } from "react";
+import { contentApi } from '../../services/content';
 
 const CorporateFAQ = () => {
   const [faqData, setFaqData] = useState([]);
@@ -20,36 +21,12 @@ const CorporateFAQ = () => {
     }
   };
 
-  const loadFAQs = () => {
+  const loadFAQs = async () => {
     try {
-      setLoading(true);
-      
-      // Load Corporate FAQs from localStorage
-      const savedFAQs = localStorage.getItem('corporateFAQs');
-      
-      if (savedFAQs) {
-        const data = JSON.parse(savedFAQs);
-        setFaqData(data);
-      } else {
-        // Fallback to default data
-        const defaultData = [
-          {
-            _id: 'corp-faq-1',
-            question: "What services does Ananta Events & Entertainment provide?",
-            answer: "Ananta Events & Entertainment offers a wide range of event management services, including corporate events, brand activations, weddings, social events, product launches, conferences, exhibitions, concerts, fairs, and cultural programs. We provide both creative planning and flawless execution to make every event a success."
-          },
-         
-         
-        ];
-        
-        setFaqData(defaultData);
-        localStorage.setItem('corporateFAQs', JSON.stringify(defaultData));
-      }
-      
-      setLoading(false);
+      const data = await contentApi.faqs({ section: 'corporate', page_size: 100 });
+      setFaqs(data.map((faq) => ({ _id: faq.id, question: faq.question, answer: faq.answer })));
     } catch (error) {
-      console.error('Error loading FAQs:', error);
-      setLoading(false);
+      setFaqs([]);
     }
   };
 

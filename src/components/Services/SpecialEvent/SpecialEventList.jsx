@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
+import { contentApi } from '../../../services/content';
+import { mapServiceEntry } from '../../../services/mappers';
 
 export const SpecialEventList = () => {
   const navigate = useNavigate();
@@ -8,27 +10,26 @@ export const SpecialEventList = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    let active = true;
     const fetchEvents = async () => {
       try {
         setLoading(true);
-        const response = await fetch('/Services/SpecialEvent.json');
-        
-        if (!response.ok) {
-          throw new Error('Failed to load events');
-        }
-        
-        const data = await response.json();
-        setEvents(data);
+        const data = await contentApi.serviceEntries({ service: 'special-events', page_size: 50 });
+        if (active) setEvents(data.map(mapServiceEntry));
         setError(null);
-      } catch (err) {
-        setError(err.message);
-        setEvents([]);
+      } catch (error) {
+        if (active) {
+          setEvents([]);
+          setError('Could not load these pages right now.');
+        }
       } finally {
-        setLoading(false);
+        if (active) setLoading(false);
       }
     };
-
     fetchEvents();
+    return () => {
+      active = false;
+    };
   }, []);
 
   if (loading) {

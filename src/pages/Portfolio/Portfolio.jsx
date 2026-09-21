@@ -1,6 +1,8 @@
 // File: src/Pages/Portfolio/Portfolio.jsx (Updated)
 import React, { useState, useEffect } from 'react';
 import PortfolioModal from './PortfolioModal';
+import { contentApi } from '../../services/content';
+import { mapPortfolio } from '../../services/mappers';
 
 
 const Portfolio = () => {

@@ -40,6 +40,27 @@ from apps.content.models import (
 # --------------------------------------------------------------------------- #
 # Mixins
 # --------------------------------------------------------------------------- #
+import django_filters
+
+
+class ServiceEntryFilter(django_filters.FilterSet):
+    """Accept either a numeric service id or its slug (`?service=corporate-events`)."""
+
+    service = django_filters.CharFilter(method="filter_service")
+
+    class Meta:
+        from apps.content.models import ServiceEntry as _ServiceEntry
+
+        model = _ServiceEntry
+        fields = ["service", "category", "is_featured"]
+
+    def filter_service(self, queryset, name, value):
+        value = str(value)
+        if value.isdigit():
+            return queryset.filter(service_id=value)
+        return queryset.filter(service__slug=value)
+
+
 class PublishedQuerysetMixin:
     """Public endpoints never expose drafts."""
 
@@ -210,7 +231,7 @@ class PublicServiceEntryViewSet(PublishedQuerysetMixin, viewsets.ReadOnlyModelVi
     lookup_field = "slug"
     throttle_classes = [PublicReadThrottle]
     search_fields = ["title", "summary", "body", "category"]
-    filterset_fields = ["service", "category", "is_featured"]
+    filterset_class = ServiceEntryFilter
     ordering_fields = ["order", "title", "event_date"]
 
     def get_queryset(self):

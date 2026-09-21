@@ -9,6 +9,8 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import EventsList from "../../../admin/pages/Events/EventsList";
 import ExhibitionEventsList from "./ExhibitionEventsList";
+import { contentApi } from '../../../services/content';
+import { mapServiceEntry } from '../../../services/mappers';
 
 const BestExhibitionStallDesign = () => {
   const [slides, setSlides] = useState([]);

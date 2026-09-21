@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import corporateEventsData from '../../../../public/CorporateEvents/CorporateEvents.json';
 import CorporateEventCard from './CorporateEventCard';
+import { contentApi } from '../../../services/content';
+import { mapServiceEntry } from '../../../services/mappers';
 
 const CorporateEventsList = () => {
   const [events, setEvents] = useState([]);
@@ -9,29 +11,38 @@ const CorporateEventsList = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    loadEvents();
+    let active = true;
+    const fetchEvents = async () => {
+      try {
+        setLoading(true);
+        const data = await contentApi.serviceEntries({ service: 'corporate-events', page_size: 50 });
+        if (active) setEvents(data.map(mapServiceEntry));
+        setError(null);
+      } catch (error) {
+        if (active) {
+          setEvents([]);
+          setError('Could not load these pages right now.');
+        }
+      } finally {
+        if (active) setLoading(false);
+      }
+    };
+    fetchEvents();
+    return () => {
+      active = false;
+    };
   }, []);
 
-  const loadEvents = () => {
+  const loadEvents = async () => {
     try {
       setLoading(true);
-
-      let data = [];
-      const savedEvents = localStorage.getItem('corporateEvents');
-      
-      if (savedEvents) {
-        data = JSON.parse(savedEvents);
-      } else if (corporateEventsData && Array.isArray(corporateEventsData)) {
-        data = corporateEventsData;
-        localStorage.setItem('corporateEvents', JSON.stringify(data));
-      }
-
-      console.log('Loaded events:', data);
-      setEvents(data);
-      setFilteredEvents(data);
-      setLoading(false);
+      const data = await contentApi.serviceEntries({ service: 1, page_size: 50 });
+      setEvents(data.map(mapServiceEntry));
+      setFilteredEvents(data.map(mapServiceEntry));
     } catch (error) {
-      console.error('Error loading events:', error);
+      setEvents([]);
+      setFilteredEvents([]);
+    } finally {
       setLoading(false);
     }
   };
