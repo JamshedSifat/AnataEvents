@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Mail, Phone, Linkedin, Twitter, Facebook, Instagram } from 'lucide-react';
+import { contentApi } from '../../../services/content';
 
 const MyTeam = () => {
   const [data, setData] = useState([]);
@@ -11,31 +12,26 @@ const MyTeam = () => {
     const fetchTeamData = async () => {
       try {
         setLoading(true);
-
-        // Load from localStorage (Admin added data)
-        const savedTeamMembers = localStorage.getItem('teamMembers');
-        if (savedTeamMembers) {
-          const data = JSON.parse(savedTeamMembers);
-          setData(data);
-          setError(null);
-          setLoading(false);
-          return;
-        }
-
-        // Fallback to JSON file
-        const response = await fetch('/About/About.json');
-        
-        if (!response.ok) {
-          throw new Error('Failed to load team data');
-        }
-        
-        const jsonData = await response.json();
-        setData(jsonData.team || []);
-        setError(null);
-        
-      } catch (err) {
-        console.log('Error:', err.message);
-        setError(err.message);
+        const data = await contentApi.team();
+        setTeamMembers(
+          data.map((member) => ({
+            _id: member.id,
+            name: member.name,
+            role: member.role,
+            description: member.description,
+            image: member.image_src || '',
+            email: member.email,
+            phone: member.phone,
+            social: {
+              linkedin: member.linkedin,
+              facebook: member.facebook,
+              instagram: member.instagram,
+              twitter: member.twitter,
+            },
+          }))
+        );
+      } catch (error) {
+        setTeamMembers([]);
       } finally {
         setLoading(false);
       }

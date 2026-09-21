@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { contentApi } from '../../services/content';
 
 const Services = () => {
   const [services, setServices] = useState([]);
@@ -8,20 +9,24 @@ const Services = () => {
     fetchServices();
   }, []);
 
-  const fetchServices = () => {
+  const fetchServices = async () => {
     try {
       setLoading(true);
-      // Load from localStorage
-      const savedServices = localStorage.getItem('services');
-      if (savedServices) {
-        const parsedServices = JSON.parse(savedServices);
-        // Filter only active services
-        const activeServices = parsedServices.filter(s => s.status === 'active');
-        setServices(activeServices);
-        console.log('Services loaded:', activeServices);
-      }
+      const services = await contentApi.services({ page_size: 50 });
+      setServices(
+        services.map((service) => ({
+          _id: service.id,
+          title: service.name,
+          slug: service.slug,
+          description: service.summary,
+          features: service.features || [],
+          icon: service.icon,
+          badge: service.badge,
+          lightGradient: `${service.color_from || 'from-primary'} ${service.color_to || 'to-secondary'}`,
+        }))
+      );
     } catch (error) {
-      console.error('Error fetching services:', error);
+      setServices([]);
     } finally {
       setLoading(false);
     }

@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { contentApi } from '../../../services/content';
+import { mapArtist } from '../../../services/mappers';
 
 const Dj = () => {
   const [djs, setDjs] = useState([]);
@@ -6,35 +8,23 @@ const Dj = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchDjs();
-  }, []);
-
-  const fetchDjs = () => {
-    try {
-      setLoading(true);
-      
-      // Load from localStorage (Admin data)
-      const savedDjs = localStorage.getItem('djs');
-      if (savedDjs) {
-        const data = JSON.parse(savedDjs);
-        setDjs(data);
-        setLoading(false);
-        return;
+    let active = true;
+    const load = async () => {
+      try {
+        setLoading(true);
+        const data = await contentApi.artists({ category: 'dj', page_size: 100 });
+        if (active) setDjs(data.map(mapArtist));
+      } catch {
+        if (active) setDjs([]);
+      } finally {
+        if (active) setLoading(false);
       }
-
-      // Fallback to JSON file
-      fetch('/DjData/DjData.json')
-        .then((res) => res.json())
-        .then((data) => {
-          setDjs(data);
-          setLoading(false);
-        })
-        .catch(() => setLoading(false));
-    } catch (error) {
-      console.error('Error:', error);
-      setLoading(false);
-    }
-  };
+    };
+    load();
+    return () => {
+      active = false;
+    };
+  }, []);
 
   return (
     <section className="py-10 bg-gray-50">

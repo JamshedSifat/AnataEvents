@@ -1,6 +1,7 @@
 // File: src/Components/RecentPosts/RecentPosts.jsx (Updated)
 import React, { useState, useEffect } from 'react';
 import { Calendar } from 'lucide-react';
+import { contentApi } from '../../services/content';
 
 const RecentBlogPosts = ({ limit = 5, columns = 1 }) => {
   const [blogs, setBlogs] = useState([]);
@@ -10,22 +11,23 @@ const RecentBlogPosts = ({ limit = 5, columns = 1 }) => {
     loadBlogs();
   }, []);
 
-  const loadBlogs = () => {
+  const loadBlogs = async () => {
     try {
       setLoading(true);
-
-      // ✅ Load from localStorage
-      let data = [];
-      const savedBlogs = localStorage.getItem('blogs');
-      
-      if (savedBlogs) {
-        data = JSON.parse(savedBlogs);
-      }
-
-      setBlogs(data.slice(0, limit));
-      setLoading(false);
+      const data = await contentApi.blogs({ page_size: 4 });
+      setBlogs(
+        data.map((blog) => ({
+          _id: blog.id,
+          slug: blog.slug,
+          title: blog.title,
+          category: blog.category,
+          image: blog.image_src || '',
+          date: blog.published_at || blog.created_at,
+        }))
+      );
     } catch (error) {
-      console.error('Error loading blogs:', error);
+      setBlogs([]);
+    } finally {
       setLoading(false);
     }
   };

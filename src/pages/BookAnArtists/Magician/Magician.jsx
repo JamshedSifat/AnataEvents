@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { contentApi } from '../../../services/content';
+import { mapArtist } from '../../../services/mappers';
 import {
   Star,
   MapPin,
@@ -13,40 +15,23 @@ const Magician = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchMagicians();
-  }, []);
-
-  const fetchMagicians = () => {
-    try {
-      setLoading(true);
-      setError(null);
-
-      // Load from localStorage (Admin data)
-      const savedMagicians = localStorage.getItem('magicians');
-      if (savedMagicians) {
-        const data = JSON.parse(savedMagicians);
-        setMagicians(data);
-        setLoading(false);
-        return;
+    let active = true;
+    const load = async () => {
+      try {
+        setLoading(true);
+        const data = await contentApi.artists({ category: 'magician', page_size: 100 });
+        if (active) setMagicians(data.map(mapArtist));
+      } catch {
+        if (active) setMagicians([]);
+      } finally {
+        if (active) setLoading(false);
       }
-
-      // Fallback to JSON file
-      fetch("/MagiciansData/MagiciansData.json")
-        .then((res) => res.json())
-        .then((data) => {
-          setMagicians(data);
-          setLoading(false);
-        })
-        .catch(() => {
-          setError("Failed to load magician data");
-          setLoading(false);
-        });
-    } catch (err) {
-      console.error("Error fetching magicians:", err);
-      setError("Failed to load magician data. Please try again later.");
-      setLoading(false);
-    }
-  };
+    };
+    load();
+    return () => {
+      active = false;
+    };
+  }, []);
 
   if (loading) {
     return (

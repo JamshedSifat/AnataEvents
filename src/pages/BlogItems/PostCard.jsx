@@ -5,6 +5,7 @@ import BlogCardItem from './BlogCardItem';
 import blogsData from '../../../public/Blog.json';
 import ArchiveItems from './ArchiveItems';
 import RecentBlogPosts from './RecentBlogPost';
+import { contentApi } from '../../services/content';
 
 const PostCard = () => {
   const [blogs, setBlogs] = useState([]);
@@ -17,26 +18,25 @@ const PostCard = () => {
     loadBlogs();
   }, []);
 
-  const loadBlogs = () => {
+  const loadBlogs = async () => {
     try {
       setLoading(true);
-
-      // ✅ Direct localStorage
-      let data = [];
-      const savedBlogs = localStorage.getItem('blogs');
-      
-      if (savedBlogs) {
-        data = JSON.parse(savedBlogs);
-      } else if (blogsData && Array.isArray(blogsData)) {
-        data = blogsData;
-        localStorage.setItem('blogs', JSON.stringify(data));
-      }
-
-      setBlogs(data);
-      setFilteredBlogs(data);
-      setLoading(false);
+      const data = await contentApi.blogs({ page_size: 50 });
+      setBlogs(
+        data.map((blog) => ({
+          _id: blog.id,
+          slug: blog.slug,
+          title: blog.title,
+          category: blog.category,
+          excerpt: blog.excerpt,
+          featured: blog.is_featured,
+          image: blog.image_src || '',
+          date: blog.published_at || blog.created_at,
+        }))
+      );
     } catch (error) {
-      console.error('Error loading blogs:', error);
+      setBlogs([]);
+    } finally {
       setLoading(false);
     }
   };

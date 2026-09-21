@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { contentApi } from '../../../services/content';
+import { mapArtist } from '../../../services/mappers';
 
 const Dancer = () => {
   const [dancers, setDancers] = useState([]);
@@ -6,35 +8,23 @@ const Dancer = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchDancers();
-  }, []);
-
-  const fetchDancers = () => {
-    try {
-      setLoading(true);
-      
-      // Load from localStorage (Admin data)
-      const savedDancers = localStorage.getItem('dancers');
-      if (savedDancers) {
-        const data = JSON.parse(savedDancers);
-        setDancers(data);
-        setLoading(false);
-        return;
+    let active = true;
+    const load = async () => {
+      try {
+        setLoading(true);
+        const data = await contentApi.artists({ category: 'dancer', page_size: 100 });
+        if (active) setDancers(data.map(mapArtist));
+      } catch {
+        if (active) setDancers([]);
+      } finally {
+        if (active) setLoading(false);
       }
-
-      // Fallback to JSON file
-      fetch('/DancerData/DancerData.json')
-        .then((res) => res.json())
-        .then((data) => {
-          setDancers(data);
-          setLoading(false);
-        })
-        .catch(() => setLoading(false));
-    } catch (error) {
-      console.error('Error:', error);
-      setLoading(false);
-    }
-  };
+    };
+    load();
+    return () => {
+      active = false;
+    };
+  }, []);
 
   if (loading) {
     return <p className="text-center py-12">Loading...</p>;

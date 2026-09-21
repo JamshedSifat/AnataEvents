@@ -1,450 +1,333 @@
-import { createBrowserRouter } from "react-router";
-import MainLayout from "../app/MainLayout";
-import Home from "../components/Home/Home";
-import Portfolio from "../pages/Portfolio/Portfolio";
-import About from "../pages/About/About";
-import Contact from "../pages/Contact/Contact";
-import Services from "../components/Services/Services";
-import CorporateEvent from "../components/Services/CorporateEvent/CorporateEvent";
-import CorporateEventDetails from "../components/Services/CorporateEvent/CorporateEventDetails";
-import BestExhibitionStallDesgin from "../components/Services/BestExhibitionStallDesgin/BestExhibitionStallDesgin";
-import InfluencerMarketingAgency from "../components/Services/InfluencerMarketingAgency/InfluencerMarketingAgency";
-import SingerAndCelebrityBooking from "../components/Services/SingerAndCelebrityBooking/SingerAndCelebrityBooking";
-import WeddingPlannerManagement from "../components/Services/WeddingPlannerManagement/WeddingPlannerManagement";
-import PhotographyVedioServices from "../components/Services/PhotographyVedioServices/PhotographyVedioServices";
+import { lazy, Suspense } from 'react';
+import { createBrowserRouter, Navigate } from 'react-router';
 
-import VirtualEvent from "../components/Services/VirtualEvent/VirtualEvent";
-// import BlogDetails from "../pages/BlogDetails/BlogDetails";
-// import BlogCard from "../components/BlogCard/BlogCard";
-import BookAnArtists from "../pages/BookAnArtists/BookAnArtists";
-import Singer from "../pages/BookAnArtists/Singers/Singer";
-import Dj from "../pages/BookAnArtists/Dj/Dj";
-import Comedian from "../pages/BookAnArtists/Comedian/Comedian";
-import Magician from "../pages/BookAnArtists/Magician/Magician";
-import Dancer from "../pages/BookAnArtists/Dancer/Dancer";
-import Opportunities from "../pages/Opportunities/Opportunities";
-import TalentHunt from "../pages/Opportunities/TalentHunt/TalentHunt";
-import ArtistRegistration from "../pages/Opportunities/ArtistRegistration/ArtistRegistration";
-import CareerOpportunities from "../pages/Opportunities/CareerOpportunities/CareerOpportunities";
-import VendorRegistration from "../pages/Opportunities/VendorRegistration/VendorRegistration";
-import PhotographyServicesDetails from "../components/Services/PhotographyVedioServices/PhotographyServicesDetails";
-import SpecialEventList from "../components/Services/SpecialEvent/SpecialEventList";
-import SpecialEventDetail from "../components/Services/SpecialEvent/SpecialEventDetail";
-import AwardShowDetail from "../components/Services/SpecialEvent/Details/AwardShowDetail";
-import ConvocationDetail from "../components/Services/SpecialEvent/Details/ConvocationDetail";
-import ReunionDetail from "../components/Services/SpecialEvent/Details/ReunionDetail";
-import FashionShowDetail from "../components/Services/SpecialEvent/Details/FashionShowDetail";
-import MusicConcertDetail from "../components/Services/SpecialEvent/Details/MusicConcertDetail";
-import SportsManagementDetail from "../components/Services/SpecialEvent/Details/SportsManagementDetail";
-import LaserShowDetail from "../components/Services/SpecialEvent/Details/LaserShowDetail";
-import Media from "../pages/Media/Media";
-import MediaGellary from "../pages/Media/MediaGellary/MediaGellary";
-import MediaVideo from "../pages/Media/MediaVideo/MediaVideo";
-import AdminLogin from "../auth/Pages/AdminLogin";
-import ProtectedRoute from "../components/ProtectedRoute";
-import AdminLayout from "../admin/Layouts/AdminLayout";
-import Dashboard from "../admin/pages/Dashboard";
-import EventsList from "../admin/pages/Events/EventsList";
-import AddEvent from "../admin/pages/Events/AddEvent";
-import UsersList from "../admin/pages/Users/UsersList";
-import MediaList from "../admin/pages/Media/MediaList";
-import ServiceManagement from "../admin/pages/Services/ServiceManagement";
-import ComedianManagement from "../admin/pages/AdminBookAnArtists/ComedianManagement/ComedianManagement";
-import DancerManagement from "../admin/pages/AdminBookAnArtists/DancerManagement/DancerManagement";
-import DjManagement from "../admin/pages/AdminBookAnArtists/DjManagement/DjManagement";
-import MagicianManagement from "../admin/pages/AdminBookAnArtists/MagicianManagement/MagicianManagement";
-import SingerManagement from "../admin/pages/AdminBookAnArtists/SingerManagement/SingerManagement";
-import MediaManagement from "../admin/pages/AdminMediaGellary/MediaManagement";
-import VideoManagement from "../admin/pages/AdminMediaGellary/VideoManagement";
-import TestimonialManagement from "../admin/pages/Testimonal/TestimonialManagement";
-import TeamManagement from "../admin/pages/Team/TeamManagement";
-import CareerManagement from "../admin/pages/AdminCarearOportunity/CareerManagement";
-import PostCard from "../pages/BlogItems/PostCard";
-import PostCardDetails from "../pages/BlogItems/PostCardDetails";
-import BlogManagement from "../admin/pages/Blog/BlogManagement";
-import PortfolioManagement from "../admin/pages/AdminProtfolio/ProtfolioManagement";
-import VendorManagement from "../admin/pages/AdminOpportunity/Vendor/VendorManagement";
-import AdminCorporateEvents from "../admin/pages/AdminCorporoateEvents/AdminCorporateEvents";
-import HomeFAQ from "../admin/pages/AdminFAQ/HomeFAQ";
-import AdminArtists from "../admin/pages/AdminOpportunity/Artists/AdminArtists";
-import AdminTalentHunt from "../admin/pages/AdminOpportunity/TalentHunt/AdminTalentHunt";
-import AdminExhibitionStall from "../admin/pages/ExhibitionStall/AdminExhibitionStall";
-import ExhibitionEventDetails from "../components/Services/BestExhibitionStallDesgin/ExhibitionEventDetails";
-import AdminHero from "../admin/Components/Home/AdminHero";
-import AdminInfluencers from "../admin/Components/AdminInfluencer/AdminInfluencers";
+import MainLayout from './MainLayout';
+import RouteError from './RouteError';
+import ProtectedRoute from '../components/ProtectedRoute';
+import NotFound from '../pages/NotFound/NotFound';
+import { LoadingScreen } from '../components/ui/States';
 
-
-// import CorporateFAQ from "../admin/pages/AdminFAQ/CorporateFAQ";
-
-// Title setter function
-const setTitle = (title) => {
-  return () => {
-    document.title = title;
-    return null;
-  };
+/**
+ * Route table.
+ *
+ * * Every page is lazy-loaded, so the initial bundle only contains the shell
+ *   (the build shipped a single ~1 MB chunk before).
+ * * URLs are kebab-case and slug based; every URL from the old build redirects
+ *   to its new home below.
+ * * `errorElement` guarantees a rendered error page instead of a blank screen.
+ */
+const lazyPage = (loader) => {
+  const Component = lazy(loader);
+  const Wrapped = (props) => (
+    <Suspense fallback={<LoadingScreen />}>
+      <Component {...props} />
+    </Suspense>
+  );
+  return Wrapped;
 };
+
+// --- public -----------------------------------------------------------------
+const Home = lazyPage(() => import('../components/Home/Home'));
+const Services = lazyPage(() => import('../components/Services/Services'));
+const CorporateEvent = lazyPage(() => import('../components/Services/CorporateEvent/CorporateEvent'));
+const CorporateEventDetails = lazyPage(
+  () => import('../components/Services/CorporateEvent/CorporateEventDetails'),
+);
+const ExhibitionStall = lazyPage(
+  () => import('../components/Services/BestExhibitionStallDesgin/BestExhibitionStallDesgin'),
+);
+const ExhibitionEventDetails = lazyPage(
+  () => import('../components/Services/BestExhibitionStallDesgin/ExhibitionEventDetails'),
+);
+const InfluencerMarketing = lazyPage(
+  () => import('../components/Services/InfluencerMarketingAgency/InfluencerMarketingAgency'),
+);
+const SingerCelebrity = lazyPage(
+  () => import('../components/Services/SingerAndCelebrityBooking/SingerAndCelebrityBooking'),
+);
+const WeddingPlanner = lazyPage(
+  () => import('../components/Services/WeddingPlannerManagement/WeddingPlannerManagement'),
+);
+const PhotographyVideo = lazyPage(
+  () => import('../components/Services/PhotographyVedioServices/PhotographyVedioServices'),
+);
+const PhotographyServicesDetails = lazyPage(
+  () => import('../components/Services/PhotographyVedioServices/PhotographyServicesDetails'),
+);
+const SpecialEventList = lazyPage(() => import('../components/Services/SpecialEvent/SpecialEventList'));
+const SpecialEventDetail = lazyPage(() => import('../components/Services/SpecialEvent/SpecialEventDetail'));
+const VirtualEvent = lazyPage(() => import('../components/Services/VirtualEvent/VirtualEvent'));
+
+const About = lazyPage(() => import('../pages/About/About'));
+const Portfolio = lazyPage(() => import('../pages/Portfolio/Portfolio'));
+const Media = lazyPage(() => import('../pages/Media/Media'));
+const MediaGallery = lazyPage(() => import('../pages/Media/MediaGellary/MediaGellary'));
+const MediaVideo = lazyPage(() => import('../pages/Media/MediaVideo/MediaVideo'));
+const BlogList = lazyPage(() => import('../pages/BlogItems/PostCard'));
+const BlogDetails = lazyPage(() => import('../pages/BlogItems/PostCardDetails'));
+const Contact = lazyPage(() => import('../pages/Contact/Contact'));
+
+const BookAnArtists = lazyPage(() => import('../pages/BookAnArtists/BookAnArtists'));
+const Singer = lazyPage(() => import('../pages/BookAnArtists/Singers/Singer'));
+const Dj = lazyPage(() => import('../pages/BookAnArtists/Dj/Dj'));
+const Comedian = lazyPage(() => import('../pages/BookAnArtists/Comedian/Comedian'));
+const Magician = lazyPage(() => import('../pages/BookAnArtists/Magician/Magician'));
+const Dancer = lazyPage(() => import('../pages/BookAnArtists/Dancer/Dancer'));
+
+const Opportunities = lazyPage(() => import('../pages/Opportunities/Opportunities'));
+const TalentHunt = lazyPage(() => import('../pages/Opportunities/TalentHunt/TalentHunt'));
+const ArtistRegistration = lazyPage(
+  () => import('../pages/Opportunities/ArtistRegistration/ArtistRegistration'),
+);
+const CareerOpportunities = lazyPage(
+  () => import('../pages/Opportunities/CareerOpportunities/CareerOpportunities'),
+);
+const VendorRegistration = lazyPage(
+  () => import('../pages/Opportunities/VendorRegistration/VendorRegistration'),
+);
+
+// --- auth -------------------------------------------------------------------
+const AdminLogin = lazyPage(() => import('../auth/Pages/AdminLogin'));
+const ForgotPassword = lazyPage(() => import('../auth/Pages/ForgotPassword'));
+const ResetPassword = lazyPage(() => import('../auth/Pages/ResetPassword'));
+const ChangePassword = lazyPage(() => import('../auth/Pages/ChangePassword'));
+
+// --- admin ------------------------------------------------------------------
+const AdminLayout = lazyPage(() => import('../admin/Layouts/AdminLayout'));
+const Dashboard = lazyPage(() => import('../admin/pages/Dashboard'));
+const AdminHero = lazyPage(() => import('../admin/Components/Home/AdminHero'));
+const AdminInfluencers = lazyPage(() => import('../admin/Components/AdminInfluencer/AdminInfluencers'));
+const AdminCorporateEvents = lazyPage(() => import('../admin/pages/AdminCorporoateEvents/AdminCorporateEvents'));
+const AdminExhibitionStall = lazyPage(() => import('../admin/pages/ExhibitionStall/AdminExhibitionStall'));
+const HomeFAQ = lazyPage(() => import('../admin/pages/AdminFAQ/HomeFAQ'));
+const AdminArtists = lazyPage(() => import('../admin/pages/AdminOpportunity/Artists/AdminArtists'));
+const AdminTalentHunt = lazyPage(() => import('../admin/pages/AdminOpportunity/TalentHunt/AdminTalentHunt'));
+const VendorManagement = lazyPage(() => import('../admin/pages/AdminOpportunity/Vendor/VendorManagement'));
+const ServiceManagement = lazyPage(() => import('../admin/pages/Services/ServiceManagement'));
+const ComedianManagement = lazyPage(
+  () => import('../admin/pages/AdminBookAnArtists/ComedianManagement/ComedianManagement'),
+);
+const DancerManagement = lazyPage(
+  () => import('../admin/pages/AdminBookAnArtists/DancerManagement/DancerManagement'),
+);
+const DjManagement = lazyPage(() => import('../admin/pages/AdminBookAnArtists/DjManagement/DjManagement'));
+const MagicianManagement = lazyPage(
+  () => import('../admin/pages/AdminBookAnArtists/MagicianManagement/MagicianManagement'),
+);
+const SingerManagement = lazyPage(
+  () => import('../admin/pages/AdminBookAnArtists/SingerManagement/SingerManagement'),
+);
+const MediaManagement = lazyPage(() => import('../admin/pages/AdminMediaGellary/MediaManagement'));
+const VideoManagement = lazyPage(() => import('../admin/pages/AdminMediaGellary/VideoManagement'));
+const TestimonialManagement = lazyPage(
+  () => import('../admin/pages/Testimonal/TestimonialManagement'),
+);
+const TeamManagement = lazyPage(() => import('../admin/pages/Team/TeamManagement'));
+const CareerManagement = lazyPage(() => import('../admin/pages/AdminCarearOportunity/CareerManagement'));
+const ApplicationsList = lazyPage(() => import('../admin/pages/AdminCarearOportunity/ApplicationsList'));
+const BlogManagement = lazyPage(() => import('../admin/pages/Blog/BlogManagement'));
+const PortfolioManagement = lazyPage(() => import('../admin/pages/AdminProtfolio/ProtfolioManagement'));
+const MediaList = lazyPage(() => import('../admin/pages/Media/MediaList'));
+const UsersList = lazyPage(() => import('../admin/pages/Users/UsersList'));
+const EventsList = lazyPage(() => import('../admin/pages/Events/EventsList'));
+const AdminSpecialEvents = lazyPage(() => import('../admin/pages/AdminSpecialEvents/AdminSpecialEvents'));
+const AdminSettings = lazyPage(() => import('../admin/pages/Settings/AdminSettings'));
+const BookingsList = lazyPage(() => import('../admin/pages/Bookings/BookingsList'));
+const ActionLogs = lazyPage(() => import('../admin/pages/Users/ActionLogs'));
+
+/** Redirect helper that keeps the browser history clean. */
+const redirect = (to) => ({ path: to, element: <Navigate to={to} replace /> });
 
 export const router = createBrowserRouter([
   {
-    path: "/",
-    element: <MainLayout></MainLayout>,
+    path: '/',
+    element: <MainLayout />,
+    errorElement: <RouteError />,
     children: [
-      {
-        index: true,
-        Component: Home,
-        loader: setTitle("Home - Ananta Events | Best Event Management Company in Bangladesh")
-      },
-      {
-        path: '/services',
-        element: <Services></Services>,
-        loader: setTitle("Services - Ananta Events | Professional Event Planning Services")
-      },
-      // Corporate Event Routes
-      {
-        path: '/services/CorporateEvent',
-        element: <CorporateEvent></CorporateEvent>,
-        loader: setTitle("Corporate Events - Ananta Events | Business Event Management")
-      },
-      {
-        path: '/services/corporate-events/:id',
-        element: <CorporateEventDetails></CorporateEventDetails>,
-        loader: setTitle("Corporate Events - Ananta Events | Business Event Management")
-      },
-      {
-        path: '/services/BestExhibitionStallDesgin',
-        element: <BestExhibitionStallDesgin></BestExhibitionStallDesgin>,
-        loader: setTitle("Exhibition Stall Design - Ananta Events | Professional Booth Design")
-      },
-      {
-      path: '/services/exhibition-events/:id',
-       element: <ExhibitionEventDetails />
-      },
-      {
-        path: '/services/InfluencerMarketingAgency',
-        element: <InfluencerMarketingAgency></InfluencerMarketingAgency>,
-        loader: setTitle("Influencer Marketing - Ananta Events | Digital Marketing Agency")
-      },
-      {
-        path: '/services/SingerAndCelebrityBooking',
-        element: <SingerAndCelebrityBooking></SingerAndCelebrityBooking>,
-        loader: setTitle("Celebrity Booking - Ananta Events | Singer & Artist Management")
-      },
-      {
-        path: '/services/WeddingPlanner&Management',
-        element: <WeddingPlannerManagement></WeddingPlannerManagement>,
-        loader: setTitle("Wedding Planning - Ananta Events | Dream Wedding Organizers")
-      },
-      {
-        path: '/services/Photography&VedioServices',
-        element: <PhotographyVedioServices></PhotographyVedioServices>,
-        loader: setTitle("Photography & Video - Ananta Events | Professional Event Coverage")
-      },
-      {
-        path: '/services/Photography&VedioServices/:id',
-        element: <PhotographyServicesDetails></PhotographyServicesDetails>,
-        loader: setTitle("Photography & Video Details - Ananta Events | Professional Event Coverage")
-      },
-      
-      // ============ SPECIAL EVENT ROUTES ============
-      {
-        path: '/services/SpecialEvent',
-        element: <SpecialEventList></SpecialEventList>,
-        loader: setTitle("Special Events - Ananta Events | Unique Event Planning")
-      },
-      // Dynamic Special Event Route
-      {
-        path: '/services/SpecialEvent/:eventId',
-        element: <SpecialEventDetail></SpecialEventDetail>,
-        loader: setTitle("Special Event Details - Ananta Events | Professional Event Management")
-      },
-      // Individual Special Event Routes (Optional - for direct access)
-      {
-        path: '/services/SpecialEvent/award-show',
-        element: <AwardShowDetail></AwardShowDetail>,
-        loader: setTitle("Award Show Organizers - Ananta Events | Glamorous Event Management")
-      },
-      {
-        path: '/services/SpecialEvent/convocation-event',
-        element: <ConvocationDetail></ConvocationDetail>,
-        loader: setTitle("University Convocation - Ananta Events | Academic Event Planning")
-      },
-      {
-        path: '/services/SpecialEvent/reunion-event',
-        element: <ReunionDetail></ReunionDetail>,
-        loader: setTitle("Reunion Event Planner - Ananta Events | Alumni Gatherings")
-      },
-      {
-        path: '/services/SpecialEvent/fashion-show',
-        element: <FashionShowDetail></FashionShowDetail>,
-        loader: setTitle("Fashion Show Organizer - Ananta Events | Runway Event Management")
-      },
-      {
-        path: '/services/SpecialEvent/music-concert',
-        element: <MusicConcertDetail></MusicConcertDetail>,
-        loader: setTitle("Live Music Concert - Ananta Events | Concert Organization Services")
-      },
-      {
-        path: '/services/SpecialEvent/laser-show',
-        element: <LaserShowDetail></LaserShowDetail>,
-        loader: setTitle("Laser Show & Fireworks - Ananta Events | Professional Display Services")
-      },
-      {
-       path: '/services/SpecialEvent/sports-management',
-       element: <SportsManagementDetail></SportsManagementDetail>,
-        loader: setTitle("Sports Event Management - Ananta Events | Professional Sports Organization")
-},
-     
-      // ============ END OF SPECIAL EVENT ROUTES ============
+      { index: true, Component: Home },
 
+      { path: 'services', Component: Services },
+
+      // Corporate events
+      { path: 'services/corporate-events', Component: CorporateEvent },
+      { path: 'services/corporate-events/:slug', Component: CorporateEventDetails },
+
+      // Exhibition stall design
+      { path: 'services/exhibition-stall-design', Component: ExhibitionStall },
+      { path: 'services/exhibition-stall-design/:slug', Component: ExhibitionEventDetails },
+
+      // Influencer marketing / celebrity booking / wedding / photography
+      { path: 'services/influencer-marketing', Component: InfluencerMarketing },
+      { path: 'services/singer-celebrity-booking', Component: SingerCelebrity },
+      { path: 'services/wedding-planner', Component: WeddingPlanner },
+      { path: 'services/photography-video', Component: PhotographyVideo },
+      { path: 'services/photography-video/:slug', Component: PhotographyServicesDetails },
+
+      // Special events (single dynamic route for all seven programmes)
+      { path: 'services/special-events', Component: SpecialEventList },
+      { path: 'services/special-events/:slug', Component: SpecialEventDetail },
+
+      { path: 'services/virtual-events', Component: VirtualEvent },
+
+      { path: 'about', Component: About },
+      { path: 'portfolio', Component: Portfolio },
+
+      { path: 'media', Component: Media },
+      { path: 'media/gallery', Component: MediaGallery },
+      { path: 'media/videos', Component: MediaVideo },
+      { path: 'media/blog', Component: BlogList },
+      { path: 'media/blog/:slug', Component: BlogDetails },
+
+      { path: 'contact', Component: Contact },
+
+      { path: 'book-artists', Component: BookAnArtists },
+      { path: 'book-artists/singers', Component: Singer },
+      { path: 'book-artists/djs', Component: Dj },
+      { path: 'book-artists/comedians', Component: Comedian },
+      { path: 'book-artists/magicians', Component: Magician },
+      { path: 'book-artists/dancers', Component: Dancer },
+
+      { path: 'opportunities', Component: Opportunities },
+      { path: 'opportunities/talent-hunt', Component: TalentHunt },
+      { path: 'opportunities/artist-registration', Component: ArtistRegistration },
+      { path: 'opportunities/careers', Component: CareerOpportunities },
+      { path: 'opportunities/vendor-registration', Component: VendorRegistration },
+
+      // ---- legacy URLs from the pre-API build -------------------------------
+
+      // service pages (mixed case, ampersands and numeric ids)
+      { path: 'services/CorporateEvent', element: <Navigate to="/services/corporate-events" replace /> },
       {
-        path: '/services/VirtualEvent',
-        element: <VirtualEvent></VirtualEvent>,
-        loader: setTitle("Virtual Events - Ananta Events | Online Event Management")
+        path: 'services/corporate-events/:id',
+        element: <CorporateEventDetails />,
       },
       {
-        path: '/About',
-        element: <About></About>,
-        loader: setTitle("About Us - Ananta Events | 16+ Years Experience in Event Planning")
-      },
-      // {
-      //   path: '/blog',
-      //   element: <BlogCard></BlogCard>,
-      //   loader: setTitle("Blog - Ananta Events | Event Planning Tips & Ideas")
-      // },
-      // {
-      //   path: '/blog/:id',
-      //   element: <BlogDetails></BlogDetails>,
-      //   loader: setTitle("Blog Details - Ananta Events | Event Planning Article")
-      // },
-      {
-        path: '/portfolio',
-        element: <Portfolio></Portfolio>,
-        loader: setTitle("Portfolio - Ananta Events | Our Successful Events Gallery")
+        path: 'services/BestExhibitionStallDesgin',
+        element: <Navigate to="/services/exhibition-stall-design" replace />,
       },
       {
-        path: '/media',
-        element: <Media></Media>,
-       
+        path: 'services/exhibition-events/:slug',
+        element: <ExhibitionEventDetails />,
       },
       {
-        path: '/media/gallery',
-        element: <MediaGellary></MediaGellary>
+        path: 'services/InfluencerMarketingAgency',
+        element: <Navigate to="/services/influencer-marketing" replace />,
       },
       {
-        path: '/media/video',
-        element: <MediaVideo></MediaVideo>
+        path: 'services/SingerAndCelebrityBooking',
+        element: <Navigate to="/services/singer-celebrity-booking" replace />,
       },
       {
-        path: '/contact',
-        element: <Contact></Contact>,
-        loader: setTitle("Contact Us - Ananta Events | Get Free Event Planning Consultation")
+        path: 'services/WeddingPlanner&Management',
+        element: <Navigate to="/services/wedding-planner" replace />,
       },
       {
-        path: '/bookAnArtists',
-        element: <BookAnArtists></BookAnArtists>,
-        loader: setTitle("Book Artists - Ananta Events | Hire Professional Performers")
+        path: 'services/Photography&VedioServices',
+        element: <Navigate to="/services/photography-video" replace />,
       },
       {
-        path: '/bookAnArtists/singer',
-        element: <Singer></Singer>,
-        loader: setTitle("Book Singers - Ananta Events | Hire Professional Singers")
+        path: 'services/Photography&VedioServices/:slug',
+        element: <PhotographyServicesDetails />,
       },
-      {
-        path: '/bookAnArtists/dj',
-        element: <Dj></Dj>,
-        loader: setTitle("Book DJs - Ananta Events | Hire Professional DJs")
-      },
-      {
-        path: '/bookAnArtists/comedian',
-        element: <Comedian></Comedian>,
-        loader: setTitle("Book Comedians - Ananta Events | Hire Professional Comedians")
-      },
-      {
-        path: '/bookAnArtists/magician',
-        element: <Magician></Magician>,
-        loader: setTitle("Book Magicians - Ananta Events | Hire Professional Magicians")
-      },
-      {
-        path: '/bookAnArtists/dancer',
-        element: <Dancer></Dancer>,
-        loader: setTitle("Book Choreographers - Ananta Events | Hire Professional Dancers")
-      },
-      {
-        path: '/opportunities',
-        element: <Opportunities></Opportunities>
-      },
-      {
-        path: '/opportunities/talent-hunt',
-        element: <TalentHunt></TalentHunt>
-      },
-      {
-        path: '/opportunities/artist-registration',
-        element: <ArtistRegistration></ArtistRegistration>
-      },
-      {
-        path: '/opportunities/careers',
-        element: <CareerOpportunities></CareerOpportunities>
-      },
-      {
-        path: '/opportunities/vendor-registration',
-        element: <VendorRegistration></VendorRegistration>
-      },
-      {
-  path: '/media/blog',
-  element: <PostCard></PostCard>,
-  loader: setTitle("Blog - Ananta Events | Event Planning Tips & Ideas")
-},
-{
-  path: '/media/blog/:id',
-  element: <PostCardDetails></PostCardDetails>,
-  loader: setTitle("Blog Details - Ananta Events | Event Planning Article")
-},
-    ]
+      { path: 'services/SpecialEvent', element: <Navigate to="/services/special-events" replace /> },
+      { path: 'services/SpecialEvent/:slug', element: <SpecialEventDetail /> },
+      { path: 'services/VirtualEvent', element: <Navigate to="/services/virtual-events" replace /> },
+
+      // top-level pages
+      { path: 'About', element: <Navigate to="/about" replace /> },
+      { path: 'media/video', element: <Navigate to="/media/videos" replace /> },
+      { path: 'blog', element: <Navigate to="/media/blog" replace /> },
+      { path: 'blog/:slug', element: <BlogDetails /> },
+
+      // booking (camelCase)
+      { path: 'bookAnArtists', element: <Navigate to="/book-artists" replace /> },
+      { path: 'bookAnArtists/singer', element: <Navigate to="/book-artists/singers" replace /> },
+      { path: 'bookAnArtists/dj', element: <Navigate to="/book-artists/djs" replace /> },
+      { path: 'bookAnArtists/comedian', element: <Navigate to="/book-artists/comedians" replace /> },
+      { path: 'bookAnArtists/magician', element: <Navigate to="/book-artists/magicians" replace /> },
+      { path: 'bookAnArtists/dancer', element: <Navigate to="/book-artists/dancers" replace /> },
+      { path: 'bookAnArtists/:rest', element: <Navigate to="/book-artists" replace /> },
+
+      { path: '*', Component: NotFound },
+    ],
   },
 
-// ADMIN ROUTES - CORRECTED
+  // ---- admin ---------------------------------------------------------------
+  { path: '/admin', element: <Navigate to="/admin/dashboard" replace /> },
   {
-    path: "/admin",
+    path: '/admin/login',
+    Component: AdminLogin,
+    errorElement: <RouteError />,
+  },
+  { path: '/admin/forgot-password', Component: ForgotPassword },
+  { path: '/admin/reset-password', Component: ResetPassword },
+  { path: '/admin/change-password', Component: ChangePassword },
+
+  {
+    path: '/admin/dashboard',
+    element: (
+      <ProtectedRoute>
+        <AdminLayout />
+      </ProtectedRoute>
+    ),
+    errorElement: <RouteError />,
     children: [
+      { index: true, Component: Dashboard },
+      { path: 'events', Component: EventsList },
+      { path: 'events/add', element: <Navigate to="/admin/dashboard/events" replace /> },
+      { path: 'hero', Component: AdminHero },
+      { path: 'services', Component: ServiceManagement },
+      { path: 'corporate-events', Component: AdminCorporateEvents },
+      { path: 'exhibition-stall', Component: AdminExhibitionStall },
+      { path: 'special-events', Component: AdminSpecialEvents },
+      { path: 'faqs', Component: HomeFAQ },
+      { path: 'artists', Component: AdminArtists },
+      { path: 'comedians', Component: ComedianManagement },
+      { path: 'dancers', Component: DancerManagement },
+      { path: 'djs', Component: DjManagement },
+      { path: 'magicians', Component: MagicianManagement },
+      { path: 'singers', Component: SingerManagement },
+      { path: 'influencers', Component: AdminInfluencers },
+      { path: 'gallery', Component: MediaManagement },
+      { path: 'videos', Component: VideoManagement },
+      { path: 'testimonials', Component: TestimonialManagement },
+      { path: 'team', Component: TeamManagement },
+      { path: 'careers', Component: CareerManagement },
+      { path: 'careers/applications', Component: ApplicationsList },
+      { path: 'blogs', Component: BlogManagement },
+      { path: 'portfolio', Component: PortfolioManagement },
+      { path: 'media', Component: MediaList },
+      { path: 'talent-hunt', Component: AdminTalentHunt },
+      { path: 'vendors', Component: VendorManagement },
+      { path: 'messages', Component: MediaList },
+      { path: 'bookings', Component: BookingsList },
       {
-        path: "login",
-        element: <AdminLogin></AdminLogin>,
-        loader: setTitle("Admin Login - Ananta Events")
+        path: 'users',
+        element: (
+          <ProtectedRoute requiredRole="super_admin">
+            <UsersList />
+          </ProtectedRoute>
+        ),
       },
       {
-        path: "dashboard",
-        element: <ProtectedRoute><AdminLayout></AdminLayout></ProtectedRoute>,
-        loader: setTitle("Admin Dashboard"),
-        children: [
-          {
-            index: true,
-            element: <Dashboard></Dashboard>
-          },
-          {
-            path: "events",
-            element: <EventsList></EventsList>
-          },
-          {
-            path: "events/add",
-            element: <AddEvent></AddEvent>
-          },
-          {
-            path: "users",
-            element: <UsersList></UsersList>
-          },
-          {
-            path: "media",
-            element: <MediaList></MediaList>
-          },
-          {
-            path:"hero",
-            element:<AdminHero></AdminHero>
-          },
-          {
-            path: "services",
-            element: <ServiceManagement></ServiceManagement>,
-            loader: setTitle("Service Management - Admin Dashboard")
-          },
-          {
-  path: "comedians",
-  element: <ComedianManagement></ComedianManagement>,
-  loader: setTitle("Comedian Management - Admin Dashboard")
-},
-{
-  path: "dancers",
-  element: <DancerManagement></DancerManagement>,
-  loader: setTitle("Dancer Management - Admin Dashboard")
-},
-{
-  path: "djs",
-  element: <DjManagement></DjManagement>,
-  loader: setTitle("DJ Management - Admin Dashboard")
-},
-{
-  path: "magicians",
-  element: <MagicianManagement></MagicianManagement>,
-  loader: setTitle("Magician Management - Admin Dashboard")
-},
-{
-  path: "singers",
-  element: <SingerManagement></SingerManagement>,
-  loader: setTitle("Singer Management - Admin Dashboard")
-},
-{
-  path: "gallery",
-  element: <MediaManagement></MediaManagement>,
-  loader: setTitle("Media Gallery Management - Admin Dashboard")
-},
-{
-  path: "videos",
-  element: <VideoManagement></VideoManagement>,
-  loader: setTitle("Video Management - Admin Dashboard")
-},
-{
-  path: "testimonials",
-  element: <TestimonialManagement></TestimonialManagement>,
-  loader: setTitle("Testimonial Management - Admin Dashboard")
-},
-{
-  path: "team",
-  element: <TeamManagement></TeamManagement>,
-  loader: setTitle("Team Management - Admin Dashboard")
-},
-{
-  path: "careers",
-  element: <CareerManagement></CareerManagement>,
-  loader: setTitle("Career Management - Admin Dashboard")
-},
-{
-  path: "blogs",
-  element: <BlogManagement></BlogManagement>,
-  loader: setTitle("Blog Management - Admin Dashboard")
-},
-  {
-  path: 'portfolio',  // Note: "portfolio" (not "protfolio")
-  element: <PortfolioManagement />,
-  loader: setTitle("Portfolio Management - Admin Dashboard")
-},
-{
-  path: 'vendors',
-  element: <VendorManagement />,
-  loader: setTitle("Vendor Management - Admin Dashboard")
-},
- {
-      path: 'corporate-events',
-      element: <AdminCorporateEvents />
-    },
- {
-      path: 'faqs',
-      element:<HomeFAQ></HomeFAQ>
-    },
-    {
-  path: 'artists',
-  element: <AdminArtists />
-},
-{
-  path: 'talent-hunt',
-  element: <AdminTalentHunt />
-},
-{
-  path: 'exhibition-stall',
-  element: <AdminExhibitionStall />
-},
-{
-  path: 'influencers',
-  element: <AdminInfluencers />
-},
+        path: 'action-logs',
+        element: (
+          <ProtectedRoute requiredRole="super_admin">
+            <ActionLogs />
+          </ProtectedRoute>
+        ),
+      },
+      { path: 'settings', Component: AdminSettings },
 
-        ]
-      }
-    ]
-  }
-
-  
+      // legacy admin URLs
+      { path: 'dashboard', element: <Navigate to="/admin/dashboard" replace /> },
+      { path: 'media-gallery', element: <Navigate to="/admin/dashboard/gallery" replace /> },
+      { path: 'opportunities', element: <Navigate to="/admin/dashboard/artists" replace /> },
+      { path: 'opportunities/vendors', element: <Navigate to="/admin/dashboard/vendors" replace /> },
+      { path: 'opportunities/talent-hunt', element: <Navigate to="/admin/dashboard/talent-hunt" replace /> },
+      { path: '*', Component: NotFound },
+    ],
+  },
 ]);
 
-
-
-
-
-
+export default router;

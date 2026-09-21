@@ -1,26 +1,33 @@
-import React, { useContext } from 'react';
-import { Navigate } from 'react-router';
-import { AuthContext } from '../auth/Context/AuthContext';
+import { Navigate, Outlet, useLocation } from 'react-router';
 
-const ProtectedRoute = ({ children }) => {
-  const { admin, loading } = useContext(AuthContext);
+import { AUTH_STATUS, useAuth } from '../auth/Context/AuthContext';
+import { LoadingScreen } from './ui/States';
+import Forbidden from './Forbidden';
 
-  if (loading) {
-    return (
-      <div className='flex items-center justify-center h-screen bg-gray-100'>
-        <div className='text-center'>
-          <div className='inline-block animate-spin rounded-full h-12 w-12 border-4 border-primary border-t-transparent mb-4'></div>
-          <p className='text-xl text-gray-600'>Loading...</p>
-        </div>
-      </div>
-    );
+/**
+ * Guards every `/admin/dashboard/*` route.
+ *
+ * The check is server-backed: the provider only marks the session
+ * authenticated after `GET /api/auth/me/` succeeds with the rotating cookie.
+ * `requiredRole` adds a second, role-based layer (super_admin only).
+ */
+const ProtectedRoute = ({ children, requiredRole = null }) => {
+  const { status, isAuthenticated, user } = useAuth();
+  const location = useLocation();
+
+  if (status === AUTH_STATUS.LOADING) {
+    return <LoadingScreen message="Verifying your session…" />;
   }
 
-  if (!admin) {
-    return <Navigate to='/admin/login' replace />;
+  if (!isAuthenticated) {
+    return <Navigate to="/admin/login" replace state={{ from: location.pathname }} />;
   }
 
-  return children;
+  if (requiredRole && user?.role !== requiredRole && user?.role !== 'super_admin') {
+    return <Forbidden />;
+  }
+
+  return children ?? <Outlet />;
 };
 
 export default ProtectedRoute;

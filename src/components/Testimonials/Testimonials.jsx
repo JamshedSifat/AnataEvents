@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { contentApi } from '../../services/content';
 
 const Testimonials = () => {
   const [testimonials, setTestimonials] = useState([]);
@@ -9,29 +10,25 @@ const Testimonials = () => {
     loadTestimonials();
   }, []);
 
-  const loadTestimonials = () => {
+  const loadTestimonials = async () => {
     try {
       setLoading(true);
-      
-      // Load from localStorage (Admin data)
-      const savedTestimonials = localStorage.getItem('testimonials');
-      if (savedTestimonials) {
-        const data = JSON.parse(savedTestimonials);
-        setTestimonials(data);
-        setLoading(false);
-        return;
-      }
-
-      // Fallback to JSON file
-      fetch("/Testimonals.json")
-        .then((res) => res.json())
-        .then((data) => {
-          setTestimonials(data);
-          setLoading(false);
-        })
-        .catch(() => setLoading(false));
+      const data = await contentApi.testimonials();
+      setTestimonials(
+        data.map((item) => ({
+          _id: item.id,
+          name: item.name,
+          designation: item.designation,
+          company: item.company,
+          eventType: item.event_type,
+          rating: item.rating,
+          review: item.review,
+          image: item.image_src || '',
+        }))
+      );
     } catch (error) {
-      console.error('Error:', error);
+      setTestimonials([]);
+    } finally {
       setLoading(false);
     }
   };

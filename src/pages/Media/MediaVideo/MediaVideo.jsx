@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { contentApi } from '../../../services/content';
 
 const MediaVideo = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -9,47 +10,22 @@ const MediaVideo = () => {
     loadVideos();
   }, []);
 
-  const loadVideos = () => {
+  const loadVideos = async () => {
     try {
       setLoading(true);
-      
-      // Load from localStorage (Admin data)
-      const savedVideos = localStorage.getItem('videos');
-      if (savedVideos) {
-        const data = JSON.parse(savedVideos);
-        setVideos(data);
-        setLoading(false);
-        return;
-      }
-
-      // Default sample videos
-      const sampleVideos = [
-        {
-          _id: '1',
-          title: 'Corporate Event Highlight',
-          category: 'corporate',
-          youtubeId: 'dQw4w9WgXcQ',
-          description: 'Professional corporate event management and execution'
-        },
-        {
-          _id: '2',
-          title: 'Wedding Ceremony',
-          category: 'wedding',
-          youtubeId: '9bZkp7q19f0',
-          description: 'Beautiful wedding planning and decoration'
-        },
-        {
-          _id: '3',
-          title: 'Concert Production',
-          category: 'concert',
-          youtubeId: 'jNQXAC9IVRw',
-          description: 'Live music show and concert organization'
-        }
-      ];
-      setVideos(sampleVideos);
-      setLoading(false);
+      const data = await contentApi.videos({ page_size: 100 });
+      setVideos(
+        data.map((video) => ({
+          _id: video.id,
+          title: video.title,
+          description: video.description,
+          category: video.category,
+          youtubeId: video.youtube_id,
+        }))
+      );
     } catch (error) {
-      console.error('Error loading videos:', error);
+      setVideos([]);
+    } finally {
       setLoading(false);
     }
   };

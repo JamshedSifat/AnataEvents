@@ -1,6 +1,7 @@
 // File: src/Components/Hero.jsx (Updated - Removed Title)
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router';
+import { contentApi } from '../../services/content';
 
 const Hero = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
@@ -12,59 +13,21 @@ const Hero = () => {
         loadSlides();
     }, []);
 
-    const loadSlides = () => {
+    const loadSlides = async () => {
         try {
             setLoading(true);
-            
-            // Default slides with all content
-            const defaultSlides = [
-                {
-                    subtitle: "Luxury Events",
-                    description: "Transform your special moments into unforgettable experiences with our premium event planning services.",
-                    image: "https://www.anantabd.net/wp-content/uploads/2022/10/IMG_0386.jpg",
-                    stats: "500+ Events Planned"
-                },
-                {
-                    subtitle: "Events",
-                    description: "Elevate your business gatherings with sophisticated corporate event planning that impresses and inspires.",
-                    image: "https://www.anantabd.net/wp-content/uploads/2020/01/iscea-night-10.jpg",
-                    stats: "1000+ Happy Clients"
-                }
-            ];
-
-            // Try to load from localStorage
-            if (typeof window !== 'undefined' && window.localStorage) {
-                const savedSlides = localStorage.getItem('heroSlides');
-                
-                if (savedSlides) {
-                    try {
-                        const parsedSlides = JSON.parse(savedSlides);
-                        if (Array.isArray(parsedSlides) && parsedSlides.length > 0) {
-                            // Map to expected format (without title)
-                            const formattedSlides = parsedSlides
-                                .sort((a, b) => (a.order || 0) - (b.order || 0))
-                                .map(slide => ({
-                                    subtitle: slide.subtitle || "",
-                                    description: slide.description || "",
-                                    image: slide.image,
-                                    stats: slide.stats || ""
-                                }));
-                            
-                            setHeroSlides(formattedSlides);
-                            setLoading(false);
-                            return;
-                        }
-                    } catch (e) {
-                        console.error('Error parsing hero slides:', e);
-                    }
-                }
-            }
-
-            // Use default slides if localStorage is empty
-            setHeroSlides(defaultSlides);
-            setLoading(false);
+            const slides = await contentApi.heroSlides();
+            setHeroSlides(
+                slides.map((slide) => ({
+                    subtitle: slide.subtitle || '',
+                    description: slide.description || '',
+                    image: slide.image_src || slide.image_url || '',
+                    stats: slide.stats || '',
+                }))
+            );
         } catch (error) {
-            console.error('Error loading hero slides:', error);
+            setHeroSlides([]);
+        } finally {
             setLoading(false);
         }
     };

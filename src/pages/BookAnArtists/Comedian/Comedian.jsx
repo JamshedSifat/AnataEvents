@@ -11,36 +11,23 @@ const Comedian = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    let active = true;
     const fetchComedians = async () => {
       try {
         setLoading(true);
         setError(null);
-
-        // First try to load from localStorage (Admin data)
-        const savedComedians = localStorage.getItem('comedians');
-        if (savedComedians) {
-          const data = JSON.parse(savedComedians);
-          setComedians(data);
-          setLoading(false);
-          return;
-        }
-
-        // Fallback to JSON file
-        const response = await fetch("/ComedianData/comedians.json");
-        if (!response.ok) {
-          throw new Error("Failed to fetch comedian data");
-        }
-        const data = await response.json();
-        setComedians(data);
-      } catch (err) {
-        console.error("Error fetching comedians:", err);
-        setError("Failed to load comedian data. Please try again later.");
+        const data = await contentApi.artists({ category: 'comedian', page_size: 100 });
+        if (active) setComedians(data.map(mapArtist));
+      } catch {
+        if (active) setError('Failed to load comedian data. Please try again later.');
       } finally {
-        setLoading(false);
+        if (active) setLoading(false);
       }
     };
-
     fetchComedians();
+    return () => {
+      active = false;
+    };
   }, []);
 
   // Loading State

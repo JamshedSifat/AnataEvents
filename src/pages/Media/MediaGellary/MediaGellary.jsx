@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { contentApi } from '../../../services/content';
 
 const MediaGallery = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -10,54 +11,22 @@ const MediaGallery = () => {
     loadMedias();
   }, []);
 
-  const loadMedias = () => {
+  const loadMedias = async () => {
     try {
       setLoading(true);
-      
-      // Load from localStorage (Admin data)
-      const savedMedias = localStorage.getItem('medias');
-      if (savedMedias) {
-        const data = JSON.parse(savedMedias);
-        setMedias(data);
-        setLoading(false);
-        return;
-      }
-
-      // Default sample medias
-      const sampleMedias = [
-        {
-          _id: '1',
-          title: 'Corporate Event Setup',
-          category: 'corporate',
-          url: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop',
-          description: 'Professional corporate event setup'
-        },
-        {
-          _id: '2',
-          title: 'Wedding Decoration',
-          category: 'wedding',
-          url: 'https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=600&h=400&fit=crop',
-          description: 'Beautiful wedding decorations'
-        },
-        {
-          _id: '3',
-          title: 'Concert Stage',
-          category: 'concert',
-          url: 'https://images.unsplash.com/photo-1511379938547-c1f69b13e835?w=600&h=400&fit=crop',
-          description: 'Professional concert stage setup'
-        },
-        {
-          _id: '4',
-          title: 'Fashion Show Runway',
-          category: 'fashion',
-          url: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&h=400&fit=crop',
-          description: 'Fashion show runway'
-        },
-      ];
-      setMedias(sampleMedias);
-      setLoading(false);
+      const data = await contentApi.gallery({ page_size: 100 });
+      setMedias(
+        data.map((image) => ({
+          _id: image.id,
+          title: image.title,
+          category: image.album || 'corporate',
+          url: image.image_src || '',
+          description: image.caption,
+        }))
+      );
     } catch (error) {
-      console.error('Error loading medias:', error);
+      setMedias([]);
+    } finally {
       setLoading(false);
     }
   };

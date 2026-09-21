@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 import { Calendar, User, ArrowLeft } from 'lucide-react';
 import blogsData from '../../../public/Blog.json';
+import { contentApi } from '../../services/content';
 
 const PostCardDetails = () => {
   const { id } = useParams();
@@ -14,41 +15,23 @@ const PostCardDetails = () => {
     loadBlogDetail();
   }, [id]);
 
-  const loadBlogDetail = () => {
+  const loadBlogDetail = async () => {
     try {
       setLoading(true);
-
-      // ✅ Direct localStorage
-      let blogs = [];
-      const savedBlogs = localStorage.getItem('blogs');
-      
-      if (savedBlogs) {
-        blogs = JSON.parse(savedBlogs);
-      } else if (blogsData && Array.isArray(blogsData)) {
-        blogs = blogsData;
-      }
-
-      // Slug দিয়ে খুঁজুন
-      const foundBlog = blogs.find(b => b._id === id);
-
-      if (!foundBlog) {
-        console.error('Blog not found with id:', id);
-        setLoading(false);
-        return;
-      }
-
-      setBlog(foundBlog);
-
-      if (foundBlog) {
-        const related = blogs
-          .filter(b => b.category === foundBlog.category && b._id !== foundBlog._id)
-          .slice(0, 3);
-        setRelatedBlogs(related);
-      }
-
-      setLoading(false);
+      const blog = await contentApi.blog(id);
+      setBlog({
+        _id: blog.id,
+        title: blog.title,
+        category: blog.category,
+        content: blog.content,
+        author: blog.author_name,
+        image: blog.image_src || '',
+        date: blog.published_at || blog.created_at,
+        readMinutes: blog.read_minutes,
+      });
     } catch (error) {
-      console.error('Error loading blog:', error);
+      setBlog(null);
+    } finally {
       setLoading(false);
     }
   };

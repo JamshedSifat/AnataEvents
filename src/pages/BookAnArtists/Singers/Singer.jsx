@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import FilterBar from "./FilterBar";
+import { contentApi } from '../../../services/content';
+import { mapArtist } from '../../../services/mappers';
 
 const Singer = () => {
   const [singers, setSingers] = useState([]);
@@ -7,35 +9,23 @@ const Singer = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchSingers();
-  }, []);
-
-  const fetchSingers = () => {
-    try {
-      setLoading(true);
-      
-      // Load from localStorage (Admin data)
-      const savedSingers = localStorage.getItem('singers');
-      if (savedSingers) {
-        const data = JSON.parse(savedSingers);
-        setSingers(data);
-        setLoading(false);
-        return;
+    let active = true;
+    const load = async () => {
+      try {
+        setLoading(true);
+        const data = await contentApi.artists({ category: 'singer', page_size: 100 });
+        if (active) setSingers(data.map(mapArtist));
+      } catch {
+        if (active) setSingers([]);
+      } finally {
+        if (active) setLoading(false);
       }
-
-      // Fallback to JSON file
-      fetch("/SingersData/singersData.json")
-        .then((res) => res.json())
-        .then((data) => {
-          setSingers(data.singers);
-          setLoading(false);
-        })
-        .catch(() => setLoading(false));
-    } catch (error) {
-      console.error('Error:', error);
-      setLoading(false);
-    }
-  };
+    };
+    load();
+    return () => {
+      active = false;
+    };
+  }, []);
 
   return (
     <section className="py-10 bg-gray-50">
