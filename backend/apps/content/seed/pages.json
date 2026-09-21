@@ -1,0 +1,303 @@
+{
+  "why_choose_us": [
+    {
+      "icon": "👥",
+      "title": "Expert Planning Team",
+      "description": "Our certified event planners bring 16+ years of experience and creativity to make your vision come to life.",
+      "highlight": "16+ Years Experience"
+    },
+    {
+      "icon": "🏆",
+      "title": "Award-Winning Company",
+      "description": "Recognized as the Best Event Management Company in Dhaka Bangladesh with proven track record of excellence.",
+      "highlight": "Rank #1 Event Planners"
+    },
+    {
+      "icon": "💎",
+      "title": "Premium Services",
+      "description": "From corporate events to exhibitions, brand activations to product launches - we deliver flawless execution.",
+      "highlight": "Full-Service Excellence"
+    },
+    {
+      "icon": "🎯",
+      "title": "100% Satisfaction",
+      "description": "Your happiness is our priority. We guarantee exceptional service and flawless event execution across Bangladesh.",
+      "highlight": "98% Client Rating"
+    }
+  ],
+  "why_choose_us_badge": "🏆 Best Event Management Company in Dhaka Bangladesh",
+  "why_choose_us_title": [
+    "Rank #1 Event Planners",
+    "Dhaka Bangladesh"
+  ],
+  "why_choose_us_paragraphs": [
+    "Ananta Events and Entertainment – the Best Event Management Company in Dhaka Bangladesh. We are award winning event planners in Bangladesh with 16 years of experience on managing Corporate Events, Conference & Seminars, Exhibition organized, Exhibition stand Fabrication, Brand Activation Event, ATL and BTL activities, product launching event in Bangladesh.",
+    "As a professional event planning service provider, we specialize in flawless and gorgeous event planning. Our qualified and experienced team handles conference, brand activation event, exhibition organization, product launching event, exhibition stand fabrication, corporate event management, celebrity management, and Digital influencer management agency services.",
+    "Join hundreds of satisfied clients who trusted Bangladesh's #1 Event Planning Company with their most important moments. Let's create something extraordinary together."
+  ],
+  "clients": [
+    {
+      "name": "Grameenphone",
+      "logo": "https://www.anantabd.net/wp-content/uploads/2025/09/1-200x100.png"
+    },
+    {
+      "name": "Banglalink",
+      "logo": "https://www.anantabd.net/wp-content/uploads/2025/09/2.png"
+    },
+    {
+      "name": "Unilever",
+      "logo": "https://www.anantabd.net/wp-content/uploads/2025/09/6-200x100.jpg"
+    },
+    {
+      "name": "BRAC",
+      "logo": "https://www.anantabd.net/wp-content/uploads/2025/09/56.jpg"
+    }
+  ],
+  "clients_subtitle": "We are proud to have collaborated with some of the most respected brands and organizations across Bangladesh.",
+  "cities": [
+    "Dhaka",
+    "Chattogram",
+    "Sylhet",
+    "Cox",
+    ",",
+    ",",
+    ",",
+    ",",
+    ",",
+    ","
+  ],
+  "coverage_subtitle": "From bustling capitals to serene coastal towns, we bring our premium event planning expertise to every corner of Bangladesh.",
+  "home_faqs": [
+    {
+      "question": "What is Ananta Events & Entertainment?",
+      "answer": "Ananta Events & Entertainment is a leading event management company in Bangladesh specializing in creating memorable experiences for corporate, social, and cultural events."
+    }
+  ],
+  "corporate_faqs": [
+    {
+      "question": "What services does Ananta Events & Entertainment provide?",
+      "answer": "Ananta Events & Entertainment offers a wide range of event management services, including corporate events, brand activations, weddings, social events, product launches, conferences, exhibitions, concerts, fairs, and cultural programs. We provide both creative planning and flawless execution to make every event a success."
+    }
+  ],
+  "virtual_videos": [
+    {
+      "title": "Virtual Conference Demo",
+      "url": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      "description": "Watch our virtual conference setup"
+    },
+    {
+      "title": "Live Streaming Setup",
+      "url": "https://www.youtube.com/embed/9bZkp7q19f0",
+      "description": "Professional live streaming technology"
+    },
+    {
+      "title": "Hybrid Event Experience",
+      "url": "https://www.youtube.com/embed/jNQXAC9IVRw",
+      "description": "Seamless hybrid event management"
+    },
+    {
+      "title": "Virtual Exhibition Tour",
+      "url": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      "description": "Interactive virtual exhibition platform"
+    },
+    {
+      "title": "Studio Production",
+      "url": "https://www.youtube.com/embed/9bZkp7q19f0",
+      "description": "Professional studio setup & production"
+    },
+    {
+      "title": "Virtual Networking",
+      "url": "https://www.youtube.com/embed/jNQXAC9IVRw",
+      "description": "Engaging virtual networking experience"
+    }
+  ],
+  "virtual_gallery": [
+    {
+      "title": "Virtual Conference Demo",
+      "url": "https://www.youtube.com/embed/dQw4w9WgXcQ',\n      description: 'Watch our virtual conference setup"
+    },
+    {
+      "title": "Live Streaming Setup",
+      "url": "https://www.youtube.com/embed/9bZkp7q19f0',\n      description: 'Professional live streaming technology"
+    },
+    {
+      "title": "Hybrid Event Experience",
+      "url": "https://www.youtube.com/embed/jNQXAC9IVRw',\n      description: 'Seamless hybrid event management"
+    },
+    {
+      "title": "Virtual Exhibition Tour",
+      "url": "https://www.youtube.com/embed/dQw4w9WgXcQ',\n      description: 'Interactive virtual exhibition platform"
+    },
+    {
+      "title": "Studio Production",
+      "url": "https://www.youtube.com/embed/9bZkp7q19f0',\n      description: 'Professional studio setup & production"
+    },
+    {
+      "title": "Virtual Networking",
+      "url": "https://www.youtube.com/embed/jNQXAC9IVRw',\n      description: 'Engaging virtual networking experience"
+    },
+    {
+      "title": "Virtual Conference",
+      "url": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop"
+    },
+    {
+      "title": "Virtual Exhibition",
+      "url": "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=800&h=600&fit=crop"
+    },
+    {
+      "title": "Live Streaming Setup",
+      "url": "https://images.unsplash.com/photo-1511379938547-c1f69b13e835?w=800&h=600&fit=crop"
+    },
+    {
+      "title": "Hybrid Event",
+      "url": "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&h=600&fit=crop"
+    },
+    {
+      "title": "Studio Setup",
+      "url": "https://images.unsplash.com/photo-1487180144351-b8472da7d491?w=800&h=600&fit=crop"
+    },
+    {
+      "title": "Virtual Networking",
+      "url": "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=800&h=600&fit=crop"
+    }
+  ],
+  "virtual_paragraphs": [
+    "Are you trying to find virtual event solutions to make reference to global audience beyond physical bounds? Ananta Events Bangladesh is that the virtual event company that gets you covered by offering seamless virtual event planning and strategic content production with utilization of inventive technologies and experienced digital event strategies.",
+    "Whether you're choosing hybrid events or fully virtual events, starting from virtual conferences, virtual exhibition, virtual trade shows, virtual meetings, online conferences, webinars, company meetings to product launches, we are dedicated to assist you create an immersive environment that permits virtual networking and maximizes engagement for your audience.",
+    "Ananta Events Bangladesh is leading virtual event planner in total brand activation specialising in engaging people, creating experiences and activating brands. Our businesses are diversified in numerous cities across Bangladesh."
+  ],
+  "book_artist_cards": [],
+  "contact_paragraphs": [
+    "Ready to plan your dream event? Get in touch with our expert team for a personalized consultation and let's bring your vision to life."
+  ],
+  "contact_info": [],
+  "contact_cards": [],
+  "opportunity_cards": [
+    {
+      "title": "Vendor Registration",
+      "description": "Register your business and collaborate with us for events"
+    },
+    {
+      "title": "Talent Hunt",
+      "description": "Showcase your talent and get discovered by event organizers"
+    },
+    {
+      "title": "Artist Registration",
+      "description": "Register as an artist and get booking opportunities"
+    },
+    {
+      "title": "Career Opportunities",
+      "description": "Join our team and build your career in event management"
+    }
+  ],
+  "talent_hunt_paragraphs": [
+    "{talent.experience || '0'} years experience",
+    "Email: {selectedTalent.email}",
+    "Phone: {selectedTalent.phone}"
+  ],
+  "influencer_seo": {
+    "heading": "Influencer Marketing Agency in Bangladesh",
+    "paragraphs": [
+      "Ananta Events & Entertainment is one of the best Influencer Marketing Agency in Bangladesh. Our Influencer Management Agency Service specializes in organizing and delegating influencers across all media platforms. We provide on-time support, strategic talent management, and manage social media pages with trained influencers who help your brand reach millions of people. Our team excels in digital marketing and market research to provide strategies best-suited to your business model."
+    ],
+    "items": []
+  },
+  "influencer_what": {
+    "heading": "What is Digital Marketing?",
+    "paragraphs": [
+      "Digital Marketing refers to any marketing conducted via technology - on phones, computers, tablets, etc. It encompasses multiple strategies including Content Marketing, Pay-per-click Marketing, Affiliate Marketing, and Social Media Marketing.",
+      "Social Media Marketing is one of the most rewarding yet challenging types of digital marketing. To make your social media strategy thrive and reach the right audience, the simplest approach is to hire a Social Media Influencer who already has your target demographic's trust and attention."
+    ],
+    "items": []
+  },
+  "influencer_why": {
+    "heading": "Why Do You Need an Influencer?",
+    "paragraphs": [
+      "A social media Influencer can directly connect a brand to their targeted audience. Furthermore, Influencer marketing adds a personal touch to a brands marketing. Such an addition is beneficial as it allows to create brand loyalty. The Influencers also benefit as a good brand can boost their image and help them better communicate."
+    ],
+    "items": []
+  },
+  "influencer_social": {
+    "heading": "Social Media Influencers Marketing",
+    "paragraphs": [
+      "Influencers on social media hold tremendous power in the digital marketing ecosystem. In recent years, social media has become an indispensable platform for marketing that cannot be ignored. To capitalize on this trend in the digital landscape, you need strategic direction. The best solution is to hire a social media influencer who can focus and direct your products to your targeted consumers.",
+      "Influencers create genuine connections with audiences through trusted personalities and authentic content.",
+      "Access highly specific audience segments aligned with your brand values and business objectives."
+    ],
+    "items": []
+  },
+  "influencer_process": {
+    "heading": "Six-Step Campaign Strategy",
+    "paragraphs": [
+      "From discovery to optimization, we manage every aspect of your influencer marketing campaign"
+    ],
+    "items": [
+      {
+        "title": "Brand Discovery",
+        "description": "We analyze your brand values, target audience, and campaign objectives"
+      },
+      {
+        "title": "Influencer Curation",
+        "description": "Identify and vet influencers that align with your brand DNA"
+      },
+      {
+        "title": "Strategy Development",
+        "description": "Create a customized campaign strategy with clear KPIs"
+      },
+      {
+        "title": "Campaign Execution",
+        "description": "Manage all negotiations, content creation, and posting"
+      },
+      {
+        "title": "Performance Analytics",
+        "description": "Deliver detailed reports with engagement and conversion metrics"
+      },
+      {
+        "title": "Optimization",
+        "description": "Continuously refine strategy based on real-time performance data"
+      }
+    ]
+  },
+  "photography": {
+    "heading": "\n            Professional Photography & Video Services\n          ",
+    "paragraphs": [],
+    "items": []
+  },
+  "corporate": {
+    "paragraphs": [
+      "Ananta Events and Entertainment is one of Bangladesh's best corporate event management companies. In Dhaka, Bangladesh, we are regarded as the best corporate event planners. We provide professional event management services, project scheduling, meeting, and brand activation events, show organizing, product launching events, exhibition stall construction, Exhibition stand Fabrication, exhibition booth production and location procurement.",
+      "As a best Corporate Event Management Company in Bangladesh, we provide 360 Degree Corporate Event services . We do ✓Corporate Event Planners, ✓Event Organizers For Corporate, ✓Corporate Event Organisers, ✓Corporate Event Promotion Planners in Dhaka.",
+      "A Corporate Event management company take the responsibility to organize an event from the planning to execution. Firstly, we understand the client's requirements make a scratch. Then we make the plan and execution the event either it corporate or social events..."
+    ],
+    "heading": "\n            Corporate Event Management{\" \"}\n            <span className=\"text-primary\">Company in Bangladesh</span>\n          "
+  },
+  "exhibition": {
+    "paragraphs": [
+      "Stand out at your next expo with thoughtful booth layouts, strong branding, and visitor-friendly flow.",
+      "Guide visitors naturally—welcome zone, demo zone, meeting space, and storage.",
+      "High-impact graphics, consistent colors, and readable signage from distance.",
+      "Add interactive demos, sampling, lead forms, and comfortable seating."
+    ],
+    "heading": "\n            Best Exhibition Stall Design\n          "
+  },
+  "services_intro": [
+    "Creating exceptional experiences that exceed expectations and leave lasting memories"
+  ],
+  "portfolio_paragraphs": [
+    "Discover our recent masterpieces and see how we transform dreams into extraordinary experiences"
+  ],
+  "media_paragraphs": [
+    "Explore our gallery, blog, and videos showcasing our amazing events and services",
+    "{tab.id === 'gallery' && 'Browse our stunning event photography collection'} {tab.id === 'blog' && 'Read latest event management tips and insights'} {tab.id === 'video' && 'Watch event highlights and behind-the-scenes content'}"
+  ],
+  "about_paragraphs": [
+    "For over 15 years, we've been transforming dreams into reality, creating unforgettable experiences that celebrate life's most precious moments."
+  ],
+  "book_artists_paragraphs": [
+    "Choose from different types of artists and performers for your special event",
+    "Professional performers available for weddings, corporate events, festivals, and celebrations"
+  ],
+  "opportunities_paragraphs": [
+    "Join AnataEvents and be part of Bangladesh's premier event management platform"
+  ]
+}

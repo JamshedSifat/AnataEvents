@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "name": "Hanif Sanket",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTX4NI2dUSeiz5Lsrhgjl-fnJYx1aDQAv-uzGZK4oCipgGOh7nAYY7PMG57sFMl_WmlSJYfwm97JcVNtv0tmsrJxy0dhqaY44njNoDlSlg&s=10",
+    "country": "Bangladesh",
+    "city": "Dhaka",
+    "famous_show": "Ityadi",
+    "bio": "Legendary producer, host, and comedy writer who created the iconic satirical talk show 'Ityadi'. Known for his sharp wit and political commentary that shaped Bengali comedy television.",
+    "rating": 4.9,
+    "experience_years": 35,
+    "genres": ["Political Satire", "Talk Show Comedy", "Social Commentary"],
+    "notable_specials": ["Ityadi Season 1-30", "Ityadi Live", "Comedy Special Collections"],
+    "social_media": {
+      "twitter": "@HanifSanket",
+      "instagram": "@hanif_sanket_official",
+      "facebook": "Hanif Sanket"
+    },
+    "awards": ["National Television Award", "Lifetime Comedy Achievement Award", "Bangladesh Media Award"],
+    "tour_status": "Active",
+    "followers": "2.5M",
+    "language": "Bangla",
+    "speciality": "Political satire, Talk show comedy, Comedy writing",
+    "notable_achievement": "Creator of legendary show 'Ityadi'"
+  },
+  {
+    "id": 2,
+    "name": "Tele Samad",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmcPw2LFM6J2_-Md9QGRXnLLCfQeAD9L2N4neAwnAAJ42sSQreU0BjdXNAIl5V2hk3s4ZH1YxyU3ww2VNBzBfLLUo9-9jGt3PLpxL3X9c&s=10",
+    "country": "Bangladesh",
+    "city": "Dhaka",
+    "famous_show": "Film Comedy Golden Era",
+    "bio": "Legendary film comedian of Bangladesh's golden age cinema. Master of physical comedy and comic timing who appeared in numerous classic Bengali films.",
+    "rating": 5.0,
+    "experience_years": 50,
+    "genres": ["Physical Comedy", "Slapstick", "Film Comedy", "Situational Humor"],
+    "notable_specials": ["Classic Film Comedy Collection", "Tele Samad Cinema Retrospective", "Golden Era Comedy"],
+    "social_media": {
+      "twitter": "@TeleSamad",
+      "instagram": "@tele_samad_official",
+      "facebook": "Tele Samad"
+    },
+    "awards": ["National Film Award", "Meritorious Artist Award", "Cinema Legend Award"],
+    "tour_status": "Semi-Active",
+    "followers": "1.8M",
+    "language": "Bangla",
+    "speciality": "Physical comedy, Slapstick, Film acting",
+    "notable_achievement": "Cinema legend with 50+ years experience"
+  },
+  {
+    "id": 3,
+    "name": "Abu Hena Rony",
+    "image": "https://www.tbsnews.net/bangladesh/comedian-abu-hena-rony-among-five-burnt-gazipur-gas-balloon-explosion-497870",
+    "country": "Bangladesh",
+    "city": "Dhaka",
+    "famous_show": "Rony's Stand-up Comedy",
+    "bio": "Contemporary stand-up comedian known for his observational humor about everyday Bangladeshi life, relationships, and modern society. Pioneer of modern stand-up comedy in Bangladesh.",
+    "rating": 4.7,
+    "experience_years": 14,
+    "genres": ["Stand-up Comedy", "Observational Humor", "Social Commentary", "Relationship Comedy"],
+    "notable_specials": ["Rony Live at Dhaka", "Modern Bangladesh Comedy", "Stand-up Special 2023"],
+    "social_media": {
+      "twitter": "@AbuHenaRony",
+      "instagram": "@abuhenarony",
+      "facebook": "Abu Hena Rony"
+    },
+    "awards": ["Best Stand-up Comedian Award", "Dhaka Comedy Festival Winner", "Audience Choice Award 2022"],
+    "tour_status": "Active",
+    "followers": "1.3M",
+    "language": "Bangla, English",
+    "speciality": "Stand-up comedy, Observational humor, Modern life jokes",
+    "notable_achievement": "Pioneer of modern stand-up comedy movement in Bangladesh"
+  },
+  {
+    "id": 4,
+    "name": "Naveed Mahbub",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPigZSeTxheEDvE6juNPUfpoYonAxBUQPaQg&s",
+    "country": "Bangladesh",
+    "city": "Dhaka",
+    "famous_show": "Naveed's Stand-up Show",
+    "bio": "Professional stand-up comedian and comedy writer bringing fresh and bold humor to Bangladesh's comedy scene. Known for his witty one-liners and street-smart comedy.",
+    "rating": 4.6,
+    "experience_years": 11,
+    "genres": ["Stand-up Comedy", "Street Humor", "Social Satire", "Dark Comedy"],
+    "notable_specials": ["Bold & Funny", "Naveed Comedy Night", "Stand-up Live Series"],
+    "social_media": {
+      "twitter": "@NaveedMahbub",
+      "instagram": "@naveedmahbub.comedy",
+      "facebook": "Naveed Mahbub"
+    },
+    "awards": ["Best Comedy Writer Award", "Stand-up Star 2021", "Comedy Innovation Award"],
+    "tour_status": "Active",
+    "followers": "980K",
+    "language": "Bangla, English",
+    "speciality": "Street humor, Dark comedy, Comedy writing",
+    "notable_achievement": "Rising star in Bangladesh stand-up comedy scene"
+  },
+  {
+    "id": 5,
+    "name": "Raba Khan",
+    "image": "https://thefamemagazine.com/wp-content/webp-express/webp-images/uploads/2024/05/Raba-Khan-777x1024.jpg.webp",
+    "country": "Bangladesh",
+    "city": "Dhaka",
+    "famous_show": "Raba Khan Comedy Videos",
+    "bio": "Social media content creator and comedian who revolutionized comedy content creation in Bangladesh through viral videos and digital platforms. Known for relatable and fun content.",
+    "rating": 4.8,
+    "experience_years": 7,
+    "genres": ["Digital Comedy", "Viral Content", "Sketch Comedy", "Relatable Humor"],
+    "notable_specials": ["Viral Comedy Collection", "Social Media Comedy Hits", "Digital Comedy Series"],
+    "social_media": {
+      "twitter": "@RabaKhanTV",
+      "instagram": "@raba.khan",
+      "facebook": "Raba Khan"
+    },
+    "awards": ["Digital Content Creator Award", "Viral Video Award 2023", "Youth Entertainer Award"],
+    "tour_status": "Active",
+    "followers": "3.2M",
+    "language": "Bangla, English",
+    "speciality": "Digital comedy, Viral content, Sketch comedy",
+    "notable_achievement": "Most followed Bangladeshi comedy creator on social media"
+  }
+]

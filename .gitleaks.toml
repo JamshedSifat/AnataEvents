@@ -1,0 +1,20 @@
+# Gitleaks configuration for Ananta Events.
+# The old hardcoded demo password below is *known and intentional*: it is
+# documented in docs/SECURITY.md and must be rewritten out of history by the
+# repository owner. The rule stays on so new secrets are always caught.
+title = "Ananta Events secret scanning"
+
+[allowlist]
+description = "Historical, already-public demo credentials documented in docs/SECURITY.md"
+regexes = [
+  '''admin123''',
+  '''admin@ananta\.com''',
+]
+
+[[rules]]
+id = "ananta-generic-secret"
+description = "Hardcoded credentials or API keys"
+regex = '''(?i)(secret|password|passwd|api[_-]?key|token)\s*[:=]\s*['"][^'"\s]{8,}['"]'''
+paths = ['''(?i)\.(js|jsx|py|json|ya?ml|env)$''']
+[rules.allowlist]
+paths = ['''^backend/tests/''', '''^docs/SECURITY\.md$''', '''\.env\.example$''']

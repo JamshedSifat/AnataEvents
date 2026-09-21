@@ -1,0 +1,51 @@
+[project]
+name = "ananta-events-backend"
+version = "1.0.0"
+description = "Django + DRF + PostgreSQL backend for the Ananta Events website and admin dashboard"
+requires-python = ">=3.11"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+exclude = ["migrations", ".venv", "staticfiles", "media"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "C4", "DJ", "S", "SIM", "RUF"]
+ignore = [
+    "E501",   # line length handled by black
+    "S101",   # asserts are fine in tests
+    "RUF012", # mutable class attrs (Django style)
+    "DJ001",  # TextField null=True is intentional in a few places
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S106", "S105", "S108"]
+# Settings read secrets from the environment; the dev defaults are intentionally
+# public placeholders guarded by explicit DEBUG-only construction.
+"config/settings/*" = ["F405", "F403", "S105", "S106", "S108"]
+"*/migrations/*" = ["E", "F", "I"]
+"*/management/commands/*" = ["S105", "S106", "S108"]
+
+[tool.black]
+line-length = 100
+target-version = ["py311"]
+extend-exclude = "migrations|staticfiles|media"
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "config.settings.test"
+python_files = ["test_*.py", "*_test.py"]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers --ds=config.settings.test"
+markers = [
+    "slow: marks tests as slow",
+]
+filterwarnings = ["ignore::DeprecationWarning"]
+
+[tool.coverage.run]
+source = ["apps", "config"]
+omit = ["*/migrations/*", "*/management/commands/seed_demo_data.py", "config/settings/*", "config/asgi.py", "config/wsgi.py"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
+fail_under = 80

@@ -1,0 +1,130 @@
+[
+  {
+    "id": 1,
+    "name": "Pooja Sengupta",
+    "image": "https://www.tbsnews.net/sites/default/files/styles/big_3/public/images/2021/10/15/pooja_sengupta.png",
+    "country": "Bangladesh",
+    "city": "Dhaka",
+    "famous_work": "Contemporary Dance Theatre",
+    "bio": "Contemporary and dance theatre artist representing Bangladesh internationally. Participated in numerous global dance festivals and cultural exchanges. Known for her innovative approach to contemporary dance and cultural diplomacy.",
+    "rating": 4.9,
+    "experience_years": 20,
+    "dance_styles": ["Contemporary", "Dance Theatre", "Modern", "Experimental"],
+    "notable_dancers": ["Arthy Ahmed", "Ridy Sheikh", "Sharmila Banerjee"],
+    "status": "Active",
+    "followers": "1.9M",
+    "awards": ["International Dance Recognition", "Global Festival Participation", "Cultural Ambassador Award"],
+    "social_media": {
+      "twitter": "@Poojasengupta",
+      "instagram": "@pooja_sengupta_dancer",
+      "facebook": "Pooja Sengupta"
+    }
+  },
+  {
+    "id": 2,
+    "name": "Arthy Ahmed",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9qCNFMpjCVy0GnmwrDHhb76Cy0qDXEAsasA&s",
+    "country": "Bangladesh",
+    "city": "Dhaka",
+    "famous_work": "Classical Dance Excellence",
+    "bio": "One of the most respected classical dancers in Bangladesh and recipient of Ekushey Padak, the highest civilian award for cultural excellence. Pioneer in preserving and promoting classical dance forms.",
+    "rating": 5.0,
+    "experience_years": 28,
+    "dance_styles": ["Kathak", "Bharatanatyam", "Classical", "Traditional"],
+    "notable_dancers": ["Sharmila Banerjee", "Shibli Mohammad", "Ashna Habib Bhabna"],
+    "status": "Active",
+    "followers": "2.3M",
+    "awards": ["Ekushey Padak", "National Dance Award", "Classical Excellence"],
+    "social_media": {
+      "twitter": "@ArthyAhmed",
+      "instagram": "@arthy_ahmed_official",
+      "facebook": "Arthy Ahmed"
+    }
+  },
+  {
+    "id": 3,
+    "name": "Ridy Sheikh",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTle-Ytb-A_yYSP3jtK5eI2lzV8zRgxvtS4kQ&s",
+    "country": "Bangladesh",
+    "city": "Dhaka",
+    "famous_work": "TV and Social Media Dance",
+    "bio": "Popular TV and social media dancer, winner of Channel i Shera Nachiye. Known for her engaging performances on television and viral social media content. Brings contemporary dance to mainstream audiences.",
+    "rating": 4.8,
+    "experience_years": 12,
+    "dance_styles": ["Contemporary", "Bollywood", "Hip-Hop", "Commercial"],
+    "notable_dancers": ["Pooja Sengupta", "Ashna Habib Bhabna", "Sadia Islam Mou"],
+    "status": "Active",
+    "followers": "2.7M",
+    "awards": ["Channel i Shera Nachiye Winner", "TV Dance Award", "Social Media Star"],
+    "social_media": {
+      "twitter": "@RidySheikh",
+      "instagram": "@ridy_sheikh_official",
+      "facebook": "Ridy Sheikh"
+    }
+  },
+ 
+  {
+    "id": 5,
+    "name": "Sharmila Banerjee",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYeA04HYsXO_pGm2YTokfiteXauZkVqomvdw&s",
+    "country": "Bangladesh",
+    "city": "Dhaka",
+    "famous_work": "Chhayanaut Dance Department",
+    "bio": "Renowned classical and creative dancer, head of dance department at Chhayanaut. Dedicated to preserving classical dance traditions while exploring creative innovations. Mentor to many young dancers.",
+    "rating": 4.9,
+    "experience_years": 26,
+    "dance_styles": ["Kathak", "Classical", "Creative", "Fusion"],
+    "notable_dancers": ["Arthy Ahmed", "Ashna Habib Bhabna", "Shibli Mohammad"],
+    "status": "Active",
+    "followers": "1.8M",
+    "awards": ["Chhayanaut Excellence", "Classical Dance Master", "Cultural Icon"],
+    "social_media": {
+      "twitter": "@SharmilaB",
+      "instagram": "@sharmila_banerjee_dance",
+      "facebook": "Sharmila Banerjee"
+    }
+  },
+  {
+    "id": 6,
+    "name": "Ashna Habib Bhabna",
+    "image": "https://www.tbsnews.net/sites/default/files/styles/infograph/public/images/2020/04/19/bhabhna_2.jpg",
+    "country": "Bangladesh",
+    "city": "Dhaka",
+    "famous_work": "TV Acting and Classical Dance",
+    "bio": "Popular performer known for exceptional classical dance performances and television acting. Combines traditional classical training with modern entertainment appeal. Multi-talented performer.",
+    "rating": 4.8,
+    "experience_years": 16,
+    "dance_styles": ["Classical", "Contemporary", "TV Performance", "Commercial"],
+    "notable_dancers": ["Ridy Sheikh", "Sharmila Banerjee", "Sadia Islam Mou"],
+    "status": "Active",
+    "followers": "2.4M",
+    "awards": ["TV Performance Award", "Classical Dance Excellence", "Best Performer"],
+    "social_media": {
+      "twitter": "@AshnaHabib",
+      "instagram": "@ashna_habib_bhabna",
+      "facebook": "Ashna Habib Bhabna"
+    }
+  },
+  {
+    "id": 7,
+    "name": "Sadia Islam Mou",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGx2MfeG7yGkmiZn5UypkLJH-xKCJeRi9XBQ&s",
+    "country": "Bangladesh",
+    "city": "Dhaka",
+    "famous_work": "Television Dance Icon",
+    "bio": "Legendary dancer and TV personality in Bangladesh with a career spanning decades. Known for her captivating performances and significant contribution to television entertainment. Cultural icon.",
+    "rating": 4.9,
+    "experience_years": 30,
+    "dance_styles": ["Classical", "Folk", "Bollywood", "Television"],
+    "notable_dancers": ["Ashna Habib Bhabna", "Ridy Sheikh", "Pooja Sengupta"],
+    "status": "Active",
+    "followers": "2.2M",
+    "awards": ["TV Legend Award", "Lifetime Achievement", "Cultural Icon"],
+    "social_media": {
+      "twitter": "@SadiaIslamMou",
+      "instagram": "@sadia_islam_mou",
+      "facebook": "Sadia Islam Mou"
+    }
+  }
+  
+]

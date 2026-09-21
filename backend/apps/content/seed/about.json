@@ -1,0 +1,93 @@
+{
+    "stats": [
+        { "number": "500+", "label": "Events Planned", "icon": "🎭" },
+        { "number": "15+", "label": "Years Experience", "icon": "⏰" },
+        { "number": "98%", "label": "Client Satisfaction", "icon": "⭐" },
+        { "number": "50+", "label": "Luxury Venues", "icon": "🏛️" }
+    ],
+    "team": [
+        {
+            "name": "Ataur Rahman",
+            "role": "Creative Director",
+            "image": "https://www.anantabd.net/wp-content/uploads/2020/03/21_Small.jpg",
+            "description": "15+ years in luxury event planning"
+        },
+        {
+            "name": "Syed Mahabubul Alam",
+            "role": "Event Coordinator",
+            "image": "https://www.anantabd.net/wp-content/uploads/2020/03/mahubu.jpg",
+            "description": "Expert in corporate and gala events"
+        },
+        {
+            "name": "Mahmudul Hasan",
+            "role": "Design Specialist",
+            "image": "https://www.anantabd.net/wp-content/uploads/2020/03/Mahmudul-Hasan.jpg",
+            "description": "Award-winning event designer"
+        },
+        {
+            "name": "Saiduz Zaman Raju",
+            "role": "Design Specialist",
+            "image": "https://www.anantabd.net/wp-content/uploads/2020/03/raju.jpg",
+            "description": "Award-winning event designer"
+        },
+        {
+            "name": "Abdul Hamid",
+            "role": "Design Specialist",
+            "image": "https://www.anantabd.net/wp-content/uploads/2020/03/hamid.jpg",
+            "description": "Award-winning event designer"
+        },
+        {
+            "name": "Nadim Mahamud Azad",
+            "role": "Design Specialist",
+            "image": "https://www.anantabd.net/wp-content/uploads/2020/03/azad.jpg",
+            "description": "Award-winning event designer"
+        },
+        {
+            "name": "Md. Almas",
+            "role": "Design Specialist",
+            "image": "https://www.anantabd.net/wp-content/uploads/2020/03/almas2.jpg",
+            "description": "Award-winning event designer"
+        },
+        {
+            "name": "Md. Arif Hasan",
+            "role": "Design Specialist",
+            "image": "https://www.anantabd.net/wp-content/uploads/2020/03/Ariful-Islam.jpg",
+            "description": "Award-winning event designer"
+        },
+        {
+            "name": "Md. Belal",
+            "role": "Design Specialist",
+            "image": "https://www.anantabd.net/wp-content/uploads/2020/03/aso..jpg",
+            "description": "Award-winning event designer"
+        },
+        {
+            "name": "Sohel Rana",
+            "role": "Design Specialist",
+            "image": "https://www.anantabd.net/wp-content/uploads/2020/03/Sohel.jpg",
+            "description": "Award-winning event designer"
+        }
+        
+    ],
+    "values": [
+        {
+            "icon": "💎",
+            "title": "Excellence",
+            "description": "We strive for perfection in every detail, ensuring your event exceeds expectations."
+        },
+        {
+            "icon": "🤝",
+            "title": "Trust",
+            "description": "Building lasting relationships through transparency, reliability, and exceptional service."
+        },
+        {
+            "icon": "✨",
+            "title": "Innovation",
+            "description": "Creative solutions and cutting-edge ideas that make your event truly unique."
+        },
+        {
+            "icon": "❤️",
+            "title": "Passion",
+            "description": "Every celebration is personal to us. Your joy is our greatest achievement."
+        }
+    ]
+}

@@ -1,0 +1,33 @@
+[
+  {
+    "id": 1,
+    "name": "Md Rejoan Hasan",
+    "designation": "Supervisor - Core IT",
+    "company": "Dhaka",
+    "image": "https://www.anantabd.net/wp-content/uploads/2025/08/528857913_1392395591826866_7017150491705011268_n.jpg",
+    "rating": 5,
+    "review": "I am proud to have worked with Ananta Events and Entertainment Bangladesh. Their team is professional, responsible, and creative in every sense. As a Supervisor in Core IT, I have personally observed how carefully they manage planning, coordination, and execution—always paying attention to the smallest details and ensuring timely delivery. Their teamwork, client support, and service quality truly set them apart. I believe Ananta Events and Entertainment Bangladesh will continue to achieve greater milestones and establish itself as one of the leading names in the country’s event management industry.",
+    "eventType": "Corporate Event"
+  },
+  {
+    "id": 2,
+    "name": "Misbahul Alam",
+    "designation": "operation Assistant -SEO Expate BD LTD",
+    "company": "Chattogram",
+    "image": "https://www.anantabd.net/wp-content/uploads/2025/08/Misbahul-CV.jpg",
+    "rating": 5,
+    "review": "I am proud to have had the opportunity to work with Ananta Events and Entertainment Bangladesh. Their team is primarily professional, responsible and creative. As an operations assistant, I have seen how much importance they attach to event planning and dedication, even the smallest details are taken into consideration and delivered on time. They are known for their teamwork, support and quality. I believe that Mano is a top-notch event and Ananta Entertainment Bangladesh will do even bigger things to become a name in the event regent industry of the country.",
+    "eventType": "Wedding"
+  },
+  {
+    "id": 3,
+    "name": "Abu Hasan",
+    "designation": "In-Charge DevSolve LTD",
+    "company": "NGO Bangladesh",
+    "image": "https://www.anantabd.net/wp-content/uploads/2025/08/515776105_750067394411084_8983683463825290336_n.jpg",
+    "rating": 5,
+    "review": "I am truly delighted to share my experience with Ananta Events and Entertainment Bangladesh. Their team is highly professional, responsible, and innovative in their approach. As an In-Charge at DevSolve LTD, I have closely noticed how effectively they plan, organize, and execute events with precision-every detail is managed with care, and delivery is always on time. Their strong teamwork, client-oriented support, and uncompromising quality make them stand out in the industry. I am confident that Ananta Events and Entertainment Bangladesh will continue to grow and become one of the top leaders in the country's event management sector.",
+    "eventType": "Gala Event"
+  }
+ 
+]
