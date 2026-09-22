@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { api } from '../../../services/api';
 
 const CoreValues = () => {
        const [data, setData] = useState({
@@ -15,38 +16,24 @@ const CoreValues = () => {
     
         // useEffect runs when component loads
         useEffect(() => {
-            // Create function to fetch data
             const fetchAboutData = async () => {
                 try {
-                    // Fetch the JSON file from public folder
-                    const response = await fetch('/About/About.json');
-    
-                    // Check if fetch was successful
-                    if (!response.ok) {
-                        throw new Error('Failed to load data');
-                    }
-    
-                    // Convert response to JSON
-                    const jsonData = await response.json();
-    
-                    // Update state with fetched data
-                    setData(jsonData);
-    
-                    // Clear any errors
+                    // Core values + stats live in the site settings singleton
+                    const res = await api.get('/settings/');
+                    setData({
+                        stats: res.data.aboutStats || [],
+                        team: [],
+                        values: res.data.aboutValues || [],
+                    });
                     setError(null);
-    
                 } catch (err) {
-                    // If error occurs, store error message
-                    console.log('Error:', err.message);
-                    setError(err.message);
+                    setError('Failed to load content');
                 } finally {
-                    // Stop loading regardless of success or error
                     setLoading(false);
                 }
             };
-    
-            // Call the fetch function
-            fetchAboutData();
+
+    fetchAboutData();
     
         }, []); // Empty array means run only once when component loads
     

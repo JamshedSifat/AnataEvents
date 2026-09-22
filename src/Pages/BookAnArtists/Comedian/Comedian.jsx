@@ -1,3 +1,4 @@
+import { api, toList } from "../../../services/api";
 import React, { useEffect, useState } from "react";
 import {
   Star,
@@ -11,36 +12,23 @@ const Comedian = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchComedians = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-
-        // First try to load from localStorage (Admin data)
-        const savedComedians = localStorage.getItem('comedians');
-        if (savedComedians) {
-          const data = JSON.parse(savedComedians);
-          setComedians(data);
-          setLoading(false);
-          return;
-        }
-
-        // Fallback to JSON file
-        const response = await fetch("/ComedianData/comedians.json");
-        if (!response.ok) {
-          throw new Error("Failed to fetch comedian data");
-        }
-        const data = await response.json();
-        setComedians(data);
-      } catch (err) {
-        console.error("Error fetching comedians:", err);
-        setError("Failed to load comedian data. Please try again later.");
-      } finally {
-        setLoading(false);
-      }
+    let cancelled = false;
+    setLoading(true);
+    setError(null);
+    api
+      .get("/artists/", { params: { category: "comedian" } })
+      .then((res) => {
+        if (!cancelled) setComedians(toList(res.data));
+      })
+      .catch(() => {
+        if (!cancelled) setError("Failed to load artists. Please try again later.");
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+    return () => {
+      cancelled = true;
     };
-
-    fetchComedians();
   }, []);
 
   // Loading State
@@ -78,7 +66,7 @@ const Comedian = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {comedians.map((comedian) => (
             <div
-              key={comedian._id || comedian.id}
+              key={comedian.id || comedian.id}
               className="group bg-white rounded-2xl shadow-md hover:shadow-2xl transition-shadow duration-300 overflow-hidden border border-gray-100"
             >
               {/* Image Container */}
@@ -103,12 +91,12 @@ const Comedian = () => {
                 <div className="absolute top-4 left-4">
                   <span
                     className={`px-3 py-1 rounded-full text-xs font-semibold text-white ${
-                      comedian.tour_status === "Active"
+                      comedian.tourStatus === "Active"
                         ? "bg-green-500"
                         : "bg-gray-500"
                     }`}
                   >
-                    {comedian.tour_status}
+                    {comedian.tourStatus}
                   </span>
                 </div>
               </div>
@@ -140,7 +128,7 @@ const Comedian = () => {
                   </p>
                   <p className="text-sm font-medium text-gray-800 flex items-center gap-2">
                     <Tv className="w-4 h-4 text-primary" />
-                    {comedian.famous_show}
+                    {comedian.famousShow}
                   </p>
                 </div>
 
@@ -149,7 +137,7 @@ const Comedian = () => {
                   <div className="bg-gray-50 rounded-lg p-3 text-center">
                     <p className="text-xs text-gray-500 uppercase">Experience</p>
                     <p className="font-bold text-primary text-lg">
-                      {comedian.experience_years}y
+                      {comedian.experienceYears}y
                     </p>
                   </div>
                   <div className="bg-gray-50 rounded-lg p-3 text-center">

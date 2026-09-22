@@ -1,3 +1,4 @@
+import { api, toList } from "../../../services/api";
 import React, { useEffect, useState } from 'react';
 
 const Dj = () => {
@@ -6,35 +7,24 @@ const Dj = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchDjs();
+    let cancelled = false;
+    setLoading(true);
+    setError(null);
+    api
+      .get("/artists/", { params: { category: "dj" } })
+      .then((res) => {
+        if (!cancelled) setDjs(toList(res.data));
+      })
+      .catch(() => {
+        if (!cancelled) setError("Failed to load artists. Please try again later.");
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
   }, []);
-
-  const fetchDjs = () => {
-    try {
-      setLoading(true);
-      
-      // Load from localStorage (Admin data)
-      const savedDjs = localStorage.getItem('djs');
-      if (savedDjs) {
-        const data = JSON.parse(savedDjs);
-        setDjs(data);
-        setLoading(false);
-        return;
-      }
-
-      // Fallback to JSON file
-      fetch('/DjData/DjData.json')
-        .then((res) => res.json())
-        .then((data) => {
-          setDjs(data);
-          setLoading(false);
-        })
-        .catch(() => setLoading(false));
-    } catch (error) {
-      console.error('Error:', error);
-      setLoading(false);
-    }
-  };
 
   return (
     <section className="py-10 bg-gray-50">
@@ -46,7 +36,7 @@ const Dj = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {djs.map((dj) => (
             <div
-              key={dj._id || dj.id}
+              key={dj.id || dj.id}
               className="card shadow-xl hover:scale-105 transition duration-300"
             >
               <figure className="relative">
@@ -66,10 +56,10 @@ const Dj = () => {
                   <span className="badge badge-primary ml-2">⭐ {dj.rating}</span>
                 </h3>
 
-                <p className="text-sm text-gray-600">{dj.famous_for}</p>
+                <p className="text-sm text-gray-600">{dj.famousFor}</p>
 
                 <div className="flex justify-between mt-4 text-sm">
-                  <p>🕒 {dj.experience_years} yrs</p>
+                  <p>🕒 {dj.experienceYears} yrs</p>
                   <button
                     onClick={() => setSelectedDj(dj)}
                     className="btn btn-primary btn-sm"
@@ -101,12 +91,12 @@ const Dj = () => {
 
               <div className="p-5">
                 <h2 className="text-2xl font-bold mb-2">{selectedDj.name}</h2>
-                <p className="text-gray-600 mb-4">{selectedDj.famous_for}</p>
+                <p className="text-gray-600 mb-4">{selectedDj.famousFor}</p>
 
                 <div className="grid grid-cols-2 gap-4 text-sm">
                   <p><b>Genre:</b> {selectedDj.genre}</p>
                   <p><b>Rating:</b> ⭐ {selectedDj.rating}</p>
-                  <p><b>Experience:</b> {selectedDj.experience_years} yrs</p>
+                  <p><b>Experience:</b> {selectedDj.experienceYears} yrs</p>
                   <p><b>City:</b> {selectedDj.city}</p>
                   <p><b>Country:</b> {selectedDj.country}</p>
                 </div>

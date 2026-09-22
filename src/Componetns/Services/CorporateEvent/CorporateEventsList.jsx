@@ -1,40 +1,32 @@
-// File: src/Components/CorporateEventsList.jsx (Removed Search, Category, CTA)
+// File: src/Components/CorporateEventsList.jsx — corporate events from the API
 import React, { useState, useEffect } from 'react';
-import corporateEventsData from '../../../../public/CorporateEvents/CorporateEvents.json';
 import CorporateEventCard from './CorporateEventCard';
+import { api, toList } from '../../../services/api';
+import { ErrorState, EmptyState } from '../../../Componetns/LoadingSpinner/AsyncState';
 
 const CorporateEventsList = () => {
   const [events, setEvents] = useState([]);
   const [filteredEvents, setFilteredEvents] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const loadEvents = () => {
+    setLoading(true);
+    setError(null);
+    api
+      .get('/service-entries/', { params: { type: 'corporate_event', page_size: 24 } })
+      .then((res) => {
+        const data = toList(res.data);
+        setEvents(data);
+        setFilteredEvents(data);
+      })
+      .catch(() => setError('Failed to load corporate events.'))
+      .finally(() => setLoading(false));
+  };
 
   useEffect(() => {
     loadEvents();
   }, []);
-
-  const loadEvents = () => {
-    try {
-      setLoading(true);
-
-      let data = [];
-      const savedEvents = localStorage.getItem('corporateEvents');
-      
-      if (savedEvents) {
-        data = JSON.parse(savedEvents);
-      } else if (corporateEventsData && Array.isArray(corporateEventsData)) {
-        data = corporateEventsData;
-        localStorage.setItem('corporateEvents', JSON.stringify(data));
-      }
-
-      console.log('Loaded events:', data);
-      setEvents(data);
-      setFilteredEvents(data);
-      setLoading(false);
-    } catch (error) {
-      console.error('Error loading events:', error);
-      setLoading(false);
-    }
-  };
 
   if (loading) {
     return (

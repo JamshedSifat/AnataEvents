@@ -4,7 +4,7 @@ import { Calendar, User, ArrowRight } from 'lucide-react';
 
 const BlogCardItem = ({ blog, featured = false }) => {
   return (
-    <a href={`/media/blog/${blog._id}`}>
+    <a href={`/media/blog/${blog.slug}`}>
       <div className={`bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer ${
         featured ? 'lg:flex' : ''
       }`}>

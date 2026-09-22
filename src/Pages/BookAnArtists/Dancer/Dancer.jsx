@@ -1,3 +1,4 @@
+import { api, toList } from "../../../services/api";
 import React, { useState, useEffect } from 'react';
 
 const Dancer = () => {
@@ -6,35 +7,25 @@ const Dancer = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchDancers();
+    let cancelled = false;
+    setLoading(true);
+    setError(null);
+    api
+      .get("/artists/", { params: { category: "dancer" } })
+      .then((res) => {
+        if (!cancelled) setDancers(toList(res.data));
+      })
+      .catch(() => {
+        if (!cancelled) setError("Failed to load artists. Please try again later.");
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
-  const fetchDancers = () => {
-    try {
-      setLoading(true);
-      
-      // Load from localStorage (Admin data)
-      const savedDancers = localStorage.getItem('dancers');
-      if (savedDancers) {
-        const data = JSON.parse(savedDancers);
-        setDancers(data);
-        setLoading(false);
-        return;
-      }
-
-      // Fallback to JSON file
-      fetch('/DancerData/DancerData.json')
-        .then((res) => res.json())
-        .then((data) => {
-          setDancers(data);
-          setLoading(false);
-        })
-        .catch(() => setLoading(false));
-    } catch (error) {
-      console.error('Error:', error);
-      setLoading(false);
-    }
-  };
 
   if (loading) {
     return <p className="text-center py-12">Loading...</p>;
@@ -56,7 +47,7 @@ const Dancer = () => {
         {/* Cards */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {dancers.map((dancer) => (
-            <div key={dancer._id || dancer.id} className="card shadow-xl hover:scale-105 transition">
+            <div key={dancer.id || dancer.id} className="card shadow-xl hover:scale-105 transition">
               <figure className="relative">
                 <img src={dancer.image} alt={dancer.name} className="h-56 w-full object-cover" />
                 <span className="absolute top-3 left-3 bg-primary text-white px-2 py-1 text-sm rounded">
@@ -73,11 +64,11 @@ const Dancer = () => {
                 </h3>
 
                 <p className="text-sm text-gray-600">
-                  {dancer.famous_for}
+                  {dancer.famousFor}
                 </p>
 
                 <div className="flex justify-between mt-4 text-sm">
-                  <p>🕒 {dancer.experience_years} yrs</p>
+                  <p>🕒 {dancer.experienceYears} yrs</p>
                   <button
                     onClick={() => setSelectedDancer(dancer)}
                     className="btn btn-primary btn-sm"
@@ -106,14 +97,14 @@ const Dancer = () => {
                 </h2>
 
                 <p className="text-gray-600 mb-4">
-                  {selectedDancer.famous_for}
+                  {selectedDancer.famousFor}
                 </p>
 
                 {/* Details */}
                 <div className="grid md:grid-cols-2 gap-4 mb-6">
                   <p><b>Category:</b> {selectedDancer.category}</p>
                   <p><b>Status:</b> {selectedDancer.status}</p>
-                  <p><b>Experience:</b> {selectedDancer.experience_years} years</p>
+                  <p><b>Experience:</b> {selectedDancer.experienceYears} years</p>
                   <p><b>Media:</b> {selectedDancer.media_presence}</p>
                 </div>
 

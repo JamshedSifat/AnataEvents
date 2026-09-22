@@ -1,8 +1,8 @@
-// File: src/Components/CorporateEventDetails.jsx (Updated - Multiple Images Support)
+// File: src/Components/CorporateEventDetails.jsx — detail served by the API
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 import { ArrowLeft, Calendar, User, ChevronLeft, ChevronRight } from 'lucide-react';
-import corporateEventsData from '../../../../public/CorporateEvents/CorporateEvents.json';
+import { api, toList } from '../../../services/api';
 
 const CorporateEventDetails = () => {
   const { id } = useParams();
@@ -16,47 +16,26 @@ const CorporateEventDetails = () => {
   }, [id]);
 
   const loadEventDetail = () => {
-    try {
-      setLoading(true);
-
-      let events = [];
-      const savedEvents = localStorage.getItem('corporateEvents');
-      
-      if (savedEvents) {
-        events = JSON.parse(savedEvents);
-      } else if (corporateEventsData && Array.isArray(corporateEventsData)) {
-        events = corporateEventsData;
-        localStorage.setItem('corporateEvents', JSON.stringify(events));
-      }
-
-      console.log('All events:', events);
-      console.log('Looking for ID:', id);
-
-      const foundEvent = events.find(e => e._id === id);
-
-      console.log('Found event:', foundEvent);
-
-      if (!foundEvent) {
-        console.error('Event not found with id:', id);
-        setLoading(false);
-        return;
-      }
-
-      setEvent(foundEvent);
-      setCurrentImageIndex(0);
-
-      if (foundEvent) {
-        const related = events
-          .filter(e => (e.category || 'Other') === (foundEvent.category || 'Other') && e._id !== foundEvent._id)
-          .slice(0, 3);
-        setRelatedEvents(related);
-      }
-
-      setLoading(false);
-    } catch (error) {
-      console.error('Error loading event:', error);
-      setLoading(false);
-    }
+    setLoading(true);
+    // Accepts both the new slug and the legacy JSON id.
+    api
+      .get(`/service-entries/${id}/`)
+      .then((res) => {
+        setEvent(res.data);
+        setCurrentImageIndex(0);
+        return api.get('/service-entries/', {
+          params: { type: 'corporate_event', page_size: 4 },
+        });
+      })
+      .then((res) => {
+        if (res) {
+          setRelatedEvents(
+            toList(res.data).filter((e) => e.slug !== id).slice(0, 3)
+          );
+        }
+      })
+      .catch(() => setEvent(null))
+      .finally(() => setLoading(false));
   };
 
   // ✅ Get all images (handle new format with images array)
@@ -69,8 +48,8 @@ const CorporateEventDetails = () => {
     }
     
     // Fallback: single image field
-    if (event.image) {
-      return [event.image];
+    if (event.coverImage || event.image) {
+      return [event.coverImage || event.image];
     }
     
     return [];

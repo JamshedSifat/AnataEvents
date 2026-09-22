@@ -1,4 +1,5 @@
 // File: src/Components/RecentPosts/RecentPosts.jsx (Updated)
+import { api, toList } from '../../services/api';
 import React, { useState, useEffect } from 'react';
 import { Calendar } from 'lucide-react';
 
@@ -7,7 +8,16 @@ const RecentBlogPosts = ({ limit = 5, columns = 1 }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    loadBlogs();
+    let cancelled = false;
+    api
+      .get('/blogs/', { params: { page_size: 5 } })
+      .then((res) => {
+        if (!cancelled) setBlogs(toList(res.data).slice(0, 5));
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   const loadBlogs = () => {
@@ -63,8 +73,8 @@ const RecentBlogPosts = ({ limit = 5, columns = 1 }) => {
       <div className={gridClass}>
         {blogs.map(blog => (
           <a
-            key={blog._id}
-            href={`/media/blog/${blog._id}`}
+            key={blog.slug}
+            href={`/media/blog/${blog.slug}`}
             className="block group hover:bg-gray-50 p-3 rounded-lg transition-all duration-300"
           >
             {/* Blog Image - Optional */}

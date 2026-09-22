@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
+import { api, toList } from '../../../services/api';
 
 export const SpecialEventList = () => {
   const navigate = useNavigate();
@@ -8,27 +9,31 @@ export const SpecialEventList = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    let cancelled = false;
     const fetchEvents = async () => {
       try {
         setLoading(true);
-        const response = await fetch('/Services/SpecialEvent.json');
-        
-        if (!response.ok) {
-          throw new Error('Failed to load events');
+        const response = await api.get('/service-entries/', {
+          params: { type: 'special_event', page_size: 24 },
+        });
+        if (!cancelled) {
+          setEvents(toList(response.data));
+          setError(null);
         }
-        
-        const data = await response.json();
-        setEvents(data);
-        setError(null);
       } catch (err) {
-        setError(err.message);
-        setEvents([]);
+        if (!cancelled) {
+          setError('Failed to load events');
+          setEvents([]);
+        }
       } finally {
-        setLoading(false);
+        if (!cancelled) setLoading(false);
       }
     };
 
     fetchEvents();
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   if (loading) {
@@ -86,13 +91,13 @@ export const SpecialEventList = () => {
               {events.map((event) => (
                 <div 
                   key={event.id}
-                  onClick={() => navigate(`/services/SpecialEvent/${event.id}`)}
+                  onClick={() => navigate(`/services/special-events/${event.slug}`)}
                   className='group h-full bg-white rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden cursor-pointer border border-gray-200'
                 >
                   {/* Image Container */}
                   <div className='relative h-56 overflow-hidden bg-gray-200'>
                     <img 
-                      src={event.image} 
+                      src={event.coverImage || event.images?.[0]} 
                       alt={event.title}
                       className='w-full h-full object-cover group-hover:scale-110 transition-transform duration-500'
                       loading='lazy'
@@ -111,18 +116,18 @@ export const SpecialEventList = () => {
                       {event.title}
                     </h3>
                     <p className='text-gray-600 text-sm line-clamp-2 mb-4 leading-relaxed'>
-                      {event.description}
+                      {event.excerpt}
                     </p>
                     
                     {/* Services Preview */}
                     <div className='flex flex-wrap gap-2 mb-4'>
-                      {event.services?.slice(0, 2).map((service, idx) => (
+                      {event.includedServices?.slice(0, 2).map((service, idx) => (
                         <span key={idx} className='text-xs bg-primary text-white px-2 py-1 rounded'>
                           {service}
                         </span>
                       ))}
-                      {event.services?.length > 2 && (
-                        <span className='text-xs text-gray-500'>+{event.services.length - 2} more</span>
+                      {event.includedServices?.length > 2 && (
+                        <span className='text-xs text-gray-500'>+{event.includedServices.length - 2} more</span>
                       )}
                     </div>
 

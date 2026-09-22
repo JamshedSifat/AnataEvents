@@ -1,5 +1,7 @@
 // File: src/Components/FAQ.jsx (Updated - Corporate FAQ for Frontend)
 import React, { useState, useEffect } from "react";
+import { api, toList } from "../../services/api";
+import { EmptyState } from "../LoadingSpinner/AsyncState";
 
 const CorporateFAQ = () => {
   const [faqData, setFaqData] = useState([]);
@@ -7,51 +9,21 @@ const CorporateFAQ = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    loadFAQs();
-    
-    // ✅ Listen for storage changes (real-time updates)
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
+    let cancelled = false;
+    setLoading(true);
+    api
+      .get("/faqs/", { params: { page: "corporate" } })
+      .then((res) => {
+        if (!cancelled) setFaqData(toList(res.data));
+      })
+      .catch(() => {})
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
   }, []);
-
-  const handleStorageChange = (e) => {
-    if (e.key === 'corporateFAQs') {
-      loadFAQs();
-    }
-  };
-
-  const loadFAQs = () => {
-    try {
-      setLoading(true);
-      
-      // Load Corporate FAQs from localStorage
-      const savedFAQs = localStorage.getItem('corporateFAQs');
-      
-      if (savedFAQs) {
-        const data = JSON.parse(savedFAQs);
-        setFaqData(data);
-      } else {
-        // Fallback to default data
-        const defaultData = [
-          {
-            _id: 'corp-faq-1',
-            question: "What services does Ananta Events & Entertainment provide?",
-            answer: "Ananta Events & Entertainment offers a wide range of event management services, including corporate events, brand activations, weddings, social events, product launches, conferences, exhibitions, concerts, fairs, and cultural programs. We provide both creative planning and flawless execution to make every event a success."
-          },
-         
-         
-        ];
-        
-        setFaqData(defaultData);
-        localStorage.setItem('corporateFAQs', JSON.stringify(defaultData));
-      }
-      
-      setLoading(false);
-    } catch (error) {
-      console.error('Error loading FAQs:', error);
-      setLoading(false);
-    }
-  };
 
   const toggleFAQ = (index) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -80,7 +52,7 @@ const CorporateFAQ = () => {
               const isOpen = openIndex === index;
               return (
                 <div
-                  key={faq._id || index}
+                  key={faq.id || index}
                   className={`rounded-2xl overflow-hidden transition-all duration-500 shadow-md 
                     ${isOpen ? "bg-primary text-white shadow-xl" : "bg-white text-gray-800 hover:shadow-xl"}`}
                 >

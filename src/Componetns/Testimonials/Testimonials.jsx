@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { api, toList } from "../../services/api";
 
 const Testimonials = () => {
   const [testimonials, setTestimonials] = useState([]);
@@ -6,35 +7,20 @@ const Testimonials = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    loadTestimonials();
+    let cancelled = false;
+    api
+      .get("/testimonials/")
+      .then((res) => {
+        if (!cancelled) setTestimonials(toList(res.data));
+      })
+      .catch(() => {})
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
   }, []);
-
-  const loadTestimonials = () => {
-    try {
-      setLoading(true);
-      
-      // Load from localStorage (Admin data)
-      const savedTestimonials = localStorage.getItem('testimonials');
-      if (savedTestimonials) {
-        const data = JSON.parse(savedTestimonials);
-        setTestimonials(data);
-        setLoading(false);
-        return;
-      }
-
-      // Fallback to JSON file
-      fetch("/Testimonals.json")
-        .then((res) => res.json())
-        .then((data) => {
-          setTestimonials(data);
-          setLoading(false);
-        })
-        .catch(() => setLoading(false));
-    } catch (error) {
-      console.error('Error:', error);
-      setLoading(false);
-    }
-  };
 
   useEffect(() => {
     if (testimonials.length === 0) return;

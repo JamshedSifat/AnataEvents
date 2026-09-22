@@ -1,57 +1,24 @@
 import React, { useState, useEffect } from 'react';
+import { api, toList } from '../../../services/api';
 
 const MediaVideo = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     loadVideos();
   }, []);
 
   const loadVideos = () => {
-    try {
-      setLoading(true);
-      
-      // Load from localStorage (Admin data)
-      const savedVideos = localStorage.getItem('videos');
-      if (savedVideos) {
-        const data = JSON.parse(savedVideos);
-        setVideos(data);
-        setLoading(false);
-        return;
-      }
-
-      // Default sample videos
-      const sampleVideos = [
-        {
-          _id: '1',
-          title: 'Corporate Event Highlight',
-          category: 'corporate',
-          youtubeId: 'dQw4w9WgXcQ',
-          description: 'Professional corporate event management and execution'
-        },
-        {
-          _id: '2',
-          title: 'Wedding Ceremony',
-          category: 'wedding',
-          youtubeId: '9bZkp7q19f0',
-          description: 'Beautiful wedding planning and decoration'
-        },
-        {
-          _id: '3',
-          title: 'Concert Production',
-          category: 'concert',
-          youtubeId: 'jNQXAC9IVRw',
-          description: 'Live music show and concert organization'
-        }
-      ];
-      setVideos(sampleVideos);
-      setLoading(false);
-    } catch (error) {
-      console.error('Error loading videos:', error);
-      setLoading(false);
-    }
+    setLoading(true);
+    setError(null);
+    api
+      .get("/videos/")
+      .then((res) => setVideos(toList(res.data)))
+      .catch(() => setError("Failed to load videos."))
+      .finally(() => setLoading(false));
   };
 
   const categories = [
@@ -145,7 +112,7 @@ const MediaVideo = () => {
           {filteredVideos.length > 0 ? (
             filteredVideos.map((video) => (
               <div 
-                key={video._id} 
+                key={video.id} 
                 className='bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group'
               >
                 {/* Video Thumbnail */}

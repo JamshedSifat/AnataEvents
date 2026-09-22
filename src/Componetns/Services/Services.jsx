@@ -1,31 +1,41 @@
 import React, { useState, useEffect } from 'react';
+import { api, toList } from '../../services/api';
+import { SectionSpinner, ErrorState, EmptyState } from '../LoadingSpinner/AsyncState';
 
 const Services = () => {
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const fetchServices = () => {
+    setLoading(true);
+    setError(null);
+    // Published services come from the API (is_published filter is server-side)
+    api.get('/services/')
+      .then((res) => setServices(toList(res.data)))
+      .catch((err) => setError(err))
+      .finally(() => setLoading(false));
+  };
 
   useEffect(() => {
     fetchServices();
   }, []);
 
-  const fetchServices = () => {
-    try {
-      setLoading(true);
-      // Load from localStorage
-      const savedServices = localStorage.getItem('services');
-      if (savedServices) {
-        const parsedServices = JSON.parse(savedServices);
-        // Filter only active services
-        const activeServices = parsedServices.filter(s => s.status === 'active');
-        setServices(activeServices);
-        console.log('Services loaded:', activeServices);
-      }
-    } catch (error) {
-      console.error('Error fetching services:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  if (loading) return <SectionSpinner label="Loading services…" />;
+  if (error) return <ErrorState message="Failed to load services." onRetry={fetchServices} />;
+
+  // Visual accent per card (design parity with the old hardcoded gradients).
+  const GRADIENTS = [
+    'from-red-500 to-pink-600',
+    'from-pink-500 to-rose-600',
+    'from-orange-500 to-red-600',
+    'from-rose-500 to-red-700',
+    'from-amber-500 to-orange-600',
+    'from-red-600 to-rose-700',
+    'from-fuchsia-500 to-red-600',
+    'from-yellow-500 to-red-500',
+  ];
+  const gradientFor = (index) => GRADIENTS[index % GRADIENTS.length];
 
   if (loading) {
     return (
@@ -70,7 +80,7 @@ const Services = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-16">
             {services.map((service, index) => (
               <div 
-                key={service._id}
+                key={service.id}
                 className="group animate-fade-in"
                 style={{ animationDelay: `${index * 0.05}s` }}
               >
@@ -81,14 +91,14 @@ const Services = () => {
                     <div className="flex items-center justify-between mb-4">
                       {/* Icon */}
                       <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-xl text-white transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-lg">
-                        <div className={`w-full h-full bg-gradient-to-br ${service.lightGradient} rounded-2xl flex items-center justify-center`}>
+                        <div className={`w-full h-full bg-gradient-to-br ${gradientFor(index)} rounded-2xl flex items-center justify-center`}>
                           {service.icon}
                         </div>
                       </div>
                       
                       <div className="text-right">
                         <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                          <div className={`badge bg-gradient-to-r ${service.lightGradient} text-white border-none text-xs`}>
+                          <div className={`badge bg-gradient-to-r ${gradientFor(index)} text-white border-none text-xs`}>
                             Premium
                           </div>
                         </div>
@@ -97,12 +107,12 @@ const Services = () => {
 
                     {/* Title */}
                     <h3 className="card-title text-lg font-playfair font-bold text-base-content mb-3 group-hover:text-primary transition-colors duration-300 leading-tight">
-                      {service.title}
+                      {service.name}
                     </h3>
 
                     {/* Description */}
                     <p className="text-base-content/70 mb-4 text-xs leading-relaxed">
-                      {service.description}
+                      {service.shortDescription || service.short_description}
                     </p>
 
                   {/* Features */}

@@ -1,45 +1,37 @@
-// File: src/Componetns/PostCard.jsx (Without utility)
+// File: src/Pages/BlogItems/PostCard.jsx — blog list served from the API
 import React, { useState, useEffect } from 'react';
 import { Search, Calendar, User } from 'lucide-react';
 import BlogCardItem from './BlogCardItem';
-import blogsData from '../../../public/Blog.json';
 import ArchiveItems from './ArchiveItems';
 import RecentBlogPosts from './RecentBlogPost';
+import { api, toList } from '../../services/api';
+import { EmptyState, ErrorState } from '../../Componetns/LoadingSpinner/AsyncState';
 
 const PostCard = () => {
   const [blogs, setBlogs] = useState([]);
   const [filteredBlogs, setFilteredBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
+
+  const loadBlogs = () => {
+    setLoading(true);
+    setError(null);
+    api
+      .get('/blogs/', { params: { page_size: 50 } })
+      .then((res) => {
+        const data = toList(res.data);
+        setBlogs(data);
+        setFilteredBlogs(data);
+      })
+      .catch(() => setError('Failed to load blog posts.'))
+      .finally(() => setLoading(false));
+  };
 
   useEffect(() => {
     loadBlogs();
   }, []);
-
-  const loadBlogs = () => {
-    try {
-      setLoading(true);
-
-      // ✅ Direct localStorage
-      let data = [];
-      const savedBlogs = localStorage.getItem('blogs');
-      
-      if (savedBlogs) {
-        data = JSON.parse(savedBlogs);
-      } else if (blogsData && Array.isArray(blogsData)) {
-        data = blogsData;
-        localStorage.setItem('blogs', JSON.stringify(data));
-      }
-
-      setBlogs(data);
-      setFilteredBlogs(data);
-      setLoading(false);
-    } catch (error) {
-      console.error('Error loading blogs:', error);
-      setLoading(false);
-    }
-  };
 
   const categories = ['All', ...new Set(blogs.map(blog => blog.category))];
 
@@ -90,7 +82,7 @@ const PostCard = () => {
                 <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-gray-900">Featured</h2>
                 <div className="grid grid-cols-1 gap-4 sm:gap-6">
                   {filteredBlogs.filter(blog => blog.featured).map(blog => (
-                    <BlogCardItem key={blog._id} blog={blog} featured={true} />
+                    <BlogCardItem key={blog.slug} blog={blog} featured={true} />
                   ))}
                 </div>
               </div>
@@ -105,7 +97,7 @@ const PostCard = () => {
               {filteredBlogs.length > 0 ? (
                 <div className="grid grid-cols-1 gap-4 sm:gap-6">
                   {filteredBlogs.map(blog => (
-                    <BlogCardItem key={blog._id} blog={blog} />
+                    <BlogCardItem key={blog.slug} blog={blog} />
                   ))}
                 </div>
               ) : (

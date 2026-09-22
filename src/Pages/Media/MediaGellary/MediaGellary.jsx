@@ -1,65 +1,26 @@
 import React, { useState, useEffect } from 'react';
+import { api, toList } from '../../../services/api';
+import { SectionSpinner, ErrorState, EmptyState } from '../../../Componetns/LoadingSpinner/AsyncState';
 
 const MediaGallery = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedImage, setSelectedImage] = useState(null);
   const [medias, setMedias] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     loadMedias();
   }, []);
 
   const loadMedias = () => {
-    try {
-      setLoading(true);
-      
-      // Load from localStorage (Admin data)
-      const savedMedias = localStorage.getItem('medias');
-      if (savedMedias) {
-        const data = JSON.parse(savedMedias);
-        setMedias(data);
-        setLoading(false);
-        return;
-      }
-
-      // Default sample medias
-      const sampleMedias = [
-        {
-          _id: '1',
-          title: 'Corporate Event Setup',
-          category: 'corporate',
-          url: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop',
-          description: 'Professional corporate event setup'
-        },
-        {
-          _id: '2',
-          title: 'Wedding Decoration',
-          category: 'wedding',
-          url: 'https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=600&h=400&fit=crop',
-          description: 'Beautiful wedding decorations'
-        },
-        {
-          _id: '3',
-          title: 'Concert Stage',
-          category: 'concert',
-          url: 'https://images.unsplash.com/photo-1511379938547-c1f69b13e835?w=600&h=400&fit=crop',
-          description: 'Professional concert stage setup'
-        },
-        {
-          _id: '4',
-          title: 'Fashion Show Runway',
-          category: 'fashion',
-          url: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&h=400&fit=crop',
-          description: 'Fashion show runway'
-        },
-      ];
-      setMedias(sampleMedias);
-      setLoading(false);
-    } catch (error) {
-      console.error('Error loading medias:', error);
-      setLoading(false);
-    }
+    setLoading(true);
+    setError(null);
+    api
+      .get("/gallery/")
+      .then((res) => setMedias(toList(res.data)))
+      .catch(() => setError("Failed to load the gallery."))
+      .finally(() => setLoading(false));
   };
 
   const categories = [
@@ -114,13 +75,17 @@ const MediaGallery = () => {
           ))}
         </div>
 
+        {error && (
+          <ErrorState message={error} onRetry={loadMedias} />
+        )}
+
         {loading && (
           <div className='text-center py-12'>
-            <p className='text-gray-600'>Loading gallery...</p>
+            <span className='loading loading-spinner loading-lg text-primary'></span>
           </div>
         )}
 
-        {!loading && filteredImages.length === 0 && (
+        {!loading && !error && filteredImages.length === 0 && (
           <div className='text-center py-12'>
             <p className='text-gray-600'>No images in this category</p>
           </div>
@@ -130,13 +95,13 @@ const MediaGallery = () => {
         <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
           {filteredImages.map((image) => (
             <div 
-              key={image._id}
+              key={image.id}
               onClick={() => setSelectedImage(image)}
               className='group cursor-pointer overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300'
             >
               <div className='relative overflow-hidden h-64 bg-gray-200'>
                 <img 
-                  src={image.url}
+                  src={image.src || image.url}
                   alt={image.title}
                   className='w-full h-full object-cover group-hover:scale-110 transition-transform duration-300'
                 />
@@ -154,7 +119,7 @@ const MediaGallery = () => {
         >
           <div className='max-w-4xl w-full'>
             <img 
-              src={selectedImage.url}
+              src={selectedImage.src || selectedImage.url}
               alt={selectedImage.title}
               className='w-full h-auto rounded-lg'
             />

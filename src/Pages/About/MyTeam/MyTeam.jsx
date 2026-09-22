@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Mail, Phone, Linkedin, Twitter, Facebook, Instagram } from 'lucide-react';
+import { api, toList } from '../../../services/api';
 
 const MyTeam = () => {
   const [data, setData] = useState([]);
@@ -11,31 +12,11 @@ const MyTeam = () => {
     const fetchTeamData = async () => {
       try {
         setLoading(true);
-
-        // Load from localStorage (Admin added data)
-        const savedTeamMembers = localStorage.getItem('teamMembers');
-        if (savedTeamMembers) {
-          const data = JSON.parse(savedTeamMembers);
-          setData(data);
-          setError(null);
-          setLoading(false);
-          return;
-        }
-
-        // Fallback to JSON file
-        const response = await fetch('/About/About.json');
-        
-        if (!response.ok) {
-          throw new Error('Failed to load team data');
-        }
-        
-        const jsonData = await response.json();
-        setData(jsonData.team || []);
+        const res = await api.get('/team/');
+        setData(toList(res.data));
         setError(null);
-        
       } catch (err) {
-        console.log('Error:', err.message);
-        setError(err.message);
+        setError('Failed to load team members');
       } finally {
         setLoading(false);
       }
@@ -43,7 +24,6 @@ const MyTeam = () => {
 
     fetchTeamData();
   }, []);
-
   if (loading) {
     return (
       <section  className="py-20 bg-base-100">

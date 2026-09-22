@@ -1,38 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import exhibitionEventsData from '../../../../public/ExhibitionStallData/ExhibitionStallData.json';
 import ExhibitionEventCard from './ExhibitionEventCard';
+import { api, toList } from '../../../services/api';
 
 const ExhibitionEventsList = () => {
   const [events, setEvents] = useState([]);
   const [filteredEvents, setFilteredEvents] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const loadEvents = () => {
+    setLoading(true);
+    setError(null);
+    api
+      .get('/service-entries/', { params: { type: 'exhibition_stall', page_size: 24 } })
+      .then((res) => {
+        const data = toList(res.data);
+        setEvents(data);
+        setFilteredEvents(data);
+      })
+      .catch(() => setError('Failed to load exhibition services.'))
+      .finally(() => setLoading(false));
+  };
 
   useEffect(() => {
     loadEvents();
   }, []);
-
-  const loadEvents = () => {
-    try {
-      setLoading(true);
-
-      let data = [];
-      const savedEvents = localStorage.getItem('exhibitionEvents');
-
-      if (savedEvents) {
-        data = JSON.parse(savedEvents);
-      } else if (exhibitionEventsData && Array.isArray(exhibitionEventsData)) {
-        data = exhibitionEventsData;
-        localStorage.setItem('exhibitionEvents', JSON.stringify(data));
-      }
-
-      setEvents(data);
-      setFilteredEvents(data);
-      setLoading(false);
-    } catch (error) {
-      console.error('Error loading events:', error);
-      setLoading(false);
-    }
-  };
 
   if (loading) {
     return (

@@ -1,73 +1,31 @@
-// File: src/Components/Hero.jsx (Updated - Removed Title)
+// File: src/Components/Hero.jsx — hero slides served from the API
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router';
+import { api, toList } from '../../services/api';
+import { SectionSpinner, EmptyState, ErrorState } from '../LoadingSpinner/AsyncState';
 
 const Hero = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
     const [heroSlides, setHeroSlides] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-    // Load slides from localStorage
-    useEffect(() => {
-        loadSlides();
-    }, []);
-
-    const loadSlides = () => {
+    const loadSlides = async () => {
         try {
             setLoading(true);
-            
-            // Default slides with all content
-            const defaultSlides = [
-                {
-                    subtitle: "Luxury Events",
-                    description: "Transform your special moments into unforgettable experiences with our premium event planning services.",
-                    image: "https://www.anantabd.net/wp-content/uploads/2022/10/IMG_0386.jpg",
-                    stats: "500+ Events Planned"
-                },
-                {
-                    subtitle: "Events",
-                    description: "Elevate your business gatherings with sophisticated corporate event planning that impresses and inspires.",
-                    image: "https://www.anantabd.net/wp-content/uploads/2020/01/iscea-night-10.jpg",
-                    stats: "1000+ Happy Clients"
-                }
-            ];
-
-            // Try to load from localStorage
-            if (typeof window !== 'undefined' && window.localStorage) {
-                const savedSlides = localStorage.getItem('heroSlides');
-                
-                if (savedSlides) {
-                    try {
-                        const parsedSlides = JSON.parse(savedSlides);
-                        if (Array.isArray(parsedSlides) && parsedSlides.length > 0) {
-                            // Map to expected format (without title)
-                            const formattedSlides = parsedSlides
-                                .sort((a, b) => (a.order || 0) - (b.order || 0))
-                                .map(slide => ({
-                                    subtitle: slide.subtitle || "",
-                                    description: slide.description || "",
-                                    image: slide.image,
-                                    stats: slide.stats || ""
-                                }));
-                            
-                            setHeroSlides(formattedSlides);
-                            setLoading(false);
-                            return;
-                        }
-                    } catch (e) {
-                        console.error('Error parsing hero slides:', e);
-                    }
-                }
-            }
-
-            // Use default slides if localStorage is empty
-            setHeroSlides(defaultSlides);
-            setLoading(false);
-        } catch (error) {
-            console.error('Error loading hero slides:', error);
+            setError(null);
+            const res = await api.get('/hero-slides/');
+            setHeroSlides(toList(res.data));
+        } catch (e) {
+            setError(e);
+        } finally {
             setLoading(false);
         }
     };
+
+    useEffect(() => {
+        loadSlides();
+    }, []);
 
     // Auto slide functionality
     useEffect(() => {
@@ -83,9 +41,15 @@ const Hero = () => {
     if (loading) {
         return (
             <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gray-900">
-                <div className="flex items-center justify-center">
-                    <span className="loading loading-spinner loading-lg text-primary"></span>
-                </div>
+                <SectionSpinner label="Loading hero…" />
+            </section>
+        );
+    }
+
+    if (error) {
+        return (
+            <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gray-900">
+                <ErrorState message="Failed to load hero slides." onRetry={loadSlides} />
             </section>
         );
     }
@@ -93,9 +57,7 @@ const Hero = () => {
     if (heroSlides.length === 0) {
         return (
             <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gray-900">
-                <div className="text-center text-white">
-                    <p className="text-xl">No hero slides available</p>
-                </div>
+                <EmptyState icon="🎭" message="No hero slides published yet." />
             </section>
         );
     }

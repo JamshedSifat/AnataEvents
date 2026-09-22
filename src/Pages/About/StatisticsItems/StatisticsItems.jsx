@@ -1,3 +1,4 @@
+import { api } from '../../../services/api';
 import React, { useEffect, useState } from 'react';
 
 const StatisticsItems = () => {
@@ -13,19 +14,11 @@ const StatisticsItems = () => {
   useEffect(() => {
     const fetchAboutData = async () => {
       try {
-        // ✅ FIXED PATH (IMPORTANT)
-        const response = await fetch('/About/About.json');
-
-        if (!response.ok) {
-          throw new Error('Failed to load data');
-        }
-
-        const jsonData = await response.json();
-        setData(jsonData);
+        // Stats come from the site settings singleton
+        const res = await api.get('/settings/');
+        setData({ stats: res.data.aboutStats || [] });
         setError(null);
-
       } catch (err) {
-        console.log('Error:', err.message);
         setError(err.message);
       } finally {
         setLoading(false);

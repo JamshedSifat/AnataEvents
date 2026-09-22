@@ -1,6 +1,8 @@
-// File: src/Pages/Portfolio/Portfolio.jsx (Updated)
+// File: src/Pages/Portfolio/Portfolio.jsx — portfolio from the API
 import React, { useState, useEffect } from 'react';
 import PortfolioModal from './PortfolioModal';
+import { api, toList } from '../../services/api';
+import { SectionSpinner, ErrorState, EmptyState } from '../../Componetns/LoadingSpinner/AsyncState';
 
 
 const Portfolio = () => {
@@ -9,24 +11,7 @@ const Portfolio = () => {
     const [selectedImage, setSelectedImage] = useState(null);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [loading, setLoading] = useState(true);
-
-    const defaultPortfolios = [
-        {
-            id: 1,
-            title: "Luxury Garden Wedding",
-            category: "Weddings",
-            image: "https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-            description: "An enchanting outdoor ceremony with 200 guests in a botanical garden setting",
-            client: "Sarah & Michael",
-            date: "June 2023",
-            budget: "$75,000",
-            gallery: [
-                "https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-                "https://images.unsplash.com/photo-1465056836643-15cea6d4e866?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-            ]
-        },
-        // ... more default items
-    ];
+    const [error, setError] = useState(null);
 
     const filters = ['All', 'Weddings', 'Corporate', 'Galas', 'Private', 'Luxury'];
 
@@ -35,27 +20,23 @@ const Portfolio = () => {
     }, []);
 
     const loadPortfolios = () => {
-        try {
-            setLoading(true);
-            const savedPortfolios = localStorage.getItem('portfolios');
-            
-            if (savedPortfolios && JSON.parse(savedPortfolios).length > 0) {
-                const data = JSON.parse(savedPortfolios);
-                setPortfolioItems(data);
-            } else {
-                setPortfolioItems(defaultPortfolios);
-            }
-            setLoading(false);
-        } catch (error) {
-            console.error('Error loading portfolios:', error);
-            setPortfolioItems(defaultPortfolios);
-            setLoading(false);
-        }
+        setLoading(true);
+        setError(null);
+        api
+            .get('/portfolio/', { params: { page_size: 60 } })
+            .then((res) => setPortfolioItems(toList(res.data)))
+            .catch(() => setError('Failed to load portfolio items.'))
+            .finally(() => setLoading(false));
     };
 
     const filteredItems = activeFilter === 'All' 
         ? portfolioItems 
         : portfolioItems.filter(item => item.category === activeFilter);
+
+    if (loading) return <SectionSpinner label="Loading portfolio…" />;
+    if (error) return <ErrorState message={error} onRetry={loadPortfolios} />;
+    if (portfolioItems.length === 0)
+        return <EmptyState icon="🖼️" message="No portfolio items published yet." />;
 
     const handleViewDetails = (item) => {
         setSelectedImage(item);

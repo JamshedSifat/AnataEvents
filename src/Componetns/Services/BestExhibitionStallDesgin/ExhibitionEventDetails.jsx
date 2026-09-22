@@ -1,8 +1,8 @@
 // File: src/Components/ExhibitionEventDetails.jsx (New - Same as CorporateEventDetails)
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
+import { api, toList } from '../../../services/api';
 import { ArrowLeft, Calendar, User, ChevronLeft, ChevronRight } from 'lucide-react';
-import exhibitionEventsData from '../../../../public/ExhibitionStallData/ExhibitionStallData.json';
 
 const ExhibitionEventDetails = () => {
   const { id } = useParams();
@@ -16,47 +16,25 @@ const ExhibitionEventDetails = () => {
   }, [id]);
 
   const loadEventDetail = () => {
-    try {
-      setLoading(true);
-
-      let events = [];
-      const savedEvents = localStorage.getItem('exhibitionEvents');
-      
-      if (savedEvents) {
-        events = JSON.parse(savedEvents);
-      } else if (exhibitionEventsData && Array.isArray(exhibitionEventsData)) {
-        events = exhibitionEventsData;
-        localStorage.setItem('exhibitionEvents', JSON.stringify(events));
-      }
-
-      console.log('All exhibition events:', events);
-      console.log('Looking for ID:', id);
-
-      const foundEvent = events.find(e => e._id === id);
-
-      console.log('Found event:', foundEvent);
-
-      if (!foundEvent) {
-        console.error('Event not found with id:', id);
-        setLoading(false);
-        return;
-      }
-
-      setEvent(foundEvent);
-      setCurrentImageIndex(0);
-
-      if (foundEvent) {
-        const related = events
-          .filter(e => (e.category || 'Other') === (foundEvent.category || 'Other') && e._id !== foundEvent._id)
-          .slice(0, 3);
-        setRelatedEvents(related);
-      }
-
-      setLoading(false);
-    } catch (error) {
-      console.error('Error loading event:', error);
-      setLoading(false);
-    }
+    setLoading(true);
+    api
+      .get(`/service-entries/${id}/`)
+      .then((res) => {
+        setEvent(res.data);
+        setCurrentImageIndex(0);
+        return api.get('/service-entries/', {
+          params: { type: 'exhibition_stall', page_size: 4 },
+        });
+      })
+      .then((res) => {
+        if (res) {
+          setRelatedEvents(
+            toList(res.data).filter((e) => e.slug !== id).slice(0, 3)
+          );
+        }
+      })
+      .catch(() => setEvent(null))
+      .finally(() => setLoading(false));
   };
 
   // ✅ Get all images (handle new format with images array)
@@ -69,8 +47,8 @@ const ExhibitionEventDetails = () => {
     }
     
     // Fallback: single image field
-    if (event.image) {
-      return [event.image];
+    if (event.coverImage || event.image) {
+      return [event.coverImage || event.image];
     }
     
     return [];

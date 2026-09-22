@@ -1,20 +1,33 @@
 import React, { useState, useEffect } from 'react';
+import { api, toList } from '../../services/api';
+import { SectionSpinner, ErrorState, EmptyState } from '../LoadingSpinner/AsyncState';
 
 const Gallery = () => {
     const [galleryImages, setGalleryImages] = useState([]);
     const [showAll, setShowAll] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-    // Fetch gallery data
+    const loadGallery = () => {
+        setLoading(true);
+        setError(null);
+        api.get('/gallery/')
+            .then(res => setGalleryImages(toList(res.data)))
+            .catch(err => setError(err))
+            .finally(() => setLoading(false));
+    };
+
     useEffect(() => {
-        fetch('/gallery.json')
-            .then(res => res.json())
-            .then(data => setGalleryImages(data))
-            .catch(err => console.error('Failed to fetch gallery data:', err));
+        loadGallery();
     }, []);
 
     // Show first 12 or all
     const displayImages = showAll ? galleryImages : galleryImages.slice(0, 12);
+
+    if (loading) return <SectionSpinner label="Loading gallery…" />;
+    if (error) return <ErrorState message="Failed to load the gallery." onRetry={loadGallery} />;
+    if (galleryImages.length === 0) return <EmptyState icon="📸" message="No gallery images published yet." />;
 
     return (
         <section className="py-4 bg-base-100">

@@ -6,7 +6,7 @@ const ExhibitionEventCard = ({ event }) => {
 
   return (
     <a
-      href={`/services/exhibition-events/${event._id}`}
+      href={`/services/exhibition-events/${event.slug}`}
       className="block w-full max-w-sm h-full"
     >
       <div className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col h-full">

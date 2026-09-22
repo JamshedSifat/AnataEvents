@@ -20,7 +20,7 @@ const Navbar = () => {
     { name: "Home", path: "/" },
     { name: "About", path: "/about" },
     { name: "Services", path: "/services", hasDropdown: true },
-    { name: "Book an Artist", path: "/bookAnArtists", hasDropdown: true },
+    { name: "Book an Artist", path: "/book-an-artist", hasDropdown: true },
     { name: "Opportunities", path: "/opportunities", hasDropdown: true },
     { name: "Portfolio", path: "/portfolio" },
     { name: "Media", path: "/media", hasDropdown: true },
@@ -34,22 +34,22 @@ const Navbar = () => {
   ];
 
   const servicesDropdown = [
-    { name: "Corporate Event", path: "/services/CorporateEvent" },
-    { name: "Best Exhibition stall desgin and Fabrication company dhaka bangladesh", path: "/services/BestExhibitionStallDesgin" },
-    { name: "Influencer Marketing Agency", path: "/services/InfluencerMarketingAgency" },
-    { name: "Singer & Celebrity Booking", path: "/services/SingerAndCelebrityBooking" },
-    { name: "Wedding Planner & Management", path: "/services/WeddingPlanner&Management" },
-    { name: "Photography & Vedio Services", path: "/services/Photography&VedioServices" },
-    { name: "Special Event", path: "/services/SpecialEvent" },
-    { name: "Virtual Event", path: "/services/VirtualEvent" }
+    { name: "Corporate Event", path: "/services/corporate-events" },
+    { name: "Exhibition Stall Design & Fabrication", path: "/services/exhibition-stall-design" },
+    { name: "Influencer Marketing Agency", path: "/services/influencer-marketing" },
+    { name: "Singer & Celebrity Booking", path: "/services/artist-celebrity-booking" },
+    { name: "Wedding Planner & Management", path: "/services/wedding-planning" },
+    { name: "Photography & Video Services", path: "/services/photography-video" },
+    { name: "Special Events", path: "/services/special-events" },
+    { name: "Virtual Events", path: "/services/virtual-events" }
   ];
 
   const bookAnArtistDropdown = [
-    { name: "Singer", path: "/bookAnArtists/singer" },
-    { name: "DJ", path: "/bookAnArtists/dj" },
-    { name: "Dancer ", path: "/bookAnArtists/dancer" },
-    { name: "Magician", path: "/bookAnArtists/magician" },
-    { name: "Comedian", path: "/bookAnArtists/comedian" },
+    { name: "Singer", path: "/book-an-artist/singer" },
+    { name: "DJ", path: "/book-an-artist/dj" },
+    { name: "Dancer", path: "/book-an-artist/dancer" },
+    { name: "Magician", path: "/book-an-artist/magician" },
+    { name: "Comedian", path: "/book-an-artist/comedian" },
   ];
 
   const opportunitiesDropdown = [

@@ -4,7 +4,7 @@ import { ArrowRight } from 'lucide-react';
 
 const CorporateEventCard = ({ event, featured = false }) => {
   return (
-    <a href={`/services/corporate-events/${event._id}`}>
+    <a href={`/services/corporate-events/${event.slug}`}>
       <div className={`bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer ${
         featured ? 'lg:flex' : ''
       }`}>
@@ -15,7 +15,7 @@ const CorporateEventCard = ({ event, featured = false }) => {
             : 'w-full h-48'
         }`}>
           <img
-            src={event.image}
+            src={event.coverImage || event.image || event.images?.[0]}
             alt={event.title}
             className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
             onError={(e) => {

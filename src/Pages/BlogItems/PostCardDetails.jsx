@@ -1,8 +1,8 @@
-// File: src/Componetns/PostCardDetails.jsx (Without utility)
+// File: src/Pages/BlogItems/PostCardDetails.jsx — blog detail from the API
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 import { Calendar, User, ArrowLeft } from 'lucide-react';
-import blogsData from '../../../public/Blog.json';
+import { api, toList } from '../../services/api';
 
 const PostCardDetails = () => {
   const { id } = useParams();
@@ -10,48 +10,29 @@ const PostCardDetails = () => {
   const [relatedBlogs, setRelatedBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const loadBlogDetail = () => {
+    setLoading(true);
+    api
+      .get(`/blogs/${id}/`)
+      .then((res) => {
+        setBlog(res.data);
+        // Related posts in the same category
+        return api.get('/blogs/', { params: { category: res.data.category, page_size: 4 } });
+      })
+      .then((res) => {
+        if (res) {
+          setRelatedBlogs(
+            toList(res.data).filter((b) => b.slug !== id).slice(0, 3)
+          );
+        }
+      })
+      .catch(() => setBlog(null))
+      .finally(() => setLoading(false));
+  };
+
   useEffect(() => {
     loadBlogDetail();
   }, [id]);
-
-  const loadBlogDetail = () => {
-    try {
-      setLoading(true);
-
-      // ✅ Direct localStorage
-      let blogs = [];
-      const savedBlogs = localStorage.getItem('blogs');
-      
-      if (savedBlogs) {
-        blogs = JSON.parse(savedBlogs);
-      } else if (blogsData && Array.isArray(blogsData)) {
-        blogs = blogsData;
-      }
-
-      // Slug দিয়ে খুঁজুন
-      const foundBlog = blogs.find(b => b._id === id);
-
-      if (!foundBlog) {
-        console.error('Blog not found with id:', id);
-        setLoading(false);
-        return;
-      }
-
-      setBlog(foundBlog);
-
-      if (foundBlog) {
-        const related = blogs
-          .filter(b => b.category === foundBlog.category && b._id !== foundBlog._id)
-          .slice(0, 3);
-        setRelatedBlogs(related);
-      }
-
-      setLoading(false);
-    } catch (error) {
-      console.error('Error loading blog:', error);
-      setLoading(false);
-    }
-  };
 
   if (loading) {
     return (

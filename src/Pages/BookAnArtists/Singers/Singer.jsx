@@ -1,3 +1,4 @@
+import { api, toList } from "../../../services/api";
 import React, { useEffect, useState } from "react";
 import FilterBar from "./FilterBar";
 
@@ -7,35 +8,24 @@ const Singer = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchSingers();
+    let cancelled = false;
+    setLoading(true);
+    setError(null);
+    api
+      .get("/artists/", { params: { category: "singer" } })
+      .then((res) => {
+        if (!cancelled) setSingers(toList(res.data));
+      })
+      .catch(() => {
+        if (!cancelled) setError("Failed to load artists. Please try again later.");
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
   }, []);
-
-  const fetchSingers = () => {
-    try {
-      setLoading(true);
-      
-      // Load from localStorage (Admin data)
-      const savedSingers = localStorage.getItem('singers');
-      if (savedSingers) {
-        const data = JSON.parse(savedSingers);
-        setSingers(data);
-        setLoading(false);
-        return;
-      }
-
-      // Fallback to JSON file
-      fetch("/SingersData/singersData.json")
-        .then((res) => res.json())
-        .then((data) => {
-          setSingers(data.singers);
-          setLoading(false);
-        })
-        .catch(() => setLoading(false));
-    } catch (error) {
-      console.error('Error:', error);
-      setLoading(false);
-    }
-  };
 
   return (
     <section className="py-10 bg-gray-50">
@@ -51,7 +41,7 @@ const Singer = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 w-10/12 mx-auto">
           {singers.map((singer) => (
             <div
-              key={singer._id || singer.id}
+              key={singer.id || singer.id}
               className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-transform duration-300 hover:scale-105 overflow-hidden"
             >
               <figure className="relative h-56 sm:h-64 overflow-hidden">

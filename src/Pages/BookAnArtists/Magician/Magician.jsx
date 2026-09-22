@@ -1,3 +1,4 @@
+import { api, toList } from "../../../services/api";
 import React, { useEffect, useState } from "react";
 import {
   Star,
@@ -13,40 +14,25 @@ const Magician = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchMagicians();
+    let cancelled = false;
+    setLoading(true);
+    setError(null);
+    api
+      .get("/artists/", { params: { category: "magician" } })
+      .then((res) => {
+        if (!cancelled) setMagicians(toList(res.data));
+      })
+      .catch(() => {
+        if (!cancelled) setError("Failed to load artists. Please try again later.");
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
-  const fetchMagicians = () => {
-    try {
-      setLoading(true);
-      setError(null);
-
-      // Load from localStorage (Admin data)
-      const savedMagicians = localStorage.getItem('magicians');
-      if (savedMagicians) {
-        const data = JSON.parse(savedMagicians);
-        setMagicians(data);
-        setLoading(false);
-        return;
-      }
-
-      // Fallback to JSON file
-      fetch("/MagiciansData/MagiciansData.json")
-        .then((res) => res.json())
-        .then((data) => {
-          setMagicians(data);
-          setLoading(false);
-        })
-        .catch(() => {
-          setError("Failed to load magician data");
-          setLoading(false);
-        });
-    } catch (err) {
-      console.error("Error fetching magicians:", err);
-      setError("Failed to load magician data. Please try again later.");
-      setLoading(false);
-    }
-  };
 
   if (loading) {
     return (
@@ -104,7 +90,7 @@ const Magician = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {magicians.map((magician) => (
               <div
-                key={magician._id || magician.id}
+                key={magician.id || magician.id}
                 className="group bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border border-purple-100 hover:border-primary/30"
               >
                 {/* Image Container */}
@@ -126,7 +112,7 @@ const Magician = () => {
                       {magician.rating}
                     </div>
                     <div className="bg-purple-600 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg">
-                      {magician.tour_status}
+                      {magician.tourStatus}
                     </div>
                   </div>
 
@@ -172,7 +158,7 @@ const Magician = () => {
                     </p>
                     <p className="text-sm font-medium text-gray-800 flex items-center gap-2">
                       <Wand2 className="w-4 h-4 text-primary" />
-                      {magician.famous_show}
+                      {magician.famousShow}
                     </p>
                   </div>
 
@@ -183,7 +169,7 @@ const Magician = () => {
                         Experience
                       </p>
                       <p className="font-bold text-primary text-lg">
-                        {magician.experience_years}y
+                        {magician.experienceYears}y
                       </p>
                     </div>
                     <div className="bg-purple-50 rounded-lg p-3 text-center hover:bg-primary/5 transition-colors">
