@@ -19,11 +19,11 @@ export default defineConfig(({ mode }) => {
     },
 
 
-    preview: {
-      host: '0.0.0.0',
-      port: Number(process.env.PORT) || 4173,
-      allowedHosts: ['anataevents.onrender.com'],
-    },
+  preview: {
+  host: '0.0.0.0',
+  port: Number(process.env.PORT) || 4173,
+  allowedHosts: ['anataevents.onrender.com'],
+},
 
     build: {
       chunkSizeWarningLimit: 900,
