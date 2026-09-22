@@ -1,0 +1,32 @@
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+exclude = ["migrations", ".venv"]
+
+[tool.ruff.lint]
+select = [
+    "E", "F", "W",      # pycodestyle / pyflakes
+    "I",                # isort
+    "B",                # bugbear
+    "DJ",               # django-specific
+    "C4", "SIM", "UP",  # misc modernisation
+]
+ignore = [
+    "E501",  # long lines in migrations/docs strings
+    "B008",  # DRF idiom: validators instantiated in field defaults
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["accounts", "artists", "config", "content", "core", "engagement"]
+
+[tool.black]
+line-length = 100
+extend-exclude = "migrations"
+
+[tool.coverage.run]
+source = ["accounts", "artists", "content", "core", "engagement"]
+omit = ["*/migrations/*", "*/tests/*", "manage.py", "config/asgi.py", "config/wsgi.py"]
+
+[tool.coverage.report]
+fail_under = 80
+show_missing = false
