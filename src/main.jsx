@@ -1,20 +1,20 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
-import { router } from './Router/Route.jsx'
-import { RouterProvider } from 'react-router'
-import { AuthProvider } from './Auth/Context/AuthContext.jsx'
-import { ServiceProvider } from './Auth/Context/ServiceContext.jsx'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { HelmetProvider } from "react-helmet-async";
+import "./index.css";
+import { router } from "./Router/Route.jsx";
+import { RouterProvider } from "react-router";
+import { AuthProvider } from "./Auth/Context/AuthContext.jsx";
 
-createRoot(document.getElementById('root')).render(
+// The old App.jsx (Vite starter) and ServiceContext (localStorage-backed)
+// were removed — see AUDIT.md.
+
+createRoot(document.getElementById("root")).render(
   <StrictMode>
-    
-    <AuthProvider>
-      <ServiceProvider>
+    <HelmetProvider>
+      <AuthProvider>
         <RouterProvider router={router} />
-      </ServiceProvider>
-    </AuthProvider>
-  </StrictMode>,
-  
-)
+      </AuthProvider>
+    </HelmetProvider>
+  </StrictMode>
+);
